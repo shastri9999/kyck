@@ -1,7 +1,10 @@
 <div>
 	Messages
-	<div ng-repeat="tab in vm.tabs">
-		{{tab.title}}
-	</div>
-	<div ui-view></div>
+	<md-tabs>
+		<md-tab ng-repeat="tab in ::vm.tabs" label="{{tab.title}}">
+			<md-content class="md-padding">
+				<message-test></message-test>
+			</md-content>
+		</md-tab>
+	</md-tabs>
 </div>

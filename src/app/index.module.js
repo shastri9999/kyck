@@ -13,6 +13,7 @@ export default angular.module('kyck', [
 	'ngMessages', 
 	'ngAria', 
 	'oc.lazyLoad',
+	'ngMaterial',
 	Components.name,
 	Routes.name
   ]
