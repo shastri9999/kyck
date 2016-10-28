@@ -5,7 +5,7 @@ module.exports = function(_path) {
   return {
     context: _path,
     debug: true,
-    devtool: 'cheap-source-map',
+    devtool: 'source-map',
     devServer: {
       contentBase: './dist',
       info: true,

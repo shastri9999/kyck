@@ -19,7 +19,6 @@ module.exports = function(_path) {
   var webpackConfig = {
     // entry points
     entry: {
-      vendor: _path + '/src/app/index.vendor.js',
       app: _path + '/src/app/index.bootstrap.js',
       polyfill: 'babel-polyfill'
     },
@@ -96,13 +95,7 @@ module.exports = function(_path) {
         loaders: [
           'url-loader?name=assets/images/[name]_[hash].[ext]&limit=10000'
         ]
-      }, {
-        test: require.resolve("angular"),
-        loaders: [
-          "expose?angular"
-        ]
-      },
-      
+      }
       ]
     },
 

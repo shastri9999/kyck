@@ -5,7 +5,7 @@ module.exports = function(_path) {
   return {
     context: _path,
     debug: false,
-    devtool: 'cheap-source-map',
+    devtool: 'source-map',
     output: {
       publicPath: '/',
       filename: '[name].[chunkhash].js'
