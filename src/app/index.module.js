@@ -2,35 +2,21 @@
 
 import * as components from './index.components';
 import config from './index.config';
-import run from './index.run';
-import uiRouter from 'angular-ui-router';
-import CoreModules from './core/core.module';
 import Components from './index.components';
+import Routes from './index.routes';
+import MainModule from './pages/main/main.module';
 
-const App = angular.module(
-  "kyck", [
-    uiRouter,
-    "ngAnimate", 
-	"ngCookies", 
-	"ngTouch", 
-	"ngSanitize", 
-	"ngMessages", 
-	"ngAria", 
-	"oc.lazyLoad",
-  CoreModules.name,
+export default angular.module('kyck', [
+  'ui.router',
+  'ngAnimate', 
+	'ngCookies', 
+	'ngTouch', 
+	'ngSanitize', 
+	'ngMessages', 
+	'ngAria', 
+	'oc.lazyLoad',
   Components.name,
-  require("./index.routes").name,
-
-    // pages
-    require("./pages/main/main.module").name
-
+  Routes.name,
+  MainModule.name
   ]
-);
-
-App
-  .config(config)
-  .run(run);
-
-
-
-export default App;
+).config(config);

@@ -1,6 +1,6 @@
 'use strict';
 
-function routeConfig($urlRouterProvider, $stateProvider, resolverProvider) {
+function routeConfig($urlRouterProvider, $stateProvider) {
   'ngInject';
   $urlRouterProvider.otherwise('/');
 }
