@@ -1,8 +1,7 @@
 'use strict';
 
-function AccessController($log) {
+function AccessController() {
 	'ngInject';
-	$log.debug('Always use $log.debug for console logs for debugging');
 }
 
 export default AccessController;

@@ -2,7 +2,7 @@
 
 function routeConfig($urlRouterProvider, $stateProvider) {
 	'ngInject';
-	$urlRouterProvider.otherwise('/signup');
+	$urlRouterProvider.otherwise('/signin');
 }
 
 export default angular
