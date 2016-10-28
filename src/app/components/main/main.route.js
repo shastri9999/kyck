@@ -4,14 +4,14 @@ import templateUrl from './main.html';
 import controller from './main.controller';
 
 function routeConfig($stateProvider) {
-  'ngInject';
+	'ngInject';
 
-  $stateProvider
-    .state('main', {
-      url: '/',
-      templateUrl,
-      controller
-    });
+	$stateProvider
+	.state('main', {
+		url: '/',
+		templateUrl,
+		controller
+	});
 
 }
 

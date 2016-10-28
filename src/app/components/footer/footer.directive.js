@@ -5,7 +5,7 @@ import footerTpl from './footer.html';
 function footerComponent($log) {
 	'ngInject';
 
-  var directive = {
+  let directive = {
     restrict: 'E',
     templateUrl: footerTpl,
     controller: FooterController,

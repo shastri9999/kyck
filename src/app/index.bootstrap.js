@@ -5,7 +5,7 @@ import "./index.module";
 import "../assets/styles/sass/index.scss";
 
 angular.element(document).ready(function () {
-  angular.bootstrap(document, ['kyck'], {
-    strictDi: true
-  });
+	angular.bootstrap(document, ['kyck'], {
+		strictDi: true
+	});
 });
