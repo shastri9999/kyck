@@ -3,7 +3,8 @@
 import route from './dashboard.route';
 
 const dashboardModule = angular.module('dashboard-module', [
-	'ui.router'
+	'ui.router',
+	'navigation-module'
 	]);
 
 dashboardModule

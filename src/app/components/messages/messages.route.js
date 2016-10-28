@@ -7,7 +7,7 @@ function routeConfig($stateProvider) {
 	'ngInject';
 
 	$stateProvider
-	.state('messages', {
+	.state('main.messages', {
 		url: '/messages',
 		templateUrl,
 		controller,

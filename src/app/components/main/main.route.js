@@ -1,14 +1,14 @@
 'use strict';
 
-import templateUrl from './dashboard.html';
-import controller from './dashboard.controller';
+import templateUrl from './main.html';
+import controller from './main.controller';
 
 function routeConfig($stateProvider) {
 	'ngInject';
 
 	$stateProvider
-	.state('dashboard', {
-		url: '/dashboard',
+	.state('main', {
+		url: '/app',
 		templateUrl,
 		controller
 	});
