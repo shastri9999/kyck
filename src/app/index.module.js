@@ -4,7 +4,6 @@ import * as components from './index.components';
 import config from './index.config';
 import Components from './index.components';
 import Routes from './index.routes';
-import MainModule from './pages/main/main.module';
 
 export default angular.module('kyck', [
   'ui.router',
@@ -16,7 +15,6 @@ export default angular.module('kyck', [
 	'ngAria', 
 	'oc.lazyLoad',
   Components.name,
-  Routes.name,
-  MainModule.name
+  Routes.name
   ]
 ).config(config);

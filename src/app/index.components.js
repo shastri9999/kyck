@@ -1,5 +1,8 @@
 'use strict';
+import FooterModule from './components/footer/footer.module';
+import MainModule from './components/main/main.module';
 
 export default angular.module('index.components', [
-	require('./components/footer/footer.module').name
+	FooterModule.name,
+	MainModule.name
 ]);
