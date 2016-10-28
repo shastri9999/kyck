@@ -1,6 +1,5 @@
 'use strict';
 
-import * as components from './index.components';
 import config from './index.config';
 import Components from './index.components';
 import Routes from './index.routes';
