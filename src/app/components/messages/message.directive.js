@@ -7,7 +7,7 @@ function messageComponent($log) {
 
   let directive = {
     restrict: 'E',
-    messageHtml,
+    templateUrl: messageHtml,
     controller: MessageController,
     controllerAs: 'vm',
     bindToController: true
