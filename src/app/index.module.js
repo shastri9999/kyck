@@ -3,12 +3,13 @@
 import * as components from './index.components';
 import config from './index.config';
 import run from './index.run';
-
+import uiRouter from 'angular-ui-router';
+import CoreModules from './core/core.module';
+import Components from './index.components';
 
 const App = angular.module(
   "kyck", [
-    // plugins
-    require('angular-ui-router'),
+    uiRouter,
     "ngAnimate", 
 	"ngCookies", 
 	"ngTouch", 
@@ -16,15 +17,9 @@ const App = angular.module(
 	"ngMessages", 
 	"ngAria", 
 	"oc.lazyLoad",
-
-    // core
-    require("./core/core.module").name,
-
-    // components
-    require("./index.components").name,
-
-    // routes
-    require("./index.routes").name,
+  CoreModules.name,
+  Components.name,
+  require("./index.routes").name,
 
     // pages
     require("./pages/main/main.module").name
