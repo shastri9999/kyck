@@ -1,13 +1,13 @@
 'use strict';
 
-import footerTpl from './footer.html';
+import templateUrl from './footer.html';
 
 function footerComponent($log) {
 	'ngInject';
 
   let directive = {
     restrict: 'E',
-    templateUrl: footerTpl,
+    templateUrl,
     controller: FooterController,
     controllerAs: 'vm',
     bindToController: true

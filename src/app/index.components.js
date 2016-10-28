@@ -1,8 +1,10 @@
 'use strict';
 import FooterModule from './components/footer/footer.module';
-import MainModule from './components/main/main.module';
+import AccessModule from './components/access/access.module';
+import DashboardModule from './components/dashboard/dashboard.module';
 
 export default angular.module('index.components', [
 	FooterModule.name,
-	MainModule.name
+	AccessModule.name,
+	DashboardModule.name
 	]);
