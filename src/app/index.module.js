@@ -6,15 +6,15 @@ import Components from './index.components';
 import Routes from './index.routes';
 
 export default angular.module('kyck', [
-  'ui.router',
-  'ngAnimate', 
+	'ui.router',
+  	'ngAnimate', 
 	'ngCookies', 
 	'ngTouch', 
 	'ngSanitize', 
 	'ngMessages', 
 	'ngAria', 
 	'oc.lazyLoad',
-  Components.name,
-  Routes.name
+	Components.name,
+	Routes.name
   ]
 ).config(config);

@@ -1,11 +1,8 @@
 'use strict';
 
 function config($logProvider) {
-	'ngInject';
-
-  // Enable log
+  'ngInject';
   $logProvider.debugEnabled(true);
-  
 }
 
 export default config;
