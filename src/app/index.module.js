@@ -1,4 +1,3 @@
-'use strict';
 
 import config from './index.config';
 import Components from './index.components';
@@ -8,7 +7,6 @@ export default angular.module('kyck', [
 	'ui.router',
   	'ngAnimate', 
 	'ngCookies', 
-	'ngTouch', 
 	'ngSanitize', 
 	'ngMessages', 
 	'ngAria', 

@@ -5,6 +5,7 @@ import SignInModule from './signin/signin.module';
 import ForgotPasswordModule from './forgot-password/forgot-password.module';
 import ChangePasswordModule from './change-password/change-password.module';
 import route from './access.route';
+import './access.scss';
 
 const AccessModule = angular.module('access-module', [
 	'ui.router',

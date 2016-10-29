@@ -8,6 +8,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 body {
   font-family: 'Lato', sans-serif;  
+  background-color: #fff;
 }
 * { box-sizing: border-box }
 
@@ -36,3 +37,13 @@ q {
 table {
   border-collapse: collapse;
   border-spacing: 0; }
+
+.flex-row {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.flex-column {
+  display: flex;
+  flex-flow: column wrap;
+}

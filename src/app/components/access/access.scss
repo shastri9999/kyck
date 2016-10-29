@@ -1,0 +1,19 @@
+.access {
+	width: 100%;
+    margin-top: 145px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    color: #7b868a;
+    font-size: 16px;
+    .access-container {
+    	border: 1px solid #e7ecf1;
+    	border-radius: 5px;
+    	display: flex;
+    	flex-flow: column;
+    	margin-top: 45px;
+    	width: 540px;
+    	align-items: center; 
+    }
+}
