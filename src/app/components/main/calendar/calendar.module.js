@@ -1,6 +1,8 @@
 'use strict';
 
 import route from './calendar.route';
+import './calendar.scss';
+
 
 const calendarModule = angular.module('calendar-module', [
 	'ui.router',
