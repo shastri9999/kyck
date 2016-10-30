@@ -12,6 +12,7 @@ export default angular.module('kyck', [
 	'ngAria', 
 	'oc.lazyLoad',
 	'ngMaterial',
+	'ngResource',
 	Components.name,
 	Routes.name
   ]
