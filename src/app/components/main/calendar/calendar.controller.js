@@ -1,6 +1,6 @@
 'use strict';
 
-function CalendarController($scope) {
+function CalendarController($scope, $mdDialog, $filter) {
 	'ngInject';
 
 	$scope.title = "My Bookings";
@@ -9,7 +9,7 @@ function CalendarController($scope) {
     {
       start: getDate(-6, 10),
       end: getDate(-6, 11),
-      customClass: 'confirmed',
+      customClass: 'reschedule',
       title: 'Event 1'
     },
     {
@@ -116,7 +116,43 @@ function CalendarController($scope) {
 
   $scope.eventClicked = function ($selectedEvent) {
 	console.log($selectedEvent);
-	console.log($selectedEvent.customClass);
+
+	var textContent = "";
+
+	var closePopup = function() {
+          alert = undefined;
+    }
+
+
+	switch ($selectedEvent.customClass) {
+		case "reschedule":
+			textContent = "Kindly reschedule your appointment as broker is busy during the time mentioned by you";
+			var txtBtn = "ReSchedule";
+			closePopup = function() {
+				console.log("ReScheduling");
+				alert = undefined;
+			}
+			break;
+		case "confirmed" : 
+			textContent = "Your appointment is confirmed.";
+			break;
+		case "pending" :
+			textContent = "Broker has not taken any action on your request yet."
+			break;
+		case "rejected":
+			textContent = "Your application has been rejected.";
+			break;
+	}
+
+	alert = $mdDialog.alert({
+	    title: $filter('uppercase')($selectedEvent.customClass),
+	    textContent: textContent,
+	    ok: txtBtn || 'Close'
+	});
+
+	$mdDialog
+        .show(alert)
+        .finally(closePopup);
   }
 
   $scope.eventCreate = function ($date) {
