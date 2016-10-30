@@ -1,4 +1,11 @@
-<div>
-	<a ui-sref="main.dashboard">Sign In</a>
-	Don't have an account <a ui-sref="access.signup">click here.</a>
-</div>
+<form class="signin-container">
+	<div style="font-size: 24px; line-height: 42px; margin-top: 50px;">Sign in to your account</div>
+	<input type="text" placeholder="Email Address">
+	<div class="password">
+		<input type="password" placeholder="Password">		
+	</div>
+	<a class="button" ui-sref="main.dashboard">Login</a>
+	<div style="margin-top: 25px; margin-bottom: 80px;">
+		Don't have an account? <a style="color: #7b868a;cursor: pointer;" ui-sref="access.signup">Click here.</a>
+	</div>
+</form>
