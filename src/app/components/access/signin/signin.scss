@@ -1,0 +1,33 @@
+.signin-container {
+	display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    input {
+    	border: 1px solid #e7ecf1;
+	    border-radius: 3px;
+	    width: 400px;
+	    height: 60px;
+	    padding: 20px;
+	    color: #7b868a;
+	    margin-top: 25px;
+    }
+    .button {
+	   	width: 400px;
+	    background: #3aafa5;
+	    color: white;
+	    height: 60px;
+	    text-align: center;
+	    vertical-align: middle;
+	    padding: 20px;
+	    margin-top: 25px;
+	    border-radius: 3px;
+	    text-decoration: none;
+	    font-size: 18px;
+	    font-weight: 500;
+	    &:hover {
+			background-color: #2e8e86;
+	    }
+	}
+
+}
