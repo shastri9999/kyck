@@ -1,5 +1,20 @@
-<div>
-	<a ui-sref="main.dashboard">Sign Up</a>
-	Already have an account? <a ui-sref="access.signin">Sign In</a>
-	<a ui-sref="access.forgot-password">Forgot Password?</a> 
-</div>
+<form class="signup-container">
+	<div style="font-size: 18px; width: 434px; line-height: 32px; text-align: center; margin-top: 10px;">
+		Signup to explore investment & trading oppportunities 
+in South East Asia and Asia
+	</div>
+	<input type="text" placeholder="First Name (as in passport)">
+	<input type="text" placeholder="Last Name (as in passport)">
+	<input type="email" placeholder="Email Address">
+	<div>
+		<input type="phone" placeholder="Phone number">		
+	</div>
+	<a class="button" ui-sref="main.dashboard">Sign Up</a>
+	<div style="display: flex; justify-content: center;margin-top: 25px;">
+		<input type="checkbox" class="checkbox">
+		&nbsp;Agree to&nbsp;<a style="color: #7b868a;cursor: pointer;text-decoration: underline;">Terms & Conditions</a>	
+	</div>
+	<div style="margin-top: 30px; margin-bottom: 45px;">
+		Already have an account? <a style="color: #7b868a;cursor: pointer;" ui-sref="access.signin">Click here</a>		
+	</div>
+</form>
