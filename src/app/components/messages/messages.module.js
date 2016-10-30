@@ -2,15 +2,17 @@
 
 import route from './messages.route';
 import messageDirective from './message.directive';
+import messageResource from './messages.resource';
 
 const messagesPageModule = angular.module('messages-module', [
-	'ui.router',
+	'ui.router'
 	]);
 
 messagesPageModule
 .config(route);
 
 messagesPageModule
-.directive('messageTest', messageDirective);
+.directive('messageTest', messageDirective)
+.factory('Message', messageResource);
 
 export default messagesPageModule;
