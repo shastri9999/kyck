@@ -4,7 +4,8 @@ import route from './calendar.route';
 
 const calendarModule = angular.module('calendar-module', [
 	'ui.router',
-	'navigation-module'
+	'navigation-module',
+	'material.components.eventCalendar'
 	]);
 
 calendarModule

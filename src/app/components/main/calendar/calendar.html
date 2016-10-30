@@ -1,3 +1,19 @@
-<div>
-	Calendar Area
-</div>
+<md-event-calendar
+  ng-model="selected"
+  md-events="events"
+  md-event-click="eventClicked($selectedEvent)"
+  md-label="title",
+  md-show-create-link="true"
+  md-create-event-click="eventCreate($date)"
+  md-create-disabled="dis"
+  auto-height="40"
+  class="md-primary"
+  md-show-create-link
+>
+  <md-event-calendar-header class="md-center">
+    <md-event-calendar-prev></md-event-calendar-prev>
+    <md-event-calendar-title></md-event-calendar-title>
+    <md-event-calendar-next></md-event-calendar-next>
+    <!-- <md-event-calendar-today></md-event-calendar-today> -->
+  </md-event-calendar-header>
+</md-event-calendar>

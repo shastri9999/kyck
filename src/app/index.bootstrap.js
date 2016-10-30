@@ -7,6 +7,7 @@ import "angular-cookies";
 import "angular-sanitize";
 import "angular-messages";
 import "angular-material";
+import "angular-material-event-calendar";
 import "angular-aria";
 import '!!file-loader?name=[name].[ext]!../favicon.ico';
 import "./index.module";
