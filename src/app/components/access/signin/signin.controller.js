@@ -1,13 +1,18 @@
 'use strict';
 
-function SignInController(AuthenticationService, $state){
-	'ngInject';
-	return {
-		'signIn': function(){
-			AuthenticationService.login('user1@user.com');
-			$state.go('main.dashboard');
-		}
+class SignInController {
+	constructor(AuthenticationService, $state){
+		'ngInject';
+
+		this._AuthenticationService = AuthenticationService;
+		this._$state = $state;
 	}
+
+	signIn(){
+		this._AuthenticationService.login('user1@user.com');
+		this._$state.go('main.dashboard');
+	}
+
 }
 
 export default SignInController;

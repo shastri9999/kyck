@@ -5,7 +5,7 @@ import Common from './common/common.module'
 
 export default angular.module('kyck', [
 	'ui.router',
-  	'ngAnimate', 
+	'ngAnimate', 
 	'ngCookies', 
 	'ngSanitize', 
 	'ngMessages', 
@@ -16,5 +16,15 @@ export default angular.module('kyck', [
 	Common.name,
 	Components.name,
 	Routes.name
-  ]
-).config(config);
+	]
+	)
+.config(config)
+.run(function($rootScope, $location, AuthenticationService){
+	$rootScope.$on('$stateChangeStart', function (event, next, toParams) {
+		const loggedIn = AuthenticationService.getLoggedInUser();
+		const isAccessPage = next.name.indexOf("access.")==0;
+		if (!loggedIn && !isAccessPage) {
+			$location.url('/signin');              	
+		}
+	});
+});

@@ -11,7 +11,20 @@ function routeConfig($stateProvider) {
 		url: 'signin',
 		templateUrl,
 		controller,
-		controllerAs: 'vm'
+		controllerAs: 'vm',
+		resolve: {
+			currentUser: function(AuthenticationService) {
+				'ngInject';
+				return AuthenticationService.getLoggedInUser();
+			}
+		},
+		onEnter: function(currentUser, $state){
+			'ngInject';
+			if (currentUser)
+			{
+				$state.go('main.dashboard');
+			}
+		}
 	});
 }
 
