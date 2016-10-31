@@ -1,10 +1,14 @@
 <div>
 	Messages
-	<md-tabs>
+	<md-tabs md-no-ink-bar md-dynamic-height style="margin: 50px;">
 		<md-tab ng-repeat="tab in ::vm.tabs" label="{{tab.title}}">
-			<md-content class="md-padding">
-				<message-test></message-test>
-			</md-content>
+		  	<div>
+				<md-content>
+					<message-test></message-test>
+					<message-test></message-test>
+					<message-test></message-test>
+				</md-content>
+			</div>
 		</md-tab>
 	</md-tabs>
 </div>
