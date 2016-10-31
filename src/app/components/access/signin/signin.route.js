@@ -10,7 +10,8 @@ function routeConfig($stateProvider) {
 	.state('access.signin', {
 		url: 'signin',
 		templateUrl,
-		controller
+		controller,
+		controllerAs: 'vm'
 	});
 }
 

@@ -75,6 +75,9 @@ module.exports = function(_path) {
           plugins: ['transform-runtime', 'add-module-exports'],
           presets: ['angular', 'es2017']
         }
+      },{
+         test: /\.json$/, 
+         loader: 'json'
       }, {
         test: /\.css$/,
         loaders: [

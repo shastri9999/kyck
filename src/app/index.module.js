@@ -1,7 +1,7 @@
-
 import config from './index.config';
 import Components from './index.components';
 import Routes from './index.routes';
+import Common from './common/common.module'
 
 export default angular.module('kyck', [
 	'ui.router',
@@ -13,6 +13,7 @@ export default angular.module('kyck', [
 	'oc.lazyLoad',
 	'ngMaterial',
 	'ngResource',
+	Common.name,
 	Components.name,
 	Routes.name
   ]

@@ -1,6 +1,6 @@
 'use strict';
 
-function MessagesController($log, $scope, Message) {
+function MessagesController($log, $scope, MessageResource, AuthenticationService) {
 	'ngInject';
 	$log.debug('Always use $log.debug for console logs for debugging');
 	var vm = this;
@@ -15,8 +15,8 @@ function MessagesController($log, $scope, Message) {
 			title: 'Draft'
 		}
 	];
-
-	var inbox = Message.inbox();
+	console.log(AuthenticationService.getLoggedInUser());
+	var inbox = MessageResource.inbox();
 	$log.debug(inbox);
 }
 

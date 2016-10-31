@@ -13,6 +13,6 @@ messagesPageModule
 
 messagesPageModule
 .directive('messageTest', messageDirective)
-.factory('Message', messageResource);
+.factory('MessageResource', messageResource);
 
 export default messagesPageModule;
