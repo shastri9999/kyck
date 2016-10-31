@@ -1,3 +1,7 @@
 navigation {
 	position: relative;
+	display: flex;
+	.navigation {
+		flex-flow: column;
+	}
 }

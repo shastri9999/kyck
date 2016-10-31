@@ -6,6 +6,7 @@ import BrokerageModule from './brokerage/brokerage.module';
 import HelpModule from './help/help.module';
 import NavigationModule from './navigation/navigation.module';
 import route from './main.route';
+import './main.scss';
 
 const mainModule = angular.module('main-module', [
 	'ui.router',
