@@ -12,8 +12,11 @@ md-tabs.md-default-theme {
 }
 
 .left-ink {
-	background-color: #3498DC;
-	width: 10px;
+	background-color: #3498db;
+	width: 5px;
+	border-radius: 5px;
+	display: flex;
+	height: 130px;
 }
 
 .recipient-icon {
@@ -23,22 +26,23 @@ md-tabs.md-default-theme {
 }
 
 .email-summary {
-	margin-top: 30px;
-	margin-bottom: 30px;
-	min-height: 90px;
-	box-shadow: 3px 3px 3px #c3c3c3;
-	box-sizing: border-box;
-	border: 1px solid #c3c3c3;
+	width: 685px;
+	height: 130px;
+	border-radius: 5px;
+	border: solid 1px #e7ecf1;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	display: flex;
 }
 
 .email-subject {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	background-color: #FFFFFF;
 	text-overflow: ellipsis;
+	font-size: 14px;
+	line-height: 25px;
 }
 
 md-content {
-	margin: 40px;
 	background-color: #FFFFFF;
 }
