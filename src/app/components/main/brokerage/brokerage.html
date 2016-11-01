@@ -1,5 +1,51 @@
 <div layout="row">
-  <div flex="50" class="headerProgress">
+  <center><h2>Progress Bar{{vm.selectedTab}}OK</h2></center><br>
+  <div ng-if="vm.selectedTab==1">
+    <h3>Premium Partners</h3>
+    POSB<br>
+    DBS<br>
+    UOB<br>
+    ICICI Bank<br><br>
+    <h3>All Partners</h3>
+    Citibank<br>
+    Bank Of America<br>
+    Standard Chartered<br>
+    ICICI Bank<br>
+    Axis Bank<br>
+    HDFC Bank<br>
+    UnionBank<br>
+  </div>
+  <div ng-if="vm.selectedTab==2">
+    UPLOAD DOCUMENTS
+  </div>
+  <div ng-if="vm.selectedTab==3">
+    <div layout="row">
+      <div flex="50">
+        First Name<br>
+        Country Code
+      </div>
+      <div flex="50">
+        Last Name<br>
+        Email Id<br>
+      </div>
+    </div>
+  </div>
+  <div ng-if="vm.selectedTab==4">
+    TAX RESIDENCE
+  </div>
+  <div ng-if="vm.selectedTab==5">
+    BOOK CALENDAR APPOINTMENTS
+  </div>
+  <footer>
+      <div layout="row">
+          <md-button class="md-raised md-back" ng-click="vm.backStep()">Back</md-button>
+          <md-button class="md-raised md-success" ng-click="vm.nextStep()">Next</md-button>
+      </div>
+  </footer>
+</div>
+
+
+<!--   <div flex="50" class="headerProgress">
     <div class="titleProgressHeader">Application Completion</div>
     <div layout="row">
     	<div flex="25">
@@ -29,5 +75,5 @@
     	<li>Provident Fund</li>
     	<li>Bank Statement</li>
     </ol>
-  </div>
+  </div> -->
 </div>

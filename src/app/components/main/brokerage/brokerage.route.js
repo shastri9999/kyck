@@ -11,6 +11,7 @@ function routeConfig($stateProvider) {
 		url: '/brokerage',
 		templateUrl,
 		controller,
+		controllerAs: 'vm',
 		breadCrumb: 'Brokerage'
 	});
 }
