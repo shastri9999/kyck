@@ -10,7 +10,8 @@ function routeConfig($stateProvider) {
 	.state('main.calendar', {
 		url: '/calendar',
 		templateUrl,
-		controller
+		controller,
+		breadCrumb: 'Calendar'
 	});
 }
 

@@ -10,7 +10,8 @@ function routeConfig($stateProvider) {
 	.state('main.help', {
 		url: '/help',
 		templateUrl,
-		controller
+		controller,
+		breadCrumb: 'Help'
 	});
 }
 

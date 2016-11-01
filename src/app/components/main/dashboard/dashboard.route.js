@@ -10,7 +10,9 @@ function routeConfig($stateProvider) {
 	.state('main.dashboard', {
 		url: '/dashboard',
 		templateUrl,
-		controller
+		controller,
+		breadCrumb: 'Dashboard'
+
 	});
 }
 

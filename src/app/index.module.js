@@ -27,5 +27,8 @@ export default angular.module('kyck', [
 		if (!loggedIn && !isAccessPage) {
 			$location.url('/signin');              	
 		}
+
+		/* Todo: Move this to service */
+		$rootScope.breadCrumb = next.breadCrumb;
 	});
 });

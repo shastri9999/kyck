@@ -10,7 +10,8 @@ function routeConfig($stateProvider) {
 	.state('main.brokerage', {
 		url: '/brokerage',
 		templateUrl,
-		controller
+		controller,
+		breadCrumb: 'Brokerage'
 	});
 }
 
