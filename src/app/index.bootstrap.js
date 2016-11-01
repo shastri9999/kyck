@@ -10,7 +10,8 @@ import "angular-material";
 import "angular-material-event-calendar";
 import "angular-aria";
 import "angular-resource";
-import 'angular-chart.js'
+import 'angular-chart.js';
+import 'material-steppers';
 import '!!file-loader?name=[name].[ext]!../favicon.ico';
 import "./index.module";
 import "../assets/styles/sass/index.scss";

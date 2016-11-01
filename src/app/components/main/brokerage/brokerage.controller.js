@@ -1,6 +1,6 @@
 'use strict';
 
-function BrokerageController() {
+function BrokerageController($mdStepper) {
 	'ngInject';
 
 	var vm=this;
@@ -13,7 +13,8 @@ function BrokerageController() {
 
 	function nextStep() {
 		console.log("oka");
-		vm.selectedTab += 1;
+		var steppers = $mdStepper('stepper-demo');
+		steppers.next();
 	}
 
 	function backStep() {

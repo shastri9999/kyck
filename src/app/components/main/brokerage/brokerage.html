@@ -1,41 +1,57 @@
 <div layout="row">
-  <center><h2>Progress Bar{{vm.selectedTab}}OK</h2></center><br>
-  <div ng-if="vm.selectedTab==1">
-    <h3>Premium Partners</h3>
-    POSB<br>
-    DBS<br>
-    UOB<br>
-    ICICI Bank<br><br>
-    <h3>All Partners</h3>
-    Citibank<br>
-    Bank Of America<br>
-    Standard Chartered<br>
-    ICICI Bank<br>
-    Axis Bank<br>
-    HDFC Bank<br>
-    UnionBank<br>
-  </div>
-  <div ng-if="vm.selectedTab==2">
-    UPLOAD DOCUMENTS
-  </div>
-  <div ng-if="vm.selectedTab==3">
-    <div layout="row">
-      <div flex="50">
-        First Name<br>
-        Country Code
-      </div>
-      <div flex="50">
-        Last Name<br>
-        Email Id<br>
-      </div>
-    </div>
-  </div>
-  <div ng-if="vm.selectedTab==4">
-    TAX RESIDENCE
-  </div>
-  <div ng-if="vm.selectedTab==5">
-    BOOK CALENDAR APPOINTMENTS
-  </div>
+  <md-stepper id="stepper-demo" 
+        md-mobile-step-text="$ctrl.isMobileStepText" 
+        md-vertical="$ctrl.isVertical" 
+        md-linear="$ctrl.isLinear"
+        md-alternative="$ctrl.isAlternative">
+        <md-step md-label="">
+            <md-step-body>
+                 <h3>Premium Partners</h3>
+                POSB<br>
+                DBS<br>
+                UOB<br>
+                ICICI Bank<br><br>
+                <h3>All Partners</h3>
+                Citibank<br>
+                Bank Of America<br>
+                Standard Chartered<br>
+                ICICI Bank<br>
+                Axis Bank<br>
+                HDFC Bank<br>
+                UnionBank<br>
+            </md-step-body>
+        </md-step>
+        <md-step md-label="">
+            <md-step-body>
+                 <p>UPLOAD DOCUMENTS</p>
+            </md-step-body>
+        </md-step>
+        <md-step md-label="">
+            <md-step-body>
+                <div layout="row">
+                  <div flex="50">
+                    First Name<br>
+                    Country Code
+                  </div>
+                  <div flex="50">
+                    Last Name<br>
+                    Email Id<br>
+                  </div>
+                </div>
+            </md-step-body>
+        </md-step>
+        <md-step md-label="">
+            <md-step-body>
+                <p>TAX RESIDENCE</p>
+            </md-step-body>
+        </md-step>
+        <md-step md-label="">
+            <md-step-body>
+                <p>BOOK CALENDAR APPOINTMENTS</p>
+            </md-step-body>
+        </md-step>
+    </md-stepper>
+    
   <footer>
       <div layout="row">
           <md-button class="md-raised md-back" ng-click="vm.backStep()">Back</md-button>

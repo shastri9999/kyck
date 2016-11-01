@@ -6,7 +6,8 @@ import './brokerage.scss';
 const brokerageModule = angular.module('brokerage-module', [
 	'ui.router',
 	'navigation-module',
-	'chart.js'
+	'chart.js',
+	'mdSteppers'
 	]);
 
 brokerageModule
