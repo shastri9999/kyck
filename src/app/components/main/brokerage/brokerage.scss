@@ -1,0 +1,17 @@
+.headerProgress {
+	background-color: #f2f8f8;
+	border: 3px solid #e8f8f8;
+	padding: 30px;
+	ol {
+		list-style: decimal;
+		padding-top: 30px;
+		padding-left: 30px;
+		line-height:21px;
+	}
+	li.active {
+		color: #3aafa6;
+	}
+}
+.titleProgressHeader{
+	font-weight:bold;
+}

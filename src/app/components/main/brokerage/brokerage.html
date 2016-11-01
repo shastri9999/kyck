@@ -4,13 +4,21 @@
 <div layout="row">
   <div flex="50" class="headerProgress">
     <div class="titleProgressHeader">Application Completion</div>
-    <ol>
-    	<li>Brokerages</li>
-    	<li>Documents</li>
-    	<li>Personal Details</li>
-    	<li>KYC</li>
-    	<li>Selection Timeslot</li>
-    </ol>
+    <div layout="row">
+    	<div flex="25">
+		    <ol>
+		    	<li class="active">Brokerages</li>
+		    	<li>Documents</li>
+		    	<li>Personal Details</li>
+		    	<li>KYC</li>
+		    	<li>Selection Timeslot</li>
+		    </ol>
+	    </div>
+	    <div flex="25">
+		    <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-colors="colors" ng-show="true">
+			</canvas>
+		</div>
+	</div>
   </div>
   <div flex="50" class="headerProgress">
     <div class="titleProgressHeader">Authenticity of Documents</div>
