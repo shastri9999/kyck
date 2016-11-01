@@ -8,10 +8,10 @@
 		display: flex;
 		flex-flow: column;
 		flex-grow: 1;
-		.menu-bar {
+		&>.menu-bar {
 			display: flex;
 		}
-		.display-area {
+		&>.display-area {
 			flex-grow: 1;
 			width: 100%;
 		}
