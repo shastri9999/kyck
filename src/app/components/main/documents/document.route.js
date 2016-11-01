@@ -12,6 +12,7 @@ function routeConfig($stateProvider) {
 		templateUrl,
 		controller,
 		controllerAs: 'vm'
+		breadCrumb: 'Documents'
 	});
 }
 

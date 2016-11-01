@@ -11,7 +11,8 @@ function routeConfig($stateProvider) {
 		url: '/messages',
 		templateUrl,
 		controller,
-		controllerAs: 'vm'
+		controllerAs: 'vm',
+		breadCrumb: 'Messages'
 	});
 
 }

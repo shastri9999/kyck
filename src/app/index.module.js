@@ -20,11 +20,15 @@ export default angular.module('kyck', [
 	)
 .config(config)
 .run(function($rootScope, $location, AuthenticationService){
+	'ngInject';
 	$rootScope.$on('$stateChangeStart', function (event, next, toParams) {
 		const loggedIn = AuthenticationService.getLoggedInUser();
 		const isAccessPage = next.name.indexOf("access.")==0;
 		if (!loggedIn && !isAccessPage) {
 			$location.url('/signin');              	
 		}
+
+		/* Todo: Move this to service */
+		$rootScope.breadCrumb = next.breadCrumb;
 	});
 });
