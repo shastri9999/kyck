@@ -1,16 +1,19 @@
 <div class="document">
 	<div layout="row" class="document-upper">
 		<div class="document-icon">
-			<i class="fa fa-file" aria-hidden="true"></i>
-
+			<img src="../../../../assets/images/1.png"></img>
 		</div>
 		<div layout="column" class="document-details">
-			<span style="font-weight: bold"> Income Tax </span>
-			<span style="font-weight: 100;font-size: 12px;">Required</span>
-			<span>Lorem ipsum dorum</span>
+			<span style="font-weight: bold"> {{ document.title }} </span>
+			<div layout="row">
+			 	<figure class="red-circle"></figure>
+			 	<span style="font-weight: 100;font-size: 12px;">{{ document.docType }}</span>
+			 </div>
+			<span>{{ document.comment }}</span>
 		</div>
 	</div>
 	<div class="document-action">
-		<span>Drag and drop your file here or <button>Upload</button> </span>
+		<span>Drag and drop your file here or <md-button class="md-primary md-raised" style="background-color: #3598DB">Upload</md-button>
+ </span>
 	</div>
 </div>

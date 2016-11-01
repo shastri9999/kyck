@@ -11,7 +11,8 @@ function documentComponent($log) {
     templateUrl: documentHtml,
     controller: DocumentController,
     controllerAs: 'vm',
-    bindToController: true
+    bindToController: true,
+    document: '='
   };
 
   return directive;

@@ -10,7 +10,8 @@ function routeConfig($stateProvider) {
 	.state('main.document', {
 		url: '/document',
 		templateUrl,
-		controller
+		controller,
+		controllerAs: 'vm'
 	});
 }
 

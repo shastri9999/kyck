@@ -1,12 +1,15 @@
 .document-icon {
 	min-height: 50px;
-	min-width: 60px;
+	min-width: 30px;
+	display: block;
+    margin-top: 40px;
+    margin-left: 10px;
 }
 
 .document {
 	min-height: 200px;
 	min-width: 200px;
-	max-width: 300px;
+	max-width: 400px;
 	box-sizing: border-box;
 	border: 1px solid #c3c3c3;
 	box-shadow: 3px 3px 3px #c3c3c3;
@@ -14,7 +17,7 @@
 
 .document-details {
 	vertical-align: middle;
-	line-height: 20px;
+	line-height: 25px;
 	padding: 20px;
 }
 
@@ -31,4 +34,24 @@
 	box-sizing: border-box;
 	min-height: 120px;
 	min-width: 180px;
+}
+
+.red-circle {
+  display: block;
+  background: red;
+  border-radius: 50%;
+  height: 5px;
+  width: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.blue-circle {
+  display: block;
+  background: #3C94D6;
+  border-radius: 50%;
+  height: 5px;
+  width: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
