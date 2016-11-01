@@ -1,9 +1,16 @@
 <div>
-	<md-tabs>
+	<div layout="row">
+	<md-content>
+	<md-tabs md-no-ink-bar md-dynamic-height style="margin: 50px;">
 		<md-tab ng-repeat="tab in ::vm.tabs" label="{{tab.title}}">
-			<md-content class="md-padding">
-				<message-test></message-test>
-			</md-content>
+					<message-test></message-test>
+					<message-test></message-test>
+					<message-test></message-test>
 		</md-tab>
 	</md-tabs>
+	</md-content>
+	</div>
+	<div layout="row" flex="50">
+		Hello
+	</div>
 </div>

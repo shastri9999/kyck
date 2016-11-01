@@ -1,6 +1,7 @@
 'use strict';
 
 import messageHtml from './message.html';
+import './message.scss';
 
 function messageComponent($log) {
 	'ngInject';

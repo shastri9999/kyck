@@ -1,6 +1,6 @@
 'use strict';
 
-function config($logProvider) {
+function config($logProvider, $mdThemingProvider) {
 	'ngInject';
 	$logProvider.debugEnabled(true);
 }
