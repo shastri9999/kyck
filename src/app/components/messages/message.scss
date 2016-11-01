@@ -1,5 +1,6 @@
 .email-from {
 	font-weight: bold;
+	margin-top: 40px;
 }
 
 .md-tab.md-active {
@@ -26,8 +27,6 @@ md-tabs.md-default-theme {
 }
 
 .email-summary {
-	width: 685px;
-	height: 130px;
 	border-radius: 5px;
 	border: solid 1px #e7ecf1;
 	margin-bottom: 10px;
@@ -45,4 +44,34 @@ md-tabs.md-default-theme {
 
 md-content {
 	background-color: #FFFFFF;
+}
+
+.email-reply {
+	diplay: flex;
+	background-color: #f2f6f8;
+}
+
+.email-icon {
+  margin-top: 40px;
+  margin-left: 30px;
+  margin-right: 20px;
+  min-width: 50px;
+  min-height: 50px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  border: solid 1px #e7ecf1;
+}
+
+.email-content {
+	margin-top: 35px;
+}
+
+.email-body {
+	margin-top: 15px;
+	margin-right: 35px;
+	line-height: 25px;
+	font-size: 16px;
 }

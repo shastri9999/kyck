@@ -1,13 +1,38 @@
-<div>
+<div layout="column">
 	<div layout="row">
-	<md-content>
-	<md-tabs md-no-ink-bar md-dynamic-height style="margin: 50px;">
-		<md-tab ng-repeat="tab in ::vm.tabs" label="{{tab.title}}">
-					<message-test></message-test>
-					<message-test></message-test>
-					<message-test></message-test>
-		</md-tab>
-	</md-tabs>
-	</md-content>
+	<div layout="column" flex>
+		<md-content>
+			<md-tabs md-no-ink-bar md-dynamic-height style="margin: 40px;">
+				<md-tab ng-repeat="tab in ::vm.tabs" label="{{tab.title}}">
+							<message-test></message-test>
+							<message-test></message-test>
+							<message-test></message-test>
+				</md-tab>
+			</md-tabs>
+		</md-content>
 	</div>
+	<div layout="row" class="email-reply" flex>
+		<div class="email-icon">
+			<!-- <img src="../../../../assets/images/1024-px-standard-charteredsvg.png"></img> -->
+		</div>
+		<div class="email-content">
+			<span style="font-weight: bold;">Standard Chartered Bank</span>
+			<div style="margin-top: 5px;">
+				2hr Ago
+			</div>
+			<div class="email-body">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			</div>
+		</div>
+	</div>
+	</div>
+
 </div>
