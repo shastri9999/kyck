@@ -19,6 +19,7 @@ md-tabs.md-default-theme {
 .recipient-icon {
 	width: 150px;
 	margin-left: 20px;
+	min-width: 40px;
 }
 
 .email-summary {
@@ -34,9 +35,10 @@ md-tabs.md-default-theme {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	background-color: #FFFFFF;
+	text-overflow: ellipsis;
 }
 
 md-content {
-	margin-top: 20px;
+	margin: 40px;
 	background-color: #FFFFFF;
 }

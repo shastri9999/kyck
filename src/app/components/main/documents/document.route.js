@@ -1,6 +1,6 @@
 'use strict';
 
-import templateUrl from './document.html';
+import templateUrl from './documents.html';
 import controller from './document.controller';
 
 function routeConfig($stateProvider) {
