@@ -1,6 +1,6 @@
 .email-from {
 	font-weight: bold;
-	margin-top: 40px;
+	display: inline-block;
 }
 
 .md-tab.md-active {
@@ -12,26 +12,14 @@ md-tabs.md-default-theme {
 	color: #FFFFFF;
 }
 
-.left-ink {
-	background-color: #3498db;
-	width: 5px;
-	border-radius: 5px;
-	display: flex;
-	height: 130px;
-}
-
-.recipient-icon {
-	width: 150px;
-	margin-left: 20px;
-	min-width: 40px;
-}
-
 .email-summary {
 	border-radius: 5px;
 	border: solid 1px #e7ecf1;
 	margin-bottom: 15px;
 	margin-top: 15px;
 	display: flex;
+	max-height: 130px;
+	border-left: solid #3498db;
 }
 
 message-summary:focus {
@@ -41,14 +29,39 @@ message-summary:focus {
 }
 
 .email-subject {
+	float: left;
+	overflow: hidden;
+	position: relative;
+	line-height: 1.2em;
+	max-height: 50px;
+	margin-right: -1em;
+	padding-right: 1em;
+
 	margin-top: 10px;
-	margin-bottom: 10px;
-	text-overflow: ellipsis;
-	font-size: 14px;
-	opacity: 0.6;
+	//margin-bottom: 10px;
+	font-weight: 600;
+	font-size: 16px;
+	opacity: 0.4;
 	font-family: Lato;
 	line-height: 1.56;
 	color: #4f6379;
+}
+
+.email-subject:before {
+	content: '...';
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.email-subject:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	width: 1em;
+	height: 1em;
+	margin-top: 0.2em;
+	background: white;
 }
 
 md-content {
@@ -61,7 +74,7 @@ md-content {
 }
 
 .email-icon {
-  margin-top: 40px;
+  margin-top: 35px;
   margin-left: 30px;
   margin-right: 20px;
   min-width: 50px;

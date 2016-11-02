@@ -1,15 +1,14 @@
 <div class="email-summary">
-	<div class="left-ink">
-	</div>
 	<div class="email-icon">
 			<!-- <img src="../../../../assets/images/1024-px-standard-charteredsvg.png"></img> -->
 	</div>
-	<div layout="row" style="padding: 10px;">
-		<div>
-			<span class="email-from">{{message.from}}</span> <span style="float: right;">{{message.time}}</span>
-			<p class="email-subject">
+	<div style="padding: 10px;">
+		<div style="margin-top: 25px;">
+			<div class="email-from">{{message.from}}</div> 
+			<div style="float: right; display: inline-block;">{{message.time}}</div>
+		</div>
+		<div class="email-subject">
 			{{message.body}}
-			</p>
 		</div>
 	</div>
 </div>
