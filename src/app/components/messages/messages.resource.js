@@ -4,7 +4,7 @@ var URL = 'http://ec2-54-255-136-1.ap-southeast-1.compute.amazonaws.com/kyck-res
 
 function MessageResource($resource, $rootScope) {
 	'ngInject';
-    return $resource(URL + 'kyck-rest/usermessage/', {}, {
+    return $resource(URL, {}, {
     	compose: {
     		method: 'GET',
     		isArray: false,

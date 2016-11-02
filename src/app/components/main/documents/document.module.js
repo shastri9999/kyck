@@ -2,6 +2,7 @@
 
 import route from './document.route';
 import documentDirective from './document.directive';
+import documentResource from './document.resource';
 
 const documentModule = angular.module('document-module', [
 	'ui.router',
@@ -12,6 +13,7 @@ documentModule
 .config(route);
 
 documentModule
-.directive('documentPane', documentDirective);
+.directive('documentPane', documentDirective)
+.factory('DocumentResource', documentResource);
 
 export default documentModule;

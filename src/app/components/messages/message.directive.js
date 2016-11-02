@@ -10,14 +10,15 @@ function messageComponent($log) {
     restrict: 'E',
     templateUrl: messageHtml,
     controller: MessageController,
-    controllerAs: 'vm',
-    bindToController: true
+    bindToController: true,
+    message: '='
   };
 
   return directive;
 
   function MessageController () {
 	  $log.debug('Hello from Message controller!');
+    //$log.debug($scope.message);
   }
 
 }
