@@ -9,17 +9,19 @@ function BrokerageController($mdStepper) {
 	function init() {
 		vm.selectedTab = 1;
 		vm.nextStep = nextStep;
+		vm.backStep = backStep;
 	}
 
 	function nextStep() {
-		console.log("oka");
+		console.log("oka 1");
 		var steppers = $mdStepper('stepper-demo');
 		steppers.next();
 	}
 
 	function backStep() {
-		console.log("oka");
-		vm.selectedTab -= 1;
+		console.log("oka 2");
+		var steppers = $mdStepper('stepper-demo');
+		steppers.back();
 	}
 
 	// $scope.labels = ["Done", "Remaining"];
