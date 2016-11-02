@@ -1,42 +1,120 @@
 <div layout="row">
-  <md-stepper id="stepper-demo" 
-        md-mobile-step-text="$ctrl.isMobileStepText" 
-        md-vertical="$ctrl.isVertical" 
-        md-linear="$ctrl.isLinear"
-        md-alternative="$ctrl.isAlternative">
+    <md-stepper id="stepper-demo" md-mobile-step-text="$ctrl.isMobileStepText" md-vertical="$ctrl.isVertical" md-linear="$ctrl.isLinear" md-alternative="$ctrl.isAlternative">
         <md-step md-label="Brokerages">
             <md-step-body>
-                 <h3>Premium Partners</h3>
-                POSB<br>
-                DBS<br>
-                UOB<br>
-                ICICI Bank<br><br>
+                <h3>Premium Partners</h3>
+                POSB<br> DBS
+                <br> UOB
+                <br> ICICI Bank<br><br>
                 <h3>All Partners</h3>
-                Citibank<br>
-                Bank Of America<br>
-                Standard Chartered<br>
-                ICICI Bank<br>
-                Axis Bank<br>
-                HDFC Bank<br>
-                UnionBank<br>
+                Citibank<br> Bank Of America<br> Standard Chartered<br> ICICI Bank<br> Axis Bank<br> HDFC Bank<br> UnionBank
+                <br>
             </md-step-body>
         </md-step>
         <md-step md-label="Documents">
             <md-step-body>
-                 <p>UPLOAD DOCUMENTS</p>
+                <p>UPLOAD DOCUMENTS</p>
             </md-step-body>
         </md-step>
         <md-step md-label="Personal Details">
             <md-step-body>
                 <div layout="row">
-                  <div flex="50">
-                    First Name<br>
-                    Country Code
-                  </div>
-                  <div flex="50">
-                    Last Name<br>
-                    Email Id<br>
-                  </div>
+                    <div flex="50" class="col" style="margin-left:30px;">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>First name</label>
+                            <input required ng-model="user.firstName" minlength="6" maxlength="100">
+                        </md-input-container>
+                    </div>
+                    <div flex="50" class="col" style="margin-right:30px;">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Last name</label>
+                            <input required ng-model="user.lastName" minlength="6" maxlength="100">
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div layout="row">
+                    <div flex="50" class="col" style="margin-left:30px;">
+                        <md-input-container class="md-block" flex="30" style="float:left;">
+                            <label>Country Code</label>
+                            <input required ng-model="user.countryCode" minlength="6" maxlength="100">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex="100 " flex-offset="10" style="float:left;">
+                            <label>Hand Phone</label>
+                            <input required ng-model="user.phoneNum" minlength="6" maxlength="100">
+                        </md-input-container>
+                    </div>
+                    <div flex="50" class="col" style="margin-right:30px;">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Email ID</label>
+                            <input required type="email" name="email" ng-model="user.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+
+                            <div ng-messages="projectForm.email.$error" role="alert">
+                                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                    Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div layout="row">
+                    <div flex="50" class="col" style="margin-left:30px;">
+                        <md-input-container class="md-block" flex="30" style="float:left;">
+                            <label>Country Code</label>
+                            <input required ng-model="user.countryCode" minlength="6" maxlength="100">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex="100" flex-offset="10" style="float:left;">
+                            <label>Residence Phone</label>
+                            <input required ng-model="user.phoneNum" minlength="6" maxlength="100">
+                        </md-input-container>
+
+                    </div>
+                    <div flex="50" class="col" style="margin-right:30px;">
+                        <md-input-container>
+                            <label>Date of Birth</label>
+                            <md-datepicker ng-model="user.bdayDate"></md-datepicker>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Nationality*</label>
+                            <md-select ng-model="ctrl.userState">
+                                <md-option><em>Singapore</em></md-option>
+                                <md-option ng-repeat="country in vm.countries" ng-value="country.name">
+                                    {{country.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div layout="row">
+                    <div flex="50" class="col" style="margin-left:30px;">
+                        <md-input-container class="md-block">
+                            <label>Residential Address</label>
+                            <textarea ng-model='user.resaddress' rows="2"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div flex="50" class="col" style="margin-right:30px;">
+                        <md-input-container class="md-block">
+                            <label>Mailing Address</label>
+                            <textarea ng-model='user.mailaddress' rows="2"></textarea>
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div layout="row">
+                    <div flex="50" class="col" style="margin-left:30px;">
+                        <md-input-container class="md-block">
+                            <label>Passport Number</label>
+                            <input required ng-model="user.passportnum" minlength="6" maxlength="100">
+                        </md-input-container>
+                    </div>
+                    <div flex="50" class="col" style="margin-right:30px;">
+                        <md-input-container class="md-block">
+                            <label>Employment Status</label>
+                            <input required ng-model="user.empstatus" minlength="6" maxlength="100">
+                        </md-input-container>
+                    </div>
                 </div>
             </md-step-body>
         </md-step>
@@ -47,49 +125,56 @@
         </md-step>
         <md-step md-label="Selection of Timeslot">
             <md-step-body>
-                <p>BOOK CALENDAR APPOINTMENTS</p>
+                <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent)" md-label="title" , md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis" auto-height class="md-primary">
+                    <md-event-calendar-header class="md-center">
+                        <md-event-calendar-prev></md-event-calendar-prev>
+                        <md-event-calendar-title></md-event-calendar-title>
+                        <md-event-calendar-next></md-event-calendar-next>
+                        <!-- <md-event-calendar-today></md-event-calendar-today> -->
+                    </md-event-calendar-header>
+                </md-event-calendar>
             </md-step-body>
         </md-step>
     </md-stepper>
 
-  <footer>
-      <div layout="row">
-          <md-button class="md-raised md-back" ng-click="vm.backStep()">Back</md-button>
-          <md-button class="md-raised md-success" ng-click="vm.nextStep()">Next</md-button>
-      </div>
-  </footer>
+    <footer>
+        <div layout="row" class="footerBtns" layout-align="start center">
+            <md-button class="md-raised md-back" ng-click="vm.backStep()">Back</md-button>
+            <md-button class="md-raised md-success" ng-click="vm.nextStep()">Next</md-button>
+        </div>
+    </footer>
 </div>
 
 
 <!--   <div flex="50" class="headerProgress">
     <div class="titleProgressHeader">Application Completion</div>
     <div layout="row">
-    	<div flex="25">
-		    <ol>
-		    	<li class="active">Brokerages</li>
-		    	<li>Documents</li>
-		    	<li>Personal Details</li>
-		    	<li>KYC</li>
-		    	<li>Selection Timeslot</li>
-		    </ol>
-	    </div>
-	    <div flex="25">
-		    <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-colors="colors" ng-show="true">
-			</canvas>
-		</div>
-	</div>
+        <div flex="25">
+            <ol>
+                <li class="active">Brokerages</li>
+                <li>Documents</li>
+                <li>Personal Details</li>
+                <li>KYC</li>
+                <li>Selection Timeslot</li>
+            </ol>
+        </div>
+        <div flex="25">
+            <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-colors="colors" ng-show="true">
+            </canvas>
+        </div>
+    </div>
   </div>
   <div flex="50" class="headerProgress">
     <div class="titleProgressHeader">Authenticity of Documents</div>
     <ol>
-    	<li>Brokerages</li>
-    	<li>NRIC or NIF</li>
-    	<li>Passport</li>
-    	<li>Address</li>
-    	<li>Salary Slip</li>
-    	<li>Salary Slip</li>
-    	<li>Provident Fund</li>
-    	<li>Bank Statement</li>
+        <li>Brokerages</li>
+        <li>NRIC or NIF</li>
+        <li>Passport</li>
+        <li>Address</li>
+        <li>Salary Slip</li>
+        <li>Salary Slip</li>
+        <li>Provident Fund</li>
+        <li>Bank Statement</li>
     </ol>
   </div> -->
 </div>

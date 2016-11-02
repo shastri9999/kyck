@@ -3,8 +3,6 @@
 function CalendarController($scope, $mdDialog, $filter) {
 	'ngInject';
 
-	$scope.title = "My Bookings";
-
 	$scope.events = [
     {
       start: getDate(-6, 10),
