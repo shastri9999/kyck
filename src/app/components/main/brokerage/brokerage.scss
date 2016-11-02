@@ -75,7 +75,7 @@ md-event-calendar {
   width: 100%; }
 
 .col {
-	margin: 20px;
+	margin: 5px 20px 10px 20px;
 }
 
 .footerBtns {
@@ -84,4 +84,8 @@ md-event-calendar {
 
 md-input-container.md-block {
 	margin-top: 0px;
+}
+
+.personalDetailsForm {
+	margin-top:45px;
 }

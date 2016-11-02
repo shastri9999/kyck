@@ -1,6 +1,6 @@
 'use strict';
 
-function BrokerageController($mdStepper, $mdDialog) {
+function BrokerageController($mdStepper, $mdDialog, $filter) {
     'ngInject';
 
     var vm = this;
@@ -742,6 +742,18 @@ function BrokerageController($mdStepper, $mdDialog) {
         }]
 
         vm.countries = countries;
+
+        var empStatuses = [{
+        	name: 'Retired'
+        }, {
+        	name: 'Employed'
+        }, {
+        	name: 'House Wife'
+        }
+        ]
+
+        vm.empStatuses = empStatuses;
+
         var events = [{
             start: getDate(-6, 10),
             end: getDate(-6, 11),

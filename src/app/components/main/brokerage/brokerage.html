@@ -18,104 +18,123 @@
         </md-step>
         <md-step md-label="Personal Details">
             <md-step-body>
-                <div layout="row">
-                    <div flex="50" class="col" style="margin-left:30px;">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>First name</label>
-                            <input required ng-model="user.firstName" minlength="6" maxlength="100">
-                        </md-input-container>
-                    </div>
-                    <div flex="50" class="col" style="margin-right:30px;">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Last name</label>
-                            <input required ng-model="user.lastName" minlength="6" maxlength="100">
-                        </md-input-container>
-                    </div>
-                </div>
+                <form name="personalDetailsForm" class="personalDetailsForm">
+                    <div layout="row">
+                        <div flex="50" class="col" style="margin-left:30px;">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>First name</label>
+                                <input required ng-model="user.firstName" name="firstName" minlength="6" maxlength="100">
 
-                <div layout="row">
-                    <div flex="50" class="col" style="margin-left:30px;">
-                        <md-input-container class="md-block" flex="30" style="float:left;">
-                            <label>Country Code</label>
-                            <input required ng-model="user.countryCode" minlength="6" maxlength="100">
-                        </md-input-container>
-                        <md-input-container class="md-block" flex="100 " flex-offset="10" style="float:left;">
-                            <label>Hand Phone</label>
-                            <input required ng-model="user.phoneNum" minlength="6" maxlength="100">
-                        </md-input-container>
-                    </div>
-                    <div flex="50" class="col" style="margin-right:30px;">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Email ID</label>
-                            <input required type="email" name="email" ng-model="user.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
-
-                            <div ng-messages="projectForm.email.$error" role="alert">
-                                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                                    Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                <div ng-messages="personalDetailsForm.firstName.$error" role="alert">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                                        Please enter a name between 6 and 100 characters.
+                                    </div>
                                 </div>
-                            </div>
-                        </md-input-container>
+                            </md-input-container>
+                        </div>
+                        <div flex="50" class="col" style="margin-right:30px;">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Last name</label>
+                                <input required ng-model="user.lastName" name="lastName" minlength="6" maxlength="100">
+                                <div ng-messages="personalDetailsForm.lastName.$error" role="alert">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                                        Please enter the last name between 6 and 100 characters.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                        </div>
                     </div>
-                </div>
 
-                <div layout="row">
-                    <div flex="50" class="col" style="margin-left:30px;">
-                        <md-input-container class="md-block" flex="30" style="float:left;">
-                            <label>Country Code</label>
-                            <input required ng-model="user.countryCode" minlength="6" maxlength="100">
-                        </md-input-container>
-                        <md-input-container class="md-block" flex="100" flex-offset="10" style="float:left;">
-                            <label>Residence Phone</label>
-                            <input required ng-model="user.phoneNum" minlength="6" maxlength="100">
-                        </md-input-container>
+                    <div layout="row" style="margin-top:0px;">
+                        <div flex="50" class="col" style="margin-left:30px;">
+                            <md-input-container class="md-block" flex="30" style="float:left;">
+                                <label>Country Code</label>
+                                <input required ng-model="user.countryCode" minlength="6" maxlength="100">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex="100 " flex-offset="10" style="float:left;">
+                                <label>Hand Phone</label>
+                                <input required ng-model="user.phoneNum" minlength="6" maxlength="100">
+                            </md-input-container>
+                        </div>
+                        <div flex="50" class="col" style="margin-right:30px;">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Email ID</label>
+                                <input required type="email" name="email" ng-model="user.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
 
+                                <div ng-messages="personalDetailsForm.email.$error" role="alert">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                        Please enter a valid email Id.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                        </div>
                     </div>
-                    <div flex="50" class="col" style="margin-right:30px;">
-                        <md-input-container>
-                            <label>Date of Birth</label>
-                            <md-datepicker ng-model="user.bdayDate"></md-datepicker>
-                        </md-input-container>
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Nationality*</label>
-                            <md-select ng-model="ctrl.userState">
-                                <md-option><em>Singapore</em></md-option>
-                                <md-option ng-repeat="country in vm.countries" ng-value="country.name">
-                                    {{country.name}}
-                                </md-option>
-                            </md-select>
-                        </md-input-container>
-                    </div>
-                </div>
 
-                <div layout="row">
-                    <div flex="50" class="col" style="margin-left:30px;">
-                        <md-input-container class="md-block">
-                            <label>Residential Address</label>
-                            <textarea ng-model='user.resaddress' rows="2"></textarea>
-                        </md-input-container>
-                    </div>
-                    <div flex="50" class="col" style="margin-right:30px;">
-                        <md-input-container class="md-block">
-                            <label>Mailing Address</label>
-                            <textarea ng-model='user.mailaddress' rows="2"></textarea>
-                        </md-input-container>
-                    </div>
-                </div>
+                    <div layout="row" style="margin-top:0px;">
+                        <div flex="50" class="col" style="margin-left:30px;">
+                            <md-input-container class="md-block" flex="30" style="float:left;">
+                                <label>Country Code</label>
+                                <input required ng-model="user.countryCode" minlength="6" maxlength="100">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex="100" flex-offset="10" style="float:left;">
+                                <label>Residence Phone</label>
+                                <input required ng-model="user.phoneNum" minlength="6" maxlength="100">
+                            </md-input-container>
 
-                <div layout="row">
-                    <div flex="50" class="col" style="margin-left:30px;">
-                        <md-input-container class="md-block">
-                            <label>Passport Number</label>
-                            <input required ng-model="user.passportnum" minlength="6" maxlength="100">
-                        </md-input-container>
+                        </div>
+                        <div flex="50" class="col" style="margin-right:30px;">
+                            <md-input-container style="margin-left: -16px;margin-top: 0px;">
+                                <label>Date of Birth</label>
+                                <md-datepicker ng-model="user.bdayDate"></md-datepicker>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Nationality*</label>
+                                <md-select ng-model="ctrl.userState">
+                                    <md-option><em>Singapore</em></md-option>
+                                    <md-option ng-repeat="country in vm.countries" ng-value="country.name">
+                                        {{country.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
                     </div>
-                    <div flex="50" class="col" style="margin-right:30px;">
-                        <md-input-container class="md-block">
-                            <label>Employment Status</label>
-                            <input required ng-model="user.empstatus" minlength="6" maxlength="100">
-                        </md-input-container>
+
+                    <div layout="row">
+                        <div flex="50" class="col" style="margin-left:30px;">
+                            <md-input-container class="md-block">
+                                <label>Residential Address</label>
+                                <textarea ng-model='user.resaddress' rows="2"></textarea>
+                            </md-input-container>
+                        </div>
+                        <div flex="50" class="col" style="margin-right:30px;">
+                            <md-input-container class="md-block">
+                                <label>Mailing Address</label>
+                                <textarea ng-model='user.mailaddress' rows="2"></textarea>
+                            </md-input-container>
+                        </div>
                     </div>
-                </div>
+
+                    <div layout="row">
+                        <div flex="50" class="col" style="margin-left:30px;">
+                            <md-input-container class="md-block">
+                                <label>Passport Number</label>
+                                <input required ng-model="user.passportnum" minlength="6" maxlength="100">
+                            </md-input-container>
+                        </div>
+                        <div flex="50" class="col" style="margin-right:30px;">
+                            <md-input-container class="md-block">
+                                <label>Employment Status</label>
+                                <md-select ng-model="ctrl.userState">
+                                    <md-option><em>Self Employed</em></md-option>
+                                    <md-option ng-repeat="empstatus in vm.empStatuses" ng-value="empstatus.name">
+                                        {{empstatus.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </form>
+
             </md-step-body>
         </md-step>
         <md-step md-label="KYC">
