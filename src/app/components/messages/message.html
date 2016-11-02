@@ -1,4 +1,4 @@
-<div layout="row" class="email-summary">
+<div class="email-summary">
 	<div class="left-ink">
 	</div>
 	<div class="email-icon">
@@ -6,9 +6,9 @@
 	</div>
 	<div layout="row" style="padding: 10px;">
 		<div>
-			<span class="email-from">Standard Chartered Bank</span> <span style="float: right;">2hr Ago</span>
+			<span class="email-from">{{message.from}}</span> <span style="float: right;">{{message.time}}</span>
 			<p class="email-subject">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			{{message.body}}
 			</p>
 		</div>
 	</div>

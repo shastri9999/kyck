@@ -12,7 +12,7 @@ messagesPageModule
 .config(route);
 
 messagesPageModule
-.directive('messageTest', messageDirective)
+.directive('messageSummary', messageDirective)
 .factory('MessageResource', messageResource);
 
 export default messagesPageModule;

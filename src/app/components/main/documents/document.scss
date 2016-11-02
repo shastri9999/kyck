@@ -10,9 +10,13 @@
 	min-height: 200px;
 	min-width: 200px;
 	max-width: 400px;
+	//height: 225px;
+	//width: 415px;
 	box-sizing: border-box;
-	border: 1px solid #c3c3c3;
-	box-shadow: 3px 3px 3px #c3c3c3;
+	border: solid 1px #e7ecf1;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	//box-shadow: 3px 3px 3px #c3c3c3;
 }
 
 .document-details {
@@ -25,9 +29,13 @@
 	text-align: center;
 	vertical-align: middle;
 	line-height: 25px;
-	background-color: #F5F9FA;
+	background-color: #f5f9fa;
 	padding: 30px;
 	font-size: 14px;
+  	font-weight: 500;
+  	font-style: normal;
+  	opacity: 0.75;
+  	font-family: Lato;
 }
 
 .document-upper {

@@ -29,9 +29,15 @@ md-tabs.md-default-theme {
 .email-summary {
 	border-radius: 5px;
 	border: solid 1px #e7ecf1;
-	margin-bottom: 10px;
-	margin-top: 10px;
+	margin-bottom: 15px;
+	margin-top: 15px;
 	display: flex;
+}
+
+message-summary:focus {
+    background-color: #f2f6f8;
+    outline: none;
+    border: 0;
 }
 
 .email-subject {
@@ -39,7 +45,10 @@ md-tabs.md-default-theme {
 	margin-bottom: 10px;
 	text-overflow: ellipsis;
 	font-size: 14px;
-	line-height: 25px;
+	opacity: 0.6;
+	font-family: Lato;
+	line-height: 1.56;
+	color: #4f6379;
 }
 
 md-content {
@@ -47,7 +56,7 @@ md-content {
 }
 
 .email-reply {
-	diplay: flex;
+	display: flex;
 	background-color: #f2f6f8;
 }
 

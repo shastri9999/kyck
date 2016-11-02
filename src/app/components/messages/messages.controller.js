@@ -2,7 +2,6 @@
 
 function MessagesController($log, $scope, MessageResource, AuthenticationService) {
 	'ngInject';
-	$log.debug('Always use $log.debug for console logs for debugging');
 	var vm = this;
 	vm.tabs = [
 		{
@@ -15,6 +14,22 @@ function MessagesController($log, $scope, MessageResource, AuthenticationService
 			title: 'Draft'
 		}
 	];
+
+	vm.currentMessage = null;
+
+
+	$scope.message = {
+		from: 'Standard Chartered Bank',
+		body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+		time: '2hr Ago'
+	};
+
+	vm.showReplyScreen = function(message){
+		$log.debug("Email clicked");
+		vm.currentMessage = message;
+	}
+
+
 	console.log(AuthenticationService.getLoggedInUser());
 	var inbox = MessageResource.inbox();
 	$log.debug(inbox);
