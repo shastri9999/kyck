@@ -4,8 +4,9 @@
   "description": "One Portal, One KYC, Ready for the World",
   "homepage": "",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
-    "build": "cross-env NODE_ENV=production webpack -p --colors"
+    "copy-images":"mkdir -p dist/assets/images && cp -R src/assets/images dist/assets",
+    "dev": "npm run copy-images && cross-env NODE_ENV=development webpack-dev-server --progress",
+    "build": "cross-env NODE_ENV=production webpack -p --colors --progress --bail"
   },
   "dependencies": {
     "angular": "^1.5.8",

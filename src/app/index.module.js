@@ -30,5 +30,6 @@ export default angular.module('kyck', [
 
 		/* Todo: Move this to service */
 		$rootScope.breadCrumb = next.breadCrumb;
+		$rootScope.sideNavCollapsed = false;
 	});
 });

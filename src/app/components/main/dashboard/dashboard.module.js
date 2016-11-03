@@ -1,6 +1,7 @@
 'use strict';
 
 import route from './dashboard.route';
+import './dashboard.scss';
 
 const dashboardModule = angular.module('dashboard-module', [
 	'ui.router',
