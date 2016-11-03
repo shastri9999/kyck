@@ -98,6 +98,28 @@
             margin: 40px;
             flex-grow: 1;
             margin-top: 0px;
+            flex-flow: column;
+            .brokerage-item {
+                display: flex;
+                margin-top: 20px;
+                .broker-logo {
+                    height: 100px;
+                    width: 100px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid #e7ecf1;
+                    border-radius: 5px;
+                    flex-shrink: 0;
+                }
+                .detail {
+                    font-size: 14px;
+                    display: flex;
+                    flex-flow: column;
+                    align-items: flex-start;
+                    padding: 20px;
+                }
+            }
         }
     }
 }
