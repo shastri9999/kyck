@@ -75,8 +75,23 @@
             margin: 40px;
             margin-top: 0px;
     		flex-grow: 1;
+            flex-flow: column;
             .message {
-
+                display: flex;
+                padding: 30px;
+                padding-right: 20px;
+                margin-top: 20px;
+                border: 1px solid #e7ecf1;
+                border-radius: 5px;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                border-left: 5px solid #3498db;
+                .time {
+                    display: flex;
+                    align-items: flex-start;
+                    font-size: 14px;
+                    opacity: 0.4;
+                }
             }
     	}
     }
