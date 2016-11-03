@@ -754,6 +754,17 @@ function BrokerageController($mdStepper, $mdDialog, $filter) {
 
         vm.empStatuses = empStatuses;
 
+        var currencies = [{
+        	name: 'Dollars'
+        }, {
+        	name: 'Rupeees',
+        }, {
+        	name: 'Euros'
+        }
+        ];
+
+        vm.currencies = currencies;
+
         var events = [{
             start: getDate(-6, 10),
             end: getDate(-6, 11),

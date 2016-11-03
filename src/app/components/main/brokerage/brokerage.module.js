@@ -7,7 +7,8 @@ const brokerageModule = angular.module('brokerage-module', [
 	'ui.router',
 	'navigation-module',
 	'chart.js',
-	'mdSteppers'
+	'mdSteppers',
+	'material.components.eventCalendar'
 	]);
 
 brokerageModule
