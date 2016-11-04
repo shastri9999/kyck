@@ -1,11 +1,14 @@
+$greeny-blue: #40B2A7;
+$pale-grey: #e7ecf1;
+
 .email-from {
 	font-weight: bold;
 	display: inline-block;
 }
 
 .md-tab.md-active {
-	background-color: #40B2A7;
-	color: rgb(250,250,250);
+	background-color: $greeny-blue;
+	color: white;
 }
 
 md-tabs.md-default-theme {
@@ -20,12 +23,6 @@ md-tabs.md-default-theme {
 	display: flex;
 	max-height: 130px;
 	border-left: solid #3498db;
-}
-
-message-summary:focus {
-    background-color: #f2f6f8;
-    outline: none;
-    border: 0;
 }
 
 .email-subject {
@@ -93,4 +90,69 @@ md-content {
 	margin-right: 35px;
 	line-height: 25px;
 	font-size: 16px;
+}
+
+.message-tabs {
+	display: inline-flex;
+	margin: 40px;
+}
+
+.md-tab {
+	display: flex;
+	font-size: 16px;
+	font-family: Lato;
+	width: 130px;
+	height: 48px;
+	font-weight: 500px;
+	font-style: normal;
+	font-strength: normal;
+	align-items: center;
+	text-align: center;
+	display: block;
+	color: #4f6379;
+	border-radius: 3px;
+	border: solid 1px $pale-grey;
+}
+
+.message-tabs .active {
+	background-color: $greeny-blue;
+	color: white;
+}
+
+.message-tab:focus {
+	outline: none;
+	border: 0;
+}
+
+message-summary:focus {
+	    outline: none;
+	    border: 0;
+}
+
+.messages {
+	display: flex;
+    margin: 40px;
+    margin-top: 0px;
+	flex-grow: 1;
+    flex-flow: column;
+    .message {
+        display: flex;
+        padding: 30px;
+        padding-right: 20px;
+        margin-top: 20px;
+        border: 1px solid #e7ecf1;
+        border-radius: 5px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: 5px solid #3498db;
+        .time {
+            display: flex;
+            align-items: flex-start;
+            font-size: 14px;
+            opacity: 0.4;
+        }
+    }
+}
+md-tabs .md-tab.md-active, md-tabs .md-tab.md-focused {
+	color: white;
 }
