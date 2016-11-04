@@ -42,7 +42,11 @@
         </md-step>
         <md-step md-label="Documents">
             <md-step-body>
-                <p>UPLOAD DOCUMENTS</p>
+                <div class="flex-wrapper">
+                <div ng-repeat="document in ::vm.documents">
+                    <document-pane style="float: left;" document="document"></document-pane>
+                </div>  
+                </div>
             </md-step-body>
         </md-step>
         <md-step md-label="Personal Details">
