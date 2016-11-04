@@ -106,7 +106,8 @@
             margin: 40px;
             flex-grow: 1;
             border-bottom: 2px solid rgba(231,236,241,0.3);
-            margin-top: 20px;            
+            margin-top: 20px;  
+            flex-flow: column;          
         }
         .brokerage {
             display: flex;
