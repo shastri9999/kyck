@@ -17,3 +17,29 @@ md-event-calendar .md-event-calendar-cell-event.rejected {
 .md-dialog-content-body{
 	padding-top:12px;
 }
+md-event-calendar._md.md-primary md-event-calendar-month .md-event-calendar-month-row-header {
+	background: #3498db;
+    height: 60px;
+    font-size: 16px;
+    padding-bottom: 20px;
+}
+
+md-event-calendar-header {
+	background: #fff;
+	font-family: Lato;
+	font-size: 16px;
+	font-weight: 500;
+	font-style: normal;
+	font-stretch: normal;
+	color: #4f6379;
+}
+
+md-event-calendar._md.md-primary md-event-calendar-header {
+	background: #fff;
+}
+.md-event-calendar-header-label {
+	color: #4f6379;
+}
+md-event-calendar._md.md-primary md-event-calendar-header md-event-calendar-next .md-arrow svg, md-event-calendar._md.md-primary md-event-calendar-header md-event-calendar-prev .md-arrow svg {
+	fill: #4f6379;
+}
