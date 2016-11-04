@@ -24,10 +24,16 @@ footer {
 }
 .md-raised.md-success {
 	color: white;
+	font-family: Lato;
+	margin-left: 0px;
+	border-radius: 1px;
 	background: #3bada5;
 }
 .md-raised.md-back {
 	color: white;
+	margin-right:0px;
+	border-radius: 1px;
+	font-family: Lato;
 	background: #4f6379;
 }
 .md-button.md-raised.md-back:not([disabled]):hover {
@@ -113,4 +119,33 @@ md-input-container.md-block {
 	border-radius: 5px;
 	border: solid 1px #3aafa5;
 	border: solid 1px var(--greeny-blue);
+}
+
+.partnerLogo {
+  width: 200px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border: solid 1px #e7ecf1;
+  margin: 20px;
+  position: relative;
+  -webkit-transition : border 1000ms ease-out;
+  -moz-transition : border 1000ms ease-out;
+  -o-transition : border 1000ms ease-out;
+  transition : border 1000ms ease-out;
+
+  img {
+  	height: 40px;
+  	margin-top: 25px;
+  }
+  .premiereIcon {
+	position: absolute;
+    height: 20px;
+    top: -25px;
+    left: 15px;
+  }
+}
+.partnerLogo:hover {
+   border : solid 1px #3aafa5; 
 }
