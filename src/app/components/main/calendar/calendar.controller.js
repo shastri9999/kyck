@@ -5,12 +5,6 @@ function CalendarController($scope, $mdDialog, $filter) {
 
 	$scope.events = [
     {
-      start: getDate(-6, 10),
-      end: getDate(-6, 11),
-      customClass: 'reschedule',
-      title: 'Event 1'
-    },
-    {
       start: getDate(-6, 9),
       end: getDate(-6, 10),
       customClass: 'confirmed',

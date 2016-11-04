@@ -43,13 +43,21 @@ footer {
 .md-button.md-raised.md-success:not([disabled]):hover {
     background-color: #3bada5;
 }
-.md-stepper-indicator.md-active .md-stepper-number, .md-stepper-indicator.md-completed .md-stepper-number {
-	background-color: #f39c11;
+.md-stepper-indicator .md-stepper-number, .md-stepper-indicator.md-completed .md-stepper-number {
+	background-color: #fff;
 	width: 40px;
     height: 40px;
     border-radius: 40px;
     line-height: 40px;
-    border: none;
+    color: #a2a9b1;
+    border: solid 2px #e4e9ee;
+}
+.md-stepper-indicator.md-active .md-stepper-number, .md-stepper-indicator.md-completed .md-stepper-number {
+	background-color: #f39c11;
+	color: #fff;
+}
+.md-stepper-number.md-activ {
+	background-color: #f39c11;
 }
 .md-stepper-number {
 	color: #e2eaec;
