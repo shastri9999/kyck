@@ -13,6 +13,7 @@ export default angular.module('kyck', [
 	'oc.lazyLoad',
 	'ngMaterial',
 	'ngResource',
+	'ngFileUpload',
 	Common.name,
 	Components.name,
 	Routes.name

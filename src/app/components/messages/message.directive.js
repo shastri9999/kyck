@@ -18,7 +18,6 @@ function messageComponent($log) {
 
   function MessageController () {
 	  $log.debug('Hello from Message controller!');
-    //$log.debug($scope.message);
   }
 
 }

@@ -10,15 +10,18 @@ function documentComponent($log) {
     restrict: 'E',
     templateUrl: documentHtml,
     controller: DocumentController,
-    controllerAs: 'vm',
     bindToController: true,
     document: '='
   };
 
   return directive;
 
-  function DocumentController () {
+  function DocumentController ($scope) {
+    'ngInject';
 	  $log.debug('Hello from Document controller!');
+    $scope.upload = function(file){
+      $log.debug(file);
+    }
   }
 
 }

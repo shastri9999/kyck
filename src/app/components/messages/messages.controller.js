@@ -16,6 +16,11 @@ function MessagesController($log, $scope, MessageResource, AuthenticationService
 	];
 
 	vm.currentMessage = null;
+	vm.activeTab = vm.tabs[0];
+
+	vm.setActive = function(tab){
+		vm.activeTab = tab;
+	}
 
 
 	$scope.message = {

@@ -7,11 +7,12 @@
 }
 
 .document {
+	margin: 10px;
 	min-height: 200px;
 	min-width: 200px;
 	max-width: 400px;
 	//height: 225px;
-	//width: 415px;
+	width: 380px;
 	box-sizing: border-box;
 	border: solid 1px #e7ecf1;
 	border-radius: 5px;
@@ -62,4 +63,8 @@
   width: 5px;
   margin-top: 10px;
   margin-right: 10px;
+}
+
+.dragover {
+    border: 5px dashed blue;
 }

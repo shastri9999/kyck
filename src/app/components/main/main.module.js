@@ -7,6 +7,7 @@ import HelpModule from './help/help.module';
 import NavigationModule from './navigation/navigation.module';
 import ToolbarModule from './toolbar/toolbar.module';
 import DocumentModule from './documents/document.module';
+import ProgressModule from './progress/progress.module';
 import route from './main.route';
 import './main.scss';
 
@@ -18,7 +19,8 @@ const mainModule = angular.module('main-module', [
 	HelpModule.name,
 	BrokerageModule.name,
 	ToolbarModule.name,
-	DocumentModule.name
+	DocumentModule.name,
+	ProgressModule.name
 	]);
 
 mainModule

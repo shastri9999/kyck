@@ -12,8 +12,9 @@
 			<span>{{ document.comment }}</span>
 		</div>
 	</div>
-	<div class="document-action">
-		<span>Drag and drop your file here or <md-button class="md-primary md-raised" style="background-color: #3598DB">Upload</md-button>
- </span>
+	<div class="document-action" ngf-drag-over-class="'dragover'" ngf-drop="upload($file)">
+		<span>Drag and drop your file here or 
+		<md-button ngf-select="upload($file)" class="md-primary md-raised" style="background-color: #3598DB">Upload</md-button>
+ 		</span>
 	</div>
 </div>

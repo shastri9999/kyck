@@ -11,8 +11,8 @@ function routeConfig($stateProvider) {
 		url: '/dashboard',
 		templateUrl,
 		controller,
+		controllerAs: 'vm',
 		breadCrumb: 'Dashboard'
-
 	});
 }
 
