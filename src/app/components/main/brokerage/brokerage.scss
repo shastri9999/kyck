@@ -130,10 +130,10 @@ md-input-container.md-block {
   border: solid 1px #e7ecf1;
   margin: 20px;
   position: relative;
-  -webkit-transition : border 1000ms ease-out;
-  -moz-transition : border 1000ms ease-out;
-  -o-transition : border 1000ms ease-out;
-  transition : border 1000ms ease-out;
+  -webkit-transition : border 400ms ease-out;
+  -moz-transition : border 400ms ease-out;
+  -o-transition : border 400ms ease-out;
+  transition : border 400ms ease-out;
 
   img {
   	height: 40px;
@@ -147,5 +147,5 @@ md-input-container.md-block {
   }
 }
 .partnerLogo:hover {
-   border : solid 1px #3aafa5; 
+   border : solid 2px #3aafa5; 
 }
