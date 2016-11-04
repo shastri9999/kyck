@@ -4,7 +4,7 @@
   "description": "One Portal, One KYC, Ready for the World",
   "homepage": "",
   "scripts": {
-    "copy-images":"mkdir -p dist/assets/images && cp -R src/assets/images dist/assets",
+    "copy-images": "mkdir -p dist/assets/images && cp -R src/assets/images dist/assets",
     "dev": "npm run copy-images && cross-env NODE_ENV=development webpack-dev-server --progress",
     "build": "cross-env NODE_ENV=production webpack -p --colors --progress --bail"
   },
@@ -53,6 +53,7 @@
     "node-sass": "^3.4.2",
     "oclazyload": "^1.0.9",
     "postcss-loader": "^0.6.0",
+    "radial-progress-chart": "0.0.4",
     "sass-loader": "^3.1.1",
     "style-loader": "^0.13.0",
     "url": "^0.11.0",
