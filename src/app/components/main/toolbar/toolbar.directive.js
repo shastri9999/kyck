@@ -1,6 +1,7 @@
 'use strict';
 
 import templateUrl from './toolbar.html';
+import controller from './toolbar.controller';
 
 function ToolbarComponent() {
 	'ngInject';
@@ -14,11 +15,6 @@ function ToolbarComponent() {
   };
 
   return directive;
-
-  const controller = ($scope)=> {
-    'ngInject';
-  }
-
 }
 
 export default ToolbarComponent;

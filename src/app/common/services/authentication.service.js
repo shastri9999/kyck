@@ -17,7 +17,7 @@ class AuthenticationService {
 	}
 
 	logout(){
-		this.loggedInUser = {};
+		this.loggedInUser = null;
 		this._StorageService.setItem('loggedInUser', this.loggedInUser);
 	}
 

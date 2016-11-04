@@ -1,10 +1,22 @@
-<form class="signin-container">
+<form name="signInForm" class="signin-container" ng-submit="vm.signIn()">
 	<div style="font-size: 24px; line-height: 42px; margin-top: 50px;">Sign in to your account</div>
-	<input type="text" placeholder="Email Address">
-	<div class="password">
-		<input type="password" placeholder="Password">		
+	<input name="username" ng-model="username" type="email" placeholder="Email Address" required>
+	<div ng-if="signInForm.username.$touched">
+		<div ng-messages="signInForm.username.$error">
+			<p class="error" ng-message="required">Username cannot be empty.</p>
+			<p class="error" ng-message="email" ng-if="signInForm.password">Username is your email address.</p>
+		</div>		
 	</div>
-	<a class="button" ng-click="vm.signIn()">Login</a>
+	<div class="password">
+		<input name="password" ng-model="password" type="password" placeholder="Password" required> 
+	</div>
+	<div ng-if="signInForm.password.$touched">
+		<div ng-messages="signInForm.password.$error">
+			<p class="error" ng-message="required" ng-if="signInForm.username">Password cannot be empty.</p>
+		</div>		
+	</div>
+	<p class="error" ng-if="signInForm.$valid && vm.invalidCredentials">Invalid Username/Password.</p>
+	<input type="submit" class="button" value="Login">
 	<div style="margin-top: 25px; margin-bottom: 80px;">
 		Don't have an account? <a style="color: #7b868a;cursor: pointer;" ui-sref="access.signup">Click here.</a>
 	</div>
