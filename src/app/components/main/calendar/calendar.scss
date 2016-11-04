@@ -2,16 +2,22 @@
 	text-transform: capitalize;
 	text-align: center;
 }
+md-event-calendar.md-event-calendar-cell-event {
+	background-color: #3aafa5;
+}
 md-event-calendar .md-event-calendar-cell-event.pending {
 	background-color: rgb(63, 81, 181);
+	background-color: #3aafa5;
 	color: white;
 }
 md-event-calendar .md-event-calendar-cell-event.confirmed {
 	background-color: rgb(0, 150, 136);
+	background-color: #3aafa5;
 	color: white;
 }
 md-event-calendar .md-event-calendar-cell-event.rejected {
 	background-color: rgb(244, 67, 54);
+	background-color: #3aafa5;
 	color: white;
 }
 .md-dialog-content-body{
