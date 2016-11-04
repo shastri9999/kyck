@@ -1,4 +1,4 @@
-<div class="dashboard-area">
+<div ng-if="vm.isUser" class="user-dashboard-area">
 	<div class="left">
 		<div class="appointments">
 			<h2>Appointments</h2>
@@ -113,4 +113,8 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div ng-if="!vm.isUser" class="broker-dashboard-area">
+	<div class="left"></div>
+	<div class="right"></div>
 </div>
