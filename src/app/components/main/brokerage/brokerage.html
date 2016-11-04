@@ -295,7 +295,7 @@
             </md-step-body>
         </md-step>
         <md-step md-label="Selection of Timeslot" layout="column">
-            <md-step-body layout="column">
+            <md-step-body>
                 <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent)" md-label="title" , md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis" auto-height class="md-primary">
                     <md-event-calendar-header class="md-center">
                         <md-event-calendar-prev></md-event-calendar-prev>
@@ -314,38 +314,4 @@
             <md-button class="md-raised md-success" ng-click="vm.nextStep()">Next</md-button>
         </div>
     </footer>
-</div>
-
-
-<!--   <div flex="50" class="headerProgress">
-    <div class="titleProgressHeader">Application Completion</div>
-    <div layout="row">
-        <div flex="25">
-            <ol>
-                <li class="active">Brokerages</li>
-                <li>Documents</li>
-                <li>Personal Details</li>
-                <li>KYC</li>
-                <li>Selection Timeslot</li>
-            </ol>
-        </div>
-        <div flex="25">
-            <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-colors="colors" ng-show="true">
-            </canvas>
-        </div>
-    </div>
-  </div>
-  <div flex="50" class="headerProgress">
-    <div class="titleProgressHeader">Authenticity of Documents</div>
-    <ol>
-        <li>Brokerages</li>
-        <li>NRIC or NIF</li>
-        <li>Passport</li>
-        <li>Address</li>
-        <li>Salary Slip</li>
-        <li>Salary Slip</li>
-        <li>Provident Fund</li>
-        <li>Bank Statement</li>
-    </ol>
-  </div> -->
 </div>
