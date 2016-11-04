@@ -3,7 +3,7 @@
 import documentHtml from './document.html';
 import './document.scss';
 
-function documentComponent($log) {
+function documentComponent($log, $state) {
 	'ngInject';
 
   let directive = {
@@ -20,7 +20,7 @@ function documentComponent($log) {
     'ngInject';
 	  $log.debug('Hello from Document controller!');
     $scope.upload = function(file){
-      $log.debug(file);
+      $state.go('main.document.preview',{ picFile: file});
     }
   }
 
