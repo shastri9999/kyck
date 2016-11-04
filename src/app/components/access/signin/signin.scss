@@ -12,19 +12,29 @@
 	    color: #7b868a;
 	    margin-top: 25px;
     }
+    .error {
+    	font-size: 12px;
+    	line-height: 18px;
+    	width: 400px;
+    	margin-top: 10px;
+    }
     .button {
-	   	width: 400px;
-	    background: #3aafa5;
-	    color: white;
-	    height: 60px;
-	    text-align: center;
-	    vertical-align: middle;
-	    padding: 20px;
-	    margin-top: 25px;
-	    border-radius: 3px;
-	    text-decoration: none;
-	    font-size: 18px;
-	    font-weight: 500;
+	   	    width: 400px;
+		    cursor: pointer;
+		    background: #3aafa5;
+		    color: white;
+		    height: 60px;
+		    text-align: center;
+		    vertical-align: middle;
+		    padding: 20px;
+		    margin-top: 25px;
+		    border-radius: 3px;
+		    text-decoration: none;
+		    font-size: 18px;
+		    font-weight: 500;
+		    border: none;
+		    outline: none;
+		    line-height: 20px;
 	    &:hover {
 			background-color: #2e8e86;
 	    }

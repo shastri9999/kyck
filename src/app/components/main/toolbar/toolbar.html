@@ -10,7 +10,10 @@
 
 	</div>
 	<div class="avatar-area">
-		<div>Paul Michael</div>
-		<img src="../../../../assets/images/avatar.png" style="padding: 0 13px;">		
+		<div>{{vm.displayName}}</div>
+		<img src="../../../../assets/images/avatar.png" style="padding: 0 13px;">	
+		<a ng-click="vm.signOut()" style="cursor: pointer;" title="Logout">
+			<img style="height: 35px;" src="../../../../assets/images/logout.svg" alt="Logout">
+		</a>	
 	</div>
 </div>

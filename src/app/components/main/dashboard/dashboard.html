@@ -1,4 +1,4 @@
-<div class="dashboard-area">
+<div ng-if="vm.isUser" class="user-dashboard-area">
 	<div class="left">
 		<div class="appointments">
 			<h2>Appointments</h2>
@@ -44,7 +44,9 @@
 				</div>
 				<div class="time">
 					<div style="white-space: nowrap;padding-right: 10px">2hrs Ago</div>
-					<img src="../../../../assets/images/open-message.png">
+					<a ui-sref="main.messages" style="text-decoration: none;cursor: pointer;">
+						<img src="../../../../assets/images/open-message.png">					
+					</a>
 
 				</div>
 			</div>
@@ -56,7 +58,9 @@
 				</div>
 				<div class="time">
 					<div style="white-space: nowrap;padding-right: 10px">2hrs Ago</div>
-					<img src="../../../../assets/images/open-message.png">
+					<a ui-sref="main.messages" style="text-decoration: none;cursor: pointer;">
+						<img src="../../../../assets/images/open-message.png">					
+					</a>
 
 				</div>
 			</div>
@@ -68,7 +72,9 @@
 				</div>
 				<div class="time">
 					<div style="white-space: nowrap;padding-right: 10px">2hrs Ago</div>
-					<img src="../../../../assets/images/open-message.png">
+					<a ui-sref="main.messages" style="text-decoration: none;cursor: pointer;">
+						<img src="../../../../assets/images/open-message.png">					
+					</a>
 
 				</div>
 			</div>
@@ -112,5 +118,109 @@
 				</div>				
 			</div>
 		</div>
+	</div>
+</div>
+<div ng-if="!vm.isUser" class="broker-dashboard-area">
+	<div class="left">
+		<div class="appointments">
+			<h2>Brokerage Application Request</h2>
+			<div class="appointments-container">
+				<div class="appointment">
+					<img src="../../../../assets/images/alvaro.png" style="height: 40px; width:40px;">			
+					<div class="detail">
+						<div style="font-size: 14px;">Alvaro Carreras</div>
+						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
+						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
+					</div>		
+				</div>				
+				<div class="appointment">
+					<img src="../../../../assets/images/alvaro.png" style="height: 40px; width:40px;">			
+					<div class="detail">
+						<div style="font-size: 14px;">Tobia Crivellari</div>
+						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
+						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
+					</div>		
+				</div>				
+				<div class="appointment">
+					<img src="../../../../assets/images/alvaro.png" style="height: 40px; width:40px;">			
+					<div class="detail">
+						<div style="font-size: 14px;">Tobia Crivellari</div>
+						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
+						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
+					</div>		
+				</div>				
+				<div class="appointment">
+					<img src="../../../../assets/images/alvaro.png" style="height: 40px; width:40px;">			
+					<div class="detail">
+						<div style="font-size: 14px;">Eugene Zaretskiy</div>
+						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
+						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
+					</div>		
+				</div>				
+				<div class="appointment">
+					<img src="../../../../assets/images/alvaro.png" style="height: 40px; width:40px;">			
+					<div class="detail">
+						<div style="font-size: 14px;">Soheil Behnezhad</div>
+						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
+						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
+					</div>		
+				</div>				
+				<div class="appointment">
+					<img src="../../../../assets/images/alvaro.png" style="height: 40px; width:40px;">			
+					<div class="detail">
+						<div style="font-size: 14px;">Soheil Behnezhad</div>
+						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
+						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
+					</div>		
+				</div>
+			</div>
+		</div>
+		<div class="messages">
+			<h2>New Messages</h2>
+			<div style="background-color: #f2f6f8;" class="message">
+				<img style="height:50px;padding-right: 20px;" src="../../../../assets/images/standard-chartered.png">
+				<div class="detail">
+					<div style="font-size: 14px; margin-bottom: 10px;">Standard Chartered Bank</div>
+					<div style="opacity: 0.4;font-size: 14px; line-height: 25px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius tempor act incididunt ut labore et dolore magna enim ad ...</div>
+				</div>
+				<div class="time">
+					<div style="white-space: nowrap;padding-right: 10px">2hrs Ago</div>
+					<a ui-sref="main.messages" style="text-decoration: none;cursor: pointer;">
+						<img src="../../../../assets/images/open-message.png">					
+					</a>
+
+				</div>
+			</div>
+			<div class="message">
+				<img style="height:50px;padding-right: 20px;" src="../../../../assets/images/standard-chartered.png">
+				<div class="detail">
+					<div style="font-size: 14px; margin-bottom: 10px;">Standard Chartered Bank</div>
+					<div style="opacity: 0.4;font-size: 14px; line-height: 25px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius tempor act incididunt ut labore et dolore magna enim ad ...</div>
+				</div>
+				<div class="time">
+					<div style="white-space: nowrap;padding-right: 10px">2hrs Ago</div>
+					<a ui-sref="main.messages" style="text-decoration: none;cursor: pointer;">
+						<img src="../../../../assets/images/open-message.png">					
+					</a>
+
+				</div>
+			</div>
+			<div class="message">
+				<img style="height:50px;padding-right: 20px;" src="../../../../assets/images/standard-chartered.png">
+				<div class="detail">
+					<div style="font-size: 14px; margin-bottom: 10px;">Standard Chartered Bank</div>
+					<div style="opacity: 0.4;font-size: 14px; line-height: 25px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius tempor act incididunt ut labore et dolore magna enim ad ...</div>
+				</div>
+				<div class="time">
+					<div style="white-space: nowrap;padding-right: 10px">2hrs Ago</div>
+					<a ui-sref="main.messages" style="text-decoration: none;cursor: pointer;">
+						<img src="../../../../assets/images/open-message.png">					
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="right">
+		<img src="../../../../assets/images/broker-dashboard-background.png">
 	</div>
 </div>
