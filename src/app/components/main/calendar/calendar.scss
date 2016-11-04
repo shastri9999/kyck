@@ -5,6 +5,9 @@
 md-event-calendar.md-event-calendar-cell-event {
 	background-color: #3aafa5;
 }
+.md-stepper-indicator.md-completed md-stepper-indicator-wrapper {
+	background: #fbfbfb;
+}
 md-event-calendar .md-event-calendar-cell-event.pending {
 	background-color: rgb(63, 81, 181);
 	background-color: #3aafa5;
