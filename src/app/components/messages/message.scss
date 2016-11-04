@@ -83,6 +83,9 @@ md-content {
 
 .email-content {
 	margin-top: 35px;
+	justify-content: space-around;
+	display: flex; 
+	flex-flow:column;
 }
 
 .email-body {
