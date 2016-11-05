@@ -295,9 +295,9 @@
             </md-step-body>
         </md-step>
         <md-step md-label="Selection of Timeslot">
-            <md-step-body>
-                <div style="min-height: 800px;">
-                    <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent)" md-label="title" , md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis" auto-height class="md-primary">
+            <md-step-body layout="column" flex>
+                <div style="min-height: 800px; height: 800px;">
+                    <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent)" md-label="title" md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis" class="md-primary">
                     <md-event-calendar-header class="md-center">
                         <md-event-calendar-prev></md-event-calendar-prev>
                         <md-event-calendar-title></md-event-calendar-title>
