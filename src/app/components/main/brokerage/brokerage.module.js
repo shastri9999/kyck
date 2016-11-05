@@ -2,6 +2,7 @@
 
 import route from './brokerage.route';
 import './brokerage.scss';
+import brokerageResource from './brokerage.resource';
 
 const brokerageModule = angular.module('brokerage-module', [
 	'ui.router',
@@ -12,6 +13,7 @@ const brokerageModule = angular.module('brokerage-module', [
 	]);
 
 brokerageModule
-.config(route);
+.config(route)
+.factory('BrokerageResource', brokerageResource);
 
 export default brokerageModule;
