@@ -1,5 +1,4 @@
 'use strict';
-import users from '../../mockdata/users.json';
 
 class AuthenticationService {
 	constructor($http, AppConstants, $rootScope, StorageService) {
