@@ -6,6 +6,9 @@ module.exports = function(_path) {
     context: _path,
     debug: true,
     devtool: 'source-map',
+    output: {
+      publicPath: 'http://0.0.0.0:8080/'
+    },
     devServer: {
       contentBase: './dist',
       info: true,

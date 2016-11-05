@@ -15,10 +15,13 @@ class ToolBarController {
 
 		this.flags = [{
 			country: 'SG',
-			url: '../../../../assets/images/flag.png'
+			url: '/assets/images/flag.png'
 		},{
 			country: 'ID',
-			url: '../../../../assets/images/flag-indonesia.png'
+			url: '/assets/images/flag-indonesia.png'
+		},{
+			country: 'TH',
+			url: '/assets/images/flag-thailand.svg'
 		}];
 		this.activeFlag = this.flags[0];
 	}

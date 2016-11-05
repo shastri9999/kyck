@@ -8,6 +8,7 @@ import NavigationModule from './navigation/navigation.module';
 import ToolbarModule from './toolbar/toolbar.module';
 import DocumentModule from './documents/document.module';
 import ProgressModule from './progress/progress.module';
+import DashboardCalendarModule from './dashboard-calendar/calendar.module';
 import route from './main.route';
 import './main.scss';
 
@@ -20,7 +21,8 @@ const mainModule = angular.module('main-module', [
 	BrokerageModule.name,
 	ToolbarModule.name,
 	DocumentModule.name,
-	ProgressModule.name
+	ProgressModule.name,
+	DashboardCalendarModule.name
 	]);
 
 mainModule
