@@ -12,9 +12,6 @@ function MessageResource($resource, $rootScope) {
     	},
     	create: {
     		method: 'POST',
-    		params: {
-    			userInputMessage: '@content'
-    		},
     		url: URL + 'create'
     	},
     	delete: {
