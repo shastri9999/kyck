@@ -9,6 +9,7 @@ function BrokerageController($mdStepper, $mdDialog, $filter) {
     function init() {
         vm.nextStep = nextStep;
         vm.backStep = backStep;
+        vm.editForm = editForm;
 
         var countries = [{
             name: 'Afghanistan',
@@ -920,6 +921,11 @@ function BrokerageController($mdStepper, $mdDialog, $filter) {
     function backStep() {
         var steppers = $mdStepper('stepper-demo');
         steppers.back();
+    }
+
+    function editForm() {
+    	var steppers = $mdStepper('stepper-demo');
+    	steppers.goto(0);
     }
 
     // vm.selected = vm.events[0];
