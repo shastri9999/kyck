@@ -15,17 +15,18 @@ class SignInController {
 
 	signIn(){
 		const scope = this._$scope;
-		const validUserNames = ['user1@user.com', 
-								'user2@user.com', 
-								'broker1@broker.com', 
-								'broker2@broker.com'];
 		const username = scope.username;
+		const password = scope.password;
 
-		if (username && validUserNames.indexOf(username)!=-1)
+		if (username)
 		{
 			this.invalidCredentials = false;
-			this._AuthenticationService.login(username);
-			this._$state.go('main.dashboard');			
+			this._AuthenticationService.login(username, password).then(()=>{
+				this._$state.go('main.dashboard');			
+			}).catch((e)=>{
+				console.log(e);
+				this.invalidCredentials = true;
+			});
 		}
 		else
 		{

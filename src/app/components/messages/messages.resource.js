@@ -1,6 +1,6 @@
 'use strict';
 
-var URL = 'http://ec2-54-255-136-1.ap-southeast-1.compute.amazonaws.com/kyck-rest/usermessage/';
+var URL = '/kyck-rest/usermessage/';
 
 function MessageResource($resource, $rootScope) {
 	'ngInject';

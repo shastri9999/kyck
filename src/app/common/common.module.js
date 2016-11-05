@@ -42,7 +42,7 @@ common.directive("outsideClick", function( $document, $parse ){
 });
 
 common.constant('AppConstants', {
-	URL: 'http://ec2-54-255-136-1.ap-southeast-1.compute.amazonaws.com/kyck-rest/'
+	URL: '/kyck-rest/'
 })
 
 export default common;
