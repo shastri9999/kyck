@@ -11,7 +11,13 @@ module.exports = function(_path) {
       info: true,
       hot: true,
       inline: true,
-      host:"0.0.0.0"
+      host:"0.0.0.0",
+      port:"8000",
+      proxy: {
+        '/kyck-rest': {
+          target: 'http://localhost:8080/kyck-rest',
+        }
+      }
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin()

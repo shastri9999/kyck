@@ -1,4 +1,5 @@
 'use strict';
+import $ from 'jquery';
 
 function MessagesController($log, $scope, MessageResource, AuthenticationService) {
 	'ngInject';
@@ -33,11 +34,45 @@ function MessagesController($log, $scope, MessageResource, AuthenticationService
 		$log.debug("Email clicked");
 		vm.currentMessage = message;
 	}
+	$.ajax({
+		method: 'POST',
+		headers: {                   
+		"Content-Type": "application/json"   
+		},  
+		data: JSON.stringify({
+		userId: "user1@user.com",
+		userPassword: "test123"
+		}),
+		crossDomain: true,
+		url:"http://localhost:8080/kyck-rest/user/login/action",
+		success: function(s){
+		console.log(s);
+	    /* Get logged in user data */
+	        $.ajax({
+	        method: 'GET',
+	        headers: {                   
+	        "Content-Type": "application/json"   
+	        },  
+	        crossDomain: true,
+	        withCredentials: true,
+	        url:"http://localhost:8080/kyck-rest/user/get/action",
+	        success: function(s){
+	        console.log(s);
+	        },
+	        failure: function(f){
+	        console.log(f)
+	        }
+	      })
+		},
+		failure: function(f){
+		console.log(f)
+		}
+	})
+
 
 
 	console.log(AuthenticationService.getLoggedInUser());
-	var inbox = MessageResource.inbox();
-	$log.debug(inbox);
+
 }
 
 export default MessagesController;
