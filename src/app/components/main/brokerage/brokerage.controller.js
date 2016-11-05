@@ -814,82 +814,82 @@ function BrokerageController($mdStepper, $mdDialog, $filter) {
         var events = [{
             start: getDate(-6, 10),
             end: getDate(-6, 11),
-            customClass: 'reschedule',
+            customClass: 'book-appointment',
             title: 'Event 1'
         }, {
             start: getDate(-6, 9),
             end: getDate(-6, 10),
-            customClass: 'confirmed',
+            customClass: 'book-appointment',
             title: 'Event 1a'
         }, {
             start: getDate(-6, 11),
             end: getDate(-6, 12),
-            customClass: 'rejected',
+            customClass: 'book-appointment',
             title: 'Event 1b'
         }, {
             start: getDate(-6, 10),
             end: getDate(-6, 11),
-            customClass: 'rejected',
+            customClass: 'book-appointment',
             title: 'Event 1c'
         }, {
             start: getDate(-6, 10),
             end: getDate(-6, 11),
-            customClass: 'pending',
+            customClass: 'book-appointment',
             title: 'Event 1d'
         }, {
             start: getDate(-6, 10),
             end: getDate(-6, 11),
-            customClass: 'confirmed',
+            customClass: 'book-appointment',
             title: 'Event 1e'
         }, {
             start: getDate(-6, 10),
             end: getDate(-6, 11),
-            customClass: 'rejected',
+            customClass: 'book-appointment',
             title: 'Event 1f'
         }, {
             start: getDate(1, 11),
             end: getDate(1, 12),
-            customClass: 'pending',
+            customClass: 'book-appointment',
             title: 'Event 2'
         }, {
             start: getDate(2, 12),
             end: getDate(2, 13),
-            customClass: 'pending',
+            customClass: 'book-appointment',
             title: 'Event 3'
         }, {
             start: getDate(4, 12),
             end: getDate(4, 13),
-            customClass: 'pending',
+            customClass: 'book-appointment',
             title: 'Event 4'
         }, {
             start: getDate(5, 12),
             end: getDate(5, 13),
-            customClass: 'pending',
+            customClass: 'book-appointment',
             title: 'Event 5'
         }, {
             start: getDate(6, 12),
             end: getDate(6, 13),
-            customClass: 'pending',
+            customClass: 'book-appointment',
             title: 'Event 6'
         }, {
             start: getDate(6, 12),
             allDay: true,
-            customClass: 'pending',
+            customClass: 'book-appointment',
             title: 'Event 7'
         }, {
             start: getDate(8, 12),
             end: getDate(8, 13),
-            customClass: 'pending',
+            customClass: 'book-appointment',
             title: 'Event 5'
         }, {
             start: getDate(8, 12),
             end: getDate(8, 13),
-            customClass: 'pending',
+            customClass: 'book-appointment',
             title: 'Event 6'
         }, {
             start: getDate(8, 12),
             allDay: true,
-            customClass: 'pending',
+            customClass: 'book-appointment',
             title: 'Event 7'
         }];
 
@@ -941,44 +941,28 @@ function BrokerageController($mdStepper, $mdDialog, $filter) {
     }
 
     function eventClicked($selectedEvent) {
-        console.log($selectedEvent);
-
         var textContent = "";
+        var confirm;
 
         var closePopup = function() {
-            alert = undefined;
+            confirm = undefined;
         }
 
+        textContent = "You are booking an appointment for 7 am on 13th November. Are you sure?";
 
-        switch ($selectedEvent.customClass) {
-            case "reschedule":
-                textContent = "Kindly reschedule your appointment as broker is busy during the time mentioned by you";
-                var txtBtn = "ReSchedule";
-                closePopup = function() {
-                    console.log("ReScheduling");
-                    alert = undefined;
-                }
-                break;
-            case "confirmed":
-                textContent = "Your appointment is confirmed.";
-                break;
-            case "pending":
-                textContent = "Broker has not taken any action on your request yet."
-                break;
-            case "rejected":
-                textContent = "Your application has been rejected.";
-                break;
-        }
-
-        alert = $mdDialog.alert({
-            title: $filter('uppercase')($selectedEvent.customClass),
+        confirm = $mdDialog.confirm({
+            title: 'Book Your Appointment',
             textContent: textContent,
-            ok: txtBtn || 'Close'
+            ok: "Yes",
+            cancel: "No"
         });
 
         $mdDialog
-            .show(alert)
-            .finally(closePopup);
+            .show(confirm).then(function() {
+            	console.log("YES");
+            }, function() {
+            	console.log("NO");
+            });
     }
 
     function eventCreate($date) {
