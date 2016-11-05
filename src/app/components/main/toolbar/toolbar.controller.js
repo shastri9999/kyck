@@ -11,6 +11,24 @@ class ToolBarController {
 		this._$state = $state;
 		this.userType = loggedInUser.userType;
 		this.displayName = [ loggedInUser.userFname, loggedInUser.userLname].map(capitalize).join(' ');
+		this.flagShow = false;
+
+		this.flags = [{
+			country: 'SG',
+			url: '../../../../assets/images/flag.png'
+		},{
+			country: 'ID',
+			url: '../../../../assets/images/flag-indonesia.png'
+		}];
+		this.activeFlag = this.flags[0];
+	}
+
+	selectFlag(flag){
+		this.activeFlag = flag;
+	}
+
+	flagClose(){
+		this.flagShow = false;
 	}
 
 	signOut(){

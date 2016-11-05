@@ -11,6 +11,49 @@ toolbar {
 			flex-grow: 1;
 		    display: flex;
 		    align-items: center;
+		    .flag-dropdown {
+		    	display: flex;
+		    	align-items: center;
+		    	position:relative;
+		    	.flag-dropdown-overlay {
+		    		position: absolute;
+		    		top: 0;
+		    		bottom: 0;
+		    		left: 0;
+		    		right: 0;
+		    		z-index: 3;
+		    		outline: none;
+		    		cursor: pointer;
+		    	}
+		    	.flag-dropdown-container {
+				    position: absolute;
+				    top: 36px;
+				    left: 12px;
+				    background: white;
+				    z-index: 5; 
+				    border: 1px solid #e7ecf1;
+				    border-radius: 3px;
+				    .flag-item {
+				    	display: flex;
+				    	align-items: center;
+				    	padding: 4px;
+				    	justify-content: space-between;
+				    	outline: none;
+				    	padding-right: 10px;
+				    	cursor: pointer;
+				    	&:hover {
+							background-color: #f2f2f2;
+				    	}
+				    	img {
+				    		height: 32px;
+				    		width: 42px;
+				    		border: 1px solid #e7ecf1;
+				    		border-radius: 3px;
+				    		margin-right: 10px; 
+				    	}
+				    }
+		    	}
+		    }
 		}
 		&>.avatar-area {
 			width: 240px;

@@ -18,6 +18,29 @@ common.filter('capitalize', function() {
     }
   });
 
+common.directive("outsideClick", function( $document, $parse ){
+	'ngInject';
+    return {
+        link: function( scope, element, attributes ){
+            const scopeExpression = attributes.outsideClick,
+                onDocumentClick = function(event){
+                    const isChild = element.find(event.target).length > 0;
+                    const clickedElement = angular.element(event.target);
+                    const isSameElement = clickedElement.attr('outside-id')==attributes.outsideId;
+                    if(!isChild && !isSameElement) {
+                        scope.$apply(scopeExpression);
+                    }
+                };
+            
+            $document.on("click", onDocumentClick);
+            
+            element.on('$destroy', function() {
+                $document.off("click", onDocumentClick);
+            });
+        }
+    }
+});
+
 common.constant('AppConstants', {
 	URL: 'http://ec2-54-255-136-1.ap-southeast-1.compute.amazonaws.com/kyck-rest/'
 })
