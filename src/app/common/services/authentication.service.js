@@ -12,8 +12,19 @@ class AuthenticationService {
 	}
 
 	login(userId, userPassword) {
-		this.loggedInUser = users[userId];
-		this._StorageService.setItem('loggedInUser', this.loggedInUser);
+		return this._$http({
+			method: 'POST',
+ 			url: '/kyck-rest/user/login/action',
+ 			data: {
+ 				userId,
+  				userPassword 
+ 			}
+		}).then((response)=>{
+			const userData = response.data.data;
+			this.loggedInUser = userData;
+			this._StorageService.setItem('loggedInUser', this.loggedInUser);
+			return userData;
+		});
 	}
 
 	logout(){
@@ -28,7 +39,7 @@ class AuthenticationService {
 	authorize(){
 		if (!this.getLoggedInUser())
 		{
-			 $state.go('access.signin');
+			$state.go('access.signin');
 		}
 	}	
 }
