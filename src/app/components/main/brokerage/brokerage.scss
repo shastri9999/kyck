@@ -15,6 +15,10 @@
 .titleProgressHeader{
 	font-weight:bold;
 }
+mainArea {
+	min-height: 100%;
+	margin-bottom: -90px;
+}
 footer {
   background-color: #f2f8f8;
   position: absolute;

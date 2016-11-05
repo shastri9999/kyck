@@ -1,4 +1,4 @@
-<div layout="row">
+<div layout="row" class="mainArea">
     <md-stepper id="stepper-demo" md-linear="true">
         <md-step md-label="Brokerages">
             <md-step-body layout="row" layout-wrap>
@@ -42,7 +42,7 @@
         </md-step>
         <md-step md-label="Documents">
             <md-step-body>
-                <div class="flex-wrapper">
+                <div class="flex-wrapper" style="height: calc(100vh - 90px);margin-bottom: -90px;">
                 <div ng-repeat="document in ::vm.documents">
                     <document-pane style="float: left;" document="document"></document-pane>
                 </div>  
