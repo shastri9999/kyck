@@ -6,6 +6,11 @@ function BrokerageResource($resource) {
 	'ngInject';
 
     return $resource(URL, {}, {
+    	userAppointments: {
+    		method: 'GET',
+    		isArray: false,
+    		url: URL + '/users/contacted'
+    	},
     	brokeragesDetails: {
     		method: 'GET',
     		isArray: false,

@@ -10,11 +10,18 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         vm.nextStep = nextStep;
         vm.backStep = backStep;
         vm.editForm = editForm;
+        vm.selectedIndex = 0;
         $scope.ifBroker = AuthenticationService.ifBroker();
+
 
 		BrokerageResource.brokeragesDetails({'userEmailId':AuthenticationService.getLoggedInUser().userId}, function (req) {
             vm.brokeragesDetails = req.data;
         }, function () {});
+
+        BrokerageResource.userAppointments((response)=>{
+            vm.userAppointments = response.data;
+        });
+
 
 		$log.debug(vm.brokeragesDetails);
 
