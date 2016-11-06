@@ -30,7 +30,7 @@ export default angular.module('kyck', [
 			$location.url('/signin');              	
 		}
 
-		/* Todo: Move this to service */
+		/* Todo: Move all this to service */
 		$rootScope.breadCrumb = next.breadCrumb;
 		$rootScope.sideNavCollapsed = false;
 	});

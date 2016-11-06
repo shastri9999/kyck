@@ -39,20 +39,13 @@ class AuthenticationService {
 		});
 	}
 
-	ifBroker() {
+	isBroker() {
 		return this.getLoggedInUser().userType != "USER";
 	}
 
 	getLoggedInUser(){
 		return this._StorageService.getItem('loggedInUser');
 	}
-
-	authorize(){
-		if (!this.getLoggedInUser())
-		{
-			$state.go('access.signin');
-		}
-	}	
 }
 
 export default AuthenticationService;

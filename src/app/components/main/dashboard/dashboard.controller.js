@@ -3,7 +3,7 @@
 function DashboardController (DashboardResource, AuthenticationService) {
 	'ngInject';
 	const vm=this;
-	vm.isBroker = AuthenticationService.ifBroker();
+	vm.isBroker = AuthenticationService.isBroker();
 
 	if (vm.isBroker)
 	{

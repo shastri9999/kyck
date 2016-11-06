@@ -6,7 +6,7 @@ function NavigationController($mdStepper, $mdDialog, $filter, BrokerageResource,
   'ngInject';
 
   var vm=this;
-  $scope.ifBroker = AuthenticationService.ifBroker();
+  $scope.isBroker = AuthenticationService.isBroker();
 }
 
 function NavigationComponent() {
