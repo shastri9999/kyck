@@ -1,6 +1,12 @@
 <div layout="row" class="mainArea">
-    <md-stepper id="stepper-demo" md-linear="true">
-        <md-step md-label="Brokerages">
+    <md-stepper id="stepper-demo" md-linear="!ifBroker">
+        <!-- <div ng-if="ifBroker">
+        <md-step md-label="Account Summary">
+            <md-step-body>
+            </md-step-body>
+        </md-step>
+        </div> -->
+        <md-step md-label="Select Broker">
             <md-step-body layout="row" layout-wrap>
                 <h3 class="partnersHeader">Premium Partners</h3>
                 <div class="partnerLogo">
