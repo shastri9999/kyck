@@ -10,11 +10,78 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         vm.nextStep = nextStep;
         vm.backStep = backStep;
         vm.editForm = editForm;
+        vm.selectedIndex = 0;
         $scope.isBroker = AuthenticationService.isBroker();
+
+        vm.partners = [
+            {
+                title: 'POSB',
+                img: '/assets/images/partnerLogos/posb.png',
+                type: 'premium',
+                selected: true
+            },
+            {
+                title: 'DBS',
+                img: '/assets/images/partnerLogos/dbs.png',
+                type: 'premium',
+                selected: true
+            },
+            {
+                title: 'UOB',
+                img: '/assets/images/partnerLogos/uob.png',
+                type: 'premium',
+                selected: false
+            },
+            {
+                title: 'ICICI',
+                img: '/assets/images/partnerLogos/icici.png',
+                type: 'premium',
+                selected: false
+            },
+            {
+                title: 'CITIBANK',
+                img: '/assets/images/partnerLogos/citibank.png',
+                type: 'normal',
+                selected: false
+            },
+            {
+                title: 'BOA',
+                img: '/assets/images/partnerLogos/boa.png',
+                type: 'normal',
+                selected: false
+            },
+            {
+                title: 'SCHARTERED',
+                img: '/assets/images/partnerLogos/schartered.png',
+                type: 'normal',
+                selected: false
+            },
+            {
+                title: 'AXISBANK',
+                img: '/assets/images/partnerLogos/axisbank.png',
+                type: 'normal',
+                selected: false
+            },
+            {
+                title: 'HDFC',
+                img: '/assets/images/partnerLogos/hdfc.png',
+                type: 'normal',
+                selected: false
+            }
+        ];
+
+        vm.toggleSelected = function(partner){
+            partner.selected = !partner.selected;
+        }
 
 		BrokerageResource.brokeragesDetails({'userEmailId':AuthenticationService.getLoggedInUser().userId}, function (req) {
             vm.brokeragesDetails = req.data;
         }, function () {});
+
+        BrokerageResource.userAppointments((response)=>{
+            vm.userAppointments = response.data;
+        });
+
 
 		$log.debug(vm.brokeragesDetails);
 
