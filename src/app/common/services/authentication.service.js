@@ -27,14 +27,20 @@ class AuthenticationService {
 	}
 
 	logout(){
-		this.loggedInUser = null;
-		this._StorageService.setItem('loggedInUser', this.loggedInUser);
+		return this._$http({
+			method: 'POST',
+ 			url: '/kyck-rest/user/logout/action',
+		}).then((response)=>{
+			this.loggedInUser = null;
+			this._StorageService.setItem('loggedInUser', this.loggedInUser);
+		}).catch(()=>{
+			this.loggedInUser = null;
+			this._StorageService.setItem('loggedInUser', this.loggedInUser);
+		});
 	}
 
 	ifBroker() {
-		console.log(this._StorageService.getItem('loggedInUser')['userType']);
-		var ifUser = this._StorageService.getItem('loggedInUser')['userType'] === "USER";
-		return !ifUser;
+		return this.getLoggedInUser().userType != "USER";
 	}
 
 	getLoggedInUser(){

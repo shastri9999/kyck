@@ -42,7 +42,7 @@ common.directive("outsideClick", function( $document, $parse ){
 });
 
 common.constant('AppConstants', {
-	URL: '/kyck-rest/'
+	URL: '/kyck-rest'
 })
 
 export default common;
