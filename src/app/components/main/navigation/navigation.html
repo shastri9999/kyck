@@ -4,20 +4,15 @@
 		<img class="logo" src="/assets/images/white-logo.png" alt="">		
 		<img class="logo-min" src="/assets/images/white-logo-min.png" alt="">		
 	</div>
-	<a ng-if="ifBroker" ui-sref-active="active" ui-sref="main.dashboard">
+	<a ui-sref-active="active" ui-sref="main.dashboard">
 		<img class="icon" src="/assets/images/dashboard.png" alt="">
 		<img class="icon-active" src="/assets/images/dashboard-active.png" alt="">
 		Dashboard
 	</a>
-	<a ng-if="!ifBroker" ui-sref-active="active" ui-sref="main.brokerage" class="{{!ifBroker}}">
+	<a ui-sref-active="active" ui-sref="main.brokerage" class="{{!ifBroker}}">
 		<img class="icon" src="/assets/images/brokerage.png" alt="">
 		<img class="icon-active" src="/assets/images/brokerage-active.png" alt="">
-		Brokerage
-	</a>
-	<a ng-if="ifBroker" ui-sref-active="active" ui-sref="main.requests" class="{{ifBroker}}">
-		<img class="icon" src="/assets/images/brokerage.png" alt="">
-		<img class="icon-active" src="/assets/images/brokerage-active.png" alt="">
-		Requests
+		<span ng-if="!ifBroker">Brokerage</span><span ng-if="ifBroker">Requests</span>
 	</a>
 	<a ui-sref-active="active" ui-sref="main.messages">
 		<img class="icon" src="/assets/images/messages.png" alt="">
