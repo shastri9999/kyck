@@ -20,7 +20,22 @@ function DashboardResource($resource, AppConstants) {
     		method: 'GET',
     		isArray: false,
     		url: URL + '/dashboard/brokerages'    		
-    	}
+    	},
+    	documentStatus: {
+    		method: 'GET',
+    		isArray: false,
+    		url: URL + '/dashboard/documentstatus/status'
+    	},
+    	kycStatus: {
+    		method: 'GET',
+    		isArray: false,
+    		url: URL + '/dashboard/profile/status'
+    	},
+    	profileStatus: {
+    		method: 'GET',
+    		isArray: false,
+    		url: URL + '/dashboard/userkycanswer/status'
+    	},
     });
 }
 

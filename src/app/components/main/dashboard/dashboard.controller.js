@@ -22,9 +22,7 @@ function DashboardController (DashboardResource, AuthenticationService) {
 
 		DashboardResource.brokerageApplications((response)=>{
 			vm.brokerageApplications = response.data;
-			console.log(response.data)
 		});
-
 	}
 }
 
