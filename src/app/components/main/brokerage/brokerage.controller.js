@@ -11,7 +11,6 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         vm.backStep = backStep;
         vm.editForm = editForm;
         vm.selectedIndex = 0;
-        $scope.ifBroker = AuthenticationService.ifBroker();
         $scope.isBroker = AuthenticationService.isBroker();
 
         vm.partners = [
