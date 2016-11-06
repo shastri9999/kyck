@@ -1,9 +1,16 @@
 'use strict';
 
-class DashboardController {
-	constructor(AuthenticationService){
-		'ngInject'
-		this.isUser = (AuthenticationService.getLoggedInUser().userType === 'USER');
+function DashboardController (DashboardResource, AuthenticationService) {
+	'ngInject';
+	var vm=this;
+
+	init();
+
+	function init() {
+		vm.ifBroker = AuthenticationService.ifBroker();
+		DashboardResource.userAppointments(function(req){
+			vm.userAppointments = req.data;
+		}, function() {console.log("error");})
 	}
 }
 export default DashboardController;

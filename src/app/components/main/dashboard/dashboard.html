@@ -1,4 +1,4 @@
-<div ng-if="vm.isUser" class="user-dashboard-area">
+<div ng-if="!vm.ifBroker" class="user-dashboard-area">
 	<div class="left">
 		<div class="appointments">
 			<h2>Appointments</h2>
@@ -120,59 +120,19 @@
 		</div>
 	</div>
 </div>
-<div ng-if="!vm.isUser" class="broker-dashboard-area">
+<div ng-show="vm.ifBroker && vm.userAppointments" class="broker-dashboard-area">
 	<div class="left">
 		<div class="appointments">
 			<h2>Brokerage Application Request</h2>
 			<div class="appointments-container">
-				<div class="appointment">
+				<div class="appointment" ng-repeat="appointment in vm.userAppointments">
 					<img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">			
 					<div class="detail">
-						<div style="font-size: 14px;">Alvaro Carreras</div>
+						<div style="font-size: 14px;">{{appointment.fname}} {{appointment.lname}}</div>
 						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
-						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
+						<a class="pending-btn" style="margin-top: 25px;">{{appointment.applicationStatus}}</a>
 					</div>		
 				</div>				
-				<div class="appointment">
-					<img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">			
-					<div class="detail">
-						<div style="font-size: 14px;">Tobia Crivellari</div>
-						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
-						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
-					</div>		
-				</div>				
-				<div class="appointment">
-					<img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">			
-					<div class="detail">
-						<div style="font-size: 14px;">Tobia Crivellari</div>
-						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
-						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
-					</div>		
-				</div>				
-				<div class="appointment">
-					<img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">			
-					<div class="detail">
-						<div style="font-size: 14px;">Eugene Zaretskiy</div>
-						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
-						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
-					</div>		
-				</div>				
-				<div class="appointment">
-					<img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">			
-					<div class="detail">
-						<div style="font-size: 14px;">Soheil Behnezhad</div>
-						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
-						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
-					</div>		
-				</div>				
-				<div class="appointment">
-					<img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">			
-					<div class="detail">
-						<div style="font-size: 14px;">Soheil Behnezhad</div>
-						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
-						<a class="pending-btn" style="margin-top: 25px;">Pending</a>
-					</div>		
-				</div>
 			</div>
 		</div>
 		<div class="messages">
