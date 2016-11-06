@@ -1,6 +1,6 @@
 'use strict';
 
-function DashboardController (DashboardResource, AuthenticationService, MessageService, $rootScope, $state) {
+function DashboardController (DashboardResource, AuthenticationService, MessageService, CalendarService, $rootScope, $state, moment) {
 	'ngInject';
 	const vm=this;
 	vm.isBroker = AuthenticationService.isBroker();
@@ -11,6 +11,13 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 
 		DashboardResource.userAppointments((response)=>{
 			vm.userAppointments = response.data;
+		});
+
+		CalendarService.fetchBrokerMeetings().then((appointments)=>{
+			vm.brokerAppointments = appointments.map((appointment)=>{
+				appointment.displayTime = moment(appointment.startTime, 'DD/MM/YYYY hh:mm').format('MMM Do YY, hh:mm a');
+				return appointment;
+			});
 		});
 	}
 	else

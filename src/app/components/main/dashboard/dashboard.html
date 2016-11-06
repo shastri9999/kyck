@@ -104,6 +104,17 @@
 		</div>
 	</div>
 	<div class="right">
-		<img src="/assets/images/broker-dashboard-background.png">
+		<img style="position:absolute;" src="/assets/images/broker-dashboard-background.png">
+		<div class="appointments">
+			<h2 style="color:white;">Appointment Slots</h2>		
+			<div class="appointment" ng-repeat="appointment in vm.brokerAppointments">
+				<img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">			
+				<div class="detail">
+					<div style="font-size: 14px;">{{appointment.userFirstName}} {{appointment.userLastName}}</div>
+					<div style="opacity: 0.4; margin-top: 3px;">{{appointment.displayTime}}</div>
+					<a class="conference-btn">Start Conference</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
