@@ -82,6 +82,7 @@
                 padding: 30px;
                 padding-right: 20px;
                 margin-top: 20px;
+                padding-bottom: 10px;
                 border: 1px solid #e7ecf1;
                 border-radius: 5px;
                 border-top-left-radius: 0;
@@ -92,6 +93,9 @@
                     align-items: flex-start;
                     font-size: 14px;
                     opacity: 0.4;
+                }
+                .detail {
+                    flex-grow: 1;
                 }
             }
     	}

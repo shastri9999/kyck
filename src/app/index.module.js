@@ -15,6 +15,7 @@ export default angular.module('kyck', [
 	'ngResource',
 	'ngFileUpload',
 	'uiCropper',
+	'angularMoment',
 	Common.name,
 	Components.name,
 	Routes.name
@@ -33,5 +34,9 @@ export default angular.module('kyck', [
 		/* Todo: Move all this to service */
 		$rootScope.breadCrumb = next.breadCrumb;
 		$rootScope.sideNavCollapsed = false;
+		$rootScope.messageView = {
+			activeMessage: null,
+			composing: false
+		}
 	});
 });

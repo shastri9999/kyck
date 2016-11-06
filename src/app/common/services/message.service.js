@@ -8,23 +8,48 @@ class MessageService{
 		this.URL = AppConstants.URL + '/usermessage';
 		this.sent = [];
 		this.inbox = [];
-		this.messagesFetched = false;
+		this.inboxFetched = false;
+		this.sentFetched = false;
 	}
 
 	fetchInbox(){
-		return this._$http({
-			method: 'GET',
- 			url: '/kyck-rest/user/login/action',
- 			data: {
- 				userId,
-  				userPassword 
- 			}
-		}).then((response)=>{
-			const userData = response.data.data;
-			this.loggedInUser = userData;
-			this._StorageService.setItem('loggedInUser', this.loggedInUser);
-			return userData;
-		});
+		if (this.inboxFetched)
+		{
+			return new Promise((resolve)=>resolve(this.inbox));
+		}
+		else
+		{
+			return this._$http({
+				method: 'GET',
+				url: this.URL + '/get-inbox',
+			}).then((response)=>{
+				this.inbox = response.data.data;
+				this.inboxFetched = true;
+				return this.inbox;
+			});
+		}
+	}
+
+	fetchSent(){
+		if (this.sentFetched)
+		{
+			return new Promise((resolve)=>resolve(this.sent));
+		}
+		else
+		{
+			return this._$http({
+				method: 'GET',
+				url: this.URL + '/sent',
+			}).then((response)=>{
+				this.sent = response.data.data;
+				this.sentFetched = true;
+				return this.sent;
+			});
+		}
+	}
+
+	refresh(){
+		this.inboxFetched = false;
 	}
 }
 

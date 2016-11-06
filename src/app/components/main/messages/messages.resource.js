@@ -30,11 +30,6 @@ function MessageResource($resource, $rootScope) {
             url: URL + 'get',
             isArray: false
         },
-        all: {
-        	method: 'GET',
-        	url: URL + 'get-all',
-        	isArray: false
-        },
         inbox: {
         	method: 'GET', 
         	isArray: false,

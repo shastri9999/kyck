@@ -1,10 +1,12 @@
 .messages-area {
 	display: flex;
+	color: #4f6379;
 	min-height: 100%;
 	.left {
 		display: flex;
 		flex-flow: column;
 		padding: 40px;
+		flex-grow: 1;
 		.navigation {
 			display: flex;
 			align-items: center;
@@ -41,6 +43,10 @@
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
                 border-left: 5px solid #3498db;
+                padding-bottom: 10px;
+                .detail {
+                	flex-grow: 1;
+                }
                 .time {
                     display: flex;
                     align-items: flex-start;

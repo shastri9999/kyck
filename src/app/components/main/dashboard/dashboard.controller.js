@@ -1,6 +1,6 @@
 'use strict';
 
-function DashboardController (DashboardResource, AuthenticationService) {
+function DashboardController (DashboardResource, AuthenticationService, MessageService) {
 	'ngInject';
 	const vm=this;
 	vm.isBroker = AuthenticationService.isBroker();
@@ -24,6 +24,10 @@ function DashboardController (DashboardResource, AuthenticationService) {
 			vm.brokerageApplications = response.data;
 		});
 	}
+	
+	MessageService.fetchInbox().then((messages)=>{
+		vm.messages = messages;
+	})
 }
 
 export default DashboardController;
