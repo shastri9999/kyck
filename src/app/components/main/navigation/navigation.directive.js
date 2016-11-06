@@ -2,13 +2,12 @@
 
 import templateUrl from './navigation.html';
 
-function NavigationController($mdStepper, $mdDialog, $filter, BrokerageResource, AuthenticationService, $log) {
+function NavigationController($mdStepper, $mdDialog, $filter, BrokerageResource, AuthenticationService, $log, $scope) {
   'ngInject';
 
   var vm=this;
-  vm.ifBroker = true;
+  $scope.ifBroker = false;
   // AuthenticationService.ifBroker();
-  console.log("HEY", vm.ifBroker);
 }
 
 function NavigationComponent() {
