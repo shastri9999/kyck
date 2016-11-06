@@ -1,6 +1,6 @@
 'use strict';
 
-var URL = 'http://ec2-54-255-136-1.ap-southeast-1.compute.amazonaws.com/kyck-rest/document/';
+var URL = '/kyck-rest/document/';
 
 function DocumentResource($resource, $rootScope) {
 	'ngInject';
@@ -21,10 +21,14 @@ function DocumentResource($resource, $rootScope) {
     		},
     		url: URL + 'download'
     	},
+        categories: {
+            method: 'GET',
+            isArray: false,
+            url: URL + 'categories'
+        },
     	findall: {
     		method: 'GET',
     		isArray: false,
-
     		url: URL + 'findall'
     	},
     	metadata: {

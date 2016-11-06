@@ -4,12 +4,12 @@
 			<img ng-src="{{document.iconUrl}}"></img>
 		</div>
 		<div layout="column" class="document-details">
-			<span style="font-weight: bold"> {{ document.title }} </span>
+			<span style="font-weight: bold"> {{ document.categoryName + ' ' + document.documentTypeName }} </span>
 			<div layout="row">
 			 	<figure class="red-circle"></figure>
-			 	<span style="font-weight: 100;font-size: 12px;">{{ document.docType }}</span>
+			 	<span style="font-weight: 100;font-size: 12px;">{{ document.docType || 'Required' }}</span>
 			 </div>
-			<span>{{ document.comment }}</span>
+			<span>{{ document.comment || 'Lorem ipsum dorum sit amet, consectuter' }}</span>
 		</div>
 	</div>
 	<div class="document-action" ngf-drag-over-class="'dragover'" ngf-drop="upload($file)">

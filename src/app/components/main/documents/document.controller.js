@@ -1,8 +1,9 @@
 'use strict';
 
-function DocumentController() {
+function DocumentController($log, DocumentResource) {
 	'ngInject';
 	var vm = this;
+	/*
 	vm.documents = [
 		{
 			title: 'Income Tax',
@@ -46,7 +47,16 @@ function DocumentController() {
 			comment: 'Attach last 6 months bank statement',
 			iconUrl: '/assets/images/7.png'
 		}
-	]
+	];
+	*/
+
+	DocumentResource.categories(function(response){
+			$log.debug(response);
+			vm.documents = response.data;
+	}, function(error){
+			$log.error(error);
+	});
+
 }
 
 export default DocumentController;
