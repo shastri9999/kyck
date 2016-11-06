@@ -11,9 +11,8 @@ function BrokerageController($mdStepper, $mdDialog, $filter, BrokerageResource, 
         vm.backStep = backStep;
         vm.editForm = editForm;
 
-        console.log(AuthenticationService.getLoggedInUser());
-		var brokeragesDetails = BrokerageResource.brokeragesDetails();
-		$log.debug(brokeragesDetails);
+		var brokeragesDetails = BrokerageResource.brokeragesDetails({'userEmailId':AuthenticationService.getLoggedInUser().userId});
+		$log.debug(AuthenticationService.getLoggedInUser());
 
         var countries = [{
             name: 'Afghanistan',

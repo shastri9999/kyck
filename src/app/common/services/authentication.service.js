@@ -31,6 +31,10 @@ class AuthenticationService {
 		this._StorageService.setItem('loggedInUser', this.loggedInUser);
 	}
 
+	ifBroker() {
+		return this._StorageService.getItem('loggedInUser')['userType'] != "USER";
+	}
+
 	getLoggedInUser(){
 		return this._StorageService.getItem('loggedInUser');
 	}
