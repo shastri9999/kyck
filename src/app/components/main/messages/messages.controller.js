@@ -1,6 +1,6 @@
 'use strict';
 
-function MessagesController($state, $scope, MessageService) {
+function MessagesController($state, $scope, MessageService, $rootScope) {
 	'ngInject';
 	const vm = this;
 
@@ -14,6 +14,10 @@ function MessagesController($state, $scope, MessageService) {
 	vm.refresh = ()=>{
 		MessageService.refresh();
 		$state.go('main.messages.inbox', {}, {reload: true});
+	}
+	
+	vm.closeMessage = (messageType)=>{
+		$rootScope.messageView['active' + messageType + 'Message'] = null;
 	}
 
 }

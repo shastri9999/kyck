@@ -26,7 +26,8 @@ export default angular.module('kyck', [
 	'ngInject';
 	$rootScope.sideNavCollapsed = false;
 	$rootScope.messageView = {
-		activeMessage: null,
+		activeInboxMessage: null,
+		activeSentMessage: null,
 		composing: false
 	};
 	$rootScope.$on('$stateChangeStart', function (event, next, toParams) {
