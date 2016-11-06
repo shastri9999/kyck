@@ -35,8 +35,9 @@ class ToolBarController {
 	}
 
 	signOut(){
-		this._AuthenticationService.logout();
-		this._$state.go('access.signin');
+		this._AuthenticationService.logout().then(()=>{
+			this._$state.go('access.signin');
+		});
 	}
 
 }
