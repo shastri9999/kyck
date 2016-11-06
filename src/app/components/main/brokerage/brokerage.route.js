@@ -2,6 +2,7 @@
 
 import templateUrl from './brokerage.html';
 import controller from './brokerage.controller';
+import brokerageResource from './brokerage.resource';
 
 function routeConfig($stateProvider) {
 	'ngInject';

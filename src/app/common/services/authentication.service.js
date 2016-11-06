@@ -39,6 +39,10 @@ class AuthenticationService {
 		});
 	}
 
+	ifBroker() {
+		return this._StorageService.getItem('loggedInUser')['userType'] != "USER";
+	}
+
 	getLoggedInUser(){
 		return this._StorageService.getItem('loggedInUser');
 	}
