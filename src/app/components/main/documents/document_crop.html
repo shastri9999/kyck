@@ -1,0 +1,13 @@
+<div style="width: 800px; border-radius: 5px; background-color: #f5f9fa"
+	ngf-drop ng-model="vm.picFile" ngf-pattern="image/*">
+<!-- 	<img style="max-width:100%;max-height:100%;vertical-align: middle;" ng-src="{{vm.picFile | ngfDataUrl}}" result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+	</img> -->
+	<div class="cropArea">
+	<ui-cropper image="vm.picFile" area-type="rectangle" result-image="vm.croppedImage"></ui-cropper>
+	</div>
+
+	<div class="crop-suggestion">
+		<p>Fit inside document screen.</p>
+		<p>Place on contrasting background.</p>
+	</div>
+</div>

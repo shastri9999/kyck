@@ -2,15 +2,28 @@
 
 function DashboardController (DashboardResource, AuthenticationService) {
 	'ngInject';
-	var vm=this;
+	const vm=this;
+	vm.isBroker = AuthenticationService.ifBroker();
 
-	init();
+	if (vm.isBroker)
+	{
+		/* Get broker related info */
 
-	function init() {
-		vm.ifBroker = AuthenticationService.ifBroker();
-		DashboardResource.userAppointments(function(req){
-			vm.userAppointments = req.data;
-		}, function() {console.log("error");})
+		DashboardResource.userAppointments((response)=>{
+			vm.userAppointments = response.data;
+		});
+	}
+	else
+	{
+		/* Get user related info */
+		DashboardResource.brokerAppointments((response)=>{
+			vm.brokerAppointments = response.data;
+		});
+
+		DashboardResource.brokerageApplications((response)=>{
+			vm.brokerageApplications = response.data;
+		});
 	}
 }
+
 export default DashboardController;

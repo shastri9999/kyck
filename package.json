@@ -58,6 +58,7 @@
     "radial-progress-chart": "0.0.4",
     "sass-loader": "^3.1.1",
     "style-loader": "^0.13.0",
+    "ui-cropper": "^1.0.3",
     "url": "^0.11.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.12",

@@ -1,8 +1,8 @@
-<div ng-if="!vm.ifBroker" class="user-dashboard-area">
+<div ng-if="!vm.isBroker" class="user-dashboard-area">
 	<div class="left">
 		<div class="appointments">
 			<h2>Appointments</h2>
-			<div class="appointment">
+			<div class="appointment" ng-repeat="appointment in vm.brokerAppointments">
 				<div class="date">
 					<div style="font-size: 24px;">27th</div>
 					<div style="opacity: 0.4;padding: 4px; border-bottom: 1px dotted;">Oct 16</div>
@@ -10,26 +10,23 @@
 				</div>
 				<img style="height:50px; padding-left: 30px; padding-right: 20px;" src="/assets/images/standard-chartered.png">
 				<div class="detail">
-					<div style="font-size: 14px;margin-bottom: 3px;">Standard Chartered Bank</div>
-					<div style="margin-bottom: 17px;opacity: 0.4;">Meeting with Standard Chartered Bank</div>
-					<div>
-						<a class="pending-btn">Pending</a>
-						<a class="conference-btn">Join Conference</a>
-					</div>
-				</div>
-			</div>
-			<div class="appointment">
-				<div class="date">
-					<div style="font-size: 24px;">26th</div>
-					<div style="opacity: 0.4;padding: 4px; border-bottom: 1px dotted;">Oct 16</div>
-					<div style="font-size: 12px; opacity: 0.3;padding: 3px;">08:20 am</div>
-				</div>
-				<img style="height:50px; padding-left: 30px; padding-right: 20px;" src="/assets/images/bank-of-america.png">
-				<div class="detail">
-					<div style="font-size: 14px;margin-bottom: 3px;">Bank of America</div>
-					<div style="margin-bottom: 17px;opacity: 0.4;">Meeting with Bank of America</div>
-					<div>
-						<a class="completed-btn">Completed</a>
+					<div style="font-size: 14px;margin-bottom: 3px;">{{appointment.brokerageName}}</div>
+					<div style="margin-bottom: 17px;opacity: 0.4;">{{appointment.meetingSubject}}</div>
+					<div ng-switch on="appointment.status">
+						<div ng-switch-when="CONFIRM">
+							<a class="pending-btn">{{appointment.status}}</a>
+							<a class="conference-btn">Join Conference</a>
+						</div>
+						<div ng-switch-when="PENDING">
+							<a class="pending-btn">{{appointment.status}}</a>
+							<a class="conference-btn">Join Conference</a>
+						</div>
+						<div ng-switch-when="completed">
+							<a href="" class="completed-btn">Completed</a>
+						</div>
+						<div ng-switch-default>
+							<a class="pending-btn">{{appointment.status}}</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -87,40 +84,20 @@
 		</div>
 		<div class="brokerage">
 			<h2>Brokerage Applications</h2>
-			<div class="brokerage-item">
+			<div class="brokerage-item" ng-repeat="application in vm.brokerageApplications">
 				<div class="broker-logo">
 					<img src="/assets/images/posb.png">
 
 				</div>
 				<div class="detail">
-					Post Office Savings Bank
-					<a class="pending-btn" style="margin-top: 10px;">Pending</a>
-				</div>				
-			</div>
-			<div class="brokerage-item">
-				<div class="broker-logo">
-					<img src="/assets/images/unionbank.png">
-
-				</div>
-				<div class="detail">
-					Union Bank of India
-					<a class="pending-btn" style="margin-top: 10px;">Pending</a>
-				</div>				
-			</div>
-			<div class="brokerage-item">
-				<div class="broker-logo">
-					<img src="/assets/images/hdfc.png">
-
-				</div>
-				<div class="detail">
-					The Housing Development Finance Corporation
-					<a class="pending-btn" style="margin-top: 10px;">Pending</a>
+					{{application.brokerageId}}
+					<a class="pending-btn" style="margin-top: 10px;">{{application.applicationStatus}}</a>
 				</div>				
 			</div>
 		</div>
 	</div>
 </div>
-<div ng-show="vm.ifBroker && vm.userAppointments" class="broker-dashboard-area">
+<div ng-if="vm.isBroker" class="broker-dashboard-area">
 	<div class="left">
 		<div class="appointments">
 			<h2>Brokerage Application Request</h2>
