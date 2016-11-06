@@ -71,6 +71,13 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
             }
         ];
 
+        BrokerageResource.userprofileget(function(response){
+            vm.userquestions = response.data;
+            $log.info(vm.userquestions);
+        }, function(error){
+            $log.error(error);
+        })
+
         vm.toggleSelected = function(partner){
             partner.selected = !partner.selected;
             if(partner.selected){
@@ -78,7 +85,6 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
             }else{
                 $scope.selectedPartners.delete(partner.title);
             }
-
         }
 
 		BrokerageResource.brokeragesDetails({'userEmailId':AuthenticationService.getLoggedInUser().userId}, function (req) {
