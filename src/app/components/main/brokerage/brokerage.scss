@@ -177,6 +177,18 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
     left: 15px;
   }
 }
+.partnerLogo:focus {
+  	outline: none;
+	border: 0;
+  	//border: solid 2px #3aafa5;
+ }
+
+ .partnerLogo.selected {
+ 	outline: none;
+	border: 0;
+  	border: solid 2px #3aafa5;
+ }
+
 .partnerLogo:hover {
-   border : solid 2px #3aafa5; 
+   //border : solid 2px #3aafa5; 
 }
