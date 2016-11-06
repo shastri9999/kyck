@@ -12,9 +12,9 @@
 			<span>{{ document.comment || 'Lorem ipsum dorum sit amet, consectuter' }}</span>
 		</div>
 	</div>
-	<div class="document-action" ngf-drag-over-class="'dragover'" ngf-drop="upload($file, document.documentType)">
+	<div class="document-action" ngf-drag-over-class="'dragover'" ngf-drop="upload($file, document)">
 		<span>Drag and drop your file here or 
-		<md-button ngf-select="upload($file, document.documentType)" class="md-primary md-raised" style="background-color: #3598DB">Upload</md-button>
+		<md-button ngf-select="upload($file, document)" class="md-primary md-raised" style="background-color: #3598DB">Upload</md-button>
  		</span>
 	</div>
 </div>
