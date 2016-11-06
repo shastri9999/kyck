@@ -36,8 +36,11 @@ function MessagesController($log, $scope, MessageResource, AuthenticationService
 
 
 	console.log(AuthenticationService.getLoggedInUser());
-	var inbox = MessageResource.inbox();
-	$log.debug(inbox);
+	MessageResource.inbox(function(request){
+		$log.debug(request.data);
+	}, function(error){
+		$log.error(error);
+	});
 }
 
 export default MessagesController;
