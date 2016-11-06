@@ -40,7 +40,7 @@ class AuthenticationService {
 	}
 
 	ifBroker() {
-		return this._StorageService.getItem('loggedInUser')['userType'] != "USER";
+		return this.getLoggedInUser().userType != "USER";
 	}
 
 	getLoggedInUser(){
