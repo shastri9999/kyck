@@ -32,7 +32,9 @@ class AuthenticationService {
 	}
 
 	ifBroker() {
-		return this._StorageService.getItem('loggedInUser')['userType'] != "USER";
+		console.log(this._StorageService.getItem('loggedInUser')['userType']);
+		var ifUser = this._StorageService.getItem('loggedInUser')['userType'] === "USER";
+		return !ifUser;
 	}
 
 	getLoggedInUser(){

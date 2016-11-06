@@ -3,6 +3,7 @@
 import DashboardModule from './dashboard/dashboard.module';
 import CalendarModule from './calendar/calendar.module';
 import BrokerageModule from './brokerage/brokerage.module';
+import RequestsModule from './requests/requests.module';
 import HelpModule from './help/help.module';
 import NavigationModule from './navigation/navigation.module';
 import ToolbarModule from './toolbar/toolbar.module';
@@ -17,6 +18,7 @@ const mainModule = angular.module('main-module', [
 	NavigationModule.name,
 	DashboardModule.name,
 	CalendarModule.name,
+	RequestsModule.name,
 	HelpModule.name,
 	BrokerageModule.name,
 	ToolbarModule.name,

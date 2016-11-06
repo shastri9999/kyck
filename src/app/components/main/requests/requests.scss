@@ -1,0 +1,182 @@
+.headerProgress {
+	background-color: #f2f8f8;
+	border: 3px solid #e8f8f8;
+	padding: 30px;
+	ol {
+		list-style: decimal;
+		padding-top: 30px;
+		padding-left: 30px;
+		line-height:21px;
+	}
+	li.active {
+		color: #3aafa6;
+	}
+}
+.titleProgressHeader{
+	font-weight:bold;
+}
+mainArea {
+	min-height: 100%;
+	margin-bottom: -90px;
+}
+footer {
+  background-color: #f2f8f8;
+  position: absolute;
+  bottom: 0px;
+  height:90px;
+  width:100%;
+}
+.md-raised.md-success {
+	color: #ffffff;
+	font-family: Lato;
+	margin-left: 0px;
+	margin-right: 0px;
+	border-radius: 1px;
+	background: #3bada5;
+}
+.md-raised.md-back {
+	color: white;
+	margin-right:0px;
+	border-radius: 1px;
+	font-family: Lato;
+	background: #4f6379;
+}
+.md-raised.md-edit-form {
+	color: #9da9b5;
+	margin-right: 0px;
+	border-radius: 1px;
+	font-family: Lato;
+	margin-left: 0px;
+	background: #ecf0f1;
+	padding-left: 20px;
+    padding-right: 20px;
+	&:hover {
+		color: #9da9b5;
+		background: #ecf0f1;
+	}
+}
+.md-raised.md-back:not([disabled]):hover {
+	color: white;
+	background: #4f6379;
+}
+.md-raised.md-success:not([disabled]):hover {
+    background-color: #3bada5;
+}
+.md-stepper-indicator .md-stepper-number, .md-stepper-indicator.md-completed .md-stepper-number {
+	background-color: #fff;
+	width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    line-height: 40px;
+    color: #a2a9b1;
+    border: solid 2px #e4e9ee;
+}
+.md-stepper-indicator.md-active .md-stepper-number, .md-stepper-indicator.md-completed .md-stepper-number {
+	background-color: #f39c11;
+	color: #fff;
+}
+.md-stepper-number.md-activ {
+	background-color: #f39c11;
+}
+.md-stepper-number {
+	color: #e2eaec;
+	background-color: #ffffff;
+	border: 2px solid #e2eaec;
+}
+md-stepper {
+	width: 100%;
+}
+.md-steppers-header {
+    box-shadow: none;
+}
+.md-steppers:not(.md-steppers-linear) .md-stepper-indicator.md-editable.md-completed:hover, .md-steppers:not(.md-steppers-linear) .md-stepper-indicator.md-editable.md-completed:hover .md-stepper-indicator-wrapper, .md-steppers:not(.md-steppers-linear) .md-stepper-indicator:not(.md-active):not(.md-completed):hover, .md-steppers:not(.md-steppers-linear) .md-stepper-indicator:not(.md-active):not(.md-completed):hover .md-stepper-indicator-wrapper {
+    background-color: #fbfbfb;
+}
+md-event-calendar {
+	margin:30px;	
+}
+
+.inputdemoErrors .inputErrorsApp {
+  min-height: 48px; }
+
+.inputdemoErrors md-input-container > p {
+  font-size: 0.8em;
+  text-align: left;
+  width: 100%; }
+
+.col {
+	margin: 5px 20px 10px 20px;
+}
+
+.footerBtns {
+	margin: 15px;
+}
+
+md-input-container.md-block {
+	margin-top: 0px;
+}
+
+.detailsForm {
+	margin-top:45px;
+}
+
+.partnersHeader {
+	font-family: Lato;
+	font-size: 16px;
+	font-weight: 700;
+	color: #4f6379;
+	text-align: center;
+	margin-top: 40px;
+	width: 100%;
+}
+
+md-event-calendar .md-event-calendar-cell-event.book-appointment {
+	background-color: #3aafa5;
+	color: white;
+}
+
+.partnerBox {
+	width: 200px;
+	height: 100px;
+	object-fit: contain;
+	border-radius: 5px;
+	background-color: #ffffff;
+	background-color: var(--white);
+	border: solid 1px #e7ecf1;
+	border: solid 1px var(--pale-grey);
+}
+
+.partnerSelected {
+	border-radius: 5px;
+	border: solid 1px #3aafa5;
+	border: solid 1px var(--greeny-blue);
+}
+
+.partnerLogo {
+  width: 200px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border: solid 1px #e7ecf1;
+  margin: 20px;
+  position: relative;
+  -webkit-transition : border 400ms ease-out;
+  -moz-transition : border 400ms ease-out;
+  -o-transition : border 400ms ease-out;
+  transition : border 400ms ease-out;
+
+  img {
+  	height: 40px;
+  	margin-top: 25px;
+  }
+  .premiereIcon {
+	position: absolute;
+    height: 20px;
+    top: -25px;
+    left: 15px;
+  }
+}
+.partnerLogo:hover {
+   border : solid 2px #3aafa5; 
+}
