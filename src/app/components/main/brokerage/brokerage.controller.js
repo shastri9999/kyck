@@ -74,14 +74,24 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         BrokerageResource.userprofileget(function(response){
             var questions = response.data;
             vm.questionsmap = {};
-            for(var i=0;i<questions.length;i++){
-                var q = questions[i];
+            questions.forEach(function(q){
                 vm.questionsmap[q.questionDesc] = q;
-            }
+            });
             $log.info(vm.questionsmap);
         }, function(error){
             $log.error(error);
-        })
+        });
+
+        BrokerageResource.kycget(function(response){
+            var questions = response.data;
+            vm.kycquestionsmap = {};
+            questions.forEach(function(q){
+                vm.kycquestionsmap[q.questionDesc] = q;
+            });
+            $log.info(vm.kycquestionsmap);
+        }, function(error){
+            $log.error(error);
+        });
 
         vm.toggleSelected = function(partner){
             partner.selected = !partner.selected;
