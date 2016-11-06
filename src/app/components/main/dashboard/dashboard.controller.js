@@ -1,6 +1,6 @@
 'use strict';
 
-function DashboardController (DashboardResource, AuthenticationService, MessageService) {
+function DashboardController (DashboardResource, AuthenticationService, MessageService, $rootScope, $state) {
 	'ngInject';
 	const vm=this;
 	vm.isBroker = AuthenticationService.isBroker();
@@ -28,6 +28,12 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 	MessageService.fetchInbox().then((messages)=>{
 		vm.messages = messages;
 	})
+
+	vm.openMessage = (message)=>{
+		$rootScope.messageView.activeMessage = message;
+		$state.go('main.messages');
+	};
+
 }
 
 export default DashboardController;
