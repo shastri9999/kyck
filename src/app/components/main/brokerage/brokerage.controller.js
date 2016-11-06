@@ -72,8 +72,13 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         ];
 
         BrokerageResource.userprofileget(function(response){
-            vm.userquestions = response.data;
-            $log.info(vm.userquestions);
+            var questions = response.data;
+            vm.questionsmap = {};
+            for(var i=0;i<questions.length;i++){
+                var q = questions[i];
+                vm.questionsmap[q.questionDesc] = q;
+            }
+            $log.info(vm.questionsmap);
         }, function(error){
             $log.error(error);
         })
@@ -830,13 +835,33 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         }]
 
         vm.countries = countries;
-
         DocumentResource.categories(function(response){
                 $log.debug(response);
                 vm.documents = response.data;
+                vm.documents.forEach(function(doc){
+                    doc.documentID = null; //Making default docId as null. Replacing it with actual value in next call
+                    doc.replaceAction = false;
+                });
+                DocumentResource.findall(function(response){
+                    if(response && response.data){
+                        response.data.forEach(function(existingDoc){
+                            for(var i=0; i<vm.documents.length; i++){
+                                if(existingDoc.documentType==vm.documents[i].documentType){
+                                    vm.documents[i].documentID = existingDoc.documentID;
+                                    break;
+                                }
+                            }
+                        });
+                    }
+                    $log.debug(vm.documents);
+                })
         }, function(error){
                 $log.error(error);
         });
+
+        vm.replace = function(document){
+            document.replaceAction = true;
+        }
 
         var empStatuses = [{
         	name: 'Retired'
