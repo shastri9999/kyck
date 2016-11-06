@@ -84,11 +84,11 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
 
         BrokerageResource.kycget(function(response){
             var questions = response.data;
-            vm.kycquestionsmap = {};
+            vm.kycquestions = {};
             questions.forEach(function(q){
-                vm.kycquestionsmap[q.questionDesc] = q;
+                vm.kycquestions[q.questionDesc] = q;
             });
-            $log.info(vm.kycquestionsmap);
+            $log.info(vm.kycquestions);
         }, function(error){
             $log.error(error);
         });
