@@ -12,19 +12,20 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         vm.editForm = editForm;
         vm.selectedIndex = 0;
         $scope.isBroker = AuthenticationService.isBroker();
+        $scope.selectedPartners = new Set();
 
         vm.partners = [
             {
                 title: 'POSB',
                 img: '/assets/images/partnerLogos/posb.png',
                 type: 'premium',
-                selected: true
+                selected: false
             },
             {
                 title: 'DBS',
                 img: '/assets/images/partnerLogos/dbs.png',
                 type: 'premium',
-                selected: true
+                selected: false
             },
             {
                 title: 'UOB',
@@ -72,6 +73,12 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
 
         vm.toggleSelected = function(partner){
             partner.selected = !partner.selected;
+            if(partner.selected){
+                $scope.selectedPartners.add(partner.title);
+            }else{
+                $scope.selectedPartners.delete(partner.title);
+            }
+
         }
 
 		BrokerageResource.brokeragesDetails({'userEmailId':AuthenticationService.getLoggedInUser().userId}, function (req) {
