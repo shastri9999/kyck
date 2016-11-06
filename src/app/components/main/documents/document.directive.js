@@ -21,7 +21,8 @@ function documentComponent($log, $state, Upload, DocumentResource) {
 	  $log.debug('Hello from Document controller!');
     $scope.upload = function(file, documentType){
         $log.debug(file);
-        //$state.go('main.document.preview',{ picFile: file});
+        $state.go('main.document.preview',{ picFile: file});
+        /*
         Upload.upload({
           url: '/kyck-rest/document/upload',
           data: {
@@ -38,6 +39,7 @@ function documentComponent($log, $state, Upload, DocumentResource) {
             $log.debug(progressPercentage);
             //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
+        */
        //DocumentResource.upload({mul})
     }
   }

@@ -13,6 +13,7 @@ import "angular-resource";
 import 'angular-chart.js';
 import 'material-steppers';
 import 'ng-file-upload';
+import 'ui-cropper';
 import '!!file-loader?name=[name].[ext]!../favicon.ico';
 import "./index.module";
 import "../assets/styles/sass/index.scss";

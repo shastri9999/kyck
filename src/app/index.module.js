@@ -14,6 +14,7 @@ export default angular.module('kyck', [
 	'ngMaterial',
 	'ngResource',
 	'ngFileUpload',
+	'uiCropper',
 	Common.name,
 	Components.name,
 	Routes.name

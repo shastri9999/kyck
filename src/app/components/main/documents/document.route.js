@@ -1,7 +1,7 @@
 'use strict';
 
 import templateUrl from './documents.html';
-import previewUrl from './document_preview.html';
+import cropUrl from './document_crop.html';
 import controller from './document.controller';
 
 function routeConfig($stateProvider) {
@@ -20,7 +20,7 @@ function routeConfig($stateProvider) {
 		params: {
 			picFile: null
 		},
-		templateUrl: previewUrl,
+		templateUrl: cropUrl,
 		onEnter: function ($mdDialog, $mdMedia, $state, $stateParams) {
 			'ngInject';
             $mdDialog.show({
@@ -32,7 +32,7 @@ function routeConfig($stateProvider) {
                 	$log.debug(vm.picFile);
                 },
                 controllerAs: 'vm',
-                templateUrl: previewUrl,
+                templateUrl: cropUrl,
                 clickOutsideToClose: true,
                 locals: {
                     picFile: $stateParams.picFile
