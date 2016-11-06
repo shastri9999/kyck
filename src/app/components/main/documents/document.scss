@@ -29,16 +29,19 @@ $pale-grey: #e7ecf1;
 }
 
 .document-action {
+  height: 90px;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 25px;
 	background-color: #f5f9fa;
 	padding: 30px;
 	font-size: 14px;
-  	font-weight: 500;
-  	font-style: normal;
-  	opacity: 0.75;
-  	font-family: Lato;
+	font-weight: 500;
+	font-style: normal;
+	opacity: 0.75;
+	font-family: Lato;
+  display: flex;
+  align-items: center;
 }
 
 .document-upper {

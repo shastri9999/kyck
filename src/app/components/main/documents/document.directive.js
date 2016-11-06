@@ -39,6 +39,15 @@ function documentComponent($log, $state, Upload, DocumentResource) {
                 .toastClass('md-primary')
                 .hideDelay(2000)
             );
+
+            DocumentResource.metadata({documentType: document.documentType}, function(response){
+                if(response && response.data){
+                  document.documentID = response.data.documentID;
+                  document.replaceAction = false;
+                }
+            }, function(error){
+                $log.error(error);
+            });
         }, function(error){
             $log.debug(error);
             $mdToast.show(
