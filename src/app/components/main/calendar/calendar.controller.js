@@ -1,59 +1,44 @@
 'use strict';
 
-function CalendarController($scope, $mdDialog, $filter) {
+function CalendarController($scope, $mdDialog, $filter, AuthenticationService, CalendarService, moment) {
 	'ngInject';
 
 	$scope.events = [
 
   ];
+  console.log(AuthenticationService.getLoggedInUser());
+  const userId = AuthenticationService.getLoggedInUser().userId;
+  const isBroker = AuthenticationService.isBroker();
+  const month = 11;
+  CalendarService.fetchMeetings(userId, month).then((data)=>{
+    $scope.events = data.map((slot)=>{
+      console.log(slot);
+      return {
+        title: slot.meetingSubject,
+        start: moment(slot.startTime, 'YYYY-MM_DD').toDate(),
+        end: moment(slot.endTime, 'YYYY-MM_DD').toDate(),
+        ...slot
+      }
+    });
+  })
   
-
-  function getDate(offsetDays, hour) {
-   offsetDays = offsetDays || 0;
-   const offset = offsetDays * 24 * 60 * 60 * 1000;
-   const date = new Date(new Date().getTime() + offset);
-   if (hour) { date.setHours(hour); }
-   return date;
- }
-
- $scope.eventClicked = function ($selectedEvent) {
-   let textContent = "";
+  $scope.eventClicked = function ($selectedEvent) {
    let closePopup = function() {
-    alert = undefined;
-  }
-
-
-  switch ($selectedEvent.customClass) {
-    case "reschedule":
-    textContent = "Kindly reschedule your appointment as broker is busy during the time mentioned by you";
-    var txtBtn = "ReSchedule";
-    closePopup = function() {
       alert = undefined;
-    }
-    break;
-    case "confirmed" : 
-    textContent = "Your appointment is confirmed.";
-    break;
-    case "pending" :
-    textContent = "Broker has not taken any action on your request yet."
-    break;
-    case "rejected":
-    textContent = "Your application has been rejected.";
-    break;
+   }
+   const slot = $selectedEvent;
+   alert = $mdDialog.alert({
+    title: slot.meetingSubject,
+    textContent: slot.meetingContent,
+    ok: 'Close'
+   });
+
+    $mdDialog
+    .show(alert)
+    .finally(closePopup);
   }
-
-  alert = $mdDialog.alert({
-   title: $filter('uppercase')($selectedEvent.customClass),
-   textContent: textContent,
-   ok: txtBtn || 'Close'
- });
-
-  $mdDialog
-  .show(alert)
-  .finally(closePopup);
-}
   $scope.eventCreate = function ($date) {
-  	console.log($date);
+
   }
 }
 
