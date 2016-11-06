@@ -75,7 +75,10 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
             partner.selected = !partner.selected;
             if(partner.selected){
                 $scope.selectedPartners.add(partner.title);
+            }else{
+                $scope.selectedPartners.delete(partner.title);
             }
+
         }
 
 		BrokerageResource.brokeragesDetails({'userEmailId':AuthenticationService.getLoggedInUser().userId}, function (req) {
