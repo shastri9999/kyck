@@ -84,34 +84,14 @@
 		</div>
 		<div class="brokerage">
 			<h2>Brokerage Applications</h2>
-			<div class="brokerage-item">
+			<div class="brokerage-item" ng-repeat="application in vm.brokerageApplications">
 				<div class="broker-logo">
 					<img src="/assets/images/posb.png">
 
 				</div>
 				<div class="detail">
-					Post Office Savings Bank
-					<a class="pending-btn" style="margin-top: 10px;">Pending</a>
-				</div>				
-			</div>
-			<div class="brokerage-item">
-				<div class="broker-logo">
-					<img src="/assets/images/unionbank.png">
-
-				</div>
-				<div class="detail">
-					Union Bank of India
-					<a class="pending-btn" style="margin-top: 10px;">Pending</a>
-				</div>				
-			</div>
-			<div class="brokerage-item">
-				<div class="broker-logo">
-					<img src="/assets/images/hdfc.png">
-
-				</div>
-				<div class="detail">
-					The Housing Development Finance Corporation
-					<a class="pending-btn" style="margin-top: 10px;">Pending</a>
+					{{application.brokerageId}}
+					<a class="pending-btn" style="margin-top: 10px;">{{application.applicationStatus}}</a>
 				</div>				
 			</div>
 		</div>

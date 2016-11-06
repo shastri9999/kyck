@@ -20,6 +20,11 @@ function DashboardController (DashboardResource, AuthenticationService) {
 			vm.brokerAppointments = response.data;
 		});
 
+		DashboardResource.brokerageApplications((response)=>{
+			vm.brokerageApplications = response.data;
+			console.log(response.data)
+		});
+
 	}
 }
 

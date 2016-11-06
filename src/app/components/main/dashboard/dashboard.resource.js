@@ -15,6 +15,11 @@ function DashboardResource($resource, AppConstants) {
     		method: 'GET',
     		isArray: false,
     		url: URL + '/dashboard/appointments'
+    	},
+    	brokerageApplications: {
+    		method: 'GET',
+    		isArray: false,
+    		url: URL + '/dashboard/brokerages'    		
     	}
     });
 }
