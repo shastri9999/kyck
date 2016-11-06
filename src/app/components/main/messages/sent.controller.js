@@ -5,7 +5,6 @@ function SentController(MessageService) {
 	const vm = this;
 	MessageService.fetchSent().then((messages)=>{
 		vm.messages = messages;
-		console.log(messages);
 	});
 }
 

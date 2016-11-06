@@ -19,6 +19,7 @@ class MessageService{
 		}
 		else
 		{
+			console.log('refetched');
 			return this._$http({
 				method: 'GET',
 				url: this.URL + '/get-inbox',
@@ -50,6 +51,7 @@ class MessageService{
 
 	refresh(){
 		this.inboxFetched = false;
+		this.sentFetched = false;
 	}
 }
 

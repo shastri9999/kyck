@@ -24,6 +24,11 @@ export default angular.module('kyck', [
 .config(config)
 .run(function($rootScope, $location, AuthenticationService){
 	'ngInject';
+	$rootScope.sideNavCollapsed = false;
+	$rootScope.messageView = {
+		activeMessage: null,
+		composing: false
+	};
 	$rootScope.$on('$stateChangeStart', function (event, next, toParams) {
 		const loggedIn = AuthenticationService.getLoggedInUser();
 		const isAccessPage = next.name.indexOf("access.")==0;
@@ -33,10 +38,5 @@ export default angular.module('kyck', [
 
 		/* Todo: Move all this to service */
 		$rootScope.breadCrumb = next.breadCrumb;
-		$rootScope.sideNavCollapsed = false;
-		$rootScope.messageView = {
-			activeMessage: null,
-			composing: false
-		}
 	});
 });
