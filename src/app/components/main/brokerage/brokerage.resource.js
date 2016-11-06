@@ -1,10 +1,19 @@
 'use strict';
 
-var URL = '/kyck-rest/';
+var URL = '/kyck-rest';
 
-function BrokerageResource($resource, $rootScope) {
-	'ng-inject';
+function BrokerageResource($resource) {
+	'ngInject';
+
     return $resource(URL, {}, {
+    	brokeragesDetails: {
+    		method: 'GET',
+    		isArray: false,
+    		params: {
+    			userEmailId: '@email'
+    		},
+    		url: URL + '/brokerages/details'
+    	},
     	userprofileget: {
     		method: 'GET',
     		isArray: false,
@@ -31,3 +40,5 @@ function BrokerageResource($resource, $rootScope) {
     	}
     });
 }
+
+export default BrokerageResource;

@@ -1,6 +1,6 @@
 'use strict';
 
-function BrokerageController($mdStepper, $mdDialog, $filter) {
+function BrokerageController($mdStepper, $mdDialog, $filter, BrokerageResource, AuthenticationService, $log) {
     'ngInject';
 
     var vm = this;
@@ -10,6 +10,10 @@ function BrokerageController($mdStepper, $mdDialog, $filter) {
         vm.nextStep = nextStep;
         vm.backStep = backStep;
         vm.editForm = editForm;
+
+        console.log(AuthenticationService.getLoggedInUser());
+		var brokeragesDetails = BrokerageResource.brokeragesDetails();
+		$log.debug(brokeragesDetails);
 
         var countries = [{
             name: 'Afghanistan',
