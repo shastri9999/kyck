@@ -9,10 +9,10 @@
 		<img class="icon-active" src="/assets/images/dashboard-active.png" alt="">
 		Dashboard
 	</a>
-	<a ui-sref-active="active" ui-sref="main.brokerage" class="{{!ifBroker}}">
+	<a ui-sref-active="active" ui-sref="main.brokerage" class="{{!isBroker}}">
 		<img class="icon" src="/assets/images/brokerage.png" alt="">
 		<img class="icon-active" src="/assets/images/brokerage-active.png" alt="">
-		<span ng-if="!ifBroker">Brokerage</span><span ng-if="ifBroker">Requests</span>
+		<span ng-if="!isBroker">Brokerage</span><span ng-if="isBroker">Requests</span>
 	</a>
 	<a ui-sref-active="active" ui-sref="main.messages">
 		<img class="icon" src="/assets/images/messages.png" alt="">

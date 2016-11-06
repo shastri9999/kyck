@@ -10,7 +10,7 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         vm.nextStep = nextStep;
         vm.backStep = backStep;
         vm.editForm = editForm;
-        $scope.ifBroker = AuthenticationService.ifBroker();
+        $scope.isBroker = AuthenticationService.isBroker();
 
 		BrokerageResource.brokeragesDetails({'userEmailId':AuthenticationService.getLoggedInUser().userId}, function (req) {
             vm.brokeragesDetails = req.data;
