@@ -34,6 +34,14 @@ footer {
 	border-radius: 1px;
 	background: #3bada5;
 }
+.md-raised.md-blue {
+	color: #ffffff;
+	font-family: Lato;
+	margin-left: 10px;
+	margin-right: 0px;
+	border-radius: 1px;
+	background: #3498db;
+}
 .md-raised.md-back {
 	color: white;
 	margin-right:0px;
@@ -62,6 +70,10 @@ footer {
 .md-raised.md-success:not([disabled]):hover {
     background-color: #3bada5;
 }
+.md-raised.md-blue:not([disabled]):hover {
+    background-color: #3498db;
+}
+
 .md-stepper-indicator .md-stepper-number, .md-stepper-indicator.md-completed .md-stepper-number {
 	background-color: #fff;
 	width: 40px;

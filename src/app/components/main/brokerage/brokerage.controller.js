@@ -905,74 +905,56 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
 
         var validationReports = [
             {
-                title: 'Document Type Check',
-                description: 'Sample Text 1'
-            }, {
-                title: 'Required Files Check',
-                description: 'Sample Text 2'
-            },
-            {
-                title: 'Document Type Check',
-                description: 'Sample Text 1'
-            }, {
-                title: 'Required Files Check',
-                description: 'Sample Text 2'
-            },
-            {
-                title: 'Document Type Check',
-                description: 'Sample Text 1'
-            }, {
-                title: 'Required Files Check',
-                description: 'Sample Text 2'
-            },
-            {
-                title: 'Document Type Check',
-                description: 'Sample Text 1'
-            }, {
-                title: 'Required Files Check',
-                description: 'Sample Text 2'
-            },
-            {
-                title: 'Document Type Check',
-                description: 'Sample Text 1'
-            }, {
-                title: 'Required Files Check',
-                description: 'Sample Text 2'
-            },
-            {
-                title: 'Document Type Check',
-                description: 'Sample Text 1'
-            }, {
-                title: 'Required Files Check',
-                description: 'Sample Text 2'
-            },
-            {
-                title: 'Document Type Check',
-                description: 'Sample Text 1'
-            }, {
-                title: 'Required Files Check',
-                description: 'Sample Text 2'
-            },
-            {
-                title: 'Document Type Check',
-                description: 'Sample Text 1'
-            }, {
-                title: 'Required Files Check',
-                description: 'Sample Text 2'
-            },
-            {
-                title: 'Document Type Check',
-                description: 'Sample Text 1'
-            }, {
-                title: 'Required Files Check',
-                description: 'Sample Text 2'
-            },
-            {
-                title: 'Document Type Check',
-                description: 'Sample Text 1'
-            }, {
-                title: 'Required Files Check',
-                description: 'Sample Text 2'
+            title: 'Document Type Check',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Required Fields Check',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Barcode Check',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Expiry Date Check',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Icnumber Checksum Check',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Name Crosscheck',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Gender Crosscheck',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Address Crosscheck',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Icnumber Crosscheck',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Nationality Crosscheck',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Image modification check',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Hologram modification check',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Field modification check',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Tampering Check',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Photo Tampering Check',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'Photo Crosscheck',
+            description: 'Lorem Ipsum Text. Description needed.'
+            },{
+            title: 'MRZ Code Check',
+            description: 'Lorem Ipsum Text. Description needed.'
             }
         ];
 
