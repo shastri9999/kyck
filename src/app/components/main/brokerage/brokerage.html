@@ -118,14 +118,14 @@
         <div ng-if="isBroker">
             <md-step md-label="Personal Details">
                 <md-step-body>
-                    <profile-form />
+                    <profile-form ng-class="{error:vm.personalDetailsError}"/>
                 </md-step-body>
             </md-step>
         </div>
         <div ng-if="isBroker">
             <md-step md-label="KYC">
                 <md-step-body>
-                    <kyc-form />
+                    <kyc-form ng-class="{error:vm.kycerror}"/>
                 </md-step-body>
             </md-step>
         </div>
@@ -144,14 +144,14 @@
         <div ng-if="!isBroker">
             <md-step md-label="Personal Details">
                 <md-step-body>
-                    <profile-form />
+                    <profile-form ng-class="{error:personalDetailsError}"/>
                 </md-step-body>
             </md-step>
         </div>
         <div ng-if="!isBroker">
             <md-step md-label="KYC">
                 <md-step-body>
-                    <kyc-form />
+                    <kyc-form ng-class="{error:vm.kycerror}"/>
                 </md-step-body>
             </md-step>
         </div>
