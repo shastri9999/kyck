@@ -12,6 +12,7 @@ class ToolBarController {
 		this._MessageService = MessageService;
 		this.userType = loggedInUser.userType;
 		this.displayName = [ loggedInUser.userFname, loggedInUser.userLname].map(capitalize).join(' ');
+		this.avatarName = [ loggedInUser.userFname[0].toUpperCase(), loggedInUser.userLname[0].toUpperCase()].join('');
 		this.flagShow = false;
 
 		this.flags = [{

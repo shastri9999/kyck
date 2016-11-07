@@ -50,3 +50,15 @@ table {
 .grow {
   flex-grow: 1;
 }
+
+.avatar-circle
+{
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+    background: rgb(130, 148, 167);
+    color: white;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 40px;
+}
