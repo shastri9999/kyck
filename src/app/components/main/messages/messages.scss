@@ -32,33 +32,49 @@
 					border: none;
 				}
 			}
+			.compose-btn{
+				height: 50px;
+				width: 150px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 3px; 
+				color: white;
+				cursor: pointer;
+				outline: none;
+				background-color: #3498db;
+				margin-left: 10px;
+				&:hover {
+					background-color: #569bca;
+				}
+			}
 		}
 		.inbox,.sent {
-			 .message {
-                display: flex;
-                padding: 30px;
-                padding-right: 20px;
-                margin-top: 20px;
-                border: 1px solid #e7ecf1;
-                border-radius: 5px;
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
-                border-left: 5px solid #3498db;
-                padding-bottom: 10px;
-                max-width: 800px;
-                .detail {
-                	flex-grow: 1;
-                }
-                .time {
-                    display: flex;
-                    align-items: flex-start;
-                    font-size: 14px;
-                    opacity: 0.4;
-                }
-                &.active {
-                	background-color: #f2f6f8;
-                }
-            }
+			.message {
+				display: flex;
+				padding: 30px;
+				padding-right: 20px;
+				margin-top: 20px;
+				border: 1px solid #e7ecf1;
+				border-radius: 5px;
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+				border-left: 5px solid #3498db;
+				padding-bottom: 10px;
+				max-width: 800px;
+				.detail {
+					flex-grow: 1;
+				}
+				.time {
+					display: flex;
+					align-items: flex-start;
+					font-size: 14px;
+					opacity: 0.4;
+				}
+				&.active {
+					background-color: #f2f6f8;
+				}
+			}
 		} 
 	}
 	.right {
@@ -71,6 +87,23 @@
 		&.send {
 			justify-content: space-between;
 		}
+		&.composing {
+			padding: 0;
+			input {
+				border: 1px solid #e7ecf1;
+				font-size: 14px;
+				padding: 22px 16px;
+			}
+			textarea {
+				border: 1px solid #e7ecf1;
+				max-height: 500px;
+				padding:16px;
+			}
+			.send-btn {
+				align-self: flex-end;
+				margin-top: 3px;
+			}
+		}
 		.close {
 			position: absolute;
 			right: 30px;
@@ -81,17 +114,18 @@
 		.message {
 			display: flex;
 		}
+		
 		textarea {
-		    border: none;
-		    overflow: auto;
-		    outline: none;
-		    box-shadow: none;
-		    resize: none;
-		    color: #4f6379;
-		    font-size: 14px;
-		    height:60px;
-		    flex: 1;
-		    border-radius: 3px; 
+			border: none;
+			overflow: auto;
+			outline: none;
+			box-shadow: none;
+			resize: none;
+			color: #4f6379;
+			font-size: 14px;
+			height:60px;
+			flex: 1;
+			border-radius: 3px; 
 		}
 		.reply {
 			display: flex;

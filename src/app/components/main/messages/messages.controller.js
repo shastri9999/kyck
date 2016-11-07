@@ -1,6 +1,6 @@
 'use strict';
 
-function MessagesController($state, $scope, MessageService, $rootScope, $mdToast) {
+function MessagesController($state, $scope, MessageService, AuthenticationService, $rootScope, $mdToast) {
 	'ngInject';
 	const vm = this;
 
@@ -10,6 +10,8 @@ function MessagesController($state, $scope, MessageService, $rootScope, $mdToast
 			$state.go('main.messages.inbox');
 		}
 	});
+
+	vm.isBroker = AuthenticationService.isBroker();
 
 	vm.refresh = ()=>{
 		MessageService.refresh();
@@ -21,12 +23,35 @@ function MessagesController($state, $scope, MessageService, $rootScope, $mdToast
 		$rootScope.messageView.reply = "";
 	}
 
+	vm.compose = ()=>{
+		vm.composeMessage = {};
+		$rootScope.messageView.reply = "";
+		$rootScope.messageView.activeInboxMessage = null;
+		$rootScope.messageView.activeSentMessage = null;
+		$rootScope.messageView.composing = true;
+	}
+
+	vm.closeCompose = ()=>{
+		vm.composeMessage = {};
+		$rootScope.messageView.composing = false;		
+	}
+	
 	vm.sendMessage = (message, forSent)=>{
 		if (!$rootScope.messageView.reply)
 			return;
 		MessageService.sendMessage(message, $rootScope.messageView.reply, forSent)
 		.then(()=>{
 			$rootScope.messageView.reply = "";
+			$mdToast.showSimple('Message Successfully Sent!');
+		});
+	}
+
+	vm.createMessage = ()=>{
+		if (!vm.composeMessage.messageFrom || !vm.composeMessage.messageSubject || !vm.composeMessage.messageContent)
+			return;
+		MessageService.sendMessage(vm.composeMessage, vm.composeMessage.messageContent)
+		.then(()=>{
+			vm.closeCompose();
 			$mdToast.showSimple('Message Successfully Sent!');
 		});
 	}
