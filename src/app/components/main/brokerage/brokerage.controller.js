@@ -112,6 +112,7 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         BrokerageResource.userAppointments((response)=>{
             vm.userAppointments = response.data;
             vm.userAppointmentsFiltered = vm.userAppointments;
+            vm.userAppointment = vm.userAppointments[0];
             if (vm.userAppointments.length > 0) {
                 selectUser(0);
             }
@@ -1122,6 +1123,7 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
     function selectUser(index) {
         console.log(index);
         vm.selectedIndex=index;
+        vm.userAppointment = vm.userAppointments[index];
     }
 
     function eventClicked($selectedEvent) {
