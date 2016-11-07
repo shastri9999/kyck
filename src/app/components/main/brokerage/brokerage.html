@@ -375,9 +375,15 @@
             <md-step-body layout="column" flex>
                 <div style="min-height: 800px; height: 800px;">
                     <div class="validationReport" ng-repeat="report in vm.validationReports">
-                        <div class="title">{{report.title}}
+                        <div style="float:left;">
+                            <div class="title">{{report.title}}
+                            </div>
+                            <div class="description">{{report.description}}
+                            </div>
                         </div>
-                        <div class="description">{{report.description}}
+                        <div style="float:right;">
+                            <img src="/assets/images/tickedgrey.png"/>
+                            <img src="/assets/images/untickedgrey.png"/>
                         </div>
                     </div>
                 </div>

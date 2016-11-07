@@ -264,6 +264,9 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 	margin: 15px;
     padding: 10px;
     margin-left: 25px;
+    max-width: 700px;
+    clear: both;
+    overflow: hidden;
 
 	.title {
 		font-size: 16px;
@@ -272,6 +275,9 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 		opacity: 0.6;
 		font-family: Lato;
 		font-size: 14px;
+	}
+	img {
+		height: 35px;
 	}
 }
 
