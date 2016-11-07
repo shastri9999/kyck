@@ -1,6 +1,6 @@
 'use strict';
 
-function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, BrokerageResource, AuthenticationService, DocumentResource) {
+function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $log, BrokerageResource, AuthenticationService, DocumentResource) {
     'ngInject';
 
     var vm = this;
@@ -978,88 +978,22 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
 
         vm.validationReports = validationReports;
 
-        var events = [{
-            start: getDate(-6, 10),
-            end: getDate(-6, 11),
-            customClass: 'book-appointment',
-            title: 'Event 1'
-        }, {
-            start: getDate(-6, 9),
-            end: getDate(-6, 10),
-            customClass: 'book-appointment',
-            title: 'Event 1a'
-        }, {
-            start: getDate(-6, 11),
-            end: getDate(-6, 12),
-            customClass: 'book-appointment',
-            title: 'Event 1b'
-        }, {
-            start: getDate(-6, 10),
-            end: getDate(-6, 11),
-            customClass: 'book-appointment',
-            title: 'Event 1c'
-        }, {
-            start: getDate(-6, 10),
-            end: getDate(-6, 11),
-            customClass: 'book-appointment',
-            title: 'Event 1d'
-        }, {
-            start: getDate(-6, 10),
-            end: getDate(-6, 11),
-            customClass: 'book-appointment',
-            title: 'Event 1e'
-        }, {
-            start: getDate(-6, 10),
-            end: getDate(-6, 11),
-            customClass: 'book-appointment',
-            title: 'Event 1f'
-        }, {
-            start: getDate(1, 11),
-            end: getDate(1, 12),
-            customClass: 'book-appointment',
-            title: 'Event 2'
-        }, {
-            start: getDate(2, 12),
-            end: getDate(2, 13),
-            customClass: 'book-appointment',
-            title: 'Event 3'
-        }, {
-            start: getDate(4, 12),
-            end: getDate(4, 13),
-            customClass: 'book-appointment',
-            title: 'Event 4'
-        }, {
-            start: getDate(5, 12),
-            end: getDate(5, 13),
-            customClass: 'book-appointment',
-            title: 'Event 5'
-        }, {
-            start: getDate(6, 12),
-            end: getDate(6, 13),
-            customClass: 'book-appointment',
-            title: 'Event 6'
-        }, {
-            start: getDate(6, 12),
-            allDay: true,
-            customClass: 'book-appointment',
-            title: 'Event 7'
-        }, {
-            start: getDate(8, 12),
-            end: getDate(8, 13),
-            customClass: 'book-appointment',
-            title: 'Event 5'
-        }, {
-            start: getDate(8, 12),
-            end: getDate(8, 13),
-            customClass: 'book-appointment',
-            title: 'Event 6'
-        }, {
-            start: getDate(8, 12),
-            allDay: true,
-            customClass: 'book-appointment',
-            title: 'Event 7'
-        }];
+        var events = [];
+        for(var i=0; i<=24; ++i)
+        {
+            for(var j=9; j<=17; ++j)
+            {
+                events.push({
+                    start: getDate(i, j),
+                    allDay: true,
+                    customClass: 'book-appointment',
+                    title: 'Slot - ' + (j-8),
+                    mday: 7 + i,
+                    mhour: j
 
+                })
+            }
+        }
         vm.events = events;
         vm.eventClicked = eventClicked;
         vm.eventCreate = eventCreate;
@@ -1133,8 +1067,10 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         var closePopup = function() {
             confirm = undefined;
         }
+        var day = $selectedEvent.mday;
+        var hour = $selectedEvent.mhour;
 
-        textContent = "You are booking an appointment for 7 am on 13th November. Are you sure?";
+        textContent = "You are booking an appointment on November " + day +" at "+ hour + ":00 . Are you sure?";
 
         confirm = $mdDialog.confirm({
             title: 'Book Your Appointment',
@@ -1145,7 +1081,7 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
 
         $mdDialog
             .show(confirm).then(function() {
-            	console.log("YES");
+            	$mdToast.showSimple('Schedule successfully created');
             }, function() {
             	console.log("NO");
             });
