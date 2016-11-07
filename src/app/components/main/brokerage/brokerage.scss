@@ -303,4 +303,23 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 			opacity: 0.4;
 		}
 	}
+	.appointmentTile {
+		border: solid 1px #e7ecf1;
+		overflow: hidden;
+	    padding: 10px;
+	    color: #4f6379;
+	    font-size: 14px;
+	    margin-top: 15px;
+		.actnItem {
+			margin: 20px;
+		}
+		.header {
+			font-size: 16px;
+			line-height: 20px;
+			margin-bottom: 15px;
+		}
+		.pending-btn {
+			margin-top: 10px;
+		}
+	}
 }
