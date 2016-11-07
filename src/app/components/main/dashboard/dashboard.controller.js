@@ -38,9 +38,9 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 
 	vm.openMessage = (message)=>{
 		$rootScope.messageView.activeInboxMessage = message;
+		$rootScope.messageView.reply = "";
 		$state.go('main.messages');
 	};
-
 }
 
 export default DashboardController;

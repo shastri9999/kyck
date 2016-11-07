@@ -68,6 +68,9 @@
 		background: #f2f6f8;
 		padding: 30px;
 		position: relative;
+		&.send {
+			justify-content: space-between;
+		}
 		.close {
 			position: absolute;
 			right: 30px;
@@ -77,6 +80,37 @@
 		}
 		.message {
 			display: flex;
+		}
+		textarea {
+		    border: none;
+		    overflow: auto;
+		    outline: none;
+		    box-shadow: none;
+		    resize: none;
+		    color: #4f6379;
+		    font-size: 14px;
+		    height:60px;
+		    flex: 1;
+		    border-radius: 3px; 
+		}
+		.reply {
+			display: flex;
+		}
+		.send-btn{
+			height: 60px;
+			width: 150px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 3px; 
+			color: white;
+			cursor: pointer;
+			outline: none;
+			background-color: #3498db;
+			margin-left: 10px;
+			&:hover {
+				background-color: #569bca;
+			}
 		}
 	}
 }

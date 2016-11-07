@@ -8,6 +8,7 @@ function InboxController(MessageService, $rootScope) {
 	});
 	
 	vm.openMessage = (message)=>{
+		$rootScope.messageView.reply = "";
 		$rootScope.messageView.activeInboxMessage = message;
 	};
 }

@@ -49,6 +49,29 @@ class MessageService{
 		}
 	}
 
+	sendMessage(message, response, forSent){
+		let data = {
+			messageContent: response,
+			messageSubject: message.messageSubject,
+			messageToEmail: message.messageToEmail,
+			messageToName: message.messageToName
+		};
+
+		if (!forSent)
+		{
+			data.messageToEmail = message.messageFrom;
+			data.messageToName = message.messageFromName;
+		}
+
+		return this._$http({
+			method: 'POST',
+			url: this.URL + '/create',
+			data
+		}).then((response)=>{
+			console.log(response);
+		})
+	}
+
 	refresh(){
 		this.inboxFetched = false;
 		this.sentFetched = false;
