@@ -115,67 +115,82 @@
                 </md-step-body>
             </md-step>
         </div>
-            <div ng-if="!isBroker || isBroker">
-                <md-step md-label="Personal Details">
-                    <md-step-body>
-                        <profile-form />
-                    </md-step-body>
-                </md-step>
-            </div>
-            <div ng-if="!isBroker || isBroker">
-                <md-step md-label="KYC">
-                    <md-step-body>
-                        <kyc-form />
-                    </md-step-body>
-                </md-step>
-            </div>
-            <div ng-if="!isBroker || isBroker">
-                <md-step md-label="Documents">
-                    <md-step-body>
-                        <div class="flex-wrapper" style="height: calc(100vh - 90px); margin-bottom: -90px; margin-top: 20px;">
-                            <div ng-repeat="document in ::vm.documents">
-                                <document-pane style="float: left;" document="document"></document-pane>
-                            </div>  
-                        </div>
-                    </md-step-body>
-                </md-step>
-            </div>
-            <div ng-if="!isBroker">
-                <md-step md-label="Selection of Timeslot">
-                    <md-step-body layout="column" flex>
-                        <div style="min-height: 800px; height: 800px;">
-                            <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent)" md-label="title" md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis" class="md-primary">
-                                <md-event-calendar-header class="md-center">
-                                    <md-event-calendar-prev></md-event-calendar-prev>
-                                    <md-event-calendar-title></md-event-calendar-title>
-                                    <md-event-calendar-next></md-event-calendar-next>
-                                    <!-- <md-event-calendar-today></md-event-calendar-today> -->
-                                </md-event-calendar-header>
-                            </md-event-calendar>
-                        </div>
-                    </md-step-body>
-                </md-step>
-            </div>
-            <div ng-if="isBroker">
-                <md-step md-label="Validation Reports">
-                    <md-step-body layout="column" flex>
-                        <div style="min-height: 800px; height: 800px;">
-                            <div class="validationReport" ng-repeat="report in vm.validationReports">
-                                <div style="float:left;">
-                                    <div class="title">{{report.title}}
-                                    </div>
-                                    <div class="description">{{report.description}}
-                                    </div>
+        <div ng-if="isBroker">
+            <md-step md-label="Personal Details">
+                <md-step-body>
+                    <profile-form />
+                </md-step-body>
+            </md-step>
+        </div>
+        <div ng-if="isBroker">
+            <md-step md-label="KYC">
+                <md-step-body>
+                    <kyc-form />
+                </md-step-body>
+            </md-step>
+        </div>
+        <div ng-if="!isBroker || isBroker">
+            <md-step md-label="Documents">
+                <md-step-body>
+                    <div class="flex-wrapper" style="height: calc(100vh - 90px); margin-bottom: -90px; margin-top: 20px;">
+                        <div ng-repeat="document in ::vm.documents">
+                            <document-pane style="float: left;" document="document"></document-pane>
+                        </div>  
+                    </div>
+                </md-step-body>
+            </md-step>
+        </div>
+
+        <div ng-if="!isBroker">
+            <md-step md-label="Personal Details">
+                <md-step-body>
+                    <profile-form />
+                </md-step-body>
+            </md-step>
+        </div>
+        <div ng-if="!isBroker">
+            <md-step md-label="KYC">
+                <md-step-body>
+                    <kyc-form />
+                </md-step-body>
+            </md-step>
+        </div>
+        <div ng-if="!isBroker">
+            <md-step md-label="Selection of Timeslot">
+                <md-step-body layout="column" flex>
+                    <div style="min-height: 800px; height: 800px;">
+                        <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent)" md-label="title" md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis" class="md-primary">
+                            <md-event-calendar-header class="md-center">
+                                <md-event-calendar-prev></md-event-calendar-prev>
+                                <md-event-calendar-title></md-event-calendar-title>
+                                <md-event-calendar-next></md-event-calendar-next>
+                                <!-- <md-event-calendar-today></md-event-calendar-today> -->
+                            </md-event-calendar-header>
+                        </md-event-calendar>
+                    </div>
+                </md-step-body>
+            </md-step>
+        </div>
+        <div ng-if="isBroker">
+            <md-step md-label="Validation Reports">
+                <md-step-body layout="column" flex>
+                    <div style="min-height: 800px; height: 800px;">
+                        <div class="validationReport" ng-repeat="report in vm.validationReports">
+                            <div style="float:left;">
+                                <div class="title">{{report.title}}
                                 </div>
-                                <div style="float:right;">
-                                    <img ng-click="toggleReport($index)" src="/assets/images/tickedgrey.png" class="ticked grey"/>
-                                    <img ng-click="toggleReport($index)" class="unticked grey" src="/assets/images/untickedgrey.png"/>
+                                <div class="description">{{report.description}}
                                 </div>
                             </div>
-                        </md-step-body>
-                    </md-step>
-                </div>
+                            <div style="float:right;">
+                                <img ng-click="toggleReport($index)" src="/assets/images/tickedgrey.png" class="ticked grey"/>
+                                <img ng-click="toggleReport($index)" class="unticked grey" src="/assets/images/untickedgrey.png"/>
+                            </div>
+                        </div>
+                    </md-step-body>
+                </md-step>
             </div>
+        </div>
         </md-stepper>
 
         <footer>
