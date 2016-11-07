@@ -98,7 +98,7 @@
             <md-step md-label="Select Broker">
                 <md-step-body layout="row" layout-wrap>
                     <h3 class="partnersHeader">Premium Partners</h3>
-                    <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'PREMIUM'}">
+                    <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'PREMIUM'}" ng-class="{'centerAlign': vm.premiumPartnersCount}">
                         <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
                             <img class="premiereIcon" src="/assets/images/premiere.png"/>
                             <center><img ng-src="{{partner.img}}"/></center>
@@ -414,7 +414,7 @@
 
         <footer>
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
-                <md-button class="md-raised md-back" ng-click="vm.backStep()">Back</md-button>
+                <md-button class="md-raised md-back" ng-click="vm.backStep()" ng-show="vm.activeStep>1">Back</md-button>
                 <md-button class="md-raised md-success" ng-click="vm.nextStep()">Next</md-button>
                 <!-- <md-button class="md-raised md-edit-form" ng-click="vm.editForm()">Edit Form</md-button> -->
             </div>
