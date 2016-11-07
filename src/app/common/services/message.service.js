@@ -1,4 +1,3 @@
-'use strict';
 
 
 class MessageService{
@@ -19,7 +18,6 @@ class MessageService{
 		}
 		else
 		{
-			console.log('refetched');
 			return this._$http({
 				method: 'GET',
 				url: this.URL + '/get-inbox',
@@ -60,16 +58,14 @@ class MessageService{
 		if (!forSent)
 		{
 			data.messageToEmail = message.messageFrom;
-			data.messageToName = message.messageFromName;
+			data.messageToName = message.messageFromName || "user test";
 		}
 
 		return this._$http({
 			method: 'POST',
 			url: this.URL + '/create',
 			data
-		}).then((response)=>{
-			console.log(response);
-		})
+		});
 	}
 
 	refresh(){

@@ -5,6 +5,7 @@
 			<a ui-sref-active="active" class="center-btn" ui-sref="main.messages.sent"> Sent </a>	
 			<a ui-sref-active="active" class="right-btn"> Draft </a>	
 			<img src="/assets/images/refresh.png" alt="Refresh" class="refresh" ng-click="vm.refresh()">
+			<a ng-if="vm.isBroker" class="compose-btn" ng-click="vm.compose()">Compose</a>
 		</div>
 		<div ui-view>
 		</div>
@@ -41,4 +42,14 @@
 			<a class="send-btn" ng-click="vm.sendMessage(messageView.activeSentMessage, true)">Send</a>
 		</div>
 	</div>
+	<div ng-if="messageView.composing" class="right composing">
+		<div style="background-color:#f2f6f8;font-size: 22px;padding: 24px 20px;position: relative;font-weight: 300;"> Compose 
+		<img class="close" src="/assets/images/close-message.png" alt="close" ng-click="vm.closeCompose()">
+		</div>
+		<input type="text" name="to" ng-model="vm.composeMessage.messageFrom" placeholder="To">
+		<input type="text" name="subject" ng-model="vm.composeMessage.messageSubject" placeholder="Subject">
+		<textarea name="message" placeholder="Type your message here..." ng-model="vm.composeMessage.messageContent" cols="30" rows="20"></textarea>
+		<a class="send-btn" ng-click="vm.createMessage()">Send</a>
+	</div>
+
 </div>
