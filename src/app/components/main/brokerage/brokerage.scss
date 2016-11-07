@@ -15,14 +15,11 @@
 .titleProgressHeader{
 	font-weight:bold;
 }
-mainArea {
-	min-height: 100%;
-	margin-bottom: -90px;
+.mainArea {
+	height: 100%;
 }
 footer {
   background-color: #f2f8f8;
-  position: absolute;
-  bottom: 0px;
   height:90px;
   width:100%;
 }
@@ -85,6 +82,7 @@ footer {
 }
 md-stepper {
 	width: 100%;
+	flex: 1;
 }
 .md-steppers-header {
     box-shadow: none;
