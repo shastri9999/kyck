@@ -12,6 +12,7 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         vm.editForm = editForm;
         vm.selectedIndex = 0;
         $scope.isBroker = AuthenticationService.isBroker();
+        vm.selectUser = selectUser;
         $scope.selectedPartners = new Set();
 
         vm.partners = [
@@ -108,6 +109,9 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
 
         BrokerageResource.userAppointments((response)=>{
             vm.userAppointments = response.data;
+            if (vm.userAppointments.length > 0) {
+                selectUser(0);
+            }
         });
 
 
@@ -895,6 +899,18 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
 
         vm.currencies = currencies;
 
+        var validationReports = [
+            {
+                title: 'Document Type Check',
+                description: 'Sample Text 1'
+            }, {
+                title: 'Required Files Check',
+                description: 'Sample Text 2'
+            }
+        ];
+
+        vm.validationReports = validationReports;
+
         var events = [{
             start: getDate(-6, 10),
             end: getDate(-6, 11),
@@ -1022,6 +1038,11 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
             date.setHours(hour);
         }
         return date;
+    }
+
+    function selectUser(index) {
+        console.log(index);
+        vm.selectedIndex=index;
     }
 
     function eventClicked($selectedEvent) {
