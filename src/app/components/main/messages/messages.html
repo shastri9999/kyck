@@ -9,7 +9,7 @@
 		<div ui-view>
 		</div>
 	</div>
-	<div ng-if="messageView.activeInboxMessage && breadCrumb=='Messages - Inbox'" class="right">
+	<div ng-if="messageView.activeInboxMessage && breadCrumb=='Messages - Inbox'" class="right send">
 		<img class="close" src="/assets/images/close-message.png" alt="close" ng-click="vm.closeMessage('Inbox')">
 		<div class="message">
 			<img style="height:50px;padding-right: 20px;" src="/assets/images/standard-chartered.png">
@@ -17,11 +17,15 @@
 				<div>{{messageView.activeInboxMessage.messageSubject}}</div>
 				<div style="font-size: 12px; margin-bottom: 10px;margin-top: 10px;">From: {{messageView.activeInboxMessage.messageFromName}} ({{messageView.activeInboxMessage.messageFrom}})</div>
 				<div style="white-space: nowrap;padding-right: 10px" am-time-ago="messageView.activeInboxMessage.messageDate | amParse:'YYYY-MM-DD'"></div>
-				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;padding-top: 10px;">{{messageView.activeInboxMessage.messageContent}}</div>
+				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;padding-top: 20px;">{{messageView.activeInboxMessage.messageContent}}</div>
 			</div>
 		</div>
+		<div class="reply">
+			<textarea name="reply" placeholder="Type your message here..." ng-model="messageView.reply" id="" cols="30" rows="2"></textarea>
+			<a class="send-btn" ng-click="vm.sendMessage(messageView.activeInboxMessage, false)">Send</a>
+		</div>
 	</div>
-	<div ng-if="messageView.activeSentMessage && breadCrumb=='Messages - Sent'" class="right">
+	<div ng-if="messageView.activeSentMessage && breadCrumb=='Messages - Sent'" class="right send">
 		<img class="close" src="/assets/images/close-message.png" alt="close" ng-click="vm.closeMessage('Sent')">
 		<div class="message">
 			<img style="height:50px;padding-right: 20px;" src="/assets/images/standard-chartered.png">
@@ -29,8 +33,12 @@
 				<div>{{messageView.activeSentMessage.messageSubject}}</div>
 				<div style="font-size: 12px; margin-bottom: 10px;margin-top: 10px;">From: {{messageView.activeSentMessage.messageToName}} ({{messageView.activeSentMessage.messageToEmail}})</div>
 				<div style="white-space: nowrap;padding-right: 10px" am-time-ago="messageView.activeSentMessage.messageDate | amParse:'YYYY-MM-DD'"></div>
-				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;">{{messageView.activeSentMessage.messageContent}}</div>
+				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;padding-top: 20px;">{{messageView.activeSentMessage.messageContent}}</div>
 			</div>
+		</div>
+		<div class="reply">
+			<textarea name="reply" placeholder="Type your message here..." ng-model="messageView.reply" id="" cols="30" rows="2"></textarea>
+			<a class="send-btn" ng-click="vm.sendMessage(messageView.activeSentMessage, true)">Send</a>
 		</div>
 	</div>
 </div>

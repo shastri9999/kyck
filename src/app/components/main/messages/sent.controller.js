@@ -8,6 +8,7 @@ function SentController(MessageService, $rootScope) {
 	});
 
 	vm.openMessage = (message)=>{
+		$rootScope.messageView.reply = "";
 		$rootScope.messageView.activeSentMessage = message;
 	};
 }

@@ -28,7 +28,8 @@ export default angular.module('kyck', [
 	$rootScope.messageView = {
 		activeInboxMessage: null,
 		activeSentMessage: null,
-		composing: false
+		composing: false,
+		reply: ""
 	};
 	$rootScope.$on('$stateChangeStart', function (event, next, toParams) {
 		const loggedIn = AuthenticationService.getLoggedInUser();
@@ -39,5 +40,6 @@ export default angular.module('kyck', [
 
 		/* Todo: Move all this to service */
 		$rootScope.breadCrumb = next.breadCrumb;
+		$rootScope.messageView.reply = "";
 	});
 });
