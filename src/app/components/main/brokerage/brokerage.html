@@ -95,80 +95,26 @@
         </md-step>
         </div>
         <div ng-if="!isBroker">
-        <md-step md-label="Select Broker">
-            <md-step-body layout="row" layout-wrap>
-                <h3 class="partnersHeader">Premium Partners</h3>
-                <div ng-repeat="partner in ::vm.partners | filter:{type:'premium'}">
-                    <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
-                        <img class="premiereIcon" src="/assets/images/premiere.png"/>
-                        <center><img ng-src="{{partner.img}}"/></center>
+            <md-step md-label="Select Broker">
+                <md-step-body layout="row" layout-wrap>
+                    <h3 class="partnersHeader">Premium Partners</h3>
+                    <div ng-repeat="partner in ::vm.partners | filter:{type:'premium'}">
+                        <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
+                            <img class="premiereIcon" src="/assets/images/premiere.png"/>
+                            <center><img ng-src="{{partner.img}}"/></center>
+                        </div>
                     </div>
-                </div>
 
-                <h3 class="partnersHeader">All Partners</h3>
-                <div ng-repeat="partner in ::vm.partners | filter:{type:'normal'}">
-                    <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
-                    <center><img ng-src="{{partner.img}}"/></center>
+                    <h3 class="partnersHeader">All Partners</h3>
+                    <div ng-repeat="partner in ::vm.partners | filter:{type:'normal'}">
+                        <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
+                            <center><img ng-src="{{partner.img}}"/></center>
+                        </div>
                     </div>
-                </div>
 
-            </md-step-body>
-        </md-step>
+                </md-step-body>
+            </md-step>
         </div>
-        <div ng-if="!isBroker || isBroker">
-        <md-step md-label="Personal Details">
-            <md-step-body>
-                <form name="personalDetailsForm" class="detailsForm">
-                    <div layout="row">
-                        <div flex="50" class="col" style="margin-left:30px;">
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>First name</label>
-                                <input required ng-model="user.firstName" name="firstName" minlength="6" maxlength="100">
-
-                                <div ng-messages="personalDetailsForm.firstName.$error" role="alert">
-                                    <div ng-message-exp="['required', 'minlength', 'maxlength']">
-                                        Please enter a name between 6 and 100 characters.
-                                    </div>
-                                </div>
-                                <div flex="50">
-                                    <span class="title">Appointment Slots</span>
-                                    <div class="appointmentTile">
-                                        <div style="float:left; padding:10px;">
-                                            <div class="header">27th Oct 16, 07:20am</div>
-                                            <a class="pending-btn ng-binding">PENDING</a>
-                                        </div>
-                                        <div style="float: right; border-left: solid 1px #e7ecf1;">
-                                            <div class="actnItem">CONFIRM</div>
-                                            <!-- <img src="/assets/images/download.png"/> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </md-step-body>
-                </md-step>
-            </div>
-            <div ng-if="!isBroker">
-                <md-step md-label="Select Broker">
-                    <md-step-body layout="row" layout-wrap>
-                        <h3 class="partnersHeader">Premium Partners</h3>
-                        <div ng-repeat="partner in ::vm.partners | filter:{type:'premium'}">
-                            <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
-                                <img class="premiereIcon" src="/assets/images/premiere.png"/>
-                                <center><img ng-src="{{partner.img}}"/></center>
-                            </div>
-                        </div>
-
-                        <h3 class="partnersHeader">All Partners</h3>
-                        <div ng-repeat="partner in ::vm.partners | filter:{type:'normal'}">
-                            <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
-                                <center><img ng-src="{{partner.img}}"/></center>
-                            </div>
-                        </div>
-
-                    </md-step-body>
-                </md-step>
-            </div>
             <div ng-if="!isBroker || isBroker">
                 <md-step md-label="Personal Details">
                     <md-step-body>
