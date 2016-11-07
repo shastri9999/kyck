@@ -5,6 +5,8 @@ import inboxTemplateUrl from './inbox.html';
 import sentTemplateUrl from './sent.html';
 
 import controller from './messages.controller';
+import inboxController from './inbox.controller';
+import sentController from './sent.controller';
 
 function routeConfig($stateProvider) {
 	'ngInject';
@@ -20,16 +22,16 @@ function routeConfig($stateProvider) {
 	.state('main.messages.inbox', {
 		url: '/inbox',
 		templateUrl: inboxTemplateUrl,
-		controller: function(){},
+		controller: inboxController,
 		controllerAs: 'vm',
-		breadCrumb: 'Messages'
+		breadCrumb: 'Messages - Inbox'
 	})
 	.state('main.messages.sent', {
 		url: '/sent',
 		templateUrl: sentTemplateUrl,
-		controller: function(){},
+		controller: sentController,
 		controllerAs: 'vm',
-		breadCrumb: 'Messages'
+		breadCrumb: 'Messages - Sent'
 	});
 
 }

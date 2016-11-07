@@ -13,19 +13,20 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         vm.selectedIndex = 0;
         $scope.isBroker = AuthenticationService.isBroker();
         vm.selectUser = selectUser;
+        $scope.selectedPartners = new Set();
 
         vm.partners = [
             {
                 title: 'POSB',
                 img: '/assets/images/partnerLogos/posb.png',
                 type: 'premium',
-                selected: true
+                selected: false
             },
             {
                 title: 'DBS',
                 img: '/assets/images/partnerLogos/dbs.png',
                 type: 'premium',
-                selected: true
+                selected: false
             },
             {
                 title: 'UOB',
@@ -71,8 +72,35 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
             }
         ];
 
+        BrokerageResource.userprofileget(function(response){
+            var questions = response.data;
+            vm.questionsmap = {};
+            questions.forEach(function(q){
+                vm.questionsmap[q.questionDesc] = q;
+            });
+            $log.info(vm.questionsmap);
+        }, function(error){
+            $log.error(error);
+        });
+
+        BrokerageResource.kycget(function(response){
+            var questions = response.data;
+            vm.kycquestions = {};
+            questions.forEach(function(q){
+                vm.kycquestions[q.questionDesc] = q;
+            });
+            $log.info(vm.kycquestions);
+        }, function(error){
+            $log.error(error);
+        });
+
         vm.toggleSelected = function(partner){
             partner.selected = !partner.selected;
+            if(partner.selected){
+                $scope.selectedPartners.add(partner.title);
+            }else{
+                $scope.selectedPartners.delete(partner.title);
+            }
         }
 
 		BrokerageResource.brokeragesDetails({'userEmailId':AuthenticationService.getLoggedInUser().userId}, function (req) {
@@ -821,13 +849,33 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         }]
 
         vm.countries = countries;
-
         DocumentResource.categories(function(response){
                 $log.debug(response);
                 vm.documents = response.data;
+                vm.documents.forEach(function(doc){
+                    doc.documentID = null; //Making default docId as null. Replacing it with actual value in next call
+                    doc.replaceAction = false;
+                });
+                DocumentResource.findall(function(response){
+                    if(response && response.data){
+                        response.data.forEach(function(existingDoc){
+                            for(var i=0; i<vm.documents.length; i++){
+                                if(existingDoc.documentType==vm.documents[i].documentType){
+                                    vm.documents[i].documentID = existingDoc.documentID;
+                                    break;
+                                }
+                            }
+                        });
+                    }
+                    $log.debug(vm.documents);
+                })
         }, function(error){
                 $log.error(error);
         });
+
+        vm.replace = function(document){
+            document.replaceAction = true;
+        }
 
         var empStatuses = [{
         	name: 'Retired'

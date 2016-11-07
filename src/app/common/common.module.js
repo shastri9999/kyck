@@ -3,12 +3,16 @@
 import UserService from './services/user.service';
 import AuthenticationService from './services/authentication.service';
 import StorageService from './services/storage.service.js';
+import MessageService from './services/message.service.js';
+import CalendarService from './services/calendar.service.js';
 
 const common = angular.module('common', []);
 
 [AuthenticationService, 
 UserService, 
-StorageService]
+StorageService,
+MessageService,
+CalendarService]
 .forEach(service=>common.service(service.name, service));
 
 common.filter('capitalize', function() {

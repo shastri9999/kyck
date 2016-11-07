@@ -1,7 +1,7 @@
 'use strict';
 
 class ToolBarController {
-	constructor(AuthenticationService, $state, $filter){
+	constructor(AuthenticationService, $state, $filter, MessageService){
 		'ngInject';
 		
 		const loggedInUser = AuthenticationService.getLoggedInUser();
@@ -9,6 +9,7 @@ class ToolBarController {
 
 		this._AuthenticationService = AuthenticationService;
 		this._$state = $state;
+		this._MessageService = MessageService;
 		this.userType = loggedInUser.userType;
 		this.displayName = [ loggedInUser.userFname, loggedInUser.userLname].map(capitalize).join(' ');
 		this.flagShow = false;
@@ -36,6 +37,7 @@ class ToolBarController {
 
 	signOut(){
 		this._AuthenticationService.logout().then(()=>{
+			this._MessageService.refresh();
 			this._$state.go('access.signin');
 		});
 	}

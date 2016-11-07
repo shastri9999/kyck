@@ -15,6 +15,7 @@ export default angular.module('kyck', [
 	'ngResource',
 	'ngFileUpload',
 	'uiCropper',
+	'angularMoment',
 	Common.name,
 	Components.name,
 	Routes.name
@@ -23,6 +24,12 @@ export default angular.module('kyck', [
 .config(config)
 .run(function($rootScope, $location, AuthenticationService){
 	'ngInject';
+	$rootScope.sideNavCollapsed = false;
+	$rootScope.messageView = {
+		activeInboxMessage: null,
+		activeSentMessage: null,
+		composing: false
+	};
 	$rootScope.$on('$stateChangeStart', function (event, next, toParams) {
 		const loggedIn = AuthenticationService.getLoggedInUser();
 		const isAccessPage = next.name.indexOf("access.")==0;
@@ -32,6 +39,5 @@ export default angular.module('kyck', [
 
 		/* Todo: Move all this to service */
 		$rootScope.breadCrumb = next.breadCrumb;
-		$rootScope.sideNavCollapsed = false;
 	});
 });

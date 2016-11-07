@@ -82,6 +82,7 @@
                 padding: 30px;
                 padding-right: 20px;
                 margin-top: 20px;
+                padding-bottom: 10px;
                 border: 1px solid #e7ecf1;
                 border-radius: 5px;
                 border-top-left-radius: 0;
@@ -92,6 +93,9 @@
                     align-items: flex-start;
                     font-size: 14px;
                     opacity: 0.4;
+                }
+                .detail {
+                    flex-grow: 1;
                 }
             }
     	}
@@ -200,6 +204,7 @@
                 display: flex;
                 padding: 30px;
                 padding-right: 20px;
+                padding-bottom: 10px;
                 margin-top: 20px;
                 border: 1px solid #e7ecf1;
                 border-radius: 5px;
@@ -212,6 +217,9 @@
                     font-size: 14px;
                     opacity: 0.4;
                 }
+                .detail {
+                    flex-grow: 1;
+                }
             }
         }
 
@@ -219,7 +227,35 @@
     .right {
         display: flex;
         flex-flow: column;
-        flex-basis: 360px;
+        flex-basis: 260px;
         overflow: hidden;
+        position:relative;
+        .appointments {
+            z-index: 1;
+            display: flex;
+            flex-flow: column;
+            padding: 10px;
+            .appointment {
+                background-color: #fff;
+                border-radius: 5px;
+                .detail {
+                    display: flex;
+                    flex-flow: column;
+                    align-items: flex-start;
+                    margin-left: 10px
+                }
+                .conference-btn {
+                    font-size: 12px;
+                    padding: 6px 18px;
+                    text-transform: uppercase;
+                    border-radius: 3px;
+                    background-color: #57c3ea;
+                    color: #fff;
+                    cursor: pointer;
+                    margin-top: 6px;
+                }
+
+            }
+        }
     }
 }
