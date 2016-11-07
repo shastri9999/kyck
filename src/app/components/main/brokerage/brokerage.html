@@ -415,7 +415,10 @@
         <footer>
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
                 <md-button class="md-raised md-back" ng-click="vm.backStep()" ng-show="vm.activeStep>1">Back</md-button>
-                <md-button class="md-raised md-success" ng-click="vm.nextStep()">Next</md-button>
+                <md-button class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="vm.activeStep==5 && !vm.timeslotSelected">
+                    <span ng-show="vm.activeStep<5">Next</span>
+                    <span ng-show="vm.activeStep==5">Submit</span>
+                </md-button>
                 <!-- <md-button class="md-raised md-edit-form" ng-click="vm.editForm()">Edit Form</md-button> -->
             </div>
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="isBroker">

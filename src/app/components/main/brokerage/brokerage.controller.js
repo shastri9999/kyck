@@ -15,6 +15,7 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         $scope.isBroker = AuthenticationService.isBroker();
         vm.selectUser = selectUser;
         $scope.selectedPartners = new Set();
+        vm.timeslotSelected = false;
 
         vm.changeUsers = changeUsers;
 
@@ -956,7 +957,7 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         // vm.activeStep = parseInt($('.md-stepper-indicator.md-active .md-stepper-number .ng-scope').innerHTML);
         if (vm.activeStep == 5)
             return;
-        
+
         vm.activeStep +=1 ; 
         var steppers = $mdStepper('stepper-demo');
         steppers.next();
@@ -1026,6 +1027,7 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         $mdDialog
             .show(confirm).then(function() {
             	$mdToast.showSimple('Schedule successfully created');
+                vm.timeslotSelected = true;
             }, function() {
             	console.log("NO");
             });
