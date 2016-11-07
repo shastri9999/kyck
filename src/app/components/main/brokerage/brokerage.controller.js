@@ -15,6 +15,8 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
         vm.selectUser = selectUser;
         $scope.selectedPartners = new Set();
 
+        vm.changeUsers = changeUsers;
+
         vm.partners = [
             {
                 title: 'POSB',
@@ -109,6 +111,8 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
 
         BrokerageResource.userAppointments((response)=>{
             vm.userAppointments = response.data;
+            vm.userAppointmentsFiltered = vm.userAppointments;
+            vm.userAppointment = vm.userAppointments[0];
             if (vm.userAppointments.length > 0) {
                 selectUser(0);
             }
@@ -906,6 +910,69 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
             }, {
                 title: 'Required Files Check',
                 description: 'Sample Text 2'
+            },
+            {
+                title: 'Document Type Check',
+                description: 'Sample Text 1'
+            }, {
+                title: 'Required Files Check',
+                description: 'Sample Text 2'
+            },
+            {
+                title: 'Document Type Check',
+                description: 'Sample Text 1'
+            }, {
+                title: 'Required Files Check',
+                description: 'Sample Text 2'
+            },
+            {
+                title: 'Document Type Check',
+                description: 'Sample Text 1'
+            }, {
+                title: 'Required Files Check',
+                description: 'Sample Text 2'
+            },
+            {
+                title: 'Document Type Check',
+                description: 'Sample Text 1'
+            }, {
+                title: 'Required Files Check',
+                description: 'Sample Text 2'
+            },
+            {
+                title: 'Document Type Check',
+                description: 'Sample Text 1'
+            }, {
+                title: 'Required Files Check',
+                description: 'Sample Text 2'
+            },
+            {
+                title: 'Document Type Check',
+                description: 'Sample Text 1'
+            }, {
+                title: 'Required Files Check',
+                description: 'Sample Text 2'
+            },
+            {
+                title: 'Document Type Check',
+                description: 'Sample Text 1'
+            }, {
+                title: 'Required Files Check',
+                description: 'Sample Text 2'
+            },
+            {
+                title: 'Document Type Check',
+                description: 'Sample Text 1'
+            }, {
+                title: 'Required Files Check',
+                description: 'Sample Text 2'
+            },
+            {
+                title: 'Document Type Check',
+                description: 'Sample Text 1'
+            }, {
+                title: 'Required Files Check',
+                description: 'Sample Text 2'
             }
         ];
 
@@ -1028,7 +1095,20 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
     	steppers.goto(0);
     }
 
-    // vm.selected = vm.events[0];
+    function searchText(seacrh_query, search_str) {
+        return search_str.indexOf(seacrh_query) > -1;
+    }
+
+    function searchAppointment(appointment) {
+        var search_str = appointment.fname + " " + appointment.lname;
+        return searchText(vm.searchUsername, search_str);
+    }
+
+    function changeUsers() {
+        console.log(vm.searchUsername);
+        vm.userAppointmentsFiltered = vm.userAppointments.filter(searchAppointment);
+        console.log(vm.userAppointmentsFiltered);
+    }
 
     function getDate(offsetDays, hour) {
         offsetDays = offsetDays || 0;
@@ -1043,6 +1123,7 @@ function BrokerageController($scope, $mdStepper, $mdDialog, $filter, $log, Broke
     function selectUser(index) {
         console.log(index);
         vm.selectedIndex=index;
+        vm.userAppointment = vm.userAppointments[index];
     }
 
     function eventClicked($selectedEvent) {

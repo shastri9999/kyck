@@ -2,9 +2,9 @@
     <div class="contactedUsers" ng-if="isBroker">
         <div class="contactedUsersTitle">Contacted Users</div>
         <div>
-            <input name="search" ng-model="username" type="search" placeholder="Search" class="searchBar">
+            <input name="search" ng-model="vm.searchUsername" type="search" ng-change="vm.changeUsers()" placeholder="Search" class="searchBar">
         </div>
-        <div class="appointment ng-scope" ng-class='{active: $index==vm.selectedIndex}' ng-repeat="appointment in vm.userAppointments" ng-click="vm.selectUser($index)">
+        <div class="appointment ng-scope" ng-class='{active: $index==vm.selectedIndex}' ng-repeat="appointment in vm.userAppointmentsFiltered" ng-click="vm.selectUser($index)">
             <img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">         
             <div class="detail">
                 <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div>
@@ -16,9 +16,50 @@
     <div flex layout="row">
     <md-stepper id="stepper-demo" md-linear="!isBroker">
         <div ng-if="isBroker">
-        <md-step md-label="Account Summary">
+        <md-step md-label="Account Summary" class="accSummary">
             <md-step-body>
-                Helllo
+            <div class="appointment ng-scope" layout="column">
+            <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
+                <div style="font-size: 14px;" class="ng-binding">{{vm.userAppointment.fname}} {{vm.userAppointment.lname}}</div>
+                <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> -->
+                <a class="pending-btn ng-binding" style="margin-top: 10px;">{{vm.userAppointment.applicationStatus}}</a>
+            </div>      
+            <div layout="row" style="margin: 20px; ">
+            <div flex="50" style="margin-right: 30px; ">
+                <span class="title">Download Documents</span>
+                <div class="documentTile">
+                    <div style="float:left;">
+                        <div class="header">Income Tax</div>
+                        <div class="description">File Size: 1 mb</div>
+                    </div>
+                    <div style="float: right;">
+                        <img src="/assets/images/download.png"/>
+                    </div>
+                </div>
+                <div class="documentTile">
+                    <div style="float:left;">
+                        <div class="header">Income Tax</div>
+                        <div class="description">File Size: 1 mb</div>
+                    </div>
+                    <div style="float: right;">
+                        <img src="/assets/images/download.png"/>
+                    </div>
+                </div>
+                <div class="documentTile">
+                    <div style="float:left;">
+                        <div class="header">Income Tax</div>
+                        <div class="description">File Size: 1 mb</div>
+                    </div>
+                    <div style="float: right;">
+                        <img src="/assets/images/download.png"/>
+                    </div>
+                </div>
+            </div>
+            <div flex="50">
+                <span class="title">Appointment Slots</span>
+            </div>
+            </div>
+            </div>
             </md-step-body>
         </md-step>
         </div>
