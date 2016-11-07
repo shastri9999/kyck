@@ -285,13 +285,15 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 	.documentTile {
 		border: solid 1px #e7ecf1;
 		overflow: hidden;
-	    padding: 20px;
+	    padding: 10px;
 	    color: #4f6379;
 	    font-size: 14px;
 	    margin-top: 15px;
 		img {
 			height: 30px;
 			opacity: 0.4;
+			margin: 10px;
+			margin-left: 20px;
 		}
 		.header {
 			font-size: 16px;
