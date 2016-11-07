@@ -5,9 +5,18 @@ class KYCFormController {
 		'ngInject';
 		this.UserService = UserService;
 		this.fields = {};
-		this.UserService.getKYCFields().then((fields)=>{
-			this.fields = fields;
-		});
+		if (this.isBroker)
+		{
+			this.UserService.getBrokerageDetails(this.userEmailId, 'kyc').then((fields)=>{
+				this.fields = fields;
+			});
+		}
+		else
+		{
+			this.UserService.getKYCFields().then((fields)=>{
+				this.fields = fields;
+			});
+		}
 	}
 }
 

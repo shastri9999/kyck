@@ -16,6 +16,7 @@ class UserService{
 		this._userDetails = [];
 		this.userFetched = false;
 		this.moment = moment;
+		this.brokeragesDetail = {};
 	}
 
 	transFormData(fields){
@@ -24,7 +25,8 @@ class UserService{
 			/* Mapping to make dropdown work */
 			field.answerId = +field.answerId || 0;
 			field.selectedValue = null;
-			field.answersList.forEach((answer)=>{
+			
+			field.answersList && field.answersList.forEach((answer)=>{
 				answer.answerId = +answer.answerId || 0;
 				if (answer.answerId == field.answerId)
 				{
@@ -48,6 +50,55 @@ class UserService{
 		})
 	}
 
+	getBrokerageDetails(email, type){
+		if (this.brokeragesDetail[email])
+		{
+			return new Promise((resolve)=>{
+				resolve(this.brokeragesDetail[email][type]);
+			});
+		}
+		else
+		{
+			return this._$http({
+				method: 'GET',
+				url: this.URL + '/brokerages/details',
+				params: {
+					userEmailId: email
+				}
+			}).then((response)=>{
+				const allData = response.data.data;
+				const details = {};
+				details['kyc'] = this.transFormData(allData['kycDetails']);
+				details['user'] = this.transFormUserData(allData['user']);
+				details['profile'] = this.transFormData(allData['userProfile']);
+				this.brokeragesDetail[email] = details;
+				return this.brokeragesDetail[email][type];
+			});
+		}
+	}
+
+	transFormUserData(data)
+	{
+		const keyMappings =  {
+		    "userId": {description: "Email Address", disabled: true},
+		    "userFname": {description: "First Name", disabled: false},
+		    "userLname": {description: "Last Address", disabled: false},
+		    "userPhone": {description: "Phone Number", disabled: false},
+		}
+
+		return Object.keys(data).map((key)=>{
+			if (keyMappings[key])
+			{
+				return {
+					key,
+					...keyMappings[key],
+					value: data[key]
+				}
+			}
+			return null;
+		}).filter(x=>!!x);
+	}
+
 	getUserFields(){
 		if (this.kycFetched)
 		{
@@ -62,23 +113,7 @@ class UserService{
 				url: this.URL + '/user/get/action'
 			}).then((response)=>{
 				const data = response.data.data;
-				const keyMappings =  {
-				    "userId": {description: "Email Address", disabled: true},
-				    "userFname": {description: "First Name", disabled: false},
-				    "userLname": {description: "Last Address", disabled: false},
-				    "userPhone": {description: "Phone Number", disabled: false},
-				}
-				this._userDetails = Object.keys(data).map((key)=>{
-					if (keyMappings[key])
-					{
-						return {
-							key,
-							...keyMappings[key],
-							value: data[key]
-						}
-					}
-					return null;
-				}).filter(x=>!!x);
+				this._userDetails = this.transFormUserData(data);
 				this.userDetails = angular.copy(this._userDetails);
 				this.userFetched = true;
 				return this.userDetails;
@@ -103,7 +138,6 @@ class UserService{
 				this._kycDetails = this.transFormData(response.data.data);
 				this.kycDetails = angular.copy(this._kycDetails);
 				this.kycFetched = true;
-				console.log(this.kycDetails);
 				return this.kycDetails;
 			});
 		}

@@ -14,6 +14,7 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         vm.activeStep = 1;
         $scope.isBroker = AuthenticationService.isBroker();
         vm.selectUser = selectUser;
+        vm.getSelectedUserEmail =getSelectedUserEmail;
         $scope.selectedPartners = new Set();
         vm.timeslotSelected = false;
         vm.kycerror = false;
@@ -58,7 +59,6 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
 
         function convert(obj) {
             obj['img'] = '/assets/images/partnerLogos/' + obj['brokerageName'] + '.png';
-            console.log(obj['brokerageName']);
             return obj;
         }
 
@@ -66,7 +66,6 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
             var brokeragesList = req.data;
             vm.partners = brokeragesList.map(convert);
             vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
-            console.log('hell', vm.premiumPartnersCount);
         }, function () {});
 
         BrokerageResource.userAppointments((response)=>{
@@ -205,7 +204,7 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         vm.kycerror = false;
         vm.personalDetailsError = false;
 
-        if (vm.activeStep == 3) {
+        if (vm.activeStep == 3 && vm.isBroker) {
             UserService.saveProfileFields().then(function(success){
                  /* show success pop up move to next */
                  $mdToast.showSimple('Personal Details Saved Successfully!');
@@ -285,9 +284,12 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
     }
 
     function selectUser(index) {
-        console.log(index);
         vm.selectedIndex=index;
         vm.userAppointment = vm.userAppointments[index];
+    }
+
+    function getSelectedUserEmail(){
+        return vm.userAppointment.email;
     }
 
     function eventClicked($selectedEvent) {
