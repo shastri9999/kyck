@@ -11,9 +11,11 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         vm.backStep = backStep;
         vm.editForm = editForm;
         vm.selectedIndex = 0;
+        vm.activeStep = 1;
         $scope.isBroker = AuthenticationService.isBroker();
         vm.selectUser = selectUser;
         $scope.selectedPartners = new Set();
+        vm.timeslotSelected = false;
 
         vm.changeUsers = changeUsers;
 
@@ -61,7 +63,8 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         BrokerageResource.brokeragesList(function (req) {
             var brokeragesList = req.data;
             vm.partners = brokeragesList.map(convert);
-            console.log('hell', vm.partners);
+            vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+            console.log('hell', vm.premiumPartnersCount);
         }, function () {});
 
         BrokerageResource.userAppointments((response)=>{
@@ -951,12 +954,17 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         // 	if (eles[j].className.indexOf('md-completed') == -1) 
         // 		eles[j].className += " md-completed";
         // }
+        // vm.activeStep = parseInt($('.md-stepper-indicator.md-active .md-stepper-number .ng-scope').innerHTML);
+        if (vm.activeStep == 5)
+            return;
 
+        vm.activeStep +=1 ; 
         var steppers = $mdStepper('stepper-demo');
         steppers.next();
     }
 
     function backStep() {
+        vm.activeStep -=1 ; 
         var steppers = $mdStepper('stepper-demo');
         steppers.back();
     }
@@ -1019,6 +1027,7 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         $mdDialog
             .show(confirm).then(function() {
             	$mdToast.showSimple('Schedule successfully created');
+                vm.timeslotSelected = true;
             }, function() {
             	console.log("NO");
             });

@@ -17,8 +17,9 @@ function DocumentResource($resource, $rootScope) {
     	download: {
     		method: 'GET',
     		params: {
-    			documentId: '@id'
+    			documentId: '@name'
     		},
+            responseType: 'arraybuffer',
     		url: URL + 'download'
     	},
         categories: {
@@ -43,6 +44,7 @@ function DocumentResource($resource, $rootScope) {
         	method: 'POST',
             params: {
                 multipartFile: '@file',
+     
                 documentType: '@type'
             },
         	url: URL + 'upload',
@@ -56,13 +58,14 @@ function DocumentResource($resource, $rootScope) {
         	isArray: false,
         	url: URL + 'uploadstatus'
         },
-        download: {
+        usrdownload: {
         	method: 'GET',
         	isArray: false,
         	params: {
         		documentId: '@id',
                 userId: '@userId'
         	},
+            responseType: 'arraybuffer',
         	url: URL + 'usr/download'
         }
     });
