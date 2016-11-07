@@ -183,8 +183,8 @@
                                 </div>
                             </div>
                             <div style="float:right;">
-                                <img ng-click="toggleReport($index)" src="/assets/images/tickedgrey.png" class="ticked grey"/>
-                                <img ng-click="toggleReport($index)" class="unticked grey" src="/assets/images/untickedgrey.png"/>
+                                <div ng-click="toggleReport($index)" class="ticked" ng-class='{grey: !report.ticked}'></div>
+                                <div ng-click="toggleReport($index)" class="unticked" ng-class='{grey: report.ticked}'></div>
                             </div>
                         </div>
                     </md-step-body>

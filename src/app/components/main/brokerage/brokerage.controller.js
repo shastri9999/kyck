@@ -839,80 +839,75 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
             document.replaceAction = true;
         }
 
-        var empStatuses = [{
-        	name: 'Retired'
-        }, {
-        	name: 'Employed'
-        }, {
-        	name: 'House Wife'
-        }
-        ]
-
-        vm.empStatuses = empStatuses;
-
-        var currencies = [{
-        	name: 'Dollars'
-        }, {
-        	name: 'Rupeees',
-        }, {
-        	name: 'Euros'
-        }
-        ];
-
-        vm.currencies = currencies;
-
         var validationReports = [
             {
             title: 'Document Type Check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Required Fields Check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Barcode Check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Expiry Date Check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Icnumber Checksum Check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: false
             },{
             title: 'Name Crosscheck',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Gender Crosscheck',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: false
             },{
             title: 'Address Crosscheck',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Icnumber Crosscheck',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Nationality Crosscheck',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: false
             },{
             title: 'Image modification check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Hologram modification check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Field modification check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Tampering Check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Photo Tampering Check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'Photo Crosscheck',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             },{
             title: 'MRZ Code Check',
-            description: 'Lorem Ipsum Text. Description needed.'
+            description: '',
+            ticked: true
             }
         ];
 
