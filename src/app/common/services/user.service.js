@@ -161,7 +161,7 @@ class UserService{
 			})
 		}
 		return new Promise((resolve)=>{
-			return {"status": "SUCCESS"}
+			 resolve({"status": "SUCCESS"});
 		});
 	}
 
