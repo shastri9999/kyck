@@ -61,4 +61,59 @@ table {
     border-radius: 100%;
     text-align: center;
     line-height: 40px;
+    text-decoration: none;
+}
+
+kyc-form form, profile-form form{
+   display: flex;
+   flex-flow: row wrap;
+  .input {
+    display: flex;
+    flex-flow: column;
+    margin: 10px;
+    position: relative;
+    label {
+      font-size: 14px;
+      color: #4f6379;
+      margin-bottom: 12px;
+    }
+    input {
+        height: 45px;
+        width: 410px;
+        border-radius: 3px;
+        border: 1px solid #e7ecf1;
+        padding: 15px;
+        font-size: 14px;
+        color: #4f6379;
+    }
+    .radio {
+      display: flex;
+      width: 410px;
+      height: 45px;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #e7ecf1;
+      border-radius: 3px;
+    }
+    select {
+      background: transparent;
+      width: 410px;
+      padding-left: 15px;
+      font-size: 14px;
+      color: #4f6379;
+      border: 1px solid #e7ecf1;
+      border-radius: 3px;
+      height: 45px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      position: relative;
+      background: #fff;
+    }
+    .dropdown {
+        position: absolute;
+        right: 10px;
+        top: 45px;    
+    }
+  }
 }

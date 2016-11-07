@@ -10,6 +10,9 @@ import DocumentModule from './documents/document.module';
 import ProgressModule from './progress/progress.module';
 import DashboardCalendarModule from './dashboard-calendar/calendar.module';
 import MessagesModule from './messages/messages.module';
+import ProfileFormModule from './profile-form/profileform.module';
+import KYCFormModule from './kyc-form/kycform.module';
+import SettingsModule from './settings/settings.module';
 import route from './main.route';
 import './main.scss';
 
@@ -24,7 +27,10 @@ const mainModule = angular.module('main-module', [
 	DocumentModule.name,
 	ProgressModule.name,
 	DashboardCalendarModule.name,
-	MessagesModule.name
+	MessagesModule.name,
+	SettingsModule.name,
+	ProfileFormModule.name,
+	KYCFormModule.name,
 	]);
 
 mainModule

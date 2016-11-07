@@ -1,0 +1,36 @@
+<form name="profileForm">
+	<div ng-repeat="field in vm.fields">
+		<div ng-switch on="field.questionType">
+			<div class="input" ng-switch-when="DROPDOWN">
+				<label for="kyc-{{field.questionId}}">
+					{{field.questionDesc}}
+					<span ng-if="field.requireField==='REQUIRED'">*</span>
+				</label>
+				<select name="kyc-{{field.questionId}}" ng-model="field.answerId">
+					<option ng-repeat="option in field.answersList" value="{{option.answerId}}">	{{option.answerDescription}}
+					</option>
+				</select>
+				<img src="/assets/images/dropdown.png" class="dropdown">
+			</div>
+			<div class="input" ng-switch-when="RADIO">
+				<label for="kyc-{{field.questionId}}">
+					{{field.questionDesc}}
+					<span ng-if="field.requireField==='REQUIRED'">*</span>
+				</label>
+				<div class="radio">
+					<label ng-repeat="option in field.answersList">
+						{{option.answerDescription}}
+						<input style="width: 20px;height: auto;" type="radio" value="{{option.answerId}}" ng-model="field.answerId">
+					</label>					
+				</div>
+			</div>
+			<div class="input" ng-switch-default>
+				<label for="kyc-{{field.questionId}}">
+					{{field.questionDesc}}
+					<span ng-if="field.requireField==='REQUIRED'">*</span>
+				</label>
+				<input name="kyc-{{field.questionId}}" type="{{field.validationType}}" ng-model="field.answerText">
+			</div>
+		</div>
+	</div>		
+</form>
