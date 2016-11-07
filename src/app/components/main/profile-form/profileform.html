@@ -14,9 +14,7 @@
 					{{field.questionDesc}}
 					<span ng-if="field.requireField==='REQUIRED'">*</span>
 				</label>
-				<select name="kyc-{{field.questionId}}" ng-model="field.answerId" ng-required="field.requireField==='REQUIRED'">
-					<option ng-repeat="option in field.answersList" value="{{option.answerId}}">	{{option.answerDescription}}
-					</option>
+				<select name="kyc-{{field.questionId}}" ng-model="field.selectedValue" ng-options="option.answerDescription for option in field.answersList">
 				</select>
 				<img src="/assets/images/dropdown.png" class="dropdown">
 			</div>
@@ -28,7 +26,7 @@
 				<div class="radio">
 					<label ng-repeat="option in field.answersList">
 						{{option.answerDescription}}
-						<input style="width: 20px;height: auto;" type="radio" value="{{option.answerId}}" ng-model="field.answerId" ng-required="field.requireField==='REQUIRED'">
+						<input style="width: 20px;height: auto;" type="radio" ng-value="{{option.answerId}}" ng-model="field.answerId" ng-required="field.requireField==='REQUIRED'">
 					</label>					
 				</div>
 			</div>

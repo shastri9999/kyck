@@ -15,6 +15,7 @@ function routeConfig($stateProvider) {
 		url: '/settings',
 		templateUrl,
 		controller,
+		controllerAs:'vm',
 		breadCrumb: 'Settings'
 	}).state('main.settings.kyc', {
 		url: '/kyc',

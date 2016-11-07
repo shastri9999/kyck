@@ -8,7 +8,6 @@ class ProfileFormController {
 		this.fields = [];
 		this.UserService.getUserFields().then((fields)=>{
 			this.userFields = fields;
-			console.log(fields);
 		});
 		this.UserService.getProfileFields().then((fields)=>{
 			this.fields = fields;

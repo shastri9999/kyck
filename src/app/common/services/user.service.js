@@ -2,7 +2,7 @@
 
 
 class UserService{
-	constructor($http, AppConstants) {
+	constructor($http, AppConstants, moment) {
 		'ngInject';
 		this._$http = $http;
 		this.URL = AppConstants.URL;
@@ -15,6 +15,37 @@ class UserService{
 		this.userDetails = [];
 		this._userDetails = [];
 		this.userFetched = false;
+		this.moment = moment;
+	}
+
+	transFormData(fields){
+		return fields.map((field)=>{
+
+			/* Mapping to make dropdown work */
+			field.answerId = +field.answerId || 0;
+			field.selectedValue = null;
+			field.answersList.forEach((answer)=>{
+				answer.answerId = +answer.answerId || 0;
+				if (answer.answerId == field.answerId)
+				{
+					field.selectedValue = answer;
+				}
+			})
+
+			/*Mapping to make date work */
+			if (field.validationType === 'DATE')
+			{
+				field.answerText = this.moment(field.answerText, 'DD-Mo-YYYY').toDate();
+			}
+
+			/*Mapping to make numbers work */
+			if (field.validationType === 'NUMBER')
+			{
+				field.answerText = +field.answerText.replace(',','')
+			}
+
+			return field;
+		})
 	}
 
 	getUserFields(){
@@ -69,9 +100,10 @@ class UserService{
 				method: 'GET',
 				url: this.URL + '/kyckuseranswer/findall/action'
 			}).then((response)=>{
-				this._kycDetails = response.data.data;
+				this._kycDetails = this.transFormData(response.data.data);
 				this.kycDetails = angular.copy(this._kycDetails);
 				this.kycFetched = true;
+				console.log(this.kycDetails);
 				return this.kycDetails;
 			});
 		}
@@ -102,13 +134,69 @@ class UserService{
 				method: 'GET',
 				url: this.URL + '/userprofile/findall/action'
 			}).then((response)=>{
-				this._profileDetails = response.data.data;
+				this._profileDetails = this.transFormData(response.data.data);
 				this.profileDetails = angular.copy(this._profileDetails);
 				this.profileFetched = true;
 				return this.profileDetails;
 			});
 		}
 	}
+
+	saveKYCFields(){
+		const requiredFilled = this.kycDetails.every((field)=>{
+			if (field.requireField=="REQUIRED" && field.questionType==="TEXT")
+			{
+				return !!field.answerText;
+			}
+			if (field.requireField=="REQUIRED" && field.questionType!=="TEXT")
+			{
+				return !!field.selectedValue.answerId;
+			}
+			return true;
+		});
+		if (!requiredFilled)
+		{
+			return new Promise((resolve, reject)=>{
+				reject(new Error("All fields marked * are required!"))
+			})
+		}
+		return new Promise((resolve)=>{
+			return {"status": "SUCCESS"}
+		});
+	}
+
+	saveProfileFields(){
+		const userDetailsFilled = this.userDetails.every((field)=>{
+			return !!field.value;
+		});
+
+		const requiredFilled = this.profileDetails.every((field)=>{
+			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER"].indexOf(field.questionType)>=0)
+			{
+				return !!field.answerText;
+			}
+			else if(field.requireField=="REQUIRED")
+			{
+				return !!field.selectedValue.answerId;
+			}
+			return true;
+		});
+
+		if (!requiredFilled || !userDetailsFilled)
+		{
+			return new Promise((resolve, reject)=>{
+				reject(new Error("All fields marked * are required!"))
+			})
+		}
+		else
+		{
+
+		}
+		return new Promise((resolve)=>{
+			resolve({"status": "SUCCESS"});
+		});
+	}
+
 }
 
 export default UserService;
