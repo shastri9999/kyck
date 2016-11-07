@@ -19,7 +19,7 @@
  		</span>
 	</div>
 	<div class="document-action" ng-if="document.documentID && !document.replaceAction">
-		<div style="width: 50%">View</div>
+		<div style="width: 50%" ng-click="vm.preview(document)">View</div>
 		<div style="width: 2px; border: solid 1px #e7ecf1;"></div>
 		<div style="width: 50%" ng-click="vm.replace(document)">Replace</div>
 	</div>
