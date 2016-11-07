@@ -35,7 +35,7 @@ class UserService{
 			/*Mapping to make date work */
 			if (field.validationType === 'DATE')
 			{
-				field.answerText = this.moment(field.answerText, 'DD-Mo-YYYY').toDate();
+				field.answerText = this.moment(field.answerText, 'DD-MM-YYYY').toDate();
 			}
 
 			/*Mapping to make numbers work */
@@ -142,6 +142,17 @@ class UserService{
 		}
 	}
 
+	updateKYCFields(answerList){
+		return this._$http({
+			method: 'POST',
+			url: this.URL + '/kyckuseranswer/updatekyc/action',
+			data: {"userDetailAnswerList": answerList}
+		}).then((s)=>{
+			this._kycDetails = angular.copy(this.kycDetails);
+			return s;
+		}).catch((e)=>console.log(e))
+	}
+
 	saveKYCFields(){
 		const requiredFilled = this.kycDetails.every((field)=>{
 			if (field.requireField=="REQUIRED" && field.questionType==="TEXT")
@@ -160,9 +171,40 @@ class UserService{
 				reject(new Error("All fields marked * are required!"))
 			})
 		}
-		return new Promise((resolve)=>{
-			 resolve({"status": "SUCCESS"});
-		});
+		else
+		{
+			const answers = this.kycDetails.map((field)=>{
+				const answer = {
+			      "answerDesc": field.selectedValue ? field.selectedValue.answerDescription:0,
+			      "answerId": field.selectedValue ? field.selectedValue.answerId:0,
+			      "answerText": field.answerText,
+			      "questionDesc": field.questionDesc,
+			      "questionId": field.questionId
+			    };
+			    if (field.validationType === 'DATE')
+				{
+					answer.answerText = this.moment(field.answerText).format('DD-MM-YYYY');
+				}
+				else
+				{
+					answer.answerText = "" + answer.answerText;
+				}
+				return answer;
+			});
+			return this.updateKYCFields(answers);
+		}
+	}
+
+	updateProfileFields(answerList){
+		return this._$http({
+			method: 'POST',
+			url: this.URL + '/userprofile/update/action',
+			data: {"userDetailAnswerList": answerList}
+		}).then((s)=>{
+			this._profileDetails = angular.copy(this.profileDetails);
+			this._userDetails = angular.copy(this.userDetails);
+			return s;
+		}).catch((e)=>console.log(e))
 	}
 
 	saveProfileFields(){
@@ -189,12 +231,27 @@ class UserService{
 			})
 		}
 		else
-		{
-
+		{	
+			const answers = this.profileDetails.map((field)=>{
+				const answer = {
+			      "answerDesc": field.selectedValue ? field.selectedValue.answerDescription:0,
+			      "answerId": field.selectedValue ? field.selectedValue.answerId:0,
+			      "answerText": field.answerText,
+			      "questionDesc": field.questionDesc,
+			      "questionId": field.questionId
+			    };
+			    if (field.validationType === 'DATE')
+				{
+					answer.answerText = this.moment(field.answerText).format('DD-MM-YYYY');
+				}
+				else
+				{
+					answer.answerText = "" + answer.answerText;
+				}
+				return answer;
+			});
+			return this.updateProfileFields(answers);
 		}
-		return new Promise((resolve)=>{
-			resolve({"status": "SUCCESS"});
-		});
 	}
 
 }
