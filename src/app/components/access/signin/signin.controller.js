@@ -21,7 +21,7 @@ class SignInController {
 		if (username)
 		{
 			this.invalidCredentials = false;
-			this._AuthenticationService.login(username, password).then(()=>{
+			this._AuthenticationService.login(username, password).then((userData)=>{
 				this._$state.go('main.dashboard');			
 			}).catch((e)=>{
 				console.log(e);

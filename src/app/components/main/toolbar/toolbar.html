@@ -25,8 +25,8 @@
 
 	</div>
 	<div class="avatar-area">
-		<div>{{vm.displayName}}</div>
-		<img src="/assets/images/avatar.png" style="padding: 0 13px;">	
+		<div style="margin-right: 4px;">{{vm.displayName}}</div>
+		<div class="avatar-circle" ng-if="!message.avatar">{{vm.avatarName}}</div>		
 		<a ng-click="vm.signOut()" style="cursor: pointer;" title="Logout">
 			<img style="height: 35px;" src="/assets/images/logout.svg" alt="Logout">
 		</a>	
