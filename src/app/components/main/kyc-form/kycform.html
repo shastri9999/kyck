@@ -6,7 +6,7 @@
 					{{field.questionDesc}}
 					<span ng-if="field.requireField==='REQUIRED'">*</span>
 				</label>
-				<select name="kyc-{{field.questionId}}" ng-model="field.answerId">
+				<select name="kyc-{{field.questionId}}" ng-model="field.answerId" ng-required="field.requireField==='REQUIRED'">
 					<option ng-repeat="option in field.answersList" value="{{option.answerId}}">	{{option.answerDescription}}
 					</option>
 				</select>
@@ -20,7 +20,7 @@
 				<div class="radio">
 					<label ng-repeat="option in field.answersList">
 						{{option.answerDescription}}
-						<input type="radio" value="{{option.answerId}}" ng-model="field.answerId">
+						<input type="radio" value="{{option.answerId}}" ng-model="field.answerId" ng-required="field.requireField==='REQUIRED'">
 					</label>					
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 					{{field.questionDesc}}
 					<span ng-if="field.requireField==='REQUIRED'">*</span>
 				</label>
-				<input name="kyc-{{field.questionId}}" type="{{field.validationType}}" ng-model="field.answerText">
+				<input name="kyc-{{field.questionId}}" type="{{field.validationType}}" ng-model="field.answerText" ng-required="field.requireField==='REQUIRED'">
 			</div>
 		</div>
 	</div>	

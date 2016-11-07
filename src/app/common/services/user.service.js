@@ -12,7 +12,49 @@ class UserService{
 		this._profileDetails = [];
 		this.kycFetched = false;
 		this.profileFetched = false;
+		this.userDetails = [];
+		this._userDetails = [];
+		this.userFetched = false;
 	}
+
+	getUserFields(){
+		if (this.kycFetched)
+		{
+			return new Promise((resolve)=>{
+				resolve(this.userDetails);
+			});
+		}
+		else
+		{
+			return this._$http({
+				method: 'GET',
+				url: this.URL + '/user/get/action'
+			}).then((response)=>{
+				const data = response.data.data;
+				const keyMappings =  {
+				    "userId": {description: "Email Address", disabled: true},
+				    "userFname": {description: "First Name", disabled: false},
+				    "userLname": {description: "Last Address", disabled: false},
+				    "userPhone": {description: "Phone Number", disabled: false},
+				}
+				this._userDetails = Object.keys(data).map((key)=>{
+					if (keyMappings[key])
+					{
+						return {
+							key,
+							...keyMappings[key],
+							value: data[key]
+						}
+					}
+					return null;
+				}).filter(x=>!!x);
+				this.userDetails = angular.copy(this._userDetails);
+				this.userFetched = true;
+				return this.userDetails;
+			});
+		}
+	}
+
 
 	getKYCFields(){
 		if (this.kycFetched)
@@ -36,11 +78,15 @@ class UserService{
 	}
 
 	clearKYCFields(){
-		this.kycDetails = angular.copy(_this.kycDetails)
+		this.kycDetails = angular.copy(this._kycDetails)
+	}
+
+	clearUserFields(){
+		this.userDetails = angular.copy(this._userDetails)
 	}
 
 	clearProfileFields(){
-		this.profileDetails = angular.copy(_this.profileDetails)
+		this.profileDetails = angular.copy(this._profileDetails)
 	}
 
 	getProfileFields(){

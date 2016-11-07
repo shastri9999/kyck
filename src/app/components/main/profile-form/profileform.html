@@ -1,4 +1,12 @@
 <form name="profileForm">
+	<div ng-repeat="field in vm.userFields">
+		<div class="input">
+				<label for="kyc-{{field.key}}">
+					{{field.description}} *
+				</label>
+				<input name="kyc-{{field.key}}" type="text" ng-model="field.value" required ng-disabled="field.disabled">
+			</div>
+	</div>
 	<div ng-repeat="field in vm.fields">
 		<div ng-switch on="field.questionType">
 			<div class="input" ng-switch-when="DROPDOWN">
@@ -6,7 +14,7 @@
 					{{field.questionDesc}}
 					<span ng-if="field.requireField==='REQUIRED'">*</span>
 				</label>
-				<select name="kyc-{{field.questionId}}" ng-model="field.answerId">
+				<select name="kyc-{{field.questionId}}" ng-model="field.answerId" ng-required="field.requireField==='REQUIRED'">
 					<option ng-repeat="option in field.answersList" value="{{option.answerId}}">	{{option.answerDescription}}
 					</option>
 				</select>
@@ -20,7 +28,7 @@
 				<div class="radio">
 					<label ng-repeat="option in field.answersList">
 						{{option.answerDescription}}
-						<input style="width: 20px;height: auto;" type="radio" value="{{option.answerId}}" ng-model="field.answerId">
+						<input style="width: 20px;height: auto;" type="radio" value="{{option.answerId}}" ng-model="field.answerId" ng-required="field.requireField==='REQUIRED'">
 					</label>					
 				</div>
 			</div>
@@ -29,7 +37,7 @@
 					{{field.questionDesc}}
 					<span ng-if="field.requireField==='REQUIRED'">*</span>
 				</label>
-				<input name="kyc-{{field.questionId}}" type="{{field.validationType}}" ng-model="field.answerText">
+				<input name="kyc-{{field.questionId}}" type="{{field.validationType}}" ng-model="field.answerText" ng-required="field.requireField==='REQUIRED'">
 			</div>
 		</div>
 	</div>		

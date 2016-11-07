@@ -4,10 +4,16 @@ class ProfileFormController {
 	constructor(UserService) {
 		'ngInject';
 		this.UserService = UserService;
-		this.fields = {};
+		this.userFields = [];
+		this.fields = [];
+		this.UserService.getUserFields().then((fields)=>{
+			this.userFields = fields;
+			console.log(fields);
+		});
 		this.UserService.getProfileFields().then((fields)=>{
 			this.fields = fields;
 		});
+
 	}
 }
 
