@@ -1,10 +1,10 @@
 <div layout="row" class="mainArea">
-    <div class="contactedUsers" ng-if="ifBroker">
+    <div class="contactedUsers" ng-if="isBroker">
         <div class="contactedUsersTitle">Contacted Users</div>
         <div>
             <input name="search" ng-model="username" type="search" placeholder="Search" class="searchBar">
         </div>
-        <div class="appointment ng-scope" ng-class='{active: $index==vm.selectedIndex}' ng-repeat="appointment in vm.userAppointments">
+        <div class="appointment ng-scope" ng-class='{active: $index==vm.selectedIndex}' ng-repeat="appointment in vm.userAppointments" ng-click="vm.selectUser($index)">
             <img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">         
             <div class="detail">
                 <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div>
@@ -14,8 +14,8 @@
         </div>
     </div>
     <div flex layout="row">
-    <md-stepper id="stepper-demo" md-linear="!ifBroker">
-        <div ng-if="ifBroker">
+    <md-stepper id="stepper-demo" md-linear="!isBroker">
+        <div ng-if="isBroker">
         <md-step md-label="Account Summary">
             <md-step-body>
                 Helllo
@@ -40,17 +40,6 @@
                     </div>
                 </div>
 
-            </md-step-body>
-        </md-step>
-        </div>
-        <div ng-if="!isBroker || isBroker">
-        <md-step md-label="Documents">
-            <md-step-body>
-                <div class="flex-wrapper" style="height: calc(100vh - 90px); margin-bottom: -90px; margin-top: 20px;">
-                <div ng-repeat="document in ::vm.documents">
-                    <document-pane style="float: left;" document="document"></document-pane>
-                </div>  
-                </div>
             </md-step-body>
         </md-step>
         </div>
@@ -304,6 +293,17 @@
         </md-step>
         </div>
         <div ng-if="!isBroker || isBroker">
+        <md-step md-label="Documents">
+            <md-step-body>
+                <div class="flex-wrapper" style="height: calc(100vh - 90px); margin-bottom: -90px; margin-top: 20px;">
+                <div ng-repeat="document in ::vm.documents">
+                    <document-pane style="float: left;" document="document"></document-pane>
+                </div>  
+                </div>
+            </md-step-body>
+        </md-step>
+        </div>
+        <div ng-if="!isBroker">
         <md-step md-label="Selection of Timeslot">
             <md-step-body layout="column" flex>
                 <div style="min-height: 800px; height: 800px;">
@@ -319,15 +319,29 @@
             </md-step-body>
         </md-step>
         </div>
+        <div ng-if="isBroker">
+        <md-step md-label="Validation Reports">
+            <md-step-body layout="column" flex>
+                <div style="min-height: 800px; height: 800px;">
+                    <div class="validationReport" ng-repeat="report in vm.validationReports">
+                        <div class="title">{{report.title}}
+                        </div>
+                        <div class="description">{{report.description}}
+                        </div>
+                    </div>
+                </div>
+            </md-step-body>
+        </md-step>
+        </div>
     </md-stepper>
 
     <footer>
-        <div layout="row" class="footerBtns" layout-align="start center" ng-if="!ifBroker">
+        <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
             <md-button class="md-raised md-back" ng-click="vm.backStep()">Back</md-button>
             <md-button class="md-raised md-success" ng-click="vm.nextStep()">Next</md-button>
             <!-- <md-button class="md-raised md-edit-form" ng-click="vm.editForm()">Edit Form</md-button> -->
         </div>
-        <div layout="row" class="footerBtns" layout-align="start center" ng-if="ifBroker">
+        <div layout="row" class="footerBtns" layout-align="start center" ng-if="isBroker">
             <md-button class="md-raised md-success" ng-click="vm.nextStep()">Accept</md-button>
         </div>
 

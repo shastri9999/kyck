@@ -196,7 +196,7 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 
 .contactedUsers {
 	width: 250px;
-	height: calc(100vh-57px);
+	height: 996px;
 	background-color: #f9fbfc;
 }
 
@@ -223,10 +223,14 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 }
 
 .appointment {
+	outline: none;
     display: flex;
     padding: 15px;
     margin-top: 20px; 
     width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
     .detail {
         display: flex;
         flex-flow: column;
@@ -248,5 +252,25 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 	.pending-btn {
 		border-color: #fff;
 		color: #fff;
+	}
+}
+
+.validationReport {
+	border: solid 1px #3498db;
+	border-left: solid 7px #3498db;
+	color: #4f6379;
+	line-height: 20px;;
+	font-weight: 600;
+	margin: 15px;
+    padding: 10px;
+    margin-left: 25px;
+
+	.title {
+		font-size: 16px;
+	}
+	.description {
+		opacity: 0.6;
+		font-family: Lato;
+		font-size: 14px;
 	}
 }
