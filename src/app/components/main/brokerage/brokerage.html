@@ -196,7 +196,7 @@
         <footer>
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
                 <md-button class="md-raised md-back" ng-click="vm.backStep()" ng-show="vm.activeStep>1">Back</md-button>
-                <md-button class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="vm.activeStep==5 && !vm.timeslotSelected">
+                <md-button class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.activeStep==5 && !vm.timeslotSelected) || (vm.activeStep==1 && selectedPartners.size<1)">
                     <span ng-show="vm.activeStep<5">Next</span>
                     <span ng-show="vm.activeStep==5">Submit</span>
                 </md-button>
