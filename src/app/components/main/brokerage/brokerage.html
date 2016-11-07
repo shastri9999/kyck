@@ -98,7 +98,7 @@
             <md-step md-label="Select Broker">
                 <md-step-body layout="row" layout-wrap>
                     <h3 class="partnersHeader">Premium Partners</h3>
-                    <div ng-repeat="partner in ::vm.partners | filter:{type:'premium'}">
+                    <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'PREMIUM'}">
                         <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
                             <img class="premiereIcon" src="/assets/images/premiere.png"/>
                             <center><img ng-src="{{partner.img}}"/></center>
@@ -106,7 +106,7 @@
                     </div>
 
                     <h3 class="partnersHeader">All Partners</h3>
-                    <div ng-repeat="partner in ::vm.partners | filter:{type:'normal'}">
+                    <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'REGULAR'}">
                         <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
                             <center><img ng-src="{{partner.img}}"/></center>
                         </div>
@@ -402,8 +402,8 @@
                                     </div>
                                 </div>
                                 <div style="float:right;">
-                                    <img src="/assets/images/tickedgrey.png"/>
-                                    <img src="/assets/images/untickedgrey.png"/>
+                                    <img ng-click="toggleReport($index)" src="/assets/images/tickedgrey.png" class="ticked grey"/>
+                                    <img ng-click="toggleReport($index)" class="unticked grey" src="/assets/images/untickedgrey.png"/>
                                 </div>
                             </div>
                         </md-step-body>

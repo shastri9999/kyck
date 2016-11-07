@@ -11,6 +11,11 @@ function BrokerageResource($resource) {
     		isArray: false,
     		url: URL + '/users/contacted'
     	},
+    	brokeragesList: {
+    		method : 'GET',
+    		isArray: false,
+    		url: URL + '/brokerage/findlist'
+    	},
     	brokeragesDetails: {
     		method: 'GET',
     		isArray: false,

@@ -17,63 +17,6 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
 
         vm.changeUsers = changeUsers;
 
-        vm.partners = [
-            {
-                title: 'POSB',
-                img: '/assets/images/partnerLogos/posb.png',
-                type: 'premium',
-                selected: false
-            },
-            {
-                title: 'DBS',
-                img: '/assets/images/partnerLogos/dbs.png',
-                type: 'premium',
-                selected: false
-            },
-            {
-                title: 'UOB',
-                img: '/assets/images/partnerLogos/uob.png',
-                type: 'premium',
-                selected: false
-            },
-            {
-                title: 'ICICI',
-                img: '/assets/images/partnerLogos/icici.png',
-                type: 'premium',
-                selected: false
-            },
-            {
-                title: 'CITIBANK',
-                img: '/assets/images/partnerLogos/citibank.png',
-                type: 'normal',
-                selected: false
-            },
-            {
-                title: 'BOA',
-                img: '/assets/images/partnerLogos/boa.png',
-                type: 'normal',
-                selected: false
-            },
-            {
-                title: 'SCHARTERED',
-                img: '/assets/images/partnerLogos/schartered.png',
-                type: 'normal',
-                selected: false
-            },
-            {
-                title: 'AXISBANK',
-                img: '/assets/images/partnerLogos/axisbank.png',
-                type: 'normal',
-                selected: false
-            },
-            {
-                title: 'HDFC',
-                img: '/assets/images/partnerLogos/hdfc.png',
-                type: 'normal',
-                selected: false
-            }
-        ];
-
         BrokerageResource.userprofileget(function(response){
             var questions = response.data;
             vm.questionsmap = {};
@@ -107,6 +50,18 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
 
 		BrokerageResource.brokeragesDetails({'userEmailId':AuthenticationService.getLoggedInUser().userId}, function (req) {
             vm.brokeragesDetails = req.data;
+        }, function () {});
+
+        function convert(obj) {
+            obj['img'] = '/assets/images/partnerLogos/' + obj['brokerageName'] + '.png';
+            console.log(obj['brokerageName']);
+            return obj;
+        }
+
+        BrokerageResource.brokeragesList(function (req) {
+            var brokeragesList = req.data;
+            vm.partners = brokeragesList.map(convert);
+            console.log('hell', vm.partners);
         }, function () {});
 
         BrokerageResource.userAppointments((response)=>{
