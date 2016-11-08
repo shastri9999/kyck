@@ -2,7 +2,7 @@
 	<div class="left">
 		<div class="appointments">
 			<h2>Appointments</h2>
-			<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'">
+			<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:3">
 				<div class="date">
 					<div style="font-size: 24px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'Do'}}</div>
 					<div style="opacity: 0.4;padding: 4px; border-bottom: 1px dotted;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'MMM YY'}}</div>
