@@ -230,8 +230,11 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
                 return;
             });
         }
-        else if (vm.activeStep == 5)
+        else if (vm.activeStep == 5) {
+            var steppers = $mdStepper('stepper-demo');
+            steppers.goto(0);
             return;
+        }
         else
             moveNext();
 
