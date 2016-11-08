@@ -10,20 +10,24 @@
                 <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div>
                 <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> -->
                 <a class="pending-btn ng-binding" style="margin-top: 4px;">{{appointment.applicationStatus}}</a>
-            </div>      
+            </div> 
         </div>
     </div>
     <div flex layout="column">
     <md-stepper id="stepper-demo" md-linear="!isBroker">
         <div ng-if="isBroker">
         <md-step md-label="Account Summary" class="accSummary">
-            <md-step-body>
-            <div class="appointment ng-scope" layout="column">
-            <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
-                <div style="font-size: 14px;" class="ng-binding">{{vm.userAppointment.fname}} {{vm.userAppointment.lname}}</div>
-                <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> -->
-                <a class="pending-btn ng-binding" style="margin-top: 10px;">{{vm.userAppointment.applicationStatus}}</a>
-            </div>      
+            <md-step-body layout="column">
+            <div layout="row">
+                <div class="appointment ng-scope" layout="column">
+                <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
+                    <div style="font-size: 14px;" class="ng-binding">{{vm.userAppointment.fname}} {{vm.userAppointment.lname}}</div>
+                    <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> -->
+                    <a class="pending-btn ng-binding" style="margin-top: 10px;">{{vm.userAppointment.applicationStatus}}</a>
+                </div>
+                <div class="container"></div>
+                </div>
+            </div>
             <div layout="row" style="margin: 20px; ">
             <div flex="50" style="margin-right: 30px; ">
                 <span class="title">Download Documents</span>
@@ -88,7 +92,6 @@
                         <div class="actnItem">DONE</div>
                     </div>
                 </div>
-            </div>
             </div>
             </div>
             </md-step-body>
