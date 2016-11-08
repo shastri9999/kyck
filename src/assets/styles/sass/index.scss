@@ -75,8 +75,17 @@ table {
   margin-top: 20px;
   &.vertical {
     width: 190px;
-    margin-left: 20px;
   }
+}
+
+.pending-btn {
+        padding: 5px 18px;
+        text-transform: uppercase;
+        border: 1px solid #57c3ea;
+        color: #57c3ea;
+        border-radius: 3px;
+        font-size: 12px;
+        cursor: pointer;
 }
 
 kyc-form form, profile-form form{

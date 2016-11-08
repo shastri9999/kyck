@@ -25,6 +25,7 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         {
             BrokerageResource.contactedBrokerages((response)=>{
                 vm.contactedBrokers = response.data;
+                console.log(vm.contactedBrokers);
             });
 
         }
