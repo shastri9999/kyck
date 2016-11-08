@@ -25,16 +25,17 @@ function BrokerageResource($resource) {
         userprofileupdate: {
             method: 'POST',
             params: {
-                  "brokerageCalenderSlotList": [
-                    {
-                          "brokerageId": "@string",
-                          "calenderSlot": "@date",
-                          "meetingContent": "@string",
-                          "meetingLocation": "@string",
-                          "meetingStatus": "@string",
-                          "meetingSubject": "@string"
-                        }
-                      ]
+                  brokerageCalenderSlotList: '@calendarSlots'
+                  // [
+                  //   {
+                  //         "brokerageId": "@string",
+                  //         "calenderSlot": "@date",
+                  //         "meetingContent": "@string",
+                  //         "meetingLocation": "@string",
+                  //         "meetingStatus": "@string",
+                  //         "meetingSubject": "@string"
+                  //       }
+                  //     ]
                 },
             url: URL + '/brokerage/submit'
         },

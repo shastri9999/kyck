@@ -9,7 +9,6 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
     function init() {
         vm.nextStep = nextStep;
         vm.backStep = backStep;
-        vm.editForm = editForm;
         vm.selectedIndex = 0;
         vm.activeStep = 1;
         $scope.isBroker = AuthenticationService.isBroker();
