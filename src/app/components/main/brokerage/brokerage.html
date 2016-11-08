@@ -14,7 +14,7 @@
         </div>
     </div>
     <div flex layout="column">
-    <md-stepper id="stepper-demo" md-linear="!isBroker">
+        <md-stepper id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker">
         <div ng-if="isBroker">
         <md-step md-label="Account Summary" class="accSummary">
             <md-step-body layout="column">
@@ -208,7 +208,17 @@
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="isBroker">
                 <md-button class="md-raised md-success" ng-click="vm.nextStep()">Accept</md-button>
             </div>
-
         </footer>
 
     </div>
+    <div layout="column" class="rightSide" ng-if="isBroker" flex>
+        <md-event-calendar>
+            <md-event-calendar-header class="md-center">
+                <md-event-calendar-prev></md-event-calendar-prev>
+                <md-event-calendar-title></md-event-calendar-title>
+                <md-event-calendar-next></md-event-calendar-next>
+                <!-- <md-event-calendar-today></md-event-calendar-today> -->
+            </md-event-calendar-header>
+        </md-event-calendar>
+    </div>
+</div>
