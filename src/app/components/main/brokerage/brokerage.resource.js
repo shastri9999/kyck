@@ -35,7 +35,6 @@ function BrokerageResource($resource) {
                           "meetingSubject": "@string"
                         }
                       ]
-                    }
                 },
             url: URL + '/brokerage/submit'
         },
