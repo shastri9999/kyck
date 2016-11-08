@@ -21,7 +21,13 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         vm.personalDetailsError = false;
 
         vm.changeUsers = changeUsers;
+        if (!$scope.isBroker)
+        {
+            BrokerageResource.contactedBrokerages((response)=>{
+                console.log(response);
+            });
 
+        }
         BrokerageResource.userprofileget(function(response){
             var questions = response.data;
             vm.questionsmap = {};

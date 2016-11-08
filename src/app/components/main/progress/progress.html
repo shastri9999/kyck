@@ -9,16 +9,16 @@
 	<div style="width: 234px;margin-top: 20px;" class="progress-chart">
 	
 	</div>
-	<div class="legend" style="display: flex; justify-content: space-between;margin-top: 10px;">
+	<div class="legend" ng-class="{legend: true, vertical: vm.isVertical}" style="display: flex; justify-content: space-between;margin-top: 10px;">
 		<div style="display: flex; align-items: center;">
-			<div style="margin-right: 10px; width: 10px; height: 10px; border-radius:100%; background-color: #00cacd"></div>
+			<div class="item" style="margin-right: 10px; width: 10px; height: 10px; border-radius:100%; background-color: #00cacd"></div>
 			Documents
 		</div>
-		<div style="display: flex; align-items: center;" >
+		<div class="item" style="display: flex; align-items: center;" >
 			<div style="margin-right: 10px; width: 10px; height: 10px; border-radius:100%; background-color: #4bb7f5"></div>
 			Personal Profile
 		</div>
-		<div style="display: flex; align-items: center;">
+		<div class="item" style="display: flex; align-items: center;">
 			<div style="margin-right: 10px; width: 10px; height: 10px; border-radius:100%; background-color: #f7b92f
 "></div>
 			KYC
