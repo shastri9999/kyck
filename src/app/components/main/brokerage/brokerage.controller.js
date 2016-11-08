@@ -24,7 +24,7 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         if (!$scope.isBroker)
         {
             BrokerageResource.contactedBrokerages((response)=>{
-                console.log(response);
+                vm.contactedBrokers = response.data;
             });
 
         }

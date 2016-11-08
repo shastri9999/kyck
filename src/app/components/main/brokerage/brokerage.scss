@@ -16,12 +16,7 @@
 	font-weight:bold;
 }
 .mainArea {
-	md-stepper: {
-		flex:0 !important;
-	}
-	height: 100%;
 	.right-stat {
-		display: flex;
 	    order: 2;
 	    width: 240px;
 	    overflow: hidden;

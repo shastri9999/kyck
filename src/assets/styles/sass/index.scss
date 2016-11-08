@@ -70,6 +70,15 @@ table {
   flex-flow:column;
   padding-left: 54px;
 }
+.progress-chart {
+  width: 234px;
+  margin-top: 20px;
+  &.vertical {
+    width: 190px;
+    margin-left: 20px;
+  }
+}
+
 kyc-form form, profile-form form{
    display: flex;
    flex-flow: row wrap;
