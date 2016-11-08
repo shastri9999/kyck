@@ -204,7 +204,7 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         vm.kycerror = false;
         vm.personalDetailsError = false;
 
-        if (vm.activeStep == 3 && vm.isBroker) {
+        if (vm.activeStep == 3 && !vm.isBroker) {
             UserService.saveProfileFields().then(function(success){
                  /* show success pop up move to next */
                  $mdToast.showSimple('Personal Details Saved Successfully!');
@@ -212,7 +212,7 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
                 })
             .catch(function(error){
                 vm.personalDetailsError = true;
-                // $mdToast.showSimple(error);
+                 $mdToast.showSimple('Please fill all fields marked *');
                 /* Validation error dont move to next step */ 
                 return;
             });
@@ -225,7 +225,7 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
                  moveNext();
             })
             .catch(function(error){
-                // $mdToast.showSimple(error);
+                $mdToast.showSimple('Please fill all fields marked *');
                 vm.kycerror = true;
                 return;
             });

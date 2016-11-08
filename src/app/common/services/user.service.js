@@ -34,6 +34,9 @@ class UserService{
 				}
 			})
 
+			if(!field.answerText)
+				return field;
+			
 			/*Mapping to make date work */
 			if (field.validationType === 'DATE')
 			{
@@ -209,7 +212,7 @@ class UserService{
 		{
 			const answers = this.kycDetails.map((field)=>{
 				const answer = {
-			      "answerDesc": field.selectedValue ? field.selectedValue.answerDescription:0,
+			      "answerDesc": field.selectedValue ? field.selectedValue.answerDescription:"",
 			      "answerId": field.selectedValue ? field.selectedValue.answerId:0,
 			      "answerText": field.answerText,
 			      "questionDesc": field.questionDesc,
@@ -229,6 +232,7 @@ class UserService{
 		}
 	}
 
+
 	updateProfileFields(answerList){
 		return this._$http({
 			method: 'POST',
@@ -237,6 +241,7 @@ class UserService{
 		}).then((s)=>{
 			this._profileDetails = angular.copy(this.profileDetails);
 			this._userDetails = angular.copy(this.userDetails);
+			console.log(this.userDetails);
 			return s;
 		}).catch((e)=>console.log(e))
 	}
@@ -268,7 +273,7 @@ class UserService{
 		{	
 			const answers = this.profileDetails.map((field)=>{
 				const answer = {
-			      "answerDesc": field.selectedValue ? field.selectedValue.answerDescription:0,
+			      "answerDesc": field.selectedValue ? field.selectedValue.answerDescription:"",
 			      "answerId": field.selectedValue ? field.selectedValue.answerId:0,
 			      "answerText": field.answerText,
 			      "questionDesc": field.questionDesc,
