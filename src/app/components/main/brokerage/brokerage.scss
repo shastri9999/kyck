@@ -457,3 +457,25 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
  	    background-size: 34px;
     }
 }
+.msg-requests {
+	border-radius: 5px;
+    background-color: #ffffff;
+    margin: 20px;
+    padding: 12px;
+    color: #4f6379;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 14px;
+    float: left;
+    width: 140px;
+    margin-bottom: 0px;
+    position: relative;
+    .datetime {
+    	color: #778ba2;
+    }
+}
+.msg-requests.left {
+}
+.msg-requests.right {
+	margin-left: 140px;
+}
