@@ -9,6 +9,16 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 	{
 		/* Get broker related info */
 
+		vm.userAppointments = [];
+		vm.userAppointmentsLimit = 3;
+		vm.userAppointmentsShowMore = function(){
+			vm.userAppointmentsLimit = Math.max(vm.userAppointments.length, 3);
+		}
+
+		vm.userAppointmentsShowLess = function(){
+			vm.userAppointmentsLimit = 3;
+		}
+
 		DashboardResource.userAppointments((response)=>{
 			vm.userAppointments = response.data;
 		});

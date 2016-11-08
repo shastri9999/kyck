@@ -8,6 +8,10 @@ function ProfileForm() {
 
   let directive = {
     restrict: 'E',
+    scope: {
+    	isBroker: '=',
+    	userEmailId: '='
+    },
     templateUrl,
     controller,
     controllerAs: 'vm',

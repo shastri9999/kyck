@@ -16,6 +16,7 @@ class UserService{
 		this._userDetails = [];
 		this.userFetched = false;
 		this.moment = moment;
+		this.brokeragesDetail = {};
 	}
 
 	transFormData(fields){
@@ -24,7 +25,8 @@ class UserService{
 			/* Mapping to make dropdown work */
 			field.answerId = +field.answerId || 0;
 			field.selectedValue = null;
-			field.answersList.forEach((answer)=>{
+			
+			field.answersList && field.answersList.forEach((answer)=>{
 				answer.answerId = +answer.answerId || 0;
 				if (answer.answerId == field.answerId)
 				{
@@ -32,10 +34,13 @@ class UserService{
 				}
 			})
 
+			if(!field.answerText)
+				return field;
+
 			/*Mapping to make date work */
 			if (field.validationType === 'DATE')
 			{
-				field.answerText = this.moment(field.answerText, 'DD-Mo-YYYY').toDate();
+				field.answerText = this.moment(field.answerText, 'DD-MM-YYYY').toDate();
 			}
 
 			/*Mapping to make numbers work */
@@ -46,6 +51,55 @@ class UserService{
 
 			return field;
 		})
+	}
+
+	getBrokerageDetails(email, type){
+		if (this.brokeragesDetail[email])
+		{
+			return new Promise((resolve)=>{
+				resolve(this.brokeragesDetail[email][type]);
+			});
+		}
+		else
+		{
+			return this._$http({
+				method: 'GET',
+				url: this.URL + '/brokerages/details',
+				params: {
+					userEmailId: email
+				}
+			}).then((response)=>{
+				const allData = response.data.data;
+				const details = {};
+				details['kyc'] = this.transFormData(allData['kycDetails']);
+				details['user'] = this.transFormUserData(allData['user']);
+				details['profile'] = this.transFormData(allData['userProfile']);
+				this.brokeragesDetail[email] = details;
+				return this.brokeragesDetail[email][type];
+			});
+		}
+	}
+
+	transFormUserData(data)
+	{
+		const keyMappings =  {
+		    "userId": {description: "Email Address", disabled: true},
+		    "userFname": {description: "First Name", disabled: false},
+		    "userLname": {description: "Last Name", disabled: false},
+		    "userPhone": {description: "Phone Number", disabled: false},
+		}
+
+		return Object.keys(data).map((key)=>{
+			if (keyMappings[key])
+			{
+				return {
+					key,
+					...keyMappings[key],
+					value: data[key]
+				}
+			}
+			return null;
+		}).filter(x=>!!x);
 	}
 
 	getUserFields(){
@@ -62,23 +116,7 @@ class UserService{
 				url: this.URL + '/user/get/action'
 			}).then((response)=>{
 				const data = response.data.data;
-				const keyMappings =  {
-				    "userId": {description: "Email Address", disabled: true},
-				    "userFname": {description: "First Name", disabled: false},
-				    "userLname": {description: "Last Address", disabled: false},
-				    "userPhone": {description: "Phone Number", disabled: false},
-				}
-				this._userDetails = Object.keys(data).map((key)=>{
-					if (keyMappings[key])
-					{
-						return {
-							key,
-							...keyMappings[key],
-							value: data[key]
-						}
-					}
-					return null;
-				}).filter(x=>!!x);
+				this._userDetails = this.transFormUserData(data);
 				this.userDetails = angular.copy(this._userDetails);
 				this.userFetched = true;
 				return this.userDetails;
@@ -103,7 +141,6 @@ class UserService{
 				this._kycDetails = this.transFormData(response.data.data);
 				this.kycDetails = angular.copy(this._kycDetails);
 				this.kycFetched = true;
-				console.log(this.kycDetails);
 				return this.kycDetails;
 			});
 		}
@@ -142,6 +179,17 @@ class UserService{
 		}
 	}
 
+	updateKYCFields(answerList){
+		return this._$http({
+			method: 'POST',
+			url: this.URL + '/kyckuseranswer/updatekyc/action',
+			data: {"kycUserAnswerList": answerList}
+		}).then((s)=>{
+			this._kycDetails = angular.copy(this.kycDetails);
+			return s;
+		}).catch((e)=>console.log(e))
+	}
+
 	saveKYCFields(){
 		const requiredFilled = this.kycDetails.every((field)=>{
 			if (field.requireField=="REQUIRED" && field.questionType==="TEXT")
@@ -160,9 +208,55 @@ class UserService{
 				reject(new Error("All fields marked * are required!"))
 			})
 		}
-		return new Promise((resolve)=>{
-			 resolve({"status": "SUCCESS"});
+		else
+		{
+			const answers = this.kycDetails.map((field)=>{
+				const answer = {
+			      "answerDesc": field.selectedValue ? field.selectedValue.answerDescription:"",
+			      "answerId": field.selectedValue ? field.selectedValue.answerId:0,
+			      "answerText": field.answerText,
+			      "questionDesc": field.questionDesc,
+			      "questionId": field.questionId
+			    };
+			    if (field.validationType === 'DATE')
+				{
+					answer.answerText = this.moment(field.answerText).format('DD-MM-YYYY');
+				}
+				else
+				{
+					answer.answerText = "" + answer.answerText;
+				}
+				return answer;
+			});
+			return this.updateKYCFields(answers);
+		}
+	}
+
+
+	updateUserDetails(details){
+		return this._$http({
+			method: 'POST',
+			url: this.URL + '/user/updateusrdetails/action',
+			data: details
 		});
+	}
+
+	updateProfileFields(answerList){
+		return this._$http({
+			method: 'POST',
+			url: this.URL + '/userprofile/update/action',
+			data: {"userDetailAnswerList": answerList}
+		}).then((s)=>{
+			this._profileDetails = angular.copy(this.profileDetails);
+			this._userDetails = angular.copy(this.userDetails);
+			const userData = {};
+			this.userDetails
+				.filter(x=>!x.disabled)
+				.forEach((detail)=>{
+					userData[detail.key] = detail.value;
+				});
+			return this.updateUserDetails(userData);
+		}).catch((e)=>console.log(e))
 	}
 
 	saveProfileFields(){
@@ -189,12 +283,27 @@ class UserService{
 			})
 		}
 		else
-		{
-
+		{	
+			const answers = this.profileDetails.map((field)=>{
+				const answer = {
+			      "answerDesc": field.selectedValue ? field.selectedValue.answerDescription:"",
+			      "answerId": field.selectedValue ? field.selectedValue.answerId:0,
+			      "answerText": field.answerText,
+			      "questionDesc": field.questionDesc,
+			      "questionId": field.questionId
+			    };
+			    if (field.validationType === 'DATE')
+				{
+					answer.answerText = this.moment(field.answerText).format('DD-MM-YYYY');
+				}
+				else
+				{
+					answer.answerText = "" + answer.answerText;
+				}
+				return answer;
+			});
+			return this.updateProfileFields(answers);
 		}
-		return new Promise((resolve)=>{
-			resolve({"status": "SUCCESS"});
-		});
 	}
 
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-function SettingsController($scope,$state, UserService) {
+function SettingsController($scope,$state, UserService, $mdToast) {
 	'ngInject';
 	
 	const vm = this;
@@ -17,12 +17,14 @@ function SettingsController($scope,$state, UserService) {
 		if (name.indexOf('profile') >= 0)
 		{
 			UserService.saveProfileFields().then((s)=>{
-				console.log(s)
+				$mdToast.showSimple("Profile Details Successfully Saved!");
 			}).catch((e)=>console.log(e));
 		}
 		else
 		{
-
+			UserService.saveKYCFields().then((s)=>{
+				$mdToast.showSimple("KYC Details Successfully Saved!");
+			}).catch((e)=>console.log(e));
 		}
 	}
 }
