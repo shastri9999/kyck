@@ -8,8 +8,12 @@ function ProgressComponent() {
 
   let directive = {
     restrict: 'E',
+    scope: {
+    	isVertical:'='
+    },
     templateUrl,
     controller,
+    controllerAs: 'vm',
     bindToController: true,
   };
   

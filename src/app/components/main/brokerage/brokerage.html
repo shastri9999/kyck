@@ -13,6 +13,33 @@
             </div> 
         </div>
     </div>
+    <div class="right-stat" ng-if="!isBroker">
+        <img style="width:250px;height:100%;position: absolute;" src="/assets/images/sidebar-background.png">
+        <div style="position:absolute;right:15px;left:10px;">
+            <div><progress-display is-vertical="true"/></div>
+             <div class="contact-brokerage">
+                <div style="position: relative;display: flex; flex-flow: column;">
+                    <h2 style="color:white;">Contact Brokerage: </h2>
+                    <input type="text" placeholder="Search"> 
+                    <img src="/assets/images/search.png" alt="Search" style="position: absolute;right:2px;top:40px;">   
+                    <div style="display: flex;flex-flow: column;">
+                        <div style="display: flex;background: white;border: none;border-radius: 3px;padding: 20px;margin-bottom: 10px;" ng-repeat="item in vm.contactedBrokers|limitTo:3">
+                            <img style="width: 60px; height:36px;margin-right: 15px;" ng-src="/assets/images/partnerLogos/{{item.brokerageId}}.png" alt="">
+                            <div style="display: flex; flex-flow: column;">
+                                <div style="font-size: 14px;opacity: 0.4">                              {{item.brokerageId}}
+                                </div>
+                                <div class="pending-btn" style="margin-top: 10px;">
+                                    {{item.status}}        
+                                </div>
+                            </div> 
+                            
+                        </div>
+                    </div>            
+                </div>
+            </div>
+            
+        </div>
+    </div>
     <div flex layout="column">
         <md-stepper id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker">
         <div ng-if="isBroker">

@@ -1,6 +1,6 @@
 'use strict';
 
-function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $log, BrokerageResource, AuthenticationService, DocumentResource, UserService) {
+function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $filter, $log, BrokerageResource, AuthenticationService, DocumentResource, UserService) {
     'ngInject';
 
     var vm = this;
@@ -21,7 +21,14 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
         vm.personalDetailsError = false;
 
         vm.changeUsers = changeUsers;
+        if (!$scope.isBroker)
+        {
+            BrokerageResource.contactedBrokerages((response)=>{
+                vm.contactedBrokers = response.data;
+                console.log(vm.contactedBrokers);
+            });
 
+        }
         BrokerageResource.userprofileget(function(response){
             var questions = response.data;
             vm.questionsmap = {};
@@ -103,6 +110,20 @@ function BrokerageController($scope,$mdToast, $mdStepper, $mdDialog, $filter, $l
 
         vm.replace = function(document){
             document.replaceAction = true;
+        }
+        
+        vm.preview = function(document){
+            DocumentResource.metadata({documentType: document.documentType}, function(response){
+                var name = response.data["documentName"];
+                var mimeType = response.data["mimeType"];
+                $log.debug(name);
+                var file = DocumentResource.download({documentId: name}, function(response){
+                    $log.debug("Download called");
+                    var blob = new Blob([(response)], {type: mimeType});
+                    blob = URL.createObjectURL(blob);
+                    $state.go('main.document.preview', {picFile: blob});
+                })
+            });
         }
 
         var validationReports = [
