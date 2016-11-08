@@ -36,7 +36,7 @@ class UserService{
 
 			if(!field.answerText)
 				return field;
-			
+
 			/*Mapping to make date work */
 			if (field.validationType === 'DATE')
 			{
@@ -85,7 +85,7 @@ class UserService{
 		const keyMappings =  {
 		    "userId": {description: "Email Address", disabled: true},
 		    "userFname": {description: "First Name", disabled: false},
-		    "userLname": {description: "Last Address", disabled: false},
+		    "userLname": {description: "Last Name", disabled: false},
 		    "userPhone": {description: "Phone Number", disabled: false},
 		}
 
@@ -183,7 +183,7 @@ class UserService{
 		return this._$http({
 			method: 'POST',
 			url: this.URL + '/kyckuseranswer/updatekyc/action',
-			data: {"userDetailAnswerList": answerList}
+			data: {"kycUserAnswerList": answerList}
 		}).then((s)=>{
 			this._kycDetails = angular.copy(this.kycDetails);
 			return s;
@@ -233,6 +233,14 @@ class UserService{
 	}
 
 
+	updateUserDetails(details){
+		return this._$http({
+			method: 'POST',
+			url: this.URL + '/user/updateusrdetails/action',
+			data: details
+		});
+	}
+
 	updateProfileFields(answerList){
 		return this._$http({
 			method: 'POST',
@@ -241,8 +249,13 @@ class UserService{
 		}).then((s)=>{
 			this._profileDetails = angular.copy(this.profileDetails);
 			this._userDetails = angular.copy(this.userDetails);
-			console.log(this.userDetails);
-			return s;
+			const userData = {};
+			this.userDetails
+				.filter(x=>!x.disabled)
+				.forEach((detail)=>{
+					userData[detail.key] = detail.value;
+				});
+			return this.updateUserDetails(userData);
 		}).catch((e)=>console.log(e))
 	}
 

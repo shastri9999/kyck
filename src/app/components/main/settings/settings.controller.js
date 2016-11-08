@@ -17,13 +17,13 @@ function SettingsController($scope,$state, UserService, $mdToast) {
 		if (name.indexOf('profile') >= 0)
 		{
 			UserService.saveProfileFields().then((s)=>{
-				$mdToast.showSimpleMessage("Profile Details Successfully Saved!");
+				$mdToast.showSimple("Profile Details Successfully Saved!");
 			}).catch((e)=>console.log(e));
 		}
 		else
 		{
 			UserService.saveKYCFields().then((s)=>{
-				$mdToast.showSimpleMessage("KYC Details Successfully Saved!");
+				$mdToast.showSimple("KYC Details Successfully Saved!");
 			}).catch((e)=>console.log(e));
 		}
 	}
