@@ -277,11 +277,6 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         steppers.back();
     }
 
-    function editForm() {
-    	var steppers = $mdStepper('stepper-demo');
-    	steppers.goto(0);
-    }
-
     function searchText(seacrh_query, search_str) {
         return search_str.indexOf(seacrh_query) > -1;
     }

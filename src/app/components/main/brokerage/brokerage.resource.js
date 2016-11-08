@@ -21,6 +21,24 @@ function BrokerageResource($resource) {
     		isArray: false,
     		url: URL + '/brokerage/findlist'
     	},
+        //TO BE DONE
+        userprofileupdate: {
+            method: 'POST',
+            params: {
+                  "brokerageCalenderSlotList": [
+                    {
+                          "brokerageId": "@string",
+                          "calenderSlot": "@date",
+                          "meetingContent": "@string",
+                          "meetingLocation": "@string",
+                          "meetingStatus": "@string",
+                          "meetingSubject": "@string"
+                        }
+                      ]
+                    }
+                },
+            url: URL + '/brokerage/submit'
+        },
     	brokeragesDetails: {
     		method: 'GET',
     		isArray: false,
