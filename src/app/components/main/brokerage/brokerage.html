@@ -15,8 +15,15 @@
     </div>
     <div class="right-stat" ng-if="!isBroker">
         <img style="width:250px;height:100%;position: absolute;" src="/assets/images/sidebar-background.png">
-        <div style="position:absolute;">
-            <progress-display is-vertical="true"/>   
+        <div style="position:absolute;right:0;left:0;">
+            <div><progress-display is-vertical="true"/></div>
+             <div class="contact-brokerage">
+                <div style="position: relative;">
+                    <input type="text" placeholder="Search"> 
+                    <img src="/assets/images/search.png" alt="Search" style="position: absolute;right:2px;">               
+                </div>
+            </div>
+            
         </div>
     </div>
     <div flex layout="column">

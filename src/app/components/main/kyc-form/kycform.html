@@ -1,5 +1,30 @@
 <form name="kycForm">
-	<div ng-repeat="field in vm.fields">
+	<div ng-repeat="field in vm.fields" ng-if="vm.isBroker">
+		<div ng-switch on="field.questionType">
+			<div class="input" ng-switch-when="DROPDOWN">
+				<label for="kyc-{{field.questionId}}">
+					{{field.questionDesc}}
+					<span ng-if="field.requireField==='REQUIRED'">*</span>
+				</label>
+				<input disabled name="kyc-{{field.questionId}}" type="text" ng-model="field.answerDesc">
+			</div>
+			<div class="input" ng-switch-when="RADIO">
+				<label for="kyc-{{field.questionId}}">
+					{{field.questionDesc}}
+					<span ng-if="field.requireField==='REQUIRED'">*</span>
+				</label>
+				<input disabled name="kyc-{{field.questionId}}" type="text" ng-model="field.answerDesc">
+			</div>
+			<div class="input" ng-switch-default>
+				<label for="kyc-{{field.questionId}}">
+					{{field.questionDesc}}
+					<span ng-if="field.requireField==='REQUIRED'">*</span>
+				</label>
+				<input disabled name="kyc-{{field.questionId}}" type="text" ng-model="field.answerText">
+			</div>
+		</div>
+	</div>	
+	<div ng-repeat="field in vm.fields" ng-if="!vm.isBroker">
 		<div ng-switch on="field.questionType">
 			<div class="input" ng-switch-when="DROPDOWN">
 				<label for="kyc-{{field.questionId}}">
