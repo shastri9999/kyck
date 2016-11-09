@@ -1,3 +1,18 @@
 <div class="block-chain">
-	<div class="top-bar">Block chain</div>
+	<div class="top-bar">
+		<div class="action" ng-click="vm.toggle()"> 
+			<img ng-if="!vm.expanded" src="/assets/images/expand.png" alt="Expand">
+			<img ng-if="vm.expanded" src="/assets/images/collapse.png" alt="Collapse">
+		</div>
+		Block chain
+	</div>
+	<div class="blocks" ng-if="vm.expanded">
+		<div class="block-wrapper" ng-repeat="block in vm.currentBlocks" ng-if="$index >= vm.startFrom">
+			<div class="block">{{block.number}}</div>
+			<div class="info">
+				<div>Date: 06/07/2016</div>
+				<div>Type: Invocation</div>
+			</div>
+		</div>
+	</div>
 </div>

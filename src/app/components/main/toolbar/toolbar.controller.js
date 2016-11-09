@@ -4,6 +4,7 @@ class ToolBarController {
 	constructor(AuthenticationService, $state, $filter, MessageService){
 		'ngInject';
 		
+		console.log(this);
 		const loggedInUser = AuthenticationService.getLoggedInUser();
 		const capitalize = $filter('capitalize');
 
@@ -26,6 +27,7 @@ class ToolBarController {
 			url: '/assets/images/flag-thailand.svg'
 		}];
 		this.activeFlag = this.flags[0];
+		console.log(this);
 	}
 
 	selectFlag(flag){

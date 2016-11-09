@@ -19,6 +19,7 @@ import './main.scss';
 
 const mainModule = angular.module('main-module', [
 	'ui.router',
+	BlockChainModule.name,
 	NavigationModule.name,
 	DashboardModule.name,
 	CalendarModule.name,
@@ -32,7 +33,6 @@ const mainModule = angular.module('main-module', [
 	SettingsModule.name,
 	ProfileFormModule.name,
 	KYCFormModule.name,
-	BlockChainModule.name
 	]);
 
 mainModule
