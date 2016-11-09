@@ -9,6 +9,7 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
     function init() {
         vm.nextStep = nextStep;
         vm.backStep = backStep;
+        vm.nextRequestStep = nextRequestStep;
         vm.selectedIndex = 0;
         vm.activeStep = 1;
         $scope.isBroker = AuthenticationService.isBroker();
@@ -18,13 +19,13 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         vm.timeslotSelected = false;
         vm.kycerror = false;
         vm.personalDetailsError = false;
+        vm.submitApplication = submitApplication;
 
         vm.changeUsers = changeUsers;
         if (!$scope.isBroker)
         {
             BrokerageResource.contactedBrokerages((response)=>{
                 vm.contactedBrokers = response.data;
-                console.log(vm.contactedBrokers);
             });
 
         }
@@ -77,6 +78,7 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         BrokerageResource.userAppointments((response)=>{
             vm.userAppointments = response.data;
             vm.userAppointmentsFiltered = vm.userAppointments;
+            console.log("NICE", vm.userAppointments);
             vm.userAppointment = vm.userAppointments[0];
             if (vm.userAppointments.length > 0) {
                 selectUser(0);
@@ -220,6 +222,16 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         vm.eventCreate = eventCreate;
     }
 
+    function submitApplication(status) {
+        BrokerageResource.updateApplication({"status": status,
+                "userId": vm.userAppointment.email},
+        function (response) {
+            console.log(response)
+        }, function (error) {
+            console.log(error);
+        });
+    }
+
     function nextStep() {
         vm.kycerror = false;
         vm.personalDetailsError = false;
@@ -253,11 +265,28 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         else if (vm.activeStep == 5) {
             var steppers = $mdStepper('stepper-demo');
             steppers.goto(0);
+            vm.activeStep = 1;
             return;
         }
         else
             moveNext();
 
+    }
+
+    function nextRequestStep() {
+        if (vm.activeStep > 1) {
+            document.getElementsByClassName('md-stepper-indicator ng-scope')[vm.activeStep-1].className+=" md-completed";
+            vm.allVerified = document.getElementsByClassName('md-stepper-indicator ng-scope md-completed').length===4;
+            console.log(document.getElementsByClassName('md-stepper-indicator ng-scope md-completed').length, vm.allVerified);
+        }
+        if (vm.activeStep == 5) {
+            var steppers = $mdStepper('stepper-demo');
+            steppers.goto(0);
+            vm.activeStep = 1;
+            return;
+        }
+        else
+            moveNext();
     }
 
     function moveNext() {

@@ -22,6 +22,24 @@ function BrokerageResource($resource) {
     		url: URL + '/brokerage/findlist'
     	},
         //TO BE DONE
+        updateApplication: {
+            method: 'POST',
+            isArray: false,
+            params: {
+                "status": "@status",
+                "userId": "@userId"
+            },
+            url: URL + '/dashboard/application/status'
+        },
+        updateMeetingStatus: {
+            method: 'POST',
+            isArray: false,
+            params: {
+                "status": "@status",
+                "userId": "@userId"
+            },
+            url: URL + '/dashboard/meeting/status'
+        },
         userprofileupdate: {
             method: 'POST',
             params: {
