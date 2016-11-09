@@ -1,6 +1,6 @@
 'use strict';
 
-function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialog, $filter, $log, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, UserService) {
+function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialog, $filter, $log, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, UserService, CalendarService) {
     'ngInject';
 
     var vm = this;
@@ -262,6 +262,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         BrokerageResource.updateApplication({"status": status,
                 "userId": vm.userAppointment.email},
         function (response) {
+            $mdToast.showSimple("Application has been successfully "+status.toLowerCase()+".");
             vm.userAppointment.applicationStatus = status;
             vm.selectedIndex = vm.userAppointments.findIndex(function (a) {return a.email == vm.userAppointment.email;})
             shuffletheorder();
@@ -271,10 +272,20 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
     }
 
     function updateMeetingStatus(status) {
+        function formatStatus(status) {
+            var t = status.toLowerCase();
+            if (t=="CONFIRM")
+                return "confirmed";
+            if (t=="RESCHEDULE")
+                return "rescheduled";
+            else
+                return t;
+        }
+
         BrokerageResource.updateMeetingStatus({"status": status,
                 "userId": vm.userAppointment.email},
         function (response) {
-            console.log(response)
+            $mdToast.showSimple("Appointment slot has been successfully "+formatStatus(status)+".");
         }, function (error) {
             console.log(error);
         });
@@ -461,6 +472,16 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
     }
 
     function selectUser(index) {
+        CalendarService.fetchBrokerMeetings().then((data)=>{
+            vm.userSlots = data.filter(function(a){
+                return a.userId === vm.userAppointment.email;
+            });
+            //startTime
+            //status
+            //
+        });
+        vm.activeStep = 1;
+        vm.allVerified = 0;
         vm.selectedIndex=index;
         vm.userAppointment = vm.userAppointments[index];
     }
