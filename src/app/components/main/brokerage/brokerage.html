@@ -146,14 +146,14 @@
         </div>
         <div ng-if="isBroker">
             <md-step md-label="Personal Details">
-                <md-step-body>
+                <md-step-body style="min-height:700px;">
                     <profile-form ng-class="{error:vm.personalDetailsError}" is-broker="isBroker" user-email-id="vm.getSelectedUserEmail()"/>
                 </md-step-body>
             </md-step>
         </div>
         <div ng-if="isBroker">
             <md-step md-label="KYC">
-                <md-step-body>
+                <md-step-body style="min-height:700px;">
                     <kyc-form ng-class="{error:vm.kycerror}" is-broker="isBroker" user-email-id="vm.getSelectedUserEmail()"/>
                 </md-step-body>
             </md-step>
@@ -172,14 +172,14 @@
 
         <div ng-if="!isBroker">
             <md-step md-label="Personal Details">
-                <md-step-body>
+                <md-step-body style="min-height:700px;">
                     <profile-form ng-class="{error:personalDetailsError}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/>
                 </md-step-body>
             </md-step>
         </div>
         <div ng-if="!isBroker">
             <md-step md-label="KYC">
-                <md-step-body>
+                <md-step-body style="min-height:700px;">
                     <kyc-form ng-class="{error:vm.kycerror}"/>
                 </md-step-body>
             </md-step>
@@ -247,7 +247,6 @@
                 <md-event-calendar-prev></md-event-calendar-prev>
                 <md-event-calendar-title></md-event-calendar-title>
                 <md-event-calendar-next></md-event-calendar-next>
-                <!-- <md-event-calendar-today></md-event-calendar-today> -->
             </md-event-calendar-header>
         </md-event-calendar>
         <h2 style="color: white;margin: 20px; margin-bottom: 0px;">Messages</h2>
