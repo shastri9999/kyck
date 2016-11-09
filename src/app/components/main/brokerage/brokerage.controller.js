@@ -230,6 +230,40 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         vm.eventCreate = eventCreate;
     }
 
+    function showDialog($event) {
+           var parentEl = angular.element(document.body);
+           var partner = (vm.partners.filter(x=>x.selected)[0]);
+           $mdDialog.show({
+             parent: parentEl,
+             targetEvent: $event,
+             template:
+               '<md-dialog aria-label="List dialog">' +
+               '  <md-dialog-content style="width:500px;height:400px;">'+
+                '<div class="dialog-content-broker">'+ 
+                ' You have submitted application and scheduled meeting with '+ partner.brokerageName +
+                ' on November ' + vm.selectedDay + ' at ' + vm.selectedHour + ':00.' +
+                ' </div>' + 
+               '  </md-dialog-content>' +
+               '  <md-dialog-actions>' +
+               '    <md-button ng-click="closeDialog()" class="md-primary">' +
+               '      Close Dialog' +
+               '    </md-button>' +
+               '  </md-dialog-actions>' +
+               '</md-dialog>',
+             controller: DialogController
+          });
+          function DialogController($scope, $mdDialog) {
+            'ngInject';
+            $scope.closeDialog = function() {
+                vm.timeslotSelected = false;
+                vm.activeStep = 1;
+                var steppers = $mdStepper('stepper-demo');
+                steppers.goto(0);
+                $mdDialog.hide();
+            }
+          }
+    }
+
     function nextStep() {
         vm.kycerror = false;
         vm.personalDetailsError = false;
@@ -269,22 +303,7 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
             });
         }
         else if (vm.activeStep == 5 && !vm.isBroker) {
-
-            
-            let confirm = $mdDialog.confirm({
-                title: 'Successfully submitted the application',
-                textContent: 'Some text content',
-                ok: "Ok",
-                no: false
-            });
-
-            $mdDialog
-                .show(confirm).then(function() {
-                    vm.timeslotSelected = false;
-                    vm.activeStep = 1;
-                    var steppers = $mdStepper('stepper-demo');
-                    steppers.goto(0);
-                });
+            showDialog();
             return;
         }
         else if (vm.activeStep == 5) {
@@ -355,6 +374,8 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         }
         var day = $selectedEvent.mday;
         var hour = $selectedEvent.mhour;
+        vm.selectedDay = day;
+        vm.selectedHour = hour;
 
         textContent = "You are booking an appointment on November " + day +" at "+ hour + ":00 . Are you sure?";
 
