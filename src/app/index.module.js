@@ -24,7 +24,28 @@ export default angular.module('kyck', [
 .config(config)
 .run(function($rootScope, $location, AuthenticationService){
 	'ngInject';
+
+	/* Todo: Move all this to service */
 	$rootScope.sideNavCollapsed = false;
+	$rootScope.shouldShowDocumentPreview = false;
+	$rootScope.documentPreviewLoading = false;
+	$rootScope.documentPreviewURL = '/assets/images/nric.jpg'
+	$rootScope.hideDocumentPreview = ()=>{
+		$rootScope.shouldShowDocumentPreview = false;
+	}
+	$rootScope.showDocumentPreview = (URL)=>{
+		if (URL)
+		{
+			$rootScope.documentPreviewLoading = false;
+			$rootScope.documentPreviewURL = URL;
+		}
+		else
+		{
+			$rootScope.documentPreviewLoading = true;
+			$rootScope.documentPreviewURL = '/assets/images/loading.gif'
+		}
+		$rootScope.shouldShowDocumentPreview = true;
+	}
 	$rootScope.messageView = {
 		activeInboxMessage: null,
 		activeSentMessage: null,

@@ -5,6 +5,23 @@
 				{{mainLoadingMessage}}
 			</div>
 		</div>
+		<div  ng-if="shouldShowDocumentPreview" class="preview-overlay">
+			<div class="dialog">
+				<div class="close" ng-click="hideDocumentPreview()" >X</div>
+				<div class="top">
+					<img ng-if="!documentPreviewLoading" ng-src="{{documentPreviewURL}}" alt="">
+					<div style="display: flex;background-color: #e5eff1;align-items: center; padding: 10px;">
+						<img src="/assets/images/loading.gif" style="margin-right: 20px;height:40px; width:40px;" alt="">
+						Please wait image is loading...
+					</div>
+				</div>
+				<div class="bottom">
+					Fit document inside screen.<br>
+					Place on contrasting background
+				</div>
+			</div>
+		</div>
+
 		<div class="navigation">
 			<navigation />			
 		</div>

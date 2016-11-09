@@ -5,6 +5,10 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
 
     var vm = this;
     init();
+    function convert(obj) {
+        obj['img'] = '/assets/images/partnerLogos/' + obj['brokerageName'] + '.png';
+        return obj;
+    }
 
     function init() {
         vm.nextStep = nextStep;
@@ -78,10 +82,6 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             vm.brokeragesDetails = req.data;
         }, function () {});
 
-        function convert(obj) {
-            obj['img'] = '/assets/images/partnerLogos/' + obj['brokerageName'] + '.png';
-            return obj;
-        }
 
         BrokerageResource.userAppointments((response)=>{
             vm.userAppointments = response.data;
@@ -121,18 +121,10 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         }
         
         vm.preview = function(document){
-            DocumentResource.metadata({documentType: document.documentType}, function(response){
-                var name = response.data["documentName"];
-                var mimeType = response.data["mimeType"];
-                $log.debug(name);
-                var file = DocumentResource.download({documentId: name}, function(response){
-                    $log.debug("Download called");
-                    var blob = new Blob([(response)], {type: mimeType});
-                    blob = URL.createObjectURL(blob);
-                    $state.go('main.document.preview', {picFile: blob});
-                })
-            });
+        
+            $rootScope.showDocumentPreview();
         }
+
 
         var validationReports = [
             {
