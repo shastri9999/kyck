@@ -210,16 +210,18 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.validationReports = validationReports;
 
         var events = [];
+        var currentDate = new Date();
+        currentDate = currentDate.getDate();
         for(var i=0; i<=24; ++i)
         {
-            for(var j=9; j<=17; ++j)
+            for(var j=currentDate; j<= (30-currentDate); ++j)
             {
                 events.push({
                     start: getDate(i, j),
                     allDay: true,
                     customClass: 'book-appointment',
                     title: 'Slot - ' + (j-8),
-                    mday: 7 + i,
+                    mday: currentDate + i,
                     mhour: j
 
                 })
@@ -236,10 +238,10 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
            console.log(partner.brokerageId, partner.brokerageName);
            $http({
             method: 'POST',
-            url: '/kyck-rest/brokerage/calender/usrupdate',
+            url: '/kyck-rest/brokerage/submit',
             data:{
               "brokerageCalenderSlot": {
-                "brokerageId": partner.brokerageId,
+                "brokerageId": partner.brokerageId+"",
                 "calenderSlot": "2016-11-10T09:57:09.609Z",
                 "meetingContent": "Meeting about brokerage application",
                 "meetingLocation": "Singapore",
@@ -370,6 +372,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         if (hour) {
             date.setHours(hour);
         }
+        date.setMinutes(0);
         return date;
     }
 
@@ -393,6 +396,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         var hour = $selectedEvent.mhour;
         vm.selectedDay = day;
         vm.selectedHour = hour;
+        console.log($selectedEvent)
 
         textContent = "You are booking an appointment on November " + day +" at "+ hour + ":00 . Are you sure?";
 

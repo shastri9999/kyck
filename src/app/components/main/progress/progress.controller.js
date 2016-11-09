@@ -7,9 +7,11 @@ function ProgressController(DashboardResource, AuthenticationService, $rootScope
 	'ngInject';
 	const vm = this;
 	vm.currentUserId = AuthenticationService.getLoggedInUser().userId;
-  const update = ()=>{
-     angular.element(document.querySelector('.progress-chart')).empty();
-     angular.element(document.querySelector('.progress-chart')).empty();
+  const update = (again)=>{
+     if (again)
+     {
+        angular.element(document.querySelector('.vertical.progress-chart')).empty();
+     }
      Promise.all([DashboardResource.profileStatus({userId: vm.currentUserId}).$promise,
         DashboardResource.kycStatus({userId: vm.currentUserId}).$promise,
         DashboardResource.documentStatus({userId: vm.currentUserId}).$promise]).then((values)=>{
@@ -62,7 +64,7 @@ function ProgressController(DashboardResource, AuthenticationService, $rootScope
   update();
 	$rootScope.$on('updateProgressChart', (event, data)=>{
     console.log('Chart update is called');
-    update();
+    update(true);
   })
 }
 

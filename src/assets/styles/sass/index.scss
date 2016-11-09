@@ -82,6 +82,8 @@ table {
   margin-top: 20px;
   &.vertical {
     width: 190px;
+    height: 190px;
+    overflow: hidden;
   }
 }
 

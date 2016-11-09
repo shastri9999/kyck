@@ -9,7 +9,8 @@ function ProgressComponent() {
   let directive = {
     restrict: 'E',
     scope: {
-    	isVertical:'='
+    	isVertical:'=',
+      chartId: '='
     },
     templateUrl,
     controller,

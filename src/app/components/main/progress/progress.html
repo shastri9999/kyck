@@ -6,7 +6,7 @@
     		transform: translateX(-6px) translateY(-1px);	
 		}
 	</style>
-	<div ng-class="{'progress-chart': true, vertical: vm.isVertical}" class="progress-chart">
+	<div ng-class="{'progress-chart': true, vertical: vm.isVertical}" id="{{vm.chartId}}" class="progress-chart">
 	
 	</div>
 	<div class="legend" ng-class="{legend: true, vertical: vm.isVertical}" style="display: flex; justify-content: space-between;margin-top: 10px;">
