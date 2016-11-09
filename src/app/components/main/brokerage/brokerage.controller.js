@@ -235,10 +235,13 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         vm.personalDetailsError = false;
 
         if (vm.activeStep == 3 && !vm.isBroker) {
+            $rootScope.mainLoading = true;
+            $rootScope.mainLoadingMessage = "Saving Profile details... Please wait."
             UserService.saveProfileFields().then(function(success){
                  /* show success pop up move to next */
                  $mdToast.showSimple('Personal Details Saved Successfully!');
                  $rootScope.$broadcast('updateProgressChart');
+                 $rootScope.mainLoading = false;
                  moveNext();
                 })
             .catch(function(error){
@@ -250,10 +253,13 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         }
         
         else if (vm.activeStep == 4 && !vm.isBroker) {
+            $rootScope.mainLoading = true;
+            $rootScope.mainLoadingMessage = "Saving KYC details... Please wait."
             UserService.saveKYCFields().then(function(success){
                  /* show success pop up move to next */
                  $mdToast.showSimple('KYC Details Saved Successfully!');
                  $rootScope.$broadcast('updateProgressChart');
+                $rootScope.mainLoading = false;
                  moveNext();
             })
             .catch(function(error){
@@ -263,9 +269,22 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
             });
         }
         else if (vm.activeStep == 5 && !vm.isBroker) {
-            vm.activeStep = 1;
-            var steppers = $mdStepper('stepper-demo');
-            steppers.goto(0);
+
+            
+            let confirm = $mdDialog.confirm({
+                title: 'Successfully submitted the application',
+                textContent: 'Some text content',
+                ok: "Ok",
+                no: false
+            });
+
+            $mdDialog
+                .show(confirm).then(function() {
+                    vm.timeslotSelected = false;
+                    vm.activeStep = 1;
+                    var steppers = $mdStepper('stepper-demo');
+                    steppers.goto(0);
+                });
             return;
         }
         else if (vm.activeStep == 5) {

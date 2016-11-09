@@ -134,7 +134,6 @@
                             <center><img ng-src="{{partner.img}}"/></center>
                         </div>
                     </div>
-
                     <h3 class="partnersHeader">All Partners</h3>
                     <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'REGULAR'}">
                         <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected , 'deactivated': partner.status}">

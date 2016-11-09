@@ -9,6 +9,7 @@ function ProgressController(DashboardResource, AuthenticationService, $rootScope
 	vm.currentUserId = AuthenticationService.getLoggedInUser().userId;
   const update = ()=>{
      angular.element(document.querySelector('.progress-chart')).empty();
+     angular.element(document.querySelector('.progress-chart')).empty();
      Promise.all([DashboardResource.profileStatus({userId: vm.currentUserId}).$promise,
         DashboardResource.kycStatus({userId: vm.currentUserId}).$promise,
         DashboardResource.documentStatus({userId: vm.currentUserId}).$promise]).then((values)=>{

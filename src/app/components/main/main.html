@@ -1,4 +1,10 @@
 <div class="main-container">
+		<div  ng-if="mainLoading" class="overlay">
+			<div class="dialog">
+				<img src="/assets/images/loading.gif" alt="" height="40px" width="40px">
+				{{mainLoadingMessage}}
+			</div>
+		</div>
 		<div class="navigation">
 			<navigation />			
 		</div>
