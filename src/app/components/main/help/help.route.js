@@ -11,6 +11,7 @@ function routeConfig($stateProvider) {
 		url: '/help',
 		templateUrl,
 		controller,
+		controllerAs: 'vm',
 		breadCrumb: 'Help'
 	});
 }
