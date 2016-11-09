@@ -36,7 +36,6 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
                         });
                         return partner;
                     })
-                    console.log('partners', vm.partners);
                     vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
                 });            
             });
@@ -235,22 +234,41 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
     function showDialog($event) {
            var parentEl = angular.element(document.body);
            var partner = (vm.partners.filter(x=>x.selected)[0]);
-           console.log(partner.brokerageId, partner.brokerageName);
            $http({
             method: 'POST',
             url: '/kyck-rest/brokerage/submit',
+            headers: {
+                "Content-Type": "application/json"
+            },            
             data:{
-              "brokerageCalenderSlot": {
+              "brokerageCalenderSlot": [{
                 "brokerageId": partner.brokerageId+"",
-                "calenderSlot": "2016-11-10T09:57:09.609Z",
+                "calenderSlot": vm.selectedTimeSlot,
                 "meetingContent": "Meeting about brokerage application",
                 "meetingLocation": "Singapore",
                 "meetingStatus": "PENDING",
                 "meetingSubject": "Discussion about brokerage application "
-              }
+              }]
             }
            }).then((s)=>{
             console.log(s);
+             BrokerageResource.contactedBrokerages((response)=>{
+                vm.contactedBrokers = response.data;
+                BrokerageResource.brokeragesList((req)=> {
+                    var brokeragesList = req.data;
+                    vm.partners = brokeragesList.map(convert);
+                    vm.partners = vm.partners.map((partner)=>{
+                        vm.contactedBrokers.forEach((broker)=>{
+                            if (broker.brokerageId == partner.brokerageName)
+                            {
+                                partner.status = broker.status;
+                            }
+                        });
+                        return partner;
+                    })
+                    vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+                });            
+            });
            }).catch(e=>console.log(e));
            $mdDialog.show({
              parent: parentEl,
@@ -396,7 +414,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         var hour = $selectedEvent.mhour;
         vm.selectedDay = day;
         vm.selectedHour = hour;
-        console.log($selectedEvent)
+        vm.selectedTimeSlot = $selectedEvent.start.toISOString();
 
         textContent = "You are booking an appointment on November " + day +" at "+ hour + ":00 . Are you sure?";
 
