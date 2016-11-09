@@ -24,6 +24,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.kycerror = false;
         vm.personalDetailsError = false;
         vm.submitApplication = submitApplication;
+        vm.updateMeetingStatus = updateMeetingStatus;
 
         vm.changeUsers = changeUsers;
         if (!$scope.isBroker)
@@ -85,7 +86,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         BrokerageResource.userAppointments((response)=>{
             vm.userAppointments = response.data;
             vm.userAppointmentsFiltered = vm.userAppointments;
-            console.log("NICE", vm.userAppointments);
+            shuffletheorder();
             vm.userAppointment = vm.userAppointments[0];
             if (vm.userAppointments.length > 0) {
                 selectUser(0);
@@ -237,8 +238,40 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.eventCreate = eventCreate;
     }
 
+    function shuffletheorder() {
+        function statusToNum(status) {
+            if (status == 'PENDING')
+                return 0;
+            if (status == 'APPROVED')
+                return 1;
+            if (status == 'REJECT')
+                return 2;
+        }
+
+        vm.userAppointments.sort(function(a,b) {
+            if (statusToNum(a.applicationStatus) < statusToNum(b.applicationStatus))
+                return -1;
+            else if (statusToNum(a.applicationStatus) === statusToNum(b.applicationStatus))
+                return 0;
+            else
+                return 1;
+        });
+    }
+
     function submitApplication(status) {
         BrokerageResource.updateApplication({"status": status,
+                "userId": vm.userAppointment.email},
+        function (response) {
+            vm.userAppointment.applicationStatus = status;
+            vm.selectedIndex = vm.userAppointments.findIndex(function (a) {return a.email == vm.userAppointment.email;})
+            shuffletheorder();
+        }, function (error) {
+            console.log(error);
+        });
+    }
+
+    function updateMeetingStatus(status) {
+        BrokerageResource.updateMeetingStatus({"status": status,
                 "userId": vm.userAppointment.email},
         function (response) {
             console.log(response)
@@ -246,7 +279,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             console.log(error);
         });
     }
-    
+
     function showDialog($event) {
            var parentEl = angular.element(document.body);
            var partner = (vm.partners.filter(x=>x.selected)[0]);

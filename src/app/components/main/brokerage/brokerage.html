@@ -98,7 +98,8 @@
                         <a class="pending-btn ng-binding">PENDING</a>
                     </div>
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <div class="actnItem">CONFIRM</div>
+                        <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
+                        <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
                     </div>
                 </div>
                 <div class="appointmentTile">
@@ -107,7 +108,8 @@
                         <a class="pending-btn ng-binding">PENDING</a>
                     </div>
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <div class="actnItem">CONFIRM</div>
+                        <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
+                        <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
                     </div>
                 </div>
                 <div class="appointmentTile">
