@@ -8,6 +8,10 @@ function BlockChain() {
 
   let directive = {
     restrict: 'E',
+    scope: {
+    	isVertical:'=',
+      chartId: '='
+    },
     templateUrl,
     controller,
     controllerAs: 'vm',

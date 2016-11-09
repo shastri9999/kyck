@@ -4,10 +4,27 @@
 	display: flex;
 	flex-flow: column;
 	border-radius: 5px;
+	left:0;
+	right:0;
+	z-index: 5;
 	.top-bar {
+	    color:white;
 		background-color: #4f6479;
-		height: 50px;
+		height: 60px;
 		display: flex;
 		align-items: center;
+		padding-left: 15px;
+		position: relative;
+		.action {
+			position: absolute;
+			left:20px;
+			top: -25px;
+			height: 40px;
+			width: 40px;
+			border-radius: 4px;
+			background-color: #4f6479;
+			cursor: pointer;
+			text-align: center;
+		}
 	}
 }
