@@ -1,3 +1,18 @@
+<style>
+.ticked {
+    background: url(../../../../assets/images/ticked.png) no-repeat;
+}
+.ticked.grey {
+    background: url(../../../../assets/images/tickedgrey.png) no-repeat;
+}
+.unticked {
+    background: url(../../../../assets/images/unticked.png) no-repeat;
+}
+.unticked.grey {
+    background: url(../../../../assets/images/untickedgrey.png) no-repeat;
+}
+</style>
+
 <div layout="row" class="mainArea">
     <div class="contactedUsers" ng-if="isBroker">
         <div class="contactedUsersTitle">Contacted Users</div>
@@ -92,17 +107,19 @@
             </div>
             <div flex="50">
                 <span class="title">Appointment Slots</span>
-                <div class="appointmentTile">
+                <div class="appointmentTile" ng-repeat="slot in vm.userSlots">
                     <div style="float:left; padding:10px;">
-                        <div class="header">27th Oct 16, 07:20am</div>
-                        <a class="pending-btn ng-binding">PENDING</a>
+                        <div class="header">{{slot.startTime}}</div>
+                        <a class="pending-btn ng-binding">{{slot.status}}</a>
                     </div>
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
-                        <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
+                        <span ng-if="slot.status==='PENDING'">
+                            <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
+                            <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
+                        </span>
                     </div>
                 </div>
-                <div class="appointmentTile">
+                <!-- <div class="appointmentTile">
                     <div style="float:left; padding:10px;">
                         <div class="header">29th Oct 16, 07:20am</div>
                         <a class="pending-btn ng-binding">PENDING</a>
@@ -120,7 +137,7 @@
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
                         <div class="actnItem">DONE</div>
                     </div>
-                </div>
+                </div> -->
             </div>
             </div>
             </md-step-body>
