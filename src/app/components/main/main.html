@@ -1,4 +1,27 @@
 <div class="main-container">
+		<div  ng-if="mainLoading" class="overlay">
+			<div class="dialog">
+				<img src="/assets/images/loading.gif" alt="" height="40px" width="40px">
+				{{mainLoadingMessage}}
+			</div>
+		</div>
+		<div  ng-if="shouldShowDocumentPreview" class="preview-overlay">
+			<div class="dialog">
+				<div class="close" ng-click="hideDocumentPreview()" >X</div>
+				<div class="top">
+					<img ng-if="!documentPreviewLoading" class="preview" ng-src="{{documentPreviewURL}}" alt="">
+					<div ng-if="documentPreviewLoading" style="display: flex;background-color: #e5eff1;align-items: center; padding: 10px;">
+						<img src="/assets/images/loading.gif" style="margin-right: 20px;height:40px; width:40px;" alt="">
+						Please wait image is loading...
+					</div>
+				</div>
+				<div class="bottom">
+					Fit document inside screen.<br>
+					Place on contrasting background
+				</div>
+			</div>
+		</div>
+
 		<div class="navigation">
 			<navigation />			
 		</div>
@@ -6,4 +29,5 @@
 			<div class="menubar"><toolbar /></div>
 			<div class="display-area" ui-view></div>
 		</div>
+		<block-chain />
 </div>

@@ -16,7 +16,7 @@
     <div class="right-stat" ng-if="!isBroker">
         <img style="width:250px;height:100%;position: absolute;" src="/assets/images/sidebar-background.png">
         <div style="position:absolute;right:15px;left:10px;">
-            <div><progress-display is-vertical="true"/></div>
+            <div><progress-display chart-id="brokerage-progress" is-vertical="true"/></div>
              <div class="contact-brokerage">
                 <div style="position: relative;display: flex; flex-flow: column;">
                     <h2 style="color:white;">Contact Brokerage: </h2>
@@ -129,15 +129,14 @@
                 <md-step-body layout="row" layout-wrap>
                     <h3 class="partnersHeader">Premium Partners</h3>
                     <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'PREMIUM'}" ng-class="{'centerAlign': vm.premiumPartnersCount}">
-                        <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
+                        <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected , 'deactivated': partner.status}">
                             <img class="premiereIcon" src="/assets/images/premiere.png"/>
                             <center><img ng-src="{{partner.img}}"/></center>
                         </div>
                     </div>
-
                     <h3 class="partnersHeader">All Partners</h3>
                     <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'REGULAR'}">
-                        <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected }">
+                        <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected , 'deactivated': partner.status}">
                             <center><img ng-src="{{partner.img}}"/></center>
                         </div>
                     </div>
@@ -147,14 +146,14 @@
         </div>
         <div ng-if="isBroker">
             <md-step md-label="Personal Details">
-                <md-step-body>
+                <md-step-body style="min-height:700px;">
                     <profile-form ng-class="{error:vm.personalDetailsError}" is-broker="isBroker" user-email-id="vm.getSelectedUserEmail()"/>
                 </md-step-body>
             </md-step>
         </div>
         <div ng-if="isBroker">
             <md-step md-label="KYC">
-                <md-step-body>
+                <md-step-body style="min-height:700px;">
                     <kyc-form ng-class="{error:vm.kycerror}" is-broker="isBroker" user-email-id="vm.getSelectedUserEmail()"/>
                 </md-step-body>
             </md-step>
@@ -173,14 +172,14 @@
 
         <div ng-if="!isBroker">
             <md-step md-label="Personal Details">
-                <md-step-body>
+                <md-step-body style="min-height:700px;">
                     <profile-form ng-class="{error:personalDetailsError}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/>
                 </md-step-body>
             </md-step>
         </div>
         <div ng-if="!isBroker">
             <md-step md-label="KYC">
-                <md-step-body>
+                <md-step-body style="min-height:700px;">
                     <kyc-form ng-class="{error:vm.kycerror}"/>
                 </md-step-body>
             </md-step>
@@ -226,7 +225,11 @@
         <footer>
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
                 <md-button class="md-raised md-back" ng-click="vm.backStep()" ng-show="vm.activeStep>1">Back</md-button>
-                <md-button class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.activeStep==5 && !vm.timeslotSelected) || (vm.activeStep==1 && selectedPartners.size<1)">
+                <md-button ng-if="!isBroker" class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.activeStep==5 && !vm.timeslotSelected) || (vm.activeStep==1 && selectedPartners.size==0)">
+                    <span ng-show="vm.activeStep<5">Next</span>
+                    <span ng-show="vm.activeStep==5">Submit</span>
+                </md-button>
+                <md-button ng-if="isBroker" class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.activeStep==5 && !vm.timeslotSelected) || (vm.activeStep==1)">
                     <span ng-show="vm.activeStep<5">Next</span>
                     <span ng-show="vm.activeStep==5">Submit</span>
                 </md-button>
@@ -253,7 +256,6 @@
                 <md-event-calendar-prev></md-event-calendar-prev>
                 <md-event-calendar-title></md-event-calendar-title>
                 <md-event-calendar-next></md-event-calendar-next>
-                <!-- <md-event-calendar-today></md-event-calendar-today> -->
             </md-event-calendar-header>
         </md-event-calendar>
         <h2 style="color: white;margin: 20px; margin-bottom: 0px;">Messages</h2>

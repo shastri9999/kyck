@@ -229,6 +229,7 @@
         flex-flow: column;
         flex-basis: 260px;
         overflow: hidden;
+        flex-shrink:0;
         position:relative;
         .appointments {
             z-index: 1;

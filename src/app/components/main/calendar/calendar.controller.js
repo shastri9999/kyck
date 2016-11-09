@@ -9,7 +9,6 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
   const userId = AuthenticationService.getLoggedInUser().userId;
   const isBroker = AuthenticationService.isBroker();
   const month = 11;
-  console.log(isBroker);
   if (!isBroker)
   {
 

@@ -1,0 +1,13 @@
+.block-chain {
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	flex-flow: column;
+	border-radius: 5px;
+	.top-bar {
+		background-color: #4f6479;
+		height: 50px;
+		display: flex;
+		align-items: center;
+	}
+}

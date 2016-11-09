@@ -1,10 +1,14 @@
 'use strict';
 
-function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $filter, $log, BrokerageResource, AuthenticationService, DocumentResource, UserService) {
+function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialog, $filter, $log, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, UserService) {
     'ngInject';
 
     var vm = this;
     init();
+    function convert(obj) {
+        obj['img'] = '/assets/images/partnerLogos/' + obj['brokerageName'] + '.png';
+        return obj;
+    }
 
     function init() {
         vm.nextStep = nextStep;
@@ -12,7 +16,7 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         vm.nextRequestStep = nextRequestStep;
         vm.selectedIndex = 0;
         vm.activeStep = 1;
-        $scope.isBroker = AuthenticationService.isBroker();
+        vm.isBroker = $scope.isBroker = AuthenticationService.isBroker();
         vm.selectUser = selectUser;
         vm.getSelectedUserEmail =getSelectedUserEmail;
         $scope.selectedPartners = new Set();
@@ -24,9 +28,20 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         vm.changeUsers = changeUsers;
         if (!$scope.isBroker)
         {
-            BrokerageResource.contactedBrokerages((response)=>{
-                vm.contactedBrokers = response.data;
-            });
+            BrokerageResource.brokeragesList((req)=> {
+                var brokeragesList = req.data;
+                vm.partners = brokeragesList.map(convert);
+                vm.partners = vm.partners.map((partner)=>{
+                    vm.contactedBrokers.forEach((broker)=>{
+                        if (broker.brokerageId == partner.brokerageName)
+                        {
+                            partner.status = broker.status;
+                        }
+                    });
+                    return partner;
+                })
+                vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+            });            
 
         }
         BrokerageResource.userprofileget(function(response){
@@ -52,6 +67,8 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         });
 
         vm.toggleSelected = function(partner){
+            if (partner.status)
+                return;
             partner.selected = !partner.selected;
             if(partner.selected){
                 $scope.selectedPartners.add(partner.title);
@@ -64,16 +81,6 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
             vm.brokeragesDetails = req.data;
         }, function () {});
 
-        function convert(obj) {
-            obj['img'] = '/assets/images/partnerLogos/' + obj['brokerageName'] + '.png';
-            return obj;
-        }
-
-        BrokerageResource.brokeragesList(function (req) {
-            var brokeragesList = req.data;
-            vm.partners = brokeragesList.map(convert);
-            vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
-        }, function () {});
 
         BrokerageResource.userAppointments((response)=>{
             vm.userAppointments = response.data;
@@ -114,18 +121,24 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         }
         
         vm.preview = function(document){
+            $rootScope.showDocumentPreview();
             DocumentResource.metadata({documentType: document.documentType}, function(response){
                 var name = response.data["documentName"];
                 var mimeType = response.data["mimeType"];
-                $log.debug(name);
-                var file = DocumentResource.download({documentId: name}, function(response){
-                    $log.debug("Download called");
-                    var blob = new Blob([(response)], {type: mimeType});
-                    blob = URL.createObjectURL(blob);
-                    $state.go('main.document.preview', {picFile: blob});
+                $http({
+                    method: 'GET',
+                    url: '/kyck-rest/document/download/string64',
+                    params: {documentId: name},
+                    transformResponse: [function (data) {
+                          return data;
+                      }]
+                }).then((data)=>{
+                    let URL = 'data:' + mimeType + ';base64,' + data.data;
+                    $rootScope.showDocumentPreview(URL);
                 })
             });
         }
+
 
         var validationReports = [
             {
@@ -202,16 +215,18 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         vm.validationReports = validationReports;
 
         var events = [];
+        var currentDate = new Date();
+        currentDate = currentDate.getDate();
         for(var i=0; i<=24; ++i)
         {
-            for(var j=9; j<=17; ++j)
+            for(var j=currentDate; j<= (30-currentDate); ++j)
             {
                 events.push({
                     start: getDate(i, j),
                     allDay: true,
                     customClass: 'book-appointment',
                     title: 'Slot - ' + (j-8),
-                    mday: 7 + i,
+                    mday: currentDate + i,
                     mhour: j
 
                 })
@@ -231,15 +246,89 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
             console.log(error);
         });
     }
+    
+    function showDialog($event) {
+           var parentEl = angular.element(document.body);
+           var partner = (vm.partners.filter(x=>x.selected)[0]);
+           $http({
+            method: 'POST',
+            url: '/kyck-rest/brokerage/submit',
+            headers: {
+                "Content-Type": "application/json"
+            },            
+            data:{
+              "brokerageCalenderSlot": [{
+                "brokerageId": partner.brokerageId+"",
+                "calenderSlot": vm.selectedTimeSlot,
+                "meetingContent": "Meeting about brokerage application",
+                "meetingLocation": "Singapore",
+                "meetingStatus": "PENDING",
+                "meetingSubject": "Discussion about brokerage application "
+              }]
+            }
+           }).then((s)=>{
+            console.log(s);
+             BrokerageResource.contactedBrokerages((response)=>{
+                vm.contactedBrokers = response.data;
+                BrokerageResource.brokeragesList((req)=> {
+                    var brokeragesList = req.data;
+                    vm.partners = brokeragesList.map(convert);
+                    vm.partners = vm.partners.map((partner)=>{
+                        vm.contactedBrokers.forEach((broker)=>{
+                            if (broker.brokerageId == partner.brokerageName)
+                            {
+                                partner.status = broker.status;
+                            }
+                        });
+                        return partner;
+                    })
+                    vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+                });            
+            });
+           }).catch(e=>console.log(e));
+           $mdDialog.show({
+             parent: parentEl,
+             targetEvent: $event,
+             template:
+               '<md-dialog aria-label="List dialog">' +
+               '  <md-dialog-content style="width:500px;height:400px;">'+
+                '<div class="dialog-content-broker">'+ 
+                ' You have submitted application and scheduled meeting with '+ partner.brokerageName +
+                ' on November ' + vm.selectedDay + ' at ' + vm.selectedHour + ':00.' +
+                ' </div>' + 
+               '  </md-dialog-content>' +
+               '  <md-dialog-actions>' +
+               '    <md-button ng-click="closeDialog()" class="md-primary">' +
+               '      Close Dialog' +
+               '    </md-button>' +
+               '  </md-dialog-actions>' +
+               '</md-dialog>',
+             controller: DialogController
+          });
+          function DialogController($scope, $mdDialog) {
+            'ngInject';
+            $scope.closeDialog = function() {
+                vm.timeslotSelected = false;
+                vm.activeStep = 1;
+                var steppers = $mdStepper('stepper-demo');
+                steppers.goto(0);
+                $mdDialog.hide();
+            }
+          }
+    }
 
     function nextStep() {
         vm.kycerror = false;
         vm.personalDetailsError = false;
 
         if (vm.activeStep == 3 && !vm.isBroker) {
+            $rootScope.mainLoading = true;
+            $rootScope.mainLoadingMessage = "Saving Profile details... Please wait."
             UserService.saveProfileFields().then(function(success){
                  /* show success pop up move to next */
                  $mdToast.showSimple('Personal Details Saved Successfully!');
+                 $rootScope.$broadcast('updateProgressChart');
+                 $rootScope.mainLoading = false;
                  moveNext();
                 })
             .catch(function(error){
@@ -250,10 +339,14 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
             });
         }
         
-        else if (vm.activeStep == 4) {
+        else if (vm.activeStep == 4 && !vm.isBroker) {
+            $rootScope.mainLoading = true;
+            $rootScope.mainLoadingMessage = "Saving KYC details... Please wait."
             UserService.saveKYCFields().then(function(success){
                  /* show success pop up move to next */
                  $mdToast.showSimple('KYC Details Saved Successfully!');
+                 $rootScope.$broadcast('updateProgressChart');
+                $rootScope.mainLoading = false;
                  moveNext();
             })
             .catch(function(error){
@@ -262,7 +355,12 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
                 return;
             });
         }
+        else if (vm.activeStep == 5 && !vm.isBroker) {
+            showDialog();
+            return;
+        }
         else if (vm.activeStep == 5) {
+            vm.activeStep = 1;
             var steppers = $mdStepper('stepper-demo');
             steppers.goto(0);
             vm.activeStep = 1;
@@ -315,9 +413,7 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
     }
 
     function changeUsers() {
-        console.log(vm.searchUsername);
         vm.userAppointmentsFiltered = vm.userAppointments.filter(searchAppointment);
-        console.log(vm.userAppointmentsFiltered);
     }
 
     function getDate(offsetDays, hour) {
@@ -327,6 +423,7 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         if (hour) {
             date.setHours(hour);
         }
+        date.setMinutes(0);
         return date;
     }
 
@@ -348,6 +445,9 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
         }
         var day = $selectedEvent.mday;
         var hour = $selectedEvent.mhour;
+        vm.selectedDay = day;
+        vm.selectedHour = hour;
+        vm.selectedTimeSlot = $selectedEvent.start.toISOString();
 
         textContent = "You are booking an appointment on November " + day +" at "+ hour + ":00 . Are you sure?";
 

@@ -13,6 +13,7 @@ import MessagesModule from './messages/messages.module';
 import ProfileFormModule from './profile-form/profileform.module';
 import KYCFormModule from './kyc-form/kycform.module';
 import SettingsModule from './settings/settings.module';
+import BlockChainModule from './blockchain/blockchain.module';
 import route from './main.route';
 import './main.scss';
 
@@ -31,6 +32,7 @@ const mainModule = angular.module('main-module', [
 	SettingsModule.name,
 	ProfileFormModule.name,
 	KYCFormModule.name,
+	BlockChainModule.name
 	]);
 
 mainModule
