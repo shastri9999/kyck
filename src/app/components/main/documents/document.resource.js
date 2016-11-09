@@ -19,8 +19,7 @@ function DocumentResource($resource, $rootScope) {
     		params: {
     			documentId: '@name'
     		},
-            responseType: 'arraybuffer',
-    		url: URL + 'download'
+    		url: URL + 'download/string64'
     	},
         categories: {
             method: 'GET',

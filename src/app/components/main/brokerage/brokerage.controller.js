@@ -15,7 +15,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.backStep = backStep;
         vm.selectedIndex = 0;
         vm.activeStep = 1;
-        $scope.isBroker = AuthenticationService.isBroker();
+        vm.isBroker = $scope.isBroker = AuthenticationService.isBroker();
         vm.selectUser = selectUser;
         vm.getSelectedUserEmail =getSelectedUserEmail;
         $scope.selectedPartners = new Set();
@@ -121,8 +121,22 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         }
         
         vm.preview = function(document){
-        
             $rootScope.showDocumentPreview();
+            DocumentResource.metadata({documentType: document.documentType}, function(response){
+                var name = response.data["documentName"];
+                var mimeType = response.data["mimeType"];
+                $http({
+                    method: 'GET',
+                    url: '/kyck-rest/document/download/string64',
+                    params: {documentId: name},
+                    transformResponse: [function (data) {
+                          return data;
+                      }]
+                }).then((data)=>{
+                    let URL = 'data:' + mimeType + ';base64,' + data.data;
+                    $rootScope.showDocumentPreview(URL);
+                })
+            });
         }
 
 

@@ -9,7 +9,7 @@
 			 	<figure class="red-circle"></figure>
 			 	<span style="font-weight: 100;font-size: 12px;">{{ document.docType || 'Required' }}</span>
 			 </div>
-			<span>{{ document.comment || 'Lorem ipsum dorum sit amet, consectuter' }}</span>
+			<span>{{ document.comment}}</span>
 		</div>
 	</div>
 	<div class="document-action" ng-if="!document.documentID || document.replaceAction" ngf-drag-over-class="'dragover'" ngf-drop="upload($file, document)">

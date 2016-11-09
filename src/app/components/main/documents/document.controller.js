@@ -1,6 +1,6 @@
 'use strict';
 
-function DocumentController($rootScope, $state, DocumentResource) {
+function DocumentController($rootScope, $state, DocumentResource, $http) {
 	'ngInject';
 	var vm = this;
 
@@ -30,20 +30,23 @@ function DocumentController($rootScope, $state, DocumentResource) {
 	}
 
 
-// DocumentResource.metadata({documentType: document.documentType}, function(response){
-		// 	var name = response.data["documentName"];
-		// 	var mimeType = response.data["mimeType"];
-		// 	$log.debug(name);
-		// 	var file = DocumentResource.download({documentId: name}, function(response){
-		// 		$log.debug("Download called");
-		// 		var blob = new Blob([(response)], {type: mimeType});
-		// 		blob = URL.createObjectURL(blob);
-		// 		$state.go('main.document.preview', {picFile: blob});
-		// 	})
-		// });
 	vm.preview = function(document){
-		
 		$rootScope.showDocumentPreview();
+		DocumentResource.metadata({documentType: document.documentType}, function(response){
+			var name = response.data["documentName"];
+			var mimeType = response.data["mimeType"];
+			$http({
+				method: 'GET',
+				url: '/kyck-rest/document/download/string64',
+				params: {documentId: name},
+				transformResponse: [function (data) {
+				      return data;
+				  }]
+			}).then((data)=>{
+				let URL = 'data:' + mimeType + ';base64,' + data.data;
+				$rootScope.showDocumentPreview(URL);
+			})
+		});
 	}
 
 }

@@ -33,6 +33,7 @@ export default angular.module('kyck', [
 	$rootScope.hideDocumentPreview = ()=>{
 		$rootScope.shouldShowDocumentPreview = false;
 	}
+	
 	$rootScope.showDocumentPreview = (URL)=>{
 		if (URL)
 		{
