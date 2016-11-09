@@ -1,6 +1,6 @@
 'use strict';
 
-function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $filter, $log, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, UserService) {
+function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialog, $filter, $log, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, UserService) {
     'ngInject';
 
     var vm = this;
@@ -233,6 +233,23 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
     function showDialog($event) {
            var parentEl = angular.element(document.body);
            var partner = (vm.partners.filter(x=>x.selected)[0]);
+           console.log(partner.brokerageId, partner.brokerageName);
+           $http({
+            method: 'POST',
+            url: '/kyck-rest/brokerage/calender/usrupdate',
+            data:{
+              "brokerageCalenderSlot": {
+                "brokerageId": partner.brokerageId,
+                "calenderSlot": "2016-11-10T09:57:09.609Z",
+                "meetingContent": "Meeting about brokerage application",
+                "meetingLocation": "Singapore",
+                "meetingStatus": "PENDING",
+                "meetingSubject": "Discussion about brokerage application "
+              }
+            }
+           }).then((s)=>{
+            console.log(s);
+           }).catch(e=>console.log(e));
            $mdDialog.show({
              parent: parentEl,
              targetEvent: $event,
