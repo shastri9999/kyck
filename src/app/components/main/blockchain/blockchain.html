@@ -7,7 +7,7 @@
 		Block chain
 	</div>
 	<div class="blocks" ng-if="vm.expanded">
-		<div class="block-wrapper" ng-repeat="block in vm.currentBlocks" ng-if="$index >= vm.startFrom">
+		<div ng-mouseover="vm.fetchInfo(block.number)" class="block-wrapper" ng-repeat="block in vm.currentBlocks" ng-if="$index >= vm.startFrom">
 			<div class="block">{{block.number}}</div>
 			<div class="info">
 				<div ng-if="block.date" style="padding-bottom: 5px;">Date: 06/07/2016</div>
