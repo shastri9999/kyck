@@ -29,21 +29,23 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.changeUsers = changeUsers;
         if (!$scope.isBroker)
         {
-            BrokerageResource.brokeragesList((req)=> {
-                var brokeragesList = req.data;
-                vm.partners = brokeragesList.map(convert);
-                vm.partners = vm.partners.map((partner)=>{
-                    vm.contactedBrokers.forEach((broker)=>{
-                        if (broker.brokerageId == partner.brokerageName)
-                        {
-                            partner.status = broker.status;
-                        }
-                    });
-                    return partner;
-                })
-                vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
-            });            
-
+             BrokerageResource.contactedBrokerages((response)=>{
+                vm.contactedBrokers = response.data;
+                BrokerageResource.brokeragesList((req)=> {
+                    var brokeragesList = req.data;
+                    vm.partners = brokeragesList.map(convert);
+                    vm.partners = vm.partners.map((partner)=>{
+                        vm.contactedBrokers.forEach((broker)=>{
+                            if (broker.brokerageId == partner.brokerageName)
+                            {
+                                partner.status = broker.status;
+                            }
+                        });
+                        return partner;
+                    })
+                    vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+                }); 
+            });           
         }
         BrokerageResource.userprofileget(function(response){
             var questions = response.data;
