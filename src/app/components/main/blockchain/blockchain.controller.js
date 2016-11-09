@@ -8,7 +8,7 @@ class BlockChainController{
 		this.expanded = false;
 		this.currentBlocks = [];
 		this.totalBlocks = 20;
-		this.startFrom = 15;
+		this.startFrom = 8;
 		this.populateBlocks();
 	}
 	
@@ -29,7 +29,7 @@ class BlockChainController{
 
 	fetchInfo(number)
 	{
-		
+
 	}
 
 }

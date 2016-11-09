@@ -10,8 +10,9 @@
 		<div class="block-wrapper" ng-repeat="block in vm.currentBlocks" ng-if="$index >= vm.startFrom">
 			<div class="block">{{block.number}}</div>
 			<div class="info">
-				<div>Date: 06/07/2016</div>
-				<div>Type: Invocation</div>
+				<div ng-if="block.date" style="padding-bottom: 5px;">Date: 06/07/2016</div>
+				<div ng-if="block.date">Type: Invocation</div>
+				<img ng-if="!block.date" style="width: 40px; height: 40px;" src="/assets/images/loading.gif" alt="">
 			</div>
 		</div>
 	</div>
