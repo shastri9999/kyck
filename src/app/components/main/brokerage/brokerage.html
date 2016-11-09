@@ -98,7 +98,8 @@
                         <a class="pending-btn ng-binding">PENDING</a>
                     </div>
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <div class="actnItem">CONFIRM</div>
+                        <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
+                        <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
                     </div>
                 </div>
                 <div class="appointmentTile">
@@ -107,7 +108,8 @@
                         <a class="pending-btn ng-binding">PENDING</a>
                     </div>
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <div class="actnItem">CONFIRM</div>
+                        <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
+                        <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
                     </div>
                 </div>
                 <div class="appointmentTile">
@@ -236,12 +238,21 @@
                 <!-- <md-button class="md-raised md-edit-form" ng-click="vm.editForm()">Edit Form</md-button> -->
             </div>
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="isBroker">
-                <md-button class="md-raised md-success" ng-click="vm.nextStep()">Accept</md-button>
+                <md-button class="md-raised md-success" ng-click="vm.nextRequestStep()">
+                    <span ng-show="vm.activeStep==1">Start</span>
+                    <span ng-show="vm.activeStep>1">Accept</span>
+                </md-button>
+                <md-button class="md-raised md-success" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.activeStep==1" ng-disabled="!vm.allVerified">
+                    <div>Submit</div>
+                </md-button>
+                <md-button class="md-raised md-warn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.activeStep==1" ng-disabled="!vm.allVerified">
+                    <div>Reject</div>
+                </md-button>
             </div>
         </footer>
 
     </div>
-    <div layout="column" class="rightSide" ng-if="isBroker" flex>
+    <div layout="column" class="rightSide" ng-if="isBroker" flex style="background: url(../../../../assets/images/broker-dashboard-background.png) no-repeat;">
         <md-event-calendar>
             <md-event-calendar-header class="md-center">
                 <md-event-calendar-prev></md-event-calendar-prev>

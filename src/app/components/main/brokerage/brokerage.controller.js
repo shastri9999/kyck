@@ -13,6 +13,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
     function init() {
         vm.nextStep = nextStep;
         vm.backStep = backStep;
+        vm.nextRequestStep = nextRequestStep;
         vm.selectedIndex = 0;
         vm.activeStep = 1;
         vm.isBroker = $scope.isBroker = AuthenticationService.isBroker();
@@ -22,27 +23,26 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.timeslotSelected = false;
         vm.kycerror = false;
         vm.personalDetailsError = false;
+        vm.submitApplication = submitApplication;
+        vm.updateMeetingStatus = updateMeetingStatus;
 
         vm.changeUsers = changeUsers;
         if (!$scope.isBroker)
         {
-            BrokerageResource.contactedBrokerages((response)=>{
-                vm.contactedBrokers = response.data;
-                BrokerageResource.brokeragesList((req)=> {
-                    var brokeragesList = req.data;
-                    vm.partners = brokeragesList.map(convert);
-                    vm.partners = vm.partners.map((partner)=>{
-                        vm.contactedBrokers.forEach((broker)=>{
-                            if (broker.brokerageId == partner.brokerageName)
-                            {
-                                partner.status = broker.status;
-                            }
-                        });
-                        return partner;
-                    })
-                    vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
-                });            
-            });
+            BrokerageResource.brokeragesList((req)=> {
+                var brokeragesList = req.data;
+                vm.partners = brokeragesList.map(convert);
+                vm.partners = vm.partners.map((partner)=>{
+                    vm.contactedBrokers.forEach((broker)=>{
+                        if (broker.brokerageId == partner.brokerageName)
+                        {
+                            partner.status = broker.status;
+                        }
+                    });
+                    return partner;
+                })
+                vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+            });            
 
         }
         BrokerageResource.userprofileget(function(response){
@@ -86,6 +86,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         BrokerageResource.userAppointments((response)=>{
             vm.userAppointments = response.data;
             vm.userAppointmentsFiltered = vm.userAppointments;
+            shuffletheorder();
             vm.userAppointment = vm.userAppointments[0];
             if (vm.userAppointments.length > 0) {
                 selectUser(0);
@@ -237,6 +238,48 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.eventCreate = eventCreate;
     }
 
+    function shuffletheorder() {
+        function statusToNum(status) {
+            if (status == 'PENDING')
+                return 0;
+            if (status == 'APPROVED')
+                return 1;
+            if (status == 'REJECT')
+                return 2;
+        }
+
+        vm.userAppointments.sort(function(a,b) {
+            if (statusToNum(a.applicationStatus) < statusToNum(b.applicationStatus))
+                return -1;
+            else if (statusToNum(a.applicationStatus) === statusToNum(b.applicationStatus))
+                return 0;
+            else
+                return 1;
+        });
+    }
+
+    function submitApplication(status) {
+        BrokerageResource.updateApplication({"status": status,
+                "userId": vm.userAppointment.email},
+        function (response) {
+            vm.userAppointment.applicationStatus = status;
+            vm.selectedIndex = vm.userAppointments.findIndex(function (a) {return a.email == vm.userAppointment.email;})
+            shuffletheorder();
+        }, function (error) {
+            console.log(error);
+        });
+    }
+
+    function updateMeetingStatus(status) {
+        BrokerageResource.updateMeetingStatus({"status": status,
+                "userId": vm.userAppointment.email},
+        function (response) {
+            console.log(response)
+        }, function (error) {
+            console.log(error);
+        });
+    }
+
     function showDialog($event) {
            var parentEl = angular.element(document.body);
            var partner = (vm.partners.filter(x=>x.selected)[0]);
@@ -353,11 +396,28 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             vm.activeStep = 1;
             var steppers = $mdStepper('stepper-demo');
             steppers.goto(0);
+            vm.activeStep = 1;
             return;
         }
         else
             moveNext();
 
+    }
+
+    function nextRequestStep() {
+        if (vm.activeStep > 1) {
+            document.getElementsByClassName('md-stepper-indicator ng-scope')[vm.activeStep-1].className+=" md-completed";
+            vm.allVerified = document.getElementsByClassName('md-stepper-indicator ng-scope md-completed').length===4;
+            console.log(document.getElementsByClassName('md-stepper-indicator ng-scope md-completed').length, vm.allVerified);
+        }
+        if (vm.activeStep == 5) {
+            var steppers = $mdStepper('stepper-demo');
+            steppers.goto(0);
+            vm.activeStep = 1;
+            return;
+        }
+        else
+            moveNext();
     }
 
     function moveNext() {
