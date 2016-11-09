@@ -18,13 +18,17 @@ function SettingsController($scope,$state, UserService, $mdToast) {
 		{
 			UserService.saveProfileFields().then((s)=>{
 				$mdToast.showSimple("Profile Details Successfully Saved!");
-			}).catch((e)=>console.log(e));
+			}).catch((e)=>{
+				$mdToast.showSimple("Please fill all fields marked as *");
+			});
 		}
 		else
 		{
 			UserService.saveKYCFields().then((s)=>{
 				$mdToast.showSimple("KYC Details Successfully Saved!");
-			}).catch((e)=>console.log(e));
+			}).catch((e)=>{
+				$mdToast.showSimple("Please fill all fields marked as *");
+			});
 		}
 	}
 }

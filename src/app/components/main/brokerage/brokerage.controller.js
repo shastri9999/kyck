@@ -1,6 +1,6 @@
 'use strict';
 
-function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $filter, $log, BrokerageResource, AuthenticationService, DocumentResource, UserService) {
+function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $filter, $log, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, UserService) {
     'ngInject';
 
     var vm = this;
@@ -228,6 +228,7 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
             UserService.saveProfileFields().then(function(success){
                  /* show success pop up move to next */
                  $mdToast.showSimple('Personal Details Saved Successfully!');
+                 $rootScope.$broadcast('updateProgressChart');
                  moveNext();
                 })
             .catch(function(error){
@@ -238,10 +239,11 @@ function BrokerageController($state, $scope,$mdToast, $mdStepper, $mdDialog, $fi
             });
         }
         
-        else if (vm.activeStep == 4) {
+        else if (vm.activeStep == 4 && !vm.isBroker) {
             UserService.saveKYCFields().then(function(success){
                  /* show success pop up move to next */
                  $mdToast.showSimple('KYC Details Saved Successfully!');
+                 $rootScope.$broadcast('updateProgressChart');
                  moveNext();
             })
             .catch(function(error){
