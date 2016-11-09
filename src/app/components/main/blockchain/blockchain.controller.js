@@ -2,13 +2,15 @@
 
 
 class BlockChainController{
-	constructor($http, $interval, moment) {
+	constructor($http, $scope, $interval) {
 		'ngInject';
 		this.$http = $http;
-		this.$interval = $interval;
 		this.expanded = false;
 		this.populateBlocks(true);
-		
+		this.timer = $interval(this.populateBlocks.bind(this), 10000);
+		$scope.$on('$destroy', ()=>{
+			$interval.cancel(this.timer);
+		});
 	}
 	
 	populateBlocks(updateStartFrom)
@@ -33,6 +35,8 @@ class BlockChainController{
 	toggle()
 	{
 		this.expanded = !this.expanded;
+		if (this.expanded)
+			this.populateBlocks();
 	}
 
 	fetchInfo(number)
@@ -45,9 +49,15 @@ class BlockChainController{
 			this.$http({
 				'method':'GET',
 				url: '/kyck-rest/blockchain/block',
-				params: {blockId: number-1}
+				params: {blockId: number}
 			}).then((s)=>{
-				console.log(s.data.firstTransaction);
+				const transaction = s.data.data.firstTransaction;
+				this.currentBlocks[number-1] = {
+					...block,
+					...transaction
+				}
+			}).catch((s)=>{
+				block.fetched = false;
 			});
 		}
 	}
