@@ -19,13 +19,14 @@ function HelpController($http) {
 	this.validate = function(hash)
 	{
 		console.log(hash);
-		// $http({
-		// 	method: 'POST',
-		// 	url: '/kyck-rest/blockchain/getnric',
-		// 	data: {}
-		// }).then((s)=>{
-
-		// })
+		$http({
+			method: 'GET',
+			url: '/kyck-rest/blockchain/validate',
+			params: {requestId : hash.requestId,
+			blockHash: hash.hash}
+		}).then((s)=>{
+			consol.log(s);
+		})
 	}
 }
 
