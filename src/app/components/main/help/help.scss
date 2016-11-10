@@ -1,43 +1,55 @@
 .hash {
-    display: flex;
-    outline: none;
-    padding: 30px;
-    padding-right: 20px;
-    margin-top: 20px;
-    border: 1px solid #e7ecf1;
-    border-radius: 5px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-left: 5px solid #3498db;
-    padding-bottom: 10px;
-    max-width: 400px;
-    flex-flow:column;
-    margin-left: 40px;
-    input {
-    	height: 45px;
-	    padding: 10px;
-	    border-radius: 5px;
-	    box-shadow: none;
-	    outline: none;
-	    background: aliceblue;
-	    margin-bottom: 10px;
-	    margin-top: 10px;
-    }
-    a.button {
-    	color: #ffffff;
-	    font-family: Lato;
-	    margin-left: 0px;
-	    margin-right: 0px;
-	    border-radius: 1px;
-	    background: #3bada5;
-	    text-decoration: none;
-	    height: 30px;
-	    display: flex;
-	    align-self: center;
-	    align-items: center;
-	    justify-content: center;
-	    border-radius: 5px;
-	    cursor: pointer;
-	    padding: 20px;
-    }
+	display: flex;
+	outline: none;
+	padding: 30px;
+	padding-right: 20px;
+	margin-top: 20px;
+	border: 1px solid #e7ecf1;
+	border-radius: 5px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border-left: 5px solid #3498db;
+	padding-bottom: 10px;
+	max-width: 400px;
+	flex-flow:column;
+	margin-left: 40px;
+	.top {
+		height: 30px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #efefef;
+		border-radius: 999px;
+		color: #67413e;
+	}
+	input {
+		height: 45px;
+		padding: 10px;
+		border-radius: 5px;
+		box-shadow: none;
+		outline: none;
+		background: #ffffff;
+		margin-bottom: 10px;
+		margin-top: 10px;
+		border: 1px solid #f2f2f2;
+	}
+	a.button {
+		color: #ffffff;
+		font-family: Lato;
+		margin-left: 0px;
+		margin-right: 0px;
+		border-radius: 1px;
+		background: #3bada5;
+		text-decoration: none;
+		height: 30px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 5px;
+		cursor: pointer;
+		padding: 20px;
+		&:hover {
+			opacity: 0.9;
+		}
+	}
 }

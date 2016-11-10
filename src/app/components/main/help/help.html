@@ -1,6 +1,6 @@
 <div>
 	<div ng-repeat="hash in vm.hashes" class="hash">
-		<div>{{hash.requestId}} {{hash.nricId}}</div>
+		<div class="top">{{hash.requestId}} {{hash.nricId}}</div>
 		<input type="text" placeholder="Enter hash value" ng-model="hash.hash">
 		<a class="button" ng-click="vm.validate(hash)">Validate</a>
 	</div>
