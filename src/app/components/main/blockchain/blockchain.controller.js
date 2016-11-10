@@ -6,6 +6,7 @@ class BlockChainController{
 		'ngInject';
 		this.$http = $http;
 		this.expanded = false;
+		this.currentBlocks = [];
 		this.populateBlocks(true);
 		this.timer = $interval(this.populateBlocks.bind(this), 10000);
 		$scope.$on('$destroy', ()=>{
@@ -20,7 +21,6 @@ class BlockChainController{
 			url: '/kyck-rest/blockchain/blocks',
 		}).then((s)=>{
 			this.totalBlocks = +s.data.data.height;
-			this.currentBlocks = [];
 			if (updateStartFrom)
 				this.startFrom = Math.max(0, this.totalBlocks-12);
 			for(let i=this.currentBlocks.length; i < this.totalBlocks; ++i)
