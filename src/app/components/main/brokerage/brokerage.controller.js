@@ -28,6 +28,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.submitApplication = submitApplication;
         vm.updateMeetingStatus = updateMeetingStatus;
         vm.showVideoDialog = showVideoDialog;
+        vm.usermessages = [];
 
         vm.changeUsers = changeUsers;
         if (!$scope.isBroker)
@@ -48,6 +49,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             });            
 
         }
+
         BrokerageResource.userprofileget(function(response){
             var questions = response.data;
             vm.questionsmap = {};
@@ -85,16 +87,17 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             vm.brokeragesDetails = req.data;
         }, function () {});
 
-
-        BrokerageResource.userAppointments((response)=>{
-            vm.userAppointments = response.data;
-            vm.userAppointmentsFiltered = vm.userAppointments;
-            shuffletheorder();
-            vm.userAppointment = vm.userAppointments[0];
-            if (vm.userAppointments.length > 0) {
-                selectUser(0);
-            }
-        });
+        if (vm.isBroker) {
+            BrokerageResource.userAppointments((response)=>{
+                vm.userAppointments = response.data;
+                vm.userAppointmentsFiltered = vm.userAppointments;
+                shuffletheorder();
+                vm.userAppointment = vm.userAppointments[0];
+                if (vm.userAppointments.length > 0) {
+                    selectUser(0);
+                }
+            });
+        }
 
         DocumentResource.categories(function(response){
                 $log.debug(response);
@@ -488,6 +491,23 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.allVerified = 0;
         vm.selectedIndex=index;
         vm.userAppointment = vm.userAppointments[index];
+
+        console.log(vm.userAppointment.email);
+
+        BrokerageResource.usermessages({userId: vm.userAppointment.email}, function(req) {
+            for(var i=0; i<req.data.length; i++) {
+                var msg = req.data[i]['messageContent'];
+                var messageDate = req.data[i]['messageDate'];
+                var c="";
+                if (req.data[i]['messageFrom']===vm.userAppointment.email) {
+                    c="left";
+                }
+                else
+                    c="right";
+
+                vm.usermessages.push({'msg':msg, 'class': c, 'date': messageDate});
+            }
+        }, function() {});
     }
 
     function getSelectedUserEmail(){

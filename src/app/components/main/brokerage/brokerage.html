@@ -122,7 +122,7 @@
                             <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
                         </span>
                         <span ng-if="slot.status=='CONFIRM'">
-                            <div class="actnItem" ng-click="vm.showVideoDialog()">JOIN VIDEO<br/>CONFERENCE</div>
+                            <div class="actnItem" ng-click="vm.showVideoDialog()" style="line-height:22px;">JOIN VIDEO<br/>CONFERENCE</div>
                         </span>
                     </div>
                 </div>
@@ -284,18 +284,12 @@
                 <md-event-calendar-next></md-event-calendar-next>
             </md-event-calendar-header>
         </md-event-calendar>
-        <h2 style="color: white;margin: 20px; margin-bottom: 0px;">Messages</h2>
-        <div class="msg-requests left">
-            Hi, I need an appointment regarding my application. Kindly do the needful.
-            <span class="datetime">20th Oct 2016, 07:15am</span>
-        </div>
-        <div class="msg-requests right">
-            Let me see, what can I do about this.
-            <span class="datetime">20th Oct 2016, 07:15am</span>
-        </div>
-        <div class="msg-requests left">
-            Yeah, sure. Thanks.
-            <span class="datetime">20th Oct 2016, 07:15am</span>
-        </div>
+        <h2 style="color: white;margin: 20px; margin-bottom: 0px;" ng-if="vm.usermessages">Messages</h2>
+        <span ng-repeat="msg in vm.usermessages">
+            <div class="msg-requests {{msg.class}}">
+                <span>{{msg.msg}}</span>
+                <span class="datetime">{{msg.date}}</span>
+            </div>
+        </span>
     </div>
 </div>

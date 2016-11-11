@@ -70,6 +70,11 @@ function BrokerageResource($resource) {
     		isArray: false,
     		url: URL + '/userprofile/findall/action'
     	},
+        usermessages: {
+            method: 'GET',
+            isArray: false,
+            url: URL + '/usermessage/brokerget'
+        },
     	userprofileupdate: {
     		method: 'POST',
     		params: {
