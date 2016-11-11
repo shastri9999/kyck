@@ -1,5 +1,7 @@
 'use strict';
 
+import inviteDialogTemplateUrl from './dialog.html';
+
 function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialog, $filter, $log, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, UserService, CalendarService) {
     'ngInject';
 
@@ -25,28 +27,29 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.personalDetailsError = false;
         vm.submitApplication = submitApplication;
         vm.updateMeetingStatus = updateMeetingStatus;
+        vm.showVideoDialog = showVideoDialog;
+        vm.usermessages = [];
 
         vm.changeUsers = changeUsers;
         if (!$scope.isBroker)
         {
-             BrokerageResource.contactedBrokerages((response)=>{
-                vm.contactedBrokers = response.data;
-                BrokerageResource.brokeragesList((req)=> {
-                    var brokeragesList = req.data;
-                    vm.partners = brokeragesList.map(convert);
-                    vm.partners = vm.partners.map((partner)=>{
-                        vm.contactedBrokers.forEach((broker)=>{
-                            if (broker.brokerageId == partner.brokerageName)
-                            {
-                                partner.status = broker.status;
-                            }
-                        });
-                        return partner;
-                    })
-                    vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
-                }); 
-            });           
+            BrokerageResource.brokeragesList((req)=> {
+                var brokeragesList = req.data;
+                vm.partners = brokeragesList.map(convert);
+                vm.partners = vm.partners.map((partner)=>{
+                    vm.contactedBrokers.forEach((broker)=>{
+                        if (broker.brokerageId == partner.brokerageName)
+                        {
+                            partner.status = broker.status;
+                        }
+                    });
+                    return partner;
+                })
+                vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+            });            
+
         }
+
         BrokerageResource.userprofileget(function(response){
             var questions = response.data;
             vm.questionsmap = {};
@@ -84,16 +87,17 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             vm.brokeragesDetails = req.data;
         }, function () {});
 
-
-        BrokerageResource.userAppointments((response)=>{
-            vm.userAppointments = response.data;
-            vm.userAppointmentsFiltered = vm.userAppointments;
-            shuffletheorder();
-            vm.userAppointment = vm.userAppointments[0];
-            if (vm.userAppointments.length > 0) {
-                selectUser(0);
-            }
-        });
+        if (vm.isBroker) {
+            BrokerageResource.userAppointments((response)=>{
+                vm.userAppointments = response.data;
+                vm.userAppointmentsFiltered = vm.userAppointments;
+                shuffletheorder();
+                vm.userAppointment = vm.userAppointments[0];
+                if (vm.userAppointments.length > 0) {
+                    selectUser(0);
+                }
+            });
+        }
 
         DocumentResource.categories(function(response){
                 $log.debug(response);
@@ -315,6 +319,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
            }).then((s)=>{
             console.log(s);
              BrokerageResource.contactedBrokerages((response)=>{
+
                 vm.contactedBrokers = response.data;
                 BrokerageResource.brokeragesList((req)=> {
                     var brokeragesList = req.data;
@@ -478,6 +483,9 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             vm.userSlots = data.filter(function(a){
                 return a.userId === vm.userAppointment.email;
             });
+            vm.userSlots.map(function(a) {
+                a['startTime'] = new Date(Date.parse(a['startTime']));
+            })
             //startTime
             //status
             //
@@ -486,6 +494,24 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.allVerified = 0;
         vm.selectedIndex=index;
         vm.userAppointment = vm.userAppointments[index];
+
+        console.log(vm.userAppointment.email);
+
+        BrokerageResource.usermessages({userId: vm.userAppointment.email}, function(req) {
+            for(var i=0; i<req.data.length; i++) {
+                var msg = req.data[i]['messageContent'];
+                var messageDate = req.data[i]['messageDate'];
+                messageDate = Date.parse(messageDate);
+                var c="";
+                if (req.data[i]['messageFrom']===vm.userAppointment.email) {
+                    c="left";
+                }
+                else
+                    c="right";
+
+                vm.usermessages.push({'msg':msg, 'class': c, 'date': messageDate});
+            }
+        }, function() {});
     }
 
     function getSelectedUserEmail(){
@@ -525,6 +551,34 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
 
     function eventCreate($date) {
         console.log($date);
+    }
+
+    function showVideoDialog($event) {
+        $mdDialog.show({
+             parent: angular.element(document.body),
+             targetEvent: $event,
+             templateUrl: inviteDialogTemplateUrl,
+             controller: InviteDialogController
+        });
+
+        function InviteDialogController($scope, $mdDialog) {
+            'ngInject';
+            $scope.addedEmails=[];
+
+            $scope.closeDialog = function() {
+                $mdDialog.hide();
+                //use $scope.addedEmails & make an API Call
+            }
+            $scope.addEmail = function() {
+                $scope.addedEmails.push($scope.extraEmail);
+                $scope.extraEmail = "";
+            }
+            $scope.removeEmail = function(email) {
+                var index = $scope.addedEmails.indexOf(email);
+                if (index > -1)
+                    $scope.addedEmails.splice(index, 1);
+            }
+        }
     }
 
 }

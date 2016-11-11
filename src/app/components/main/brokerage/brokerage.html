@@ -113,13 +113,16 @@
                 <span class="title">Appointment Slots</span>
                 <div class="appointmentTile" ng-repeat="slot in vm.userSlots">
                     <div style="float:left; padding:10px;">
-                        <div class="header">{{slot.startTime}}</div>
+                        <div class="header">{{slot.startTime | date:'dd MMM yy, HH:mm a'}}</div>
                         <a class="pending-btn ng-binding">{{slot.status}}</a>
                     </div>
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
                         <span ng-if="slot.status==='PENDING'">
                             <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
                             <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
+                        </span>
+                        <span ng-if="slot.status=='CONFIRM'">
+                            <div class="actnItem" ng-click="vm.showVideoDialog()" style="line-height:22px;">JOIN VIDEO<br/>CONFERENCE</div>
                         </span>
                     </div>
                 </div>
@@ -281,18 +284,12 @@
                 <md-event-calendar-next></md-event-calendar-next>
             </md-event-calendar-header>
         </md-event-calendar>
-        <h2 style="color: white;margin: 20px; margin-bottom: 0px;">Messages</h2>
-        <div class="msg-requests left">
-            Hi, I need an appointment regarding my application. Kindly do the needful.
-            <span class="datetime">20th Oct 2016, 07:15am</span>
-        </div>
-        <div class="msg-requests right">
-            Let me see, what can I do about this.
-            <span class="datetime">20th Oct 2016, 07:15am</span>
-        </div>
-        <div class="msg-requests left">
-            Yeah, sure. Thanks.
-            <span class="datetime">20th Oct 2016, 07:15am</span>
-        </div>
+        <h2 style="color: white;margin: 20px; margin-bottom: 0px;" ng-if="vm.usermessages">Messages</h2>
+        <span ng-repeat="msg in vm.usermessages">
+            <div class="msg-requests {{msg.class}}">
+                <div>{{msg.msg}}</div>
+                <div class="datetime">{{msg.date | date:'dd MMM yy, HH:mm a'}}</div>
+            </div>
+        </span>
     </div>
 </div>
