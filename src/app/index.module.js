@@ -30,8 +30,14 @@ export default angular.module('kyck', [
 	$rootScope.shouldShowDocumentPreview = false;
 	$rootScope.documentPreviewLoading = false;
 	$rootScope.documentPreviewURL = '/assets/images/nric.jpg'
+	$rootScope.viewingDocument = {};
+	$rootScope.OCRView = false;
+	$rootScope.canEnableOCR = false;
+
 	$rootScope.hideDocumentPreview = ()=>{
 		$rootScope.shouldShowDocumentPreview = false;
+		$rootScope.canEnableOCR = false;
+		$rootScope.OCRView = false;	
 	}
 	
 	$rootScope.showDocumentPreview = (URL)=>{
@@ -44,9 +50,20 @@ export default angular.module('kyck', [
 		{
 			$rootScope.documentPreviewLoading = true;
 			$rootScope.documentPreviewURL = '/assets/images/loading.gif'
+			$rootScope.viewingDocument = {};
 		}
 		$rootScope.shouldShowDocumentPreview = true;
 	}
+
+	$rootScope.showOCRView = ()=>{
+		if ($rootScope.viewingDocument.OCR)
+			$rootScope.OCRView = true;
+	}
+
+	$rootScope.closeOCRView = ()=>{
+		$rootScope.OCRView = false;	
+	}
+
 	$rootScope.messageView = {
 		activeInboxMessage: null,
 		activeSentMessage: null,

@@ -8,16 +8,36 @@
 		<div  ng-if="shouldShowDocumentPreview" class="preview-overlay">
 			<div class="dialog">
 				<div class="close" ng-click="hideDocumentPreview()" >X</div>
-				<div class="top">
-					<img ng-if="!documentPreviewLoading" class="preview" ng-src="{{documentPreviewURL}}" alt="">
-					<div ng-if="documentPreviewLoading" style="display: flex;background-color: #e5eff1;align-items: center; padding: 10px;">
+				<div ng-class="{top:true, ocr:OCRView}">
+					<img ng-if="!documentPreviewLoading && !OCRView" class="preview" ng-src="{{documentPreviewURL}}" alt="">
+					<div ng-if="documentPreviewLoading && !OCRView" style="display: flex;background-color: #e5eff1;align-items: center; padding: 10px;">
 						<img src="/assets/images/loading.gif" style="margin-right: 20px;height:40px; width:40px;" alt="">
 						Please wait image is loading...
 					</div>
+					<div ng-if="OCRView" class="ocr-view">
+						{{viewingDocument.OCR|json}}
+					</div>
 				</div>
-				<div class="bottom">
-					Fit document inside screen.<br>
-					Place on contrasting background
+				<div class="bottom" ng-if="!canEnableOCR">
+					{{viewingDocument.documentName}}
+				</div>
+				<div class="bottom ocr" ng-if="canEnableOCR">
+					<div ng-if="viewingDocument.OCR" class="buttons">
+						<div ng-class='{"preview-btn":true, "active":!OCRView}' ng-click="closeOCRView()">
+							<img ng-if="!documentPreviewLoading" ng-src="{{documentPreviewURL}}" alt="Preview">
+						</div>
+						<div ng-class='{"ocr-btn":true, "active":OCRView}' ng-click="showOCRView()" ng-if="viewingDocument.OCR">
+							<img src="/assets/images/ocrsearch.png" alt="">
+							<div style="position: absolute; top:32px; left:32px;font-size: 10px;">OCR</div>
+						</div>						
+					</div>
+					<div>
+						{{viewingDocument.documentName}}					
+					</div>
+					<div>
+						<a ng-click="showOCRView()" ng-if="!OCRView && viewingDocument.OCR">Verify OCR</a>
+						<a ng-click="hideDocumentPreview()" ng-if="OCRView || !viewingDocument.OCR">Done</a>
+					</div>
 				</div>
 			</div>
 		</div>
