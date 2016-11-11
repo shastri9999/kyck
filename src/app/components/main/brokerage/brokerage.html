@@ -113,7 +113,7 @@
                 <span class="title">Appointment Slots</span>
                 <div class="appointmentTile" ng-repeat="slot in vm.userSlots">
                     <div style="float:left; padding:10px;">
-                        <div class="header">{{slot.startTime}}</div>
+                        <div class="header">{{slot.startTime | date:'dd MMM yy, HH:mm a'}}</div>
                         <a class="pending-btn ng-binding">{{slot.status}}</a>
                     </div>
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
@@ -287,8 +287,8 @@
         <h2 style="color: white;margin: 20px; margin-bottom: 0px;" ng-if="vm.usermessages">Messages</h2>
         <span ng-repeat="msg in vm.usermessages">
             <div class="msg-requests {{msg.class}}">
-                <span>{{msg.msg}}</span>
-                <span class="datetime">{{msg.date}}</span>
+                <div>{{msg.msg}}</div>
+                <div class="datetime">{{msg.date | date:'dd MMM yy, HH:mm a'}}</div>
             </div>
         </span>
     </div>

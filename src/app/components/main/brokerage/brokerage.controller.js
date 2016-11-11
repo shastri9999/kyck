@@ -483,6 +483,9 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             vm.userSlots = data.filter(function(a){
                 return a.userId === vm.userAppointment.email;
             });
+            vm.userSlots.map(function(a) {
+                a['startTime'] = new Date(Date.parse(a['startTime']));
+            })
             //startTime
             //status
             //
@@ -498,6 +501,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             for(var i=0; i<req.data.length; i++) {
                 var msg = req.data[i]['messageContent'];
                 var messageDate = req.data[i]['messageDate'];
+                messageDate = Date.parse(messageDate);
                 var c="";
                 if (req.data[i]['messageFrom']===vm.userAppointment.email) {
                     c="left";
