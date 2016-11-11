@@ -8,7 +8,7 @@ class BlockChainController{
 		this.expanded = false;
 		this.currentBlocks = [];
 		this.populateBlocks(true);
-		this.timer = $interval(this.populateBlocks.bind(this), 10000);
+		this.timer = $interval(this.populateBlocks.bind(this), 15000);
 		$scope.$on('$destroy', ()=>{
 			$interval.cancel(this.timer);
 		});
@@ -26,7 +26,7 @@ class BlockChainController{
 			for(let i=this.currentBlocks.length; i < this.totalBlocks; ++i)
 			{
 				this.currentBlocks.push({
-					number: i+1,
+					number: i,
 				});
 			}
 		})
@@ -41,7 +41,7 @@ class BlockChainController{
 
 	fetchInfo(number)
 	{
-		const block = this.currentBlocks[number-1];
+		const block = this.currentBlocks[number];
 
 		if (!block.fetched)
 		{
@@ -52,7 +52,7 @@ class BlockChainController{
 				params: {blockId: number}
 			}).then((s)=>{
 				const transaction = s.data.data.firstTransaction;
-				this.currentBlocks[number-1] = {
+				this.currentBlocks[number] = {
 					...block,
 					...transaction
 				}
