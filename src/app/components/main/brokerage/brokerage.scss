@@ -492,3 +492,22 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 .msg-requests.right {
 	margin-left: 140px;
 }
+
+/* DIALOG INVITE USER */
+.inviteUsersDialog {
+	padding: 30px;
+	.heading {
+		font-size: 22px;
+		line-height: 27px;
+		color: #4f6379;
+	}
+	hr {
+	    border-top: solid 1px #e7ecf1;
+	}
+	.addedEmail {
+		color: #3aafa5;
+		font-size: 14px;
+		line-height: 16px;
+		margin: 15px;
+	}
+}

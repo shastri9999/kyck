@@ -121,6 +121,9 @@
                             <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
                             <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
                         </span>
+                        <span ng-if="slot.status=='CONFIRM'">
+                            <div class="actnItem" ng-click="vm.showVideoDialog()">JOIN VIDEO<br/>CONFERENCE</div>
+                        </span>
                     </div>
                 </div>
                 <!-- <div class="appointmentTile">
