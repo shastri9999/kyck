@@ -1,0 +1,34 @@
+<md-dialog aria-label="List dialog">
+  <md-dialog-content style="width:500px; height:400px;">
+<div class="inviteUsersDialog">
+ <span class="heading">Invite</span>
+ <hr/>
+ <form name="projectForm" style="overflow:hidden;">
+	 <md-input-container class="md-block" style="margin-top: 30px; float: left; width: 380px;">
+        <label>Add email address here to invite…
+        </label>
+        <input type="email" name="extraEmail" ng-model="extraEmail"
+               minlength="4" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+
+        <div ng-messages="projectForm.extraEmail.$error" role="alert">
+          <div ng-message-exp="['minlength', 'maxlength', 'pattern']">
+            Please enter a valid email ID.
+          </div>
+        </div>
+      </md-input-container>
+	<span style="float: right; margin-top: 40px; color: #4f6379; cursor: pointer;" ng-click="addEmail()">Add</span>
+ </form>
+ <hr ng-if="addedEmails.length"/>
+ <div ng-repeat="addedEmail in addedEmails">
+ 	<span class="addedEmail">{{addedEmail}}</span>
+ 	<span ng-click="removeEmail(addedEmail)" style="float:right;">Delete</span>
+ 	<hr/>
+ </div>
+ </div>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="closeDialog()" class="md-primary">
+      Join &amp; Start
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>
