@@ -126,25 +126,6 @@
                         </span>
                     </div>
                 </div>
-                <!-- <div class="appointmentTile">
-                    <div style="float:left; padding:10px;">
-                        <div class="header">29th Oct 16, 07:20am</div>
-                        <a class="pending-btn ng-binding">PENDING</a>
-                    </div>
-                    <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
-                        <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
-                    </div>
-                </div>
-                <div class="appointmentTile">
-                    <div style="float:left; padding:10px;">
-                        <div class="header">28th Oct 16, 07:20am</div>
-                        <a class="pending-btn ng-binding">PENDING</a>
-                    </div>
-                    <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <div class="actnItem">DONE</div>
-                    </div>
-                </div> -->
             </div>
             </div>
             </md-step-body>
@@ -267,7 +248,7 @@
                     <span ng-show="vm.activeStep>1">Accept</span>
                 </md-button>
                 <md-button class="md-raised md-success" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.activeStep==1" ng-disabled="!vm.allVerified">
-                    <div>Submit</div>
+                    <div>Accept</div>
                 </md-button>
                 <md-button class="md-raised md-warn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.activeStep==1" ng-disabled="!vm.allVerified">
                     <div>Reject</div>
