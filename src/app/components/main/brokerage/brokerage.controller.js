@@ -2,7 +2,9 @@
 
 import inviteDialogTemplateUrl from './dialog.html';
 
-function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialog, $filter, $log, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, UserService, CalendarService) {
+function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, 
+        $mdDialog, $rootScope, BrokerageResource, AuthenticationService, 
+        DocumentResource, UserService, CalendarService) {
     'ngInject';
 
     var vm = this;
@@ -56,9 +58,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             questions.forEach(function(q){
                 vm.questionsmap[q.questionDesc] = q;
             });
-            $log.info(vm.questionsmap);
         }, function(error){
-            $log.error(error);
         });
 
         BrokerageResource.kycget(function(response){
@@ -67,9 +67,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             questions.forEach(function(q){
                 vm.kycquestions[q.questionDesc] = q;
             });
-            $log.info(vm.kycquestions);
         }, function(error){
-            $log.error(error);
         });
 
         vm.toggleSelected = function(partner){
@@ -100,7 +98,6 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         }
 
         DocumentResource.categories(function(response){
-                $log.debug(response);
                 vm.documents = response.data;
                 vm.documents.forEach(function(doc){
                     doc.documentID = null; //Making default docId as null. Replacing it with actual value in next call
@@ -117,10 +114,8 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
                             }
                         });
                     }
-                    $log.debug(vm.documents);
                 })
         }, function(error){
-                $log.error(error);
         });
 
         vm.replace = function(document){
@@ -146,80 +141,21 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             });
         }
 
+        const leadingZeros = (number, zeros=2)=>{
+            let string = (number || 0) + "";
+            while (string.length < zeros)
+                string = "0" + string;
+            return string;
+        } 
+        BrokerageResource.validationReports({
+            userId: AuthenticationService.getLoggedInUser().userId
+        },(response)=>{
+            vm.validationReports = response.data.checkList;
+            vm.validationAcceptedCount = leadingZeros(vm.validationReports.filter(x=>x.status==="PASS").length);
+            vm.validationRejectedCount = leadingZeros(vm.validationReports.filter(x=>x.status!=="PASS").length);
+            vm.validationTotalCount = leadingZeros(vm.validationReports.length);
+        });
 
-        var validationReports = [
-            {
-            title: 'Document Type Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Required Fields Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Barcode Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Expiry Date Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Icnumber Checksum Check',
-            description: '',
-            ticked: false
-            },{
-            title: 'Name Crosscheck',
-            description: '',
-            ticked: true
-            },{
-            title: 'Gender Crosscheck',
-            description: '',
-            ticked: false
-            },{
-            title: 'Address Crosscheck',
-            description: '',
-            ticked: true
-            },{
-            title: 'Icnumber Crosscheck',
-            description: '',
-            ticked: true
-            },{
-            title: 'Nationality Crosscheck',
-            description: '',
-            ticked: false
-            },{
-            title: 'Image modification check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Hologram modification check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Field modification check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Tampering Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Photo Tampering Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Photo Crosscheck',
-            description: '',
-            ticked: true
-            },{
-            title: 'MRZ Code Check',
-            description: '',
-            ticked: true
-            }
-        ];
-
-        vm.validationReports = validationReports;
 
         var events = [];
         var currentDate = new Date();
