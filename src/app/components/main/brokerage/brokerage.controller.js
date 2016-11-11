@@ -31,7 +31,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.usermessages = [];
 
         vm.changeUsers = changeUsers;
-        if (!$scope.isBroker)
+        if (!vm.isBroker)
         {
             BrokerageResource.brokeragesList((req)=> {
                 var brokeragesList = req.data;
