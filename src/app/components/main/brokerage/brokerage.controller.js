@@ -35,20 +35,23 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.changeUsers = changeUsers;
         if (!vm.isBroker)
         {
-            BrokerageResource.brokeragesList((req)=> {
-                var brokeragesList = req.data;
-                vm.partners = brokeragesList.map(convert);
-                vm.partners = vm.partners.map((partner)=>{
-                    vm.contactedBrokers.forEach((broker)=>{
-                        if (broker.brokerageId == partner.brokerageName)
-                        {
-                            partner.status = broker.status;
-                        }
-                    });
-                    return partner;
-                })
-                vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
-            });            
+            BrokerageResource.contactedBrokerages((response)=>{
+                vm.contactedBrokers = response.data;
+                BrokerageResource.brokeragesList((req)=> {
+                    var brokeragesList = req.data;
+                    vm.partners = brokeragesList.map(convert);
+                    vm.partners = vm.partners.map((partner)=>{
+                        vm.contactedBrokers.forEach((broker)=>{
+                            if (broker.brokerageId == partner.brokerageName)
+                            {
+                                partner.status = broker.status;
+                            }
+                        });
+                        return partner;
+                    })
+                    vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+                });     
+            });       
 
         }
 
@@ -123,19 +126,25 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         }
         
         vm.preview = function(document){
+            $rootScope.canEnableOCR = !vm.isBroker;
             $rootScope.showDocumentPreview();
             DocumentResource.metadata({documentType: document.documentType}, function(response){
-                var name = response.data["documentName"];
-                var mimeType = response.data["mimeType"];
+                const documentData = response.data;
+                let document = documentData;
+                $rootScope.viewingDocument = document;
+                $rootScope.viewingDocument.OCR = null;
+                DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
+                    $rootScope.viewingDocument.OCR = response.data;
+                });
                 $http({
                     method: 'GET',
                     url: '/kyck-rest/document/download/string64',
-                    params: {documentId: name},
+                    params: {documentId: documentData.documentName},
                     transformResponse: [function (data) {
                           return data;
                       }]
                 }).then((data)=>{
-                    let URL = 'data:' + mimeType + ';base64,' + data.data;
+                    let URL = 'data:' + documentData.mimeType + ';base64,' + data.data;
                     $rootScope.showDocumentPreview(URL);
                 })
             });

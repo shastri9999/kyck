@@ -74,12 +74,38 @@
 				}
 				&.ocr {
 					padding: 0;
+					margin: 30px;
+					.input {
+					    display: flex;
+					    flex-flow: column;
+					    margin: 10px;
+					    position: relative;
+					    label {
+					      font-size: 14px;
+					      color: #4f6379;
+					      margin-bottom: 12px;
+					      opacity: 0.5;
+					    }
+					    input {
+					        height: 45px;
+					        width: 220px;
+					        border-radius: 3px;
+					        border: 1px solid #e7ecf1;
+					        padding: 15px;
+					        font-size: 14px;
+					        color: #4f6379;
+					        background-color: #f7f8f9;
+					    }
+					}
 				}
 				.ocr-view {
 					display: flex;
 					flex: 1;
 					background: #fff;
 					height: 570px;
+					flex-flow: row wrap;
+					align-content: flex-start;
+				    padding: 10px;
 				}
 			}
 			.bottom {
@@ -144,6 +170,17 @@
 					}
 					outline: none;
 					cursor: pointer;
+			    }
+			    .verify-btn, .done-btn {
+			    	height: 35px;
+			    	padding: 10px 30px;
+			    	background-color: #3498db;
+			    	color: white;
+			    	cursor: pointer;
+			    	border-radius: 5px;
+			    	&:hover{
+						opacity: 0.9;
+			    	}
 			    }
 
 			}

@@ -15,7 +15,12 @@
 						Please wait image is loading...
 					</div>
 					<div ng-if="OCRView" class="ocr-view">
-						{{viewingDocument.OCR|json}}
+						<div class="input" ng-repeat="field in viewingDocument.OCR">
+							<label>
+								{{field.name}}
+							</label>
+							<input disabled type="text" ng-model="field.value">
+						</div>
 					</div>
 				</div>
 				<div class="bottom" ng-if="!canEnableOCR">
@@ -26,7 +31,7 @@
 						<div ng-class='{"preview-btn":true, "active":!OCRView}' ng-click="closeOCRView()">
 							<img ng-if="!documentPreviewLoading" ng-src="{{documentPreviewURL}}" alt="Preview">
 						</div>
-						<div ng-class='{"ocr-btn":true, "active":OCRView}' ng-click="showOCRView()" ng-if="viewingDocument.OCR">
+						<div ng-class='{"ocr-btn":true, "active":OCRView}' ng-click="showOCRView()" ng-if="viewingDocument.OCR.length">
 							<img src="/assets/images/ocrsearch.png" alt="">
 							<div style="position: absolute; top:32px; left:32px;font-size: 10px;">OCR</div>
 						</div>						
@@ -35,8 +40,8 @@
 						{{viewingDocument.documentName}}					
 					</div>
 					<div>
-						<a ng-click="showOCRView()" ng-if="!OCRView && viewingDocument.OCR">Verify OCR</a>
-						<a ng-click="hideDocumentPreview()" ng-if="OCRView || !viewingDocument.OCR">Done</a>
+						<a class="verify-btn" ng-click="showOCRView()" ng-if="!OCRView && viewingDocument.OCR.length">Verify OCR</a>
+						<a class="done-btn" ng-click="hideDocumentPreview()" ng-if="OCRView || !viewingDocument.OCR.length">Done</a>
 					</div>
 				</div>
 			</div>
