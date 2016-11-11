@@ -359,30 +359,63 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 		color: #fff;
 	}
 }
+.validation-report-count
+{
+	display: flex;
+    margin: 10px 30px;
+	color: #4f6379;
+	.stat {
+		font-size: 60px;
+		margin-right: 100px;
+		font-weight: 600;
+		&.accepted::after {
+			content: "Accepted";
+			font-size: 14px;
 
+		}
+		&.rejected::after {
+			content: "Rejected";
+			font-size: 14px;
+		}
+
+		&.total::after {
+			content: "Total";
+			font-size: 14px;
+		}
+	}
+}
 .validationReport {
 	border: solid 1px #3498db;
 	border-left: solid 7px #3498db;
 	color: #4f6379;
-	line-height: 20px;;
+	line-height: 22px;
 	font-weight: 600;
 	margin: 15px;
     padding: 10px;
     margin-left: 25px;
-    max-width: 700px;
     clear: both;
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 
 	.title {
 		font-size: 16px;
 	}
 	.description {
 		opacity: 0.6;
-		font-family: Lato;
 		font-size: 14px;
 	}
 	img {
 		height: 35px;
+	}
+	.checklist-table
+	{
+		font-size: 12px;
+		font-weight: 400;
 	}
 }
 

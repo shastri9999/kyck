@@ -6,6 +6,14 @@ function BrokerageResource($resource) {
 	'ngInject';
 
     return $resource(URL, {}, {
+        validationReports: {
+            method: 'GET',
+            isArray: false,
+            params: {
+                userId: '@id'
+            },
+            url: URL + '/ocr/data/validation/result'
+        },
     	userAppointments: {
     		method: 'GET',
     		isArray: false,

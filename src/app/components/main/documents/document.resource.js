@@ -31,12 +31,17 @@ function DocumentResource($resource, $rootScope) {
     		isArray: false,
     		url: URL + 'findall'
     	},
-    	metadata: {
+        metadata: {
             method: 'GET',
             params: {
                 documentType: '@type'
             },
             url: URL + 'metadata',
+            isArray: false
+        },
+        ocrdata: {
+            method: 'GET',
+            url: '/kyck-rest/ocr/data',
             isArray: false
         },
         upload: {

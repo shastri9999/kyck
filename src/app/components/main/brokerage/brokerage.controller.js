@@ -2,7 +2,9 @@
 
 import inviteDialogTemplateUrl from './dialog.html';
 
-function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialog, $filter, $log, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, UserService, CalendarService) {
+function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, 
+        $mdDialog, $rootScope, BrokerageResource, AuthenticationService, 
+        DocumentResource, UserService, CalendarService) {
     'ngInject';
 
     var vm = this;
@@ -31,22 +33,25 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         vm.usermessages = [];
 
         vm.changeUsers = changeUsers;
-        if (!$scope.isBroker)
+        if (!vm.isBroker)
         {
-            BrokerageResource.brokeragesList((req)=> {
-                var brokeragesList = req.data;
-                vm.partners = brokeragesList.map(convert);
-                vm.partners = vm.partners.map((partner)=>{
-                    vm.contactedBrokers.forEach((broker)=>{
-                        if (broker.brokerageId == partner.brokerageName)
-                        {
-                            partner.status = broker.status;
-                        }
-                    });
-                    return partner;
-                })
-                vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
-            });            
+            BrokerageResource.contactedBrokerages((response)=>{
+                vm.contactedBrokers = response.data;
+                BrokerageResource.brokeragesList((req)=> {
+                    var brokeragesList = req.data;
+                    vm.partners = brokeragesList.map(convert);
+                    vm.partners = vm.partners.map((partner)=>{
+                        vm.contactedBrokers.forEach((broker)=>{
+                            if (broker.brokerageId == partner.brokerageName)
+                            {
+                                partner.status = broker.status;
+                            }
+                        });
+                        return partner;
+                    })
+                    vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+                });     
+            });       
 
         }
 
@@ -56,9 +61,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             questions.forEach(function(q){
                 vm.questionsmap[q.questionDesc] = q;
             });
-            $log.info(vm.questionsmap);
         }, function(error){
-            $log.error(error);
         });
 
         BrokerageResource.kycget(function(response){
@@ -67,9 +70,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
             questions.forEach(function(q){
                 vm.kycquestions[q.questionDesc] = q;
             });
-            $log.info(vm.kycquestions);
         }, function(error){
-            $log.error(error);
         });
 
         vm.toggleSelected = function(partner){
@@ -100,7 +101,6 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         }
 
         DocumentResource.categories(function(response){
-                $log.debug(response);
                 vm.documents = response.data;
                 vm.documents.forEach(function(doc){
                     doc.documentID = null; //Making default docId as null. Replacing it with actual value in next call
@@ -117,10 +117,8 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
                             }
                         });
                     }
-                    $log.debug(vm.documents);
                 })
         }, function(error){
-                $log.error(error);
         });
 
         vm.replace = function(document){
@@ -128,98 +126,45 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, $mdDialo
         }
         
         vm.preview = function(document){
+            $rootScope.canEnableOCR = !vm.isBroker;
             $rootScope.showDocumentPreview();
             DocumentResource.metadata({documentType: document.documentType}, function(response){
-                var name = response.data["documentName"];
-                var mimeType = response.data["mimeType"];
+                const documentData = response.data;
+                let document = documentData;
+                $rootScope.viewingDocument = document;
+                $rootScope.viewingDocument.OCR = null;
+                DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
+                    $rootScope.viewingDocument.OCR = response.data;
+                });
                 $http({
                     method: 'GET',
                     url: '/kyck-rest/document/download/string64',
-                    params: {documentId: name},
+                    params: {documentId: documentData.documentName},
                     transformResponse: [function (data) {
                           return data;
                       }]
                 }).then((data)=>{
-                    let URL = 'data:' + mimeType + ';base64,' + data.data;
+                    let URL = 'data:' + documentData.mimeType + ';base64,' + data.data;
                     $rootScope.showDocumentPreview(URL);
                 })
             });
         }
 
+        const leadingZeros = (number, zeros=2)=>{
+            let string = (number || 0) + "";
+            while (string.length < zeros)
+                string = "0" + string;
+            return string;
+        } 
+        BrokerageResource.validationReports({
+            userId: AuthenticationService.getLoggedInUser().userId
+        },(response)=>{
+            vm.validationReports = response.data.checkList;
+            vm.validationAcceptedCount = leadingZeros(vm.validationReports.filter(x=>x.status==="PASS").length);
+            vm.validationRejectedCount = leadingZeros(vm.validationReports.filter(x=>x.status!=="PASS").length);
+            vm.validationTotalCount = leadingZeros(vm.validationReports.length);
+        });
 
-        var validationReports = [
-            {
-            title: 'Document Type Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Required Fields Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Barcode Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Expiry Date Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Icnumber Checksum Check',
-            description: '',
-            ticked: false
-            },{
-            title: 'Name Crosscheck',
-            description: '',
-            ticked: true
-            },{
-            title: 'Gender Crosscheck',
-            description: '',
-            ticked: false
-            },{
-            title: 'Address Crosscheck',
-            description: '',
-            ticked: true
-            },{
-            title: 'Icnumber Crosscheck',
-            description: '',
-            ticked: true
-            },{
-            title: 'Nationality Crosscheck',
-            description: '',
-            ticked: false
-            },{
-            title: 'Image modification check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Hologram modification check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Field modification check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Tampering Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Photo Tampering Check',
-            description: '',
-            ticked: true
-            },{
-            title: 'Photo Crosscheck',
-            description: '',
-            ticked: true
-            },{
-            title: 'MRZ Code Check',
-            description: '',
-            ticked: true
-            }
-        ];
-
-        vm.validationReports = validationReports;
 
         var events = [];
         var currentDate = new Date();

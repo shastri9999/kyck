@@ -211,16 +211,34 @@
             <md-step md-label="Validation Reports">
                 <md-step-body layout="column" flex>
                     <div style="min-height: 800px; height: 800px;">
+                        <div class="validation-report-count">
+                            <div class="stat accepted">
+                                {{vm.validationAcceptedCount}}
+                            </div>
+                            <div class="stat rejected">
+                                {{vm.validationRejectedCount}}
+                            </div>
+                            <div class="stat total">
+                                {{vm.validationTotalCount}}
+                            </div>
+
+                        </div>
                         <div class="validationReport" ng-repeat="report in vm.validationReports">
-                            <div style="float:left;">
-                                <div class="title">{{report.title}}
+                            <div>
+                                <div class="title">{{report.name}}
                                 </div>
                                 <div class="description">{{report.description}}
                                 </div>
+                                <table class="checklist-table" ng-if="report.checklistValue.length">
+                                    <tr ng-repeat="checklistValue in report.checklistValue">
+                                        <td>{{checklistValue.name}} :</td>
+                                        <td> {{checklistValue.value}}</td>
+                                    </tr>
+                                </table>
                             </div>
-                            <div style="float:right;">
-                                <div ng-click="toggleReport($index)" class="ticked" ng-class='{grey: !report.ticked}'></div>
-                                <div ng-click="toggleReport($index)" class="unticked" ng-class='{grey: report.ticked}'></div>
+                            <div>
+                                <div ng-click="toggleReport($index)" class="ticked" ng-class='{grey: report.status != "PASS"}'></div>
+                                <div ng-click="toggleReport($index)" class="unticked" ng-class='{grey: report.status =="PASS"}'></div>
                             </div>
                         </div>
                     </md-step-body>
