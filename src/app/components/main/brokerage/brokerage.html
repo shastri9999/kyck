@@ -173,14 +173,14 @@
         <div ng-if="isBroker">
             <md-step md-label="Personal Details">
                 <md-step-body style="min-height:700px;">
-                    <profile-form ng-class="{error:vm.personalDetailsError}" is-broker="isBroker" user-email-id="vm.getSelectedUserEmail()"/>
+                    <profile-form ng-class="{error:vm.personalDetailsError}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/>
                 </md-step-body>
             </md-step>
         </div>
         <div ng-if="isBroker">
             <md-step md-label="KYC">
                 <md-step-body style="min-height:700px;">
-                    <kyc-form ng-class="{error:vm.kycerror}" is-broker="isBroker" user-email-id="vm.getSelectedUserEmail()"/>
+                    <kyc-form ng-class="{error:vm.kycerror}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/>
                 </md-step-body>
             </md-step>
         </div>
@@ -189,7 +189,7 @@
                 <md-step-body>
                     <div class="flex-wrapper" style="height: calc(100vh - 90px); margin-bottom: -90px; margin-top: 20px;">
                         <div ng-repeat="document in ::vm.documents">
-                            <document-pane style="float: left;" document="document"></document-pane>
+                            <document-pane is-broker="true" style="float: left;" document="document"></document-pane>
                         </div>  
                     </div>
                 </md-step-body>

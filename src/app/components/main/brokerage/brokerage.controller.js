@@ -84,10 +84,6 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             }
         }
 
-		BrokerageResource.brokeragesDetails({'userEmailId':AuthenticationService.getLoggedInUser().userId}, function (req) {
-            vm.brokeragesDetails = req.data;
-        }, function () {});
-
         if (vm.isBroker) {
             BrokerageResource.userAppointments((response)=>{
                 vm.userAppointments = response.data;
@@ -100,30 +96,6 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             });
         }
 
-        DocumentResource.categories(function(response){
-                vm.documents = response.data;
-                vm.documents.forEach(function(doc){
-                    doc.documentID = null; //Making default docId as null. Replacing it with actual value in next call
-                    doc.replaceAction = false;
-                });
-                DocumentResource.findall(function(response){
-                    if(response && response.data){
-                        response.data.forEach(function(existingDoc){
-                            for(var i=0; i<vm.documents.length; i++){
-                                if(existingDoc.documentType==vm.documents[i].documentType){
-                                    vm.documents[i].documentID = existingDoc.documentID;
-                                    break;
-                                }
-                            }
-                        });
-                    }
-                })
-        }, function(error){
-        });
-
-        vm.replace = function(document){
-            document.replaceAction = true;
-        }
         
         vm.preview = function(document){
             $rootScope.canEnableOCR = !vm.isBroker;
@@ -436,11 +408,37 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             //
         });
         vm.activeStep = 1;
+        var steppers = $mdStepper('stepper-demo');
+        steppers.goto(0);
         vm.allVerified = 0;
         vm.selectedIndex=index;
         vm.userAppointment = vm.userAppointments[index];
 
         console.log(vm.userAppointment.email);
+
+        BrokerageResource.brokeragesDetails({'userEmailId':vm.userAppointment.email}, function (req) {
+            vm.brokeragesDetails = req.data;
+            console.log(req.data);
+            DocumentResource.categories(function(response){
+                vm.documents = response.data;
+                vm.documents.forEach(function(doc){
+                    doc.documentID = null;
+                    doc.replaceAction = false;
+                });
+                vm.brokeragesDetails.document.forEach(function(existingDoc){
+                    for(var i=0; i<vm.documents.length; i++){
+                        if(existingDoc.documentType==vm.documents[i].documentType){
+                            vm.documents[i].documentID = existingDoc.documentID;
+                            vm.documents[i].documentName = existingDoc.documentName;
+                            vm.documents[i].mimeType = existingDoc.mimeType;
+                            break;
+                        }
+                    }
+                });
+            }, function(error){});
+        }, function () {});
+
+
 
         BrokerageResource.usermessages({userId: vm.userAppointment.email}, function(req) {
             for(var i=0; i<req.data.length; i++) {

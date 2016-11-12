@@ -11,7 +11,8 @@ function documentComponent($log, $state, Upload, DocumentResource) {
     templateUrl: documentHtml,
     controller: DocumentController,
     bindToController: true,
-    document: '='
+    document: '=',
+    isBroker: '='
   };
 
   return directive;
