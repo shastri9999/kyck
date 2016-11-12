@@ -77,31 +77,18 @@
             <div layout="row" style="margin: 20px; ">
             <div flex="50" style="margin-right: 30px; ">
                 <span class="title">Download Documents</span>
-                <div class="documentTile">
-                    <div style="float:left; padding:10px;">
-                        <div class="header">Income Tax</div>
-                        <div class="description">File Size: 1 mb</div>
+                <div class="document-container">
+                    <div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokeragesDetails.document || !vm.brokeragesDetails.document.length">
+                        No uploaded Documents for this user.
                     </div>
-                    <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <img src="/assets/images/download.png"/>
-                    </div>
-                </div>
-                <div class="documentTile">
-                    <div style="float:left; padding:10px;">
-                        <div class="header">Income Tax</div>
-                        <div class="description">File Size: 1 mb</div>
-                    </div>
-                    <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <img src="/assets/images/download.png"/>
-                    </div>
-                </div>
-                <div class="documentTile">
-                    <div style="float:left; padding:10px;">
-                        <div class="header">Income Tax</div>
-                        <div class="description">File Size: 1 mb</div>
-                    </div>
-                    <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <img src="/assets/images/download.png"/>
+                    <div ng-repeat="document in vm.documents" ng-if="document.documentID" class="documentTile">
+                        <div style="float:left; padding:10px;">
+                            <div class="header">{{document.categoryName}}</div>
+                            <div class="description">Click to select</div>
+                        </div>
+                        <div style="float: right; border-left: solid 1px #e7ecf1;">
+                            <img src="/assets/images/download.png"/>
+                        </div>
                     </div>
                 </div>
                 <div style="margin-top:10px;">
@@ -126,25 +113,6 @@
                         </span>
                     </div>
                 </div>
-                <!-- <div class="appointmentTile">
-                    <div style="float:left; padding:10px;">
-                        <div class="header">29th Oct 16, 07:20am</div>
-                        <a class="pending-btn ng-binding">PENDING</a>
-                    </div>
-                    <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
-                        <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
-                    </div>
-                </div>
-                <div class="appointmentTile">
-                    <div style="float:left; padding:10px;">
-                        <div class="header">28th Oct 16, 07:20am</div>
-                        <a class="pending-btn ng-binding">PENDING</a>
-                    </div>
-                    <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <div class="actnItem">DONE</div>
-                    </div>
-                </div> -->
             </div>
             </div>
             </md-step-body>

@@ -76,7 +76,11 @@
 		<div class="appointments">
 			<h2>Brokerage Application Request</h2>
 			<div class="appointments-container">
-				<div class="appointment" ng-repeat="appointment in vm.userAppointments">
+				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.userAppointments || !vm.userAppointments.length">
+					No Application Requests to Show 
+				</div>
+				<div class="appointment" ng-click="vm.goToRequests()" ng-repeat="appointment in vm.userAppointments">
+					<a class="overlay-link" ui-sref="main.brokerage"></a>
 					<img ng-if="appointment.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
 					<div class="avatar-circle" ng-if="!appointment.avatar">
 						{{appointment.fname|limitTo:1|capitalize}}
@@ -84,7 +88,7 @@
 					</div>
 					<div class="detail">
 						<div style="font-size: 14px;">{{appointment.fname}} {{appointment.lname}}</div>
-						<div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
+						<div ng-if="appointment.date" style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
 						<a class="pending-btn" style="margin-top: 25px;">{{appointment.applicationStatus}}</a>
 					</div>		
 				</div>				
@@ -92,22 +96,27 @@
 		</div>
 		<div class="messages">
 			<h2>Messages</h2>
-			<div class="message" ng-repeat="message in vm.messages | orderBy:'-messageDate' | limitTo: 3" ng-click="vm.openMessage(message)">
-				<img ng-if="message.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
-				<div class="avatar-circle" ng-if="!message.avatar">{{message.messageFrom|limitTo:1|capitalize}}</div>
-				<div class="detail">
-					<div>{{message.messageSubject}}</div>
-					<div style="font-size: 12px; margin-bottom: 10px;margin-top: 10px;">From: {{message.messageFromName}} ({{message.messageFrom}})</div>
-					<div style="opacity: 0.4;font-size: 14px; line-height: 25px;">{{message.messageContent}}</div>
+			<div class="message-container">
+				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.messages || !vm.messages.length">
+					No Messages to Show 
 				</div>
-				<div class="time">
-					<div style="white-space: nowrap;padding-right: 10px" am-time-ago="message.messageDate | amParse:'DD/MM/YYYY hh:mm'"></div>
-					<a style="text-decoration: none;cursor: pointer;">
-						<img src="/assets/images/open-message.png">					
-					</a>
+
+				<div class="message" ng-repeat="message in vm.messages | orderBy:'-messageDate'" ng-click="vm.openMessage(message)">
+					<img ng-if="message.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
+					<div class="avatar-circle" ng-if="!message.avatar">{{message.messageFrom|limitTo:1|capitalize}}</div>
+					<div class="detail">
+						<div>{{message.messageSubject}}</div>
+						<div style="font-size: 12px; margin-bottom: 10px;margin-top: 10px;">From: {{message.messageFromName}} ({{message.messageFrom}})</div>
+						<div style="opacity: 0.4;font-size: 14px; line-height: 25px;">{{message.messageContent}}</div>
+					</div>
+					<div class="time">
+						<div style="white-space: nowrap;padding-right: 10px" am-time-ago="message.messageDate | amParse:'DD/MM/YYYY hh:mm'"></div>
+						<a style="text-decoration: none;cursor: pointer;">
+							<img src="/assets/images/open-message.png">					
+						</a>
+					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<div class="right">

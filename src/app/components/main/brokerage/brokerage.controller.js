@@ -403,10 +403,8 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             vm.userSlots.map(function(a) {
                 a['startTime'] = new Date(Date.parse(a['startTime']));
             })
-            //startTime
-            //status
-            //
         });
+        
         vm.activeStep = 1;
         var steppers = $mdStepper('stepper-demo');
         steppers.goto(0);
