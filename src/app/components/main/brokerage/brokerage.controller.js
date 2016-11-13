@@ -58,7 +58,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                 vm.documents = response.data;
                 vm.documents.forEach(function(doc){
                     doc.documentID = null;
-                    doc.replaceAction = false;
+                    doc.replaceAction = true;
                 });
                 DocumentResource.findall((response)=>{
                     const documents = response.data;
