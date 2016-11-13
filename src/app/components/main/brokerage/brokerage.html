@@ -63,7 +63,7 @@
         <md-stepper id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker">
         <div ng-if="isBroker">
         <md-step md-label="Account Summary" class="accSummary">
-            <md-step-body layout="column">
+            <md-step-body layout="column" style="min-height: 71vh;">
             <div layout="row">
                 <div class="appointment ng-scope" layout="column">
                 <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
