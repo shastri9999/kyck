@@ -24,8 +24,8 @@
             <input name="search" ng-model="vm.searchUsername" type="search" ng-change="vm.changeUsers()" placeholder="Search" class="searchBar">
         </div>
         <div class="appointment ng-scope" ng-class='{active: $index==vm.selectedIndex}' ng-repeat="appointment in vm.userAppointmentsFiltered" ng-click="vm.selectUser($index)">
-            <img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">         
-            <div class="detail">
+<!--             <img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">         
+ -->            <div class="detail">
                 <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div>
                 <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> -->
                 <a class="pending-btn ng-binding" style="margin-top: 4px;">{{appointment.applicationStatus}}</a>
@@ -253,7 +253,7 @@
                     <span ng-show="vm.activeStep>1">Accept</span>
                 </md-button>
                 <md-button class="md-raised md-success" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.activeStep==1" ng-disabled="!vm.allVerified">
-                    <div>Submit</div>
+                    <div>Approve</div>
                 </md-button>
                 <md-button class="md-raised md-warn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.activeStep==1" ng-disabled="!vm.allVerified">
                     <div>Reject</div>

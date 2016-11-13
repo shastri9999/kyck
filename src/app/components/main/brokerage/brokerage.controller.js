@@ -31,6 +31,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.updateMeetingStatus = updateMeetingStatus;
         vm.showVideoDialog = showVideoDialog;
         vm.usermessages = [];
+        vm.selectedDocumentNames = [];
 
         vm.changeUsers = changeUsers;
         if (!vm.isBroker)
@@ -97,6 +98,14 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         }
 
         
+        vm.selectDocument = function(document){
+            vm.selectedDocumentNames.push(document.documentName);
+        }
+
+        vm.documentDownload = function(){
+            DocumentResource.bulkDownload();
+        }
+
         vm.preview = function(document){
             $rootScope.canEnableOCR = !vm.isBroker;
             $rootScope.showDocumentPreview();
@@ -281,6 +290,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                 var steppers = $mdStepper('stepper-demo');
                 steppers.goto(0);
                 $mdDialog.hide();
+                vm.selectedDocumentNames = [];
             }
           }
     }
@@ -332,6 +342,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             var steppers = $mdStepper('stepper-demo');
             steppers.goto(0);
             vm.activeStep = 1;
+            vm.selectedDocumentNames = [];
             return;
         }
         else
@@ -349,6 +360,8 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             var steppers = $mdStepper('stepper-demo');
             steppers.goto(0);
             vm.activeStep = 1;
+            vm.selectedDocumentNames = [];
+
             return;
         }
         else
@@ -359,6 +372,8 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.activeStep +=1; 
         var steppers = $mdStepper('stepper-demo');
         steppers.next();
+        vm.selectedDocumentNames = [];
+
         return;
     }
 
@@ -369,6 +384,8 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.activeStep -=1 ; 
         var steppers = $mdStepper('stepper-demo');
         steppers.back();
+
+        vm.selectedDocumentNames = [];
     }
 
     function searchText(seacrh_query, search_str) {
@@ -411,6 +428,8 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.allVerified = 0;
         vm.selectedIndex=index;
         vm.userAppointment = vm.userAppointments[index];
+        vm.selectedDocumentNames = [];
+
 
         console.log(vm.userAppointment.email);
 
