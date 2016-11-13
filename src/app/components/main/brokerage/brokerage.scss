@@ -426,6 +426,12 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 		color: #4f6379;
 		line-height: 24px;
 	}
+	.document-container {
+		min-height: 300px;
+	    max-height: 365px;
+	    overflow: auto;
+	    padding-right: 20px;
+	}
 	.documentTile {
 		border: solid 1px #e7ecf1;
 		overflow: hidden;

@@ -13,14 +13,15 @@
 		</div>
 	</div>
 	<div class="document-action" ng-if="!document.documentID || document.replaceAction" ngf-drag-over-class="'dragover'" ngf-drop="upload($file, document)">
-		<span>Drag and drop your file here or 
-		<md-button ngf-select="upload($file, document)" class="md-primary md-raised" style="background-color: #3598DB">	Upload
+		<span ng-if="isBroker">Document not uploaded.</span>
+		<span ng-if="!isBroker">Drag and drop your file here or 
+		<md-button ng-if="!isBroker" ngf-select="upload($file, document)" class="md-primary md-raised" style="background-color: #3598DB">	Upload
 		</md-button>
  		</span>
 	</div>
 	<div class="document-action" ng-if="document.documentID && !document.replaceAction">
 		<div style="width: 50%" ng-click="vm.preview(document)">View</div>
 		<div style="width: 2px; border: solid 1px #e7ecf1;"></div>
-		<div style="width: 50%" ng-click="vm.replace(document)">Replace</div>
+		<div ng-if="!isBroker" style="width: 50%" ng-click="vm.replace(document)">Replace</div>
 	</div>
 </div>

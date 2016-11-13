@@ -29,12 +29,12 @@ function DashboardResource($resource, AppConstants) {
     	kycStatus: {
     		method: 'GET',
     		isArray: false,
-    		url: URL + '/dashboard/profile/status'
+    		url: URL + '/dashboard/userkycanswer/status'
     	},
     	profileStatus: {
     		method: 'GET',
     		isArray: false,
-    		url: URL + '/dashboard/userkycanswer/status'
+    		url: URL + '/dashboard/profile/status'
     	},
     });
 }

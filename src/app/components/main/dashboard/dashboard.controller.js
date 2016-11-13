@@ -46,6 +46,10 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 		vm.messages = messages;
 	})
 
+	vm.goToRequests =()=>{
+		$state.go('main.brokerage');
+	}
+
 	vm.openMessage = (message)=>{
 		$rootScope.messageView.activeInboxMessage = message;
 		$rootScope.messageView.reply = "";
