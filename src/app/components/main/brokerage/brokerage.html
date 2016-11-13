@@ -136,12 +136,13 @@
                         </div>
                     </div>
                     <h3 class="partnersHeader">All Partners</h3>
-                    <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'REGULAR'}">
+                    <div style="display: flex; width: 100%; justify-content: center;">
+                    <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'REGULAR'}" style="margin: 20px;">
                         <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected , 'deactivated': partner.status}">
                             <center><img ng-src="{{partner.img}}"/></center>
                         </div>
                     </div>
-
+                    </div>
                 </md-step-body>
             </md-step>
         </div>

@@ -33,9 +33,6 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.usermessages = [];
         vm.selectedDocumentNames = [];
 
-        var steppers = $mdStepper('stepper-demo');
-        console.log(vm.steppers)
-
         vm.changeUsers = changeUsers;
         if (!vm.isBroker)
         {
@@ -333,12 +330,13 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                 });            
             });
            }).catch(e=>console.log(e));
+
            $mdDialog.show({
              parent: parentEl,
              targetEvent: $event,
              template:
                '<md-dialog aria-label="List dialog">' +
-               '  <md-dialog-content style="width:500px;height:400px;">'+
+               '  <md-dialog-content style="width:500px;height:200px;">'+
                 '<div class="dialog-content-broker">'+ 
                 ' You have submitted application and scheduled meeting with '+ partner.brokerageName +
                 ' on November ' + vm.selectedDay + ' at ' + vm.selectedHour + ':00.' +
