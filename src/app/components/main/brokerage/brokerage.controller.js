@@ -33,6 +33,9 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.usermessages = [];
         vm.selectedDocumentNames = [];
 
+        var steppers = $mdStepper('stepper-demo');
+        console.log(vm.steppers)
+
         vm.changeUsers = changeUsers;
         if (!vm.isBroker)
         {
@@ -535,11 +538,11 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             $scope.addedEmails=[];
 
             $scope.closeDialog = function() {
-                console.log($scope.addedEmails, vm.userAppointment.userId);
+                console.log($scope.addedEmails, vm.userAppointment);
                 BrokerageResource.startconference({
-                    'emailId' : $scope.addedEmails, 'userId' : vm.userAppointment.userId
+                    'emailId' : $scope.addedEmails, 'userId' : vm.userAppointment.email
                 }, function(req){
-                    console.log(req);
+                    $window.open(req.data, 'Join Video Conferenence', 'width=1024,height=800');
                     $mdToast.showSimple("Invited for Video Conference.")
                 }, function(error){console.log(error);});
                 $mdDialog.hide();
