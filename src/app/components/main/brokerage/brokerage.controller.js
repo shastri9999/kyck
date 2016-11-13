@@ -58,7 +58,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                 vm.documents = response.data;
                 vm.documents.forEach(function(doc){
                     doc.documentID = null;
-                    doc.replaceAction = true;
+                    doc.replaceAction = false;
                 });
                 DocumentResource.findall((response)=>{
                     const documents = response.data;
@@ -76,6 +76,10 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                 });
                 
             }, function(error){});
+
+            vm.replace = (document)=>{
+                document.replaceAction = true;
+            }
         }
 
         BrokerageResource.userprofileget(function(response){
