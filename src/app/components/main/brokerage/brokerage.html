@@ -81,19 +81,26 @@
                     <div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokeragesDetails.document || !vm.brokeragesDetails.document.length">
                         No uploaded Documents for this user.
                     </div>
-                    <div ng-repeat="document in vm.documents" ng-if="document.documentID" class="documentTile">
+                    <div ng-class="{documentTile:true,selected:vm.hasDocument(document)}" ng-click="vm.toggleDocument(document)" ng-repeat="document in vm.documents" ng-if="document.documentID" class="documentTile">
                         <div style="float:left; padding:10px;">
                             <div class="header">{{document.categoryName}}</div>
-                            <div class="description">Click to select</div>
+                            <div class="description">Click to select/de-select</div>
                         </div>
                         <div style="float: right; border-left: solid 1px #e7ecf1;">
-                            <img src="/assets/images/download.png"/>
+                            <img src="/assets/images/selected.png" class="selected">
+                            <a ng-href="/kyck-rest/document/bulkDownload?documentNames={{document.documentName}}&userId={{vm.userAppointment.email}}">
+                                <img src="/assets/images/download.png"/>                                
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div style="margin-top:10px;">
-                    <md-button class="md-raised md-success" ng-click="">Select All</md-button>
-                    <md-button class="md-raised md-blue" ng-click="">Download All</md-button>
+                <div style="margin-top:10px;display: flex;">
+                    <a ng-click="vm.toggleAllDocuments()" class="select-all-btn">
+                        {{vm.selectedDocumentNames.length!=vm.brokeragesDetails.document.length ? 'Select All' : 'Clear All'}}
+                    </a>
+                    <a ng-href="{{vm.getDownloadLink()}}" class="download-all-btn">
+                        Download Selected
+                    </a>
                 </div>
             </div>
             <div flex="50">
