@@ -51,7 +51,7 @@ function BrokerageResource($resource) {
         userprofileupdate: {
             method: 'POST',
             params: {
-                  brokerageCalenderSlotList: '@calendarSlots'
+                  brokerageCalenderSlot: '@calendarSlots'
                   // [
                   //   {
                   //         "brokerageId": "@string",

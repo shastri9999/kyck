@@ -165,19 +165,25 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             vm.validationTotalCount = leadingZeros(vm.validationReports.length);
         });
 
+        function numToTime(num) {
+            if (i<12):
+                return i + ':00 AM';
+            else
+                return (i-12) + ':00 PM';
+        }
 
         var events = [];
         var currentDate = new Date();
         currentDate = currentDate.getDate();
-        for(var j=currentDate; j<= (30-currentDate); ++j)
+        for(var j=0; j<= 30; ++j)
         {
-            for(var i=0; i<=24; ++i)
+            for(var i=10; i<=19; ++i)
             {
                 events.push({
-                    start: getDate(i, j),
+                    start: getDate(j, i),
                     allDay: true,
                     customClass: 'book-appointment',
-                    title: 'Slot - ' + i,
+                    title: ' - ' + numToTime(i) + ' slot',
                     mday: currentDate + j,
                     mhour: i
                 })
