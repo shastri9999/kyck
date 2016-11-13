@@ -52,8 +52,30 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                     })
                     vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
                 });     
-            });       
+            });  
 
+            DocumentResource.categories(function(response){
+                vm.documents = response.data;
+                vm.documents.forEach(function(doc){
+                    doc.documentID = null;
+                    doc.replaceAction = false;
+                });
+                DocumentResource.findall((response)=>{
+                    const documents = response.data;
+
+                   documents.forEach(function(existingDoc){
+                        for(var i=0; i<vm.documents.length; i++){
+                            if(existingDoc.documentType==vm.documents[i].documentType){
+                                vm.documents[i].documentID = existingDoc.documentID;
+                                vm.documents[i].documentName = existingDoc.documentName;
+                                vm.documents[i].mimeType = existingDoc.mimeType;
+                                break;
+                            }
+                        }
+                   });
+                });
+                
+            }, function(error){});
         }
 
         BrokerageResource.userprofileget(function(response){
@@ -96,15 +118,48 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                 }
             });
         }
+        if (vm.isBroker)
+        {
+            vm.getDownloadLink = ()=>{
+                if (vm.userAppointment)
+                    return '/kyck-rest/document/bulkDownload?'+ 'userId=' + vm.userAppointment.email + '&documentNames='
+                    + vm.selectedDocumentNames.join(',');
+                return '';
+            }
+            vm.toggleAllDocuments = ()=>{
+                let selection = [];
+                vm.brokeragesDetails.document.forEach((doc)=>{
+                    selection.push(doc.documentName);
+                });
+                if (selection.length == vm.selectedDocumentNames.length)
+                {
+                    vm.selectedDocumentNames = [];
+                }
+                else
+                {
+                    vm.selectedDocumentNames = selection;
+                }
+            }
 
-        
-        vm.selectDocument = function(document){
-            vm.selectedDocumentNames.push(document.documentName);
+            vm.hasDocument = function(document) {
+                return (vm.selectedDocumentNames.indexOf(document.documentName) >= 0);
+            }
+
+            vm.toggleDocument = function(document){
+                const name = document.documentName;
+                const index = vm.selectedDocumentNames.indexOf(document.documentName);
+                if (index >= 0)
+                {
+                    vm.selectedDocumentNames.splice(index, 1);
+                }
+                else
+                {
+                    vm.selectedDocumentNames.push(document.documentName)
+                }
+            }
+
         }
 
-        vm.documentDownload = function(){
-            DocumentResource.bulkDownload();
-        }
 
         vm.preview = function(document){
             $rootScope.canEnableOCR = !vm.isBroker;
@@ -431,11 +486,9 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.selectedDocumentNames = [];
 
 
-        console.log(vm.userAppointment.email);
 
         BrokerageResource.brokeragesDetails({'userEmailId':vm.userAppointment.email}, function (req) {
             vm.brokeragesDetails = req.data;
-            console.log(req.data);
             DocumentResource.categories(function(response){
                 vm.documents = response.data;
                 vm.documents.forEach(function(doc){

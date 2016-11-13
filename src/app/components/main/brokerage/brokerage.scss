@@ -426,6 +426,37 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 		color: #4f6379;
 		line-height: 24px;
 	}
+	.download-all-btn {
+		background-color: #3498db;
+		color: white;
+		cursor: pointer;
+		text-decoration: none;
+		width: 165px;
+		height: 50px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 3px;
+		margin-left: 20px;
+		&:hover {
+			opacity: 0.9;
+		}
+	}
+	.select-all-btn {
+		background-color: #3bada5;
+		color: white;
+		cursor: pointer;
+		text-decoration: none;
+		width: 165px;
+		height: 50px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 3px;
+		&:hover {
+			opacity: 0.9;
+		}
+	}
 	.document-container {
 		min-height: 300px;
 	    max-height: 365px;
@@ -439,6 +470,23 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 	    color: #4f6379;
 	    font-size: 14px;
 	    margin-top: 15px;
+	    outline:none;
+	    position: relative;
+	    cursor: pointer;
+	    &.selected {
+	    	background-color: #f2f2f2;
+	    	img.selected {
+	    		display: block;
+	    	}
+	    }
+	    img.selected {
+			height: 15px;
+		    width: 15px;
+		    position: absolute;
+		    top: -6px;
+		    right: -5px;
+		    display: none;
+	    }
 		img {
 			height: 30px;
 			opacity: 0.4;
