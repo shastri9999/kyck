@@ -201,7 +201,7 @@
                     <!-- <img ng-src="{{partner.img}}" alt="{{partner.brokerageName}}"/>
                     <span>{{partner.brokerageName}}</span>
                     <img src="../../../../assets/images/calendaricon.png"/> -->
-                    <div style="min-height: 800px; height: 800px;">
+                    <div style="min-height: 70vh; max-height: 70vh; height: 70vh;">
                         <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent)" md-label="title" md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis" class="md-primary">
                             <md-event-calendar-header class="md-center">
                                 <md-event-calendar-prev></md-event-calendar-prev>
@@ -285,7 +285,7 @@
         </footer>
 
     </div>
-    <div layout="column" class="rightSide" ng-if="isBroker" flex style="background: url(../../../../assets/images/broker-dashboard-background.png) no-repeat;">
+    <div layout="column" class="rightSide" ng-if="isBroker" flex style="background: url(../../../../assets/images/broker-dashboard-background.png) no-repeat; max-height: 71vh;">
         <md-event-calendar>
             <md-event-calendar-header class="md-center">
                 <md-event-calendar-prev></md-event-calendar-prev>

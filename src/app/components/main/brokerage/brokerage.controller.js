@@ -201,15 +201,6 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             vm.validationTotalCount = leadingZeros(vm.validationReports.length);
         });
 
-        function numToTime(num) {
-            if (i<12)
-                return i + ':00 AM';
-            else if (i==12)
-                return i + ':00 PM';
-            else
-                return (i-12) + ':00 PM';
-        }
-
         var events = [];
         var currentDate = new Date();
         currentDate = currentDate.getDate();
@@ -217,11 +208,12 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         {
             for(var i=10; i<=19; ++i)
             {
+                var i2 = 1+i;
                 events.push({
                     start: getDate(j, i),
                     allDay: true,
                     customClass: 'book-appointment',
-                    title: '- ' + numToTime(i),
+                    title: numToTime(i) + ' - ' + numToTime(i2),
                     mday: currentDate + j,
                     mhour: i
                 })
@@ -230,6 +222,15 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.events = events;
         vm.eventClicked = eventClicked;
         vm.eventCreate = eventCreate;
+    }
+
+    function numToTime(i) {
+        if (i<12)
+            return i + ':00 AM';
+        else if (i==12)
+            return i + ':00 PM';
+        else
+            return (i-12) + ':00 PM';
     }
 
     function shuffletheorder() {
@@ -551,7 +552,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.selectedHour = hour;
         vm.selectedTimeSlot = $selectedEvent.start.toISOString();
 
-        textContent = "You are booking an appointment on November " + day +" at "+ hour + ":00 . Are you sure?";
+        textContent = "You are booking an appointment on November " + day +" at "+ numToTime(hour) + " . Are you sure?";
 
         confirm = $mdDialog.confirm({
             title: 'Book Your Appointment',
