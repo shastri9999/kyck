@@ -149,6 +149,8 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         function numToTime(num) {
             if (i<12)
                 return i + ':00 AM';
+            else if (i==12)
+                return i + ':00 PM';
             else
                 return (i-12) + ':00 PM';
         }
@@ -164,7 +166,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                     start: getDate(j, i),
                     allDay: true,
                     customClass: 'book-appointment',
-                    title: ' - ' + numToTime(i) + ' slot',
+                    title: '- ' + numToTime(i),
                     mday: currentDate + j,
                     mhour: i
                 })
@@ -507,7 +509,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
 
         $mdDialog
             .show(confirm).then(function() {
-            	$mdToast.showSimple('Schedule successfully created');
+            	$mdToast.showSimple('Request for appointment successfully created.');
                 vm.timeslotSelected = true;
             }, function() {
             	console.log("NO");
