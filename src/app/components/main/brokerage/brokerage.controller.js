@@ -121,7 +121,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         if (vm.isBroker)
         {
             vm.getDownloadLink = ()=>{
-                if (vm.userAppointment)
+                if (vm.userAppointment && vm.selectedDocumentNames.length)
                     return '/kyck-rest/document/bulkDownload?'+ 'userId=' + vm.userAppointment.email + '&documentNames='
                     + vm.selectedDocumentNames.join(',');
                 return '';
