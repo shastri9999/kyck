@@ -78,9 +78,9 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                 return;
             partner.selected = !partner.selected;
             if(partner.selected){
-                $scope.selectedPartners.add(partner.title);
+                $scope.selectedPartners.add(partner);
             }else{
-                $scope.selectedPartners.delete(partner.title);
+                $scope.selectedPartners.delete(partner);
             }
         }
 
@@ -169,18 +169,17 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         var events = [];
         var currentDate = new Date();
         currentDate = currentDate.getDate();
-        for(var i=0; i<=24; ++i)
+        for(var j=currentDate; j<= (30-currentDate); ++j)
         {
-            for(var j=currentDate; j<= (30-currentDate); ++j)
+            for(var i=0; i<=24; ++i)
             {
                 events.push({
                     start: getDate(i, j),
                     allDay: true,
                     customClass: 'book-appointment',
-                    title: 'Slot - ' + (j-8),
-                    mday: currentDate + i,
-                    mhour: j
-
+                    title: 'Slot - ' + i,
+                    mday: currentDate + j,
+                    mhour: i
                 })
             }
         }
@@ -384,9 +383,10 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
     }
 
     function moveNext() {
-        vm.activeStep +=1; 
+        vm.activeStep +=1;
         var steppers = $mdStepper('stepper-demo');
         steppers.next();
+        // steppers.goto(4); 
         return;
     }
 
@@ -511,6 +511,13 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             $scope.addedEmails=[];
 
             $scope.closeDialog = function() {
+                console.log($scope.addedEmails, vm.userAppointment.userId);
+                BrokerageResource.startconference({
+                    'emailId' : $scope.addedEmails, 'userId' : vm.userAppointment.userId
+                }, function(req){
+                    console.log(req);
+                    $mdToast.showSimple("Invited for Video Conference.")
+                }, function(error){console.log(error);});
                 $mdDialog.hide();
                 //use $scope.addedEmails & make an API Call
             }
