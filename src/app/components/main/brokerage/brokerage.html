@@ -266,7 +266,7 @@
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="isBroker">
                 <md-button class="md-raised md-success" ng-click="vm.nextRequestStep()">
                     <span ng-show="vm.activeStep==1">Start</span>
-                    <span ng-show="vm.activeStep>1">Submit</span>
+                    <span ng-show="vm.activeStep>1">Accept</span>
                 </md-button>
                 <md-button class="md-raised md-success" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.activeStep==1" ng-disabled="!vm.allVerified">
                     <div>Approve</div>
@@ -293,5 +293,6 @@
                 <div class="datetime">{{msg.date | date:'dd MMM yy, HH:mm a'}}</div>
             </div>
         </span>
+        <input type="text" name="compose" placeholder="Add your message" class="input" style="margin: 10px; margin-left:18px; padding: 10px; border-radius: 7px;">
     </div>
 </div>

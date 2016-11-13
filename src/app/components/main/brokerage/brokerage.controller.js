@@ -4,7 +4,7 @@ import inviteDialogTemplateUrl from './dialog.html';
 
 function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, 
         $mdDialog, $rootScope, BrokerageResource, AuthenticationService, 
-        DocumentResource, UserService, CalendarService) {
+        DocumentResource, UserService, CalendarService, $window, moment) {
     'ngInject';
 
     var vm = this;
@@ -380,6 +380,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.activeStep +=1;
         var steppers = $mdStepper('stepper-demo');
         steppers.next();
+        $window.scrollTo(0, 0);
         // steppers.goto(4); 
         vm.selectedDocumentNames = [];
         return;
@@ -427,7 +428,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             });
             console.log(vm.userSlots);
             vm.userSlots.map(function(a) {
-                a['startTime'] = new Date(Date.parse(a['startTime']));
+                a['startTime'] = moment(a['startTime'], 'DD/MM/YYYY hh:mm').toDate();
             })
         });
         
@@ -444,7 +445,6 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
 
         BrokerageResource.brokeragesDetails({'userEmailId':vm.userAppointment.email}, function (req) {
             vm.brokeragesDetails = req.data;
-            console.log(req.data);
             DocumentResource.categories(function(response){
                 vm.documents = response.data;
                 vm.documents.forEach(function(doc){
