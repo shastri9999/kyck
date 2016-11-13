@@ -60,10 +60,10 @@
         </div>
     </div>
     <div flex layout="column">
-        <md-stepper id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker">
+        <md-stepper id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker" style="min-height: 79vh;">
         <div ng-if="isBroker">
         <md-step md-label="Account Summary" class="accSummary">
-            <md-step-body layout="column" style="min-height: 71vh;">
+            <md-step-body layout="column">
             <div layout="row">
                 <div class="appointment ng-scope" layout="column">
                 <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
