@@ -19,7 +19,7 @@ class CalendarService{
 			},
 			url: this.URL + '/user/meeting/month',
 		}).then((response)=>{
-			this.slots = response.data[userEmailId];
+			this.slots = response.data.data;
 			return this.slots;
 		});
 	}

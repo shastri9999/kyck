@@ -9,7 +9,8 @@ const brokerageModule = angular.module('brokerage-module', [
 	'navigation-module',
 	'chart.js',
 	'mdSteppers',
-	'material.components.eventCalendar'
+	'material.components.eventCalendar',
+	'angAccordion'
 	]);
 
 brokerageModule

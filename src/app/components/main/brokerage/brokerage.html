@@ -60,7 +60,7 @@
         </div>
     </div>
     <div flex layout="column">
-        <md-stepper id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker">
+        <md-stepper id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker" style="min-height: 79vh;">
         <div ng-if="isBroker">
         <md-step md-label="Account Summary" class="accSummary">
             <md-step-body layout="column">
@@ -188,6 +188,19 @@
         <div ng-if="!isBroker">
             <md-step md-label="Selection of Timeslot">
                 <md-step-body layout="column" flex>
+                <!-- <ang-accordion one-at-a-time="true">
+                <collapsible-item item-title="Some Heading 1" initially-open="true">
+                    <div>This is regular html code</div>
+                </collapsible-item>
+                <collapsible-item item-title="Some Heading 2">
+                    <div>This is regular html code</div>
+                </collapsible-item>
+                <collapsible-item item-title="Some Heading 3"> -->
+                    <!-- <div ng-repeat="partner in selectedPartners" style="min-height: 800px; height: 800px;">
+                     -->
+                    <!-- <img ng-src="{{partner.img}}" alt="{{partner.brokerageName}}"/>
+                    <span>{{partner.brokerageName}}</span>
+                    <img src="../../../../assets/images/calendaricon.png"/> -->
                     <div style="min-height: 800px; height: 800px;">
                         <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent)" md-label="title" md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis" class="md-primary">
                             <md-event-calendar-header class="md-center">
@@ -198,6 +211,9 @@
                             </md-event-calendar-header>
                         </md-event-calendar>
                     </div>
+                    <!-- </div> -->
+                <!-- </collapsible-item>
+                </ang-accordion> -->
                 </md-step-body>
             </md-step>
         </div>
@@ -257,7 +273,7 @@
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="isBroker">
                 <md-button class="md-raised md-success" ng-click="vm.nextRequestStep()">
                     <span ng-show="vm.activeStep==1">Start</span>
-                    <span ng-show="vm.activeStep>1">Accept</span>
+                    <span ng-show="vm.activeStep>1">Submit</span>
                 </md-button>
                 <md-button class="md-raised md-success" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.activeStep==1" ng-disabled="!vm.allVerified">
                     <div>Approve</div>

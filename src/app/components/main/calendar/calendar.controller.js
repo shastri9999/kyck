@@ -11,13 +11,14 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
   const month = 11;
   if (!isBroker)
   {
-
+    console.log(userId, month);
     CalendarService.fetchMeetings(userId, month).then((data)=>{
+      console.log(data);
       $scope.events = data.map((slot)=>{
         return {
           title: slot.meetingSubject,
-          start: moment(slot.startTime, 'YYYY-MM_DD').toDate(),
-          end: moment(slot.endTime, 'YYYY-MM_DD').toDate(),
+          start: moment(slot.startTime, 'DD/MM/YYYY hh:mm').toDate(),
+          end: moment(slot.endTime, 'DD/MM/YYYY hh:mm').toDate(),
           ...slot
         }      
       });

@@ -101,9 +101,9 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                 return;
             partner.selected = !partner.selected;
             if(partner.selected){
-                $scope.selectedPartners.add(partner.title);
+                $scope.selectedPartners.add(partner);
             }else{
-                $scope.selectedPartners.delete(partner.title);
+                $scope.selectedPartners.delete(partner);
             }
         }
 
@@ -201,22 +201,29 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             vm.validationTotalCount = leadingZeros(vm.validationReports.length);
         });
 
+        function numToTime(num) {
+            if (i<12)
+                return i + ':00 AM';
+            else if (i==12)
+                return i + ':00 PM';
+            else
+                return (i-12) + ':00 PM';
+        }
 
         var events = [];
         var currentDate = new Date();
         currentDate = currentDate.getDate();
-        for(var i=0; i<=24; ++i)
+        for(var j=0; j<= 30; ++j)
         {
-            for(var j=currentDate; j<= (30-currentDate); ++j)
+            for(var i=10; i<=19; ++i)
             {
                 events.push({
-                    start: getDate(i, j),
+                    start: getDate(j, i),
                     allDay: true,
                     customClass: 'book-appointment',
-                    title: 'Slot - ' + (j-8),
-                    mday: currentDate + i,
-                    mhour: j
-
+                    title: '- ' + numToTime(i),
+                    mday: currentDate + j,
+                    mhour: i
                 })
             }
         }
@@ -424,11 +431,11 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
     }
 
     function moveNext() {
-        vm.activeStep +=1; 
+        vm.activeStep +=1;
         var steppers = $mdStepper('stepper-demo');
         steppers.next();
+        // steppers.goto(4); 
         vm.selectedDocumentNames = [];
-
         return;
     }
 
@@ -555,7 +562,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
 
         $mdDialog
             .show(confirm).then(function() {
-            	$mdToast.showSimple('Schedule successfully created');
+            	$mdToast.showSimple('Request for appointment successfully created.');
                 vm.timeslotSelected = true;
             }, function() {
             	console.log("NO");
@@ -579,6 +586,13 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             $scope.addedEmails=[];
 
             $scope.closeDialog = function() {
+                console.log($scope.addedEmails, vm.userAppointment.userId);
+                BrokerageResource.startconference({
+                    'emailId' : $scope.addedEmails, 'userId' : vm.userAppointment.userId
+                }, function(req){
+                    console.log(req);
+                    $mdToast.showSimple("Invited for Video Conference.")
+                }, function(error){console.log(error);});
                 $mdDialog.hide();
                 //use $scope.addedEmails & make an API Call
             }

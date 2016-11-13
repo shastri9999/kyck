@@ -51,7 +51,7 @@ function BrokerageResource($resource) {
         userprofileupdate: {
             method: 'POST',
             params: {
-                  brokerageCalenderSlotList: '@calendarSlots'
+                  brokerageCalenderSlot: '@calendarSlots'
                   // [
                   //   {
                   //         "brokerageId": "@string",
@@ -101,7 +101,15 @@ function BrokerageResource($resource) {
     			kycUserAnswerList: '@content'
     		},
     		url: URL + '/kyckuseranswer/update/action'
-    	}
+    	},
+        startconference: {
+            method: 'POST',
+            params: {
+                emailId : '@emailId',
+                userId : '@userId'
+            },
+            url: URL + '/webconf/startconference'
+        }
     });
 }
 
