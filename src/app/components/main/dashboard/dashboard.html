@@ -119,8 +119,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="right">
-		<img style="position:absolute;" src="/assets/images/broker-dashboard-background.png">
+	<div class="right" style="min-width: 300px; background: url(../../../../assets/images/broker-dashboard-background.png) no-repeat;">
+		<!-- <img style="position:absolute;" src="/assets/images/broker-dashboard-background.png"> -->
+		<div class="rightSide" style="max-height: 330px;">
+		<md-event-calendar>
+            <md-event-calendar-header class="md-center">
+                <md-event-calendar-prev></md-event-calendar-prev>
+                <md-event-calendar-title></md-event-calendar-title>
+                <md-event-calendar-next></md-event-calendar-next>
+            </md-event-calendar-header>
+        </md-event-calendar>
+        </div>
+
 		<div class="appointments">
 			<h2 style="color:white;">Appointment Slots</h2>		
 			<div class="appointment" ng-repeat="appointment in vm.brokerAppointments">
