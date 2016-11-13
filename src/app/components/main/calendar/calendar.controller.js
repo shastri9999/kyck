@@ -11,7 +11,6 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
   const month = 11;
   if (!isBroker)
   {
-    console.log(userId, month);
     CalendarService.fetchMeetings(userId, month).then((data)=>{
       console.log(data);
       $scope.events = data.map((slot)=>{

@@ -38,7 +38,7 @@
             <div><progress-display chart-id="brokerage-progress" is-vertical="true"/></div>
              <div class="contact-brokerage">
                 <div style="position: relative;display: flex; flex-flow: column;">
-                    <h2 style="color:white;">Contact Brokerage: </h2>
+                    <h2 style="color:white;">Brokerage Applications: </h2>
                     <input type="text" placeholder="Search"> 
                     <img src="/assets/images/search.png" alt="Search" style="position: absolute;right:2px;top:40px;">   
                     <div style="display: flex;flex-flow: column;">
@@ -189,11 +189,11 @@
                     <div>This is regular html code</div>
                 </collapsible-item>
                 <collapsible-item item-title="Some Heading 3"> -->
-                    <!-- <div ng-repeat="partner in selectedPartners" style="min-height: 800px; height: 800px;">
-                     -->
-                    <!-- <img ng-src="{{partner.img}}" alt="{{partner.brokerageName}}"/>
+                    <div ng-repeat="partner in selectedPartners" style="min-height: 800px; height: 800px;">
+                    
+                    <img ng-src="{{partner.img}}" alt="{{partner.brokerageName}}"/>
                     <span>{{partner.brokerageName}}</span>
-                    <img src="../../../../assets/images/calendaricon.png"/> -->
+                    <img src="../../../../assets/images/calendaricon.png"/>
                     <div style="min-height: 70vh; max-height: 70vh; height: 70vh;">
                         <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent)" md-label="title" md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis" class="md-primary">
                             <md-event-calendar-header class="md-center">
@@ -204,10 +204,10 @@
                             </md-event-calendar-header>
                         </md-event-calendar>
                     </div>
-                    <!-- </div> -->
+                    </div>
                 <!-- </collapsible-item>
-                </ang-accordion> -->
-                </md-step-body>
+                </ang-accordion>
+                </md-step-body> -->
             </md-step>
         </div>
         <div ng-if="isBroker">
@@ -278,7 +278,7 @@
         </footer>
 
     </div>
-    <div layout="column" class="rightSide" ng-if="isBroker" flex style="background: url(../../../../assets/images/broker-dashboard-background.png) no-repeat; max-height: 71vh;">
+    <div layout="column" class="rightSide" ng-if="isBroker" flex style="background: url(../../../../assets/images/broker-dashboard-background.png) no-repeat; background-color: #47ada4; overflow: scroll;">
         <md-event-calendar>
             <md-event-calendar-header class="md-center">
                 <md-event-calendar-prev></md-event-calendar-prev>
