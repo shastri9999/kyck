@@ -8,6 +8,7 @@ function NavigationController($mdStepper, $mdDialog, $filter, BrokerageResource,
   var vm=this;
   $scope.isBroker = AuthenticationService.isBroker();
   $scope.bgurl = AuthenticationService.getBGURL();
+  $scope.isIA = AuthenticationService.isIA();
 }
 
 function NavigationComponent() {

@@ -4,27 +4,27 @@
 		<img class="logo" src="/assets/images/white-logo.png" alt="">		
 		<img class="logo-min" src="/assets/images/white-logo-min.png" alt="">		
 	</div>
-	<a ui-sref-active="active" ui-sref="main.dashboard">
+	<a ui-sref-active="active" ui-sref="main.dashboard" ng-if="!isIA">
 		<img class="icon" src="/assets/images/dashboard.png" alt="">
 		<img class="icon-active" src="/assets/images/dashboard-active.png" alt="">
 		Dashboard
 	</a>
-	<a ui-sref-active="active" ui-sref="main.brokerage" class="{{!isBroker}}">
+	<a ui-sref-active="active" ui-sref="main.brokerage" class="{{!isBroker}}" ng-if="!isIA">
 		<img class="icon" src="/assets/images/brokerage.png" alt="">
 		<img class="icon-active" src="/assets/images/brokerage-active.png" alt="">
 		<span ng-if="!isBroker">Brokerage</span><span ng-if="isBroker">Requests</span>
 	</a>
-	<a ui-sref-active="active" ui-sref="main.messages">
+	<a ui-sref-active="active" ui-sref="main.messages" ng-if="!isIA">
 		<img class="icon" src="/assets/images/messages.png" alt="">
 		<img class="icon-active" src="/assets/images/messages-active.png" alt="">
 		Messages
 	</a>
-	<a ui-sref-active="active" ui-sref="main.document" ng-if="!isBroker">
+	<a ui-sref-active="active" ui-sref="main.document" ng-if="!isBroker && !isIA">
 		<img class="icon" src="/assets/images/documents.png" alt="">
 		<img class="icon-active" src="/assets/images/documents-active.png" alt="">
 		Documents
 	</a>
-	<a ui-sref-active="active" ui-sref="main.calendar">
+	<a ui-sref-active="active" ui-sref="main.calendar" ng-if="!isIA">
 		<img class="icon" src="/assets/images/calendar.png" alt="">
 		<img class="icon-active" src="/assets/images/calendar-active.png" alt="">
 		Calendar
@@ -32,6 +32,6 @@
 	<a ui-sref-active="active" ui-sref="main.help">
 		<img class="icon" src="/assets/images/help.png" alt="">
 		<img class="icon-active" src="/assets/images/help-active.png" alt="">
-		Help
+		<span ng-if="!isIA">Help</span><span ng-if="isIA">Dashboard</span>
 	</a>
 </div>
