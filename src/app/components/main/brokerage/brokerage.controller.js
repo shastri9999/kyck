@@ -290,9 +290,21 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 return t;
         }
 
-        BrokerageResource.updateMeetingStatus({"status": status,
-                "userId": vm.userAppointment.email},
+        BrokerageResource.updateMeetingStatus({
+                // "status": status,
+                // "userId": vm.userAppointment.email
+            },
         function (response) {
+            vm.userSlots = vm.userSlots.map(function(a){
+                if (a.userId == vm.userAppointment.email)
+                    a.status = "CONFIRM";
+                return a;
+            });
+
+            vm.userAppointments[vm.selectedIndex]['applicationStatus'] = "APPROVED";
+
+            console.log(vm.userAppointment.email, vm.userAppointments, status);
+
             $mdToast.showSimple("Appointment slot has been successfully "+formatStatus(status)+".");
         }, function (error) {
             console.log(error);

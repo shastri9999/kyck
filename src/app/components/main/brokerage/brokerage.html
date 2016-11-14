@@ -111,11 +111,11 @@
                         <a class="pending-btn ng-binding">{{slot.status}}</a>
                     </div>
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <span ng-if="slot.status==='PENDING'">
+                        <span ng-show="slot.status==='PENDING'">
                             <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
                             <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
                         </span>
-                        <span ng-if="slot.status=='CONFIRM'">
+                        <span ng-show="slot.status==='CONFIRM'">
                             <div class="actnItem" ng-click="vm.showVideoDialog()" style="line-height:22px;">JOIN VIDEO<br/>CONFERENCE</div>
                         </span>
                     </div>
@@ -217,7 +217,7 @@
                                 <div class="meetingDetailsHeading">Meeting Details</div>
                                 <div class="meetingDetailsContent" layout="row" flex ng-repeat="slot in selectedPartners[$index]['selectedAppointments']">
                                     <div flex="10"><img src="../../../../assets/images/clockicon.png" width="24" /></div>
-                                    <div flex="90" class="timings">Time slot - {{slot| date:'medium'}}</div>
+                                    <div flex="90" class="timings">Time slot - {{slot | date:'medium'}}</div>
                                 </div>
                             </div>
                         </div>
