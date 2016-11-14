@@ -365,27 +365,26 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             });
            }).catch(e=>console.log(e));
 
-           $mdToast.showSimple("Your appointment preferences have been sent to the partners.");
+           // $mdToast.showSimple("Your appointment preferences have been sent to the partners.");
 
-           // $mdDialog.show({
-           //   parent: parentEl,
-           //   targetEvent: $event,
-           //   template:
-           //     '<md-dialog aria-label="List dialog">' +
-           //     '  <md-dialog-content style="width:500px;height:200px;">'+
-           //      '<div class="dialog-content-broker">'+ 
-           //      ' You have submitted application and scheduled meeting with '+ partner.brokerageName +
-           //      ' on November ' + vm.selectedDay + ' at ' + vm.selectedHour + ':00.' +
-           //      ' </div>' + 
-           //     '  </md-dialog-content>' +
-           //     '  <md-dialog-actions>' +
-           //     '    <md-button ng-click="closeDialog()" class="md-primary">' +
-           //     '      Close Dialog' +
-           //     '    </md-button>' +
-           //     '  </md-dialog-actions>' +
-           //     '</md-dialog>',
-           //   controller: DialogController
-           //     });
+           $mdDialog.show({
+             parent: parentEl,
+             targetEvent: $event,
+             template:
+               '<md-dialog aria-label="List dialog">' +
+               '  <md-dialog-content style="width:500px;height:200px;">'+
+                '<div class="dialog-content-broker">'+ 
+                ' Your appointment preferences have been sent to the partners.' +
+                ' </div>' + 
+               '  </md-dialog-content>' +
+               '  <md-dialog-actions>' +
+               '    <md-button ng-click="closeDialog()" class="md-primary">' +
+               '      Okay!' +
+               '    </md-button>' +
+               '  </md-dialog-actions>' +
+               '</md-dialog>',
+             controller: DialogController
+               });
           function DialogController($scope, $mdDialog) {
             'ngInject';
             $scope.closeDialog = function() {
