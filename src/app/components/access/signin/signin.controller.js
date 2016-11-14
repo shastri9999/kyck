@@ -22,7 +22,12 @@ class SignInController {
 		{
 			this.invalidCredentials = false;
 			this._AuthenticationService.login(username, password).then((userData)=>{
-				this._$state.go('main.dashboard');			
+				if (this._AuthenticationService.isIA()) {
+					this._$state.go('main.help');
+				}
+				else {
+					this._$state.go('main.dashboard');			
+				}
 			}).catch((e)=>{
 				console.log(e);
 				this.invalidCredentials = true;

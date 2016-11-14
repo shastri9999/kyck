@@ -16,19 +16,22 @@ function routeConfig($stateProvider) {
 			currentUser: function(AuthenticationService) {
 				'ngInject';
 				return AuthenticationService.getLoggedInUser();
-			},
-			isIA: function(AuthenticationService) {
-				'ngInject';
-				return AuthenticationService.isIA();
 			}
+			// ,
+			// isIA: function(AuthenticationService) {
+			// 	'ngInject';
+			// 	return AuthenticationService.isIA();
+			// }
 		},
-		onEnter: function(currentUser, isIA, $state){
+		onEnter: function(currentUser, $state){
+		// onEnter: function(currentUser, isIA, $state){
 			'ngInject';
-			if (isIA)
-			{
-				$state.go('main.help');
-			}
-			else if (currentUser)
+			// if (isIA)
+			// {
+			// 	$state.go('main.help');
+			// }
+			// else
+			if (currentUser)
 			{
 				$state.go('main.dashboard');
 			}
