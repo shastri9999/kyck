@@ -32,6 +32,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.showVideoDialog = showVideoDialog;
         vm.usermessages = [];
         vm.selectedDocumentNames = [];
+        vm.bgurl = AuthenticationService.getBGURL();
 
         vm.changeUsers = changeUsers;
         if (!vm.isBroker)

@@ -4,6 +4,7 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 	'ngInject';
 	const vm=this;
 	vm.isBroker = AuthenticationService.isBroker();
+	vm.bgurl = AuthenticationService.getBGURL();
 
 	if (vm.isBroker)
 	{
