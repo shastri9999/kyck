@@ -121,6 +121,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         }
 
         if (vm.isBroker) {
+            $rootScope.sideNavCollapsed = true;
             BrokerageResource.userAppointments((response)=>{
                 vm.userAppointments = response.data;
                 vm.userAppointmentsFiltered = vm.userAppointments;
