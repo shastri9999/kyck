@@ -2,7 +2,7 @@
 
 import inviteDialogTemplateUrl from './dialog.html';
 
-function BrokerageController($state, $scope,$mdToast,$http, $mdStepper, 
+function BrokerageController($state, $scope, $mdToast,$http, $mdStepper, 
         $mdDialog, $rootScope, BrokerageResource, AuthenticationService, 
         DocumentResource, UserService, CalendarService, $window, moment) {
     'ngInject';
@@ -23,7 +23,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.isBroker = $scope.isBroker = AuthenticationService.isBroker();
         vm.selectUser = selectUser;
         vm.getSelectedUserEmail =getSelectedUserEmail;
-        $scope.selectedPartners = new Set();
+        $scope.selectedPartners = [];
         vm.timeslotSelected = false;
         vm.kycerror = false;
         vm.personalDetailsError = false;
@@ -33,6 +33,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         vm.usermessages = [];
         vm.selectedDocumentNames = [];
         vm.bgurl = AuthenticationService.getBGURL();
+        vm.toggleShowPartner = toggleShowPartner;
 
         vm.changeUsers = changeUsers;
         if (!vm.isBroker)
@@ -105,10 +106,17 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             if (partner.status)
                 return;
             partner.selected = !partner.selected;
+
             if(partner.selected){
-                $scope.selectedPartners.add(partner);
+                $scope.selectedPartners.push(partner);
             }else{
-                $scope.selectedPartners.delete(partner);
+                $scope.selectedPartners = $scope.selectedPartners.filter(function(obj) {
+                    return obj.brokerageId !== partner.brokerageId;
+                })
+            }
+
+            if ($scope.selectedPartners.length>1) {
+                var steppers = $mdStepper('stepper-demo');
             }
         }
 
@@ -294,6 +302,25 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
     function showDialog($event) {
            var parentEl = angular.element(document.body);
            var partner = (vm.partners.filter(x=>x.selected)[0]);
+
+           //$scope.selectedPartners.selectedAppointments
+           var slots = [];
+           for (var i=0; i<$scope.selectedPartners.length; i++) {
+                var partner = $scope.selectedPartners[i];
+                if (partner.selectedAppointments) {
+                    for (var j=0; j<partner.selectedAppointments; j++) {
+                        slots.push({
+                            "brokerageId": partner.brokerageId+"",
+                            "calenderSlot": partner.selectedAppointments[j],
+                            "meetingContent": "Meeting about brokerage application",
+                            "meetingLocation": "Singapore",
+                            "meetingStatus": "PENDING",
+                            "meetingSubject": "Discussion about brokerage application"
+                        });
+                    }
+                }
+           }
+
            $http({
             method: 'POST',
             url: '/kyck-rest/brokerage/submit',
@@ -301,14 +328,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
                 "Content-Type": "application/json"
             },            
             data:{
-              "brokerageCalenderSlot": [{
-                "brokerageId": partner.brokerageId+"",
-                "calenderSlot": vm.selectedTimeSlot,
-                "meetingContent": "Meeting about brokerage application",
-                "meetingLocation": "Singapore",
-                "meetingStatus": "PENDING",
-                "meetingSubject": "Discussion about brokerage application "
-              }]
+              "brokerageCalenderSlot": slots
             }
            }).then((s)=>{
             console.log(s);
@@ -332,25 +352,27 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
             });
            }).catch(e=>console.log(e));
 
-           $mdDialog.show({
-             parent: parentEl,
-             targetEvent: $event,
-             template:
-               '<md-dialog aria-label="List dialog">' +
-               '  <md-dialog-content style="width:500px;height:200px;">'+
-                '<div class="dialog-content-broker">'+ 
-                ' You have submitted application and scheduled meeting with '+ partner.brokerageName +
-                ' on November ' + vm.selectedDay + ' at ' + vm.selectedHour + ':00.' +
-                ' </div>' + 
-               '  </md-dialog-content>' +
-               '  <md-dialog-actions>' +
-               '    <md-button ng-click="closeDialog()" class="md-primary">' +
-               '      Close Dialog' +
-               '    </md-button>' +
-               '  </md-dialog-actions>' +
-               '</md-dialog>',
-             controller: DialogController
-          });
+           $mdToast.showSimple("Your appointment preferences have been sent to the partners.");
+
+           // $mdDialog.show({
+           //   parent: parentEl,
+           //   targetEvent: $event,
+           //   template:
+           //     '<md-dialog aria-label="List dialog">' +
+           //     '  <md-dialog-content style="width:500px;height:200px;">'+
+           //      '<div class="dialog-content-broker">'+ 
+           //      ' You have submitted application and scheduled meeting with '+ partner.brokerageName +
+           //      ' on November ' + vm.selectedDay + ' at ' + vm.selectedHour + ':00.' +
+           //      ' </div>' + 
+           //     '  </md-dialog-content>' +
+           //     '  <md-dialog-actions>' +
+           //     '    <md-button ng-click="closeDialog()" class="md-primary">' +
+           //     '      Close Dialog' +
+           //     '    </md-button>' +
+           //     '  </md-dialog-actions>' +
+           //     '</md-dialog>',
+           //   controller: DialogController
+           //     });
           function DialogController($scope, $mdDialog) {
             'ngInject';
             $scope.closeDialog = function() {
@@ -388,7 +410,8 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         
         else if (vm.activeStep == 4 && !vm.isBroker) {
             $rootScope.mainLoading = true;
-            $rootScope.mainLoadingMessage = "Saving KYC details... Please wait."
+            $rootScope.mainLoadingMessage = "Saving KYC details... Please wait.";
+            $scope.selectedPartners[0]['showCalendar'] = true;
             UserService.saveKYCFields().then(function(success){
                  /* show success pop up move to next */
                  $mdToast.showSimple('KYC Details Saved Successfully!');
@@ -547,7 +570,7 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         return vm.userAppointment.email;
     }
 
-    function eventClicked($selectedEvent) {
+    function eventClicked($selectedEvent, index) {
         var textContent = "";
         var confirm;
 
@@ -572,6 +595,23 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
         $mdDialog
             .show(confirm).then(function() {
             	$mdToast.showSimple('Request for appointment successfully created.');
+                if ($scope.selectedPartners[index]['selectedAppointments']) {
+                    $scope.selectedPartners[index]['selectedAppointments'].push(vm.selectedTimeSlot);
+
+                    if ($scope.selectedPartners[index]['selectedAppointments'].length >=3) {
+                        $scope.selectedPartners[index]['showCalendar'] = false;
+                        if (index<$scope.selectedPartners.length-1) {
+                            $mdToast.showSimple("3 appointments booked. Moving to next partner.");
+                            $scope.selectedPartners[index+1]['showCalendar'] = true;
+                        } else {
+                            $mdToast.showSimple("3 appointments booked. Click Submit to continue.");
+                        }
+                    }
+                }
+                else {
+                    $scope.selectedPartners[index]['selectedAppointments']=[vm.selectedTimeSlot];
+                }
+
                 vm.timeslotSelected = true;
             }, function() {
             	console.log("NO");
@@ -580,6 +620,18 @@ function BrokerageController($state, $scope,$mdToast,$http, $mdStepper,
 
     function eventCreate($date) {
         console.log($date);
+    }
+
+    function toggleShowPartner(index) {
+        console.log(index);
+        for (var i=0; i<$scope.selectedPartners.length; i++) {
+            if (i!==index) {
+                $scope.selectedPartners[i]['showCalendar'] = false;
+            } else {
+                console.log(i, index);
+                $scope.selectedPartners[i]['showCalendar'] = !$scope.selectedPartners[i]['showCalendar'];
+            }
+        }
     }
 
     function showVideoDialog($event) {
