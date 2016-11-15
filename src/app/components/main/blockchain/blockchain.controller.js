@@ -2,9 +2,10 @@
 
 
 class BlockChainController{
-	constructor($http, $scope, $interval) {
+	constructor($http, $scope, $interval, $document) {
 		'ngInject';
 		this.$http = $http;
+		this.$document = $document;
 		this.expanded = false;
 		this.currentBlocks = [];
 		this.populateBlocks(true);
@@ -42,6 +43,10 @@ class BlockChainController{
 	fetchInfo(number)
 	{
 		const block = this.currentBlocks[number];
+
+		const blockElement = document.querySelector('#blockchain-'+number);
+		const blockInfoElement = document.querySelector('#blockinfo-'+number);
+		blockInfoElement.style.left = (blockElement.offsetLeft - 25) + "px";
 
 		if (!block.fetched)
 		{
