@@ -2,10 +2,10 @@
 
 
 class BlockChainController{
-	constructor($http, $scope, $interval, $document) {
+	constructor($http, $scope, $interval, $rootScope) {
 		'ngInject';
 		this.$http = $http;
-		this.$document = $document;
+		this.$rootScope = $rootScope;
 		this.expanded = false;
 		this.currentBlocks = [];
 		this.populateBlocks(true);
@@ -30,6 +30,8 @@ class BlockChainController{
 					number: i,
 				});
 			}
+		}).catch((error)=>{
+			this.$rootScope.$broadcast('logout');
 		})
 	}
 
