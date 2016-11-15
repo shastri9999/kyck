@@ -16,7 +16,6 @@ class ToolBarController {
 		this.flagShow = false;
 
         $rootScope.loadingProgress = true;
-
 		this.flags = [{
 			country: 'SG',
 			url: '/assets/images/flag.png'

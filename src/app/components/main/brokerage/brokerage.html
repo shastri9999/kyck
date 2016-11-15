@@ -24,6 +24,11 @@
             <input name="search" ng-model="vm.searchUsername" type="search" ng-change="vm.changeUsers()" placeholder="Search" class="searchBar">
         </div>
         <div class="appointment ng-scope" ng-class='{active: $index==vm.selectedIndex}' ng-repeat="appointment in vm.userAppointmentsFiltered" ng-click="vm.selectUser($index)">
+            <div class="avatar-circle" ng-if="!appointment.avatar">
+                {{appointment.fname|limitTo:1|capitalize}}
+                {{appointment.lname|limitTo:1|capitalize}}
+            </div>
+
             <div class="detail">
                 <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div>
                 <a class="pending-btn ng-binding" style="margin-top: 4px;">{{appointment.applicationStatus}}</a>

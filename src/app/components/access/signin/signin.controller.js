@@ -1,12 +1,13 @@
 'use strict';
 
 class SignInController {
-	constructor(AuthenticationService, $state, $scope){
+	constructor(AuthenticationService, $state, $scope, $rootScope){
 		'ngInject';
 
 		this._AuthenticationService = AuthenticationService;
 		this._$state = $state;
 		this._$scope = $scope;
+		this._$rootScope = $rootScope;
 		this.invalidCredentials = false;
 		$scope.$watchGroup(['username', 'password'], ()=>{
 			this.invalidCredentials = false;
@@ -17,11 +18,13 @@ class SignInController {
 		const scope = this._$scope;
 		const username = scope.username;
 		const password = scope.password;
+		this._$rootScope.loadingProgress = true;
 
 		if (username)
 		{
 			this.invalidCredentials = false;
 			this._AuthenticationService.login(username, password).then((userData)=>{
+				this._$rootScope.loadingProgress = false;
 				if (this._AuthenticationService.isIA()) {
 					this._$state.go('main.help');
 				}
@@ -29,6 +32,7 @@ class SignInController {
 					this._$state.go('main.dashboard');			
 				}
 			}).catch((e)=>{
+				this._$rootScope.loadingProgress = false;
 				console.log(e);
 				this.invalidCredentials = true;
 			});

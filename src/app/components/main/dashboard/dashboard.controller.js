@@ -21,13 +21,17 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 			vm.userAppointmentsLimit = 3;
 		}
 
+		$rootScope.loadingProgress = true;
 		DashboardResource.userAppointments((response)=>{
+			$rootScope.loadingProgress = false;
 			vm.userAppointments = response.data;
 		}, (error)=>{
+			$rootScope.loadingProgress = false;
 			$rootScope.$broadcast('logout');
 		});
 
 		CalendarService.fetchBrokerMeetings().then((appointments)=>{
+			$rootScope.loadingProgress = false;
 			vm.brokerAppointments = appointments.map((appointment)=>{
 				appointment.displayTime = moment(appointment.startTime, 'DD/MM/YYYY hh:mm').format('MMM Do YY, hh:mm a');
 				return appointment;
@@ -37,16 +41,21 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 	else
 	{
 		/* Get user related info */
+		$rootScope.loadingProgress=true;
 		DashboardResource.brokerAppointments((response)=>{
+			$rootScope.loadingProgress = false;
 			vm.brokerAppointments = response.data;
 		});
 
 		DashboardResource.brokerageApplications((response)=>{
+			$rootScope.loadingProgress = false;
 			vm.brokerageApplications = response.data;
 		});
 	}
 	
+	$rootScope.loadingProgress = true;
 	MessageService.fetchInbox().then((messages)=>{
+		$rootScope.loadingProgress = false;
 		vm.messages = messages;
 	})
 
