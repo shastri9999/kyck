@@ -24,10 +24,8 @@
             <input name="search" ng-model="vm.searchUsername" type="search" ng-change="vm.changeUsers()" placeholder="Search" class="searchBar">
         </div>
         <div class="appointment ng-scope" ng-class='{active: $index==vm.selectedIndex}' ng-repeat="appointment in vm.userAppointmentsFiltered" ng-click="vm.selectUser($index)">
-<!--             <img src="/assets/images/alvaro.png" style="height: 40px; width:40px;">         
- -->            <div class="detail">
+            <div class="detail">
                 <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div>
-                <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> -->
                 <a class="pending-btn ng-binding" style="margin-top: 4px;">{{appointment.applicationStatus}}</a>
             </div> 
         </div>
@@ -129,12 +127,15 @@
             <md-step md-label="Select Broker">
                 <md-step-body layout="row" layout-wrap>
                     <h3 class="partnersHeader">Premium Partners</h3>
-                    <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'PREMIUM'}" ng-class="{'centerAlign': vm.premiumPartnersCount}">
-                        <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected , 'deactivated': partner.status}">
-                            <img class="premiereIcon" src="/assets/images/premiere.png"/>
-                            <center><img ng-src="{{partner.img}}"/></center>
-                        </div>
+                    <div style="display: flex; flex-flow: row wrap; justify-content: center;width: 100%;">
+                        <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'PREMIUM'}">
+                            <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected , 'deactivated': partner.status}">
+                                <img class="premiereIcon" src="/assets/images/premiere.png"/>
+                                <center><img ng-src="{{partner.img}}"/></center>
+                            </div>
+                        </div>    
                     </div>
+                    
                     <h3 class="partnersHeader">All Partners</h3>
                     <div style="display: flex; width: 100%; justify-content: center;">
                     <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'REGULAR'}" style="margin: 20px;">
@@ -160,12 +161,12 @@
                 </md-step-body>
             </md-step>
         </div>
-        <div ng-if="!isBroker || isBroker">
+        <div>
             <md-step md-label="Documents">
                 <md-step-body>
                     <div class="flex-wrapper" style="height: calc(100vh - 90px); margin-bottom: -90px; margin-top: 20px;">
                         <div ng-repeat="document in ::vm.documents">
-                            <document-pane is-broker="true" style="float: left;" document="document"></document-pane>
+                            <document-pane is-broker="isBroker" style="float: left;" document="document" user-id="vm.userAppointment.email"></document-pane>
                         </div>  
                     </div>
                 </md-step-body>

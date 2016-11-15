@@ -79,9 +79,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 
             }, function(error){});
 
-            vm.replace = (document)=>{
-                document.replaceAction = true;
-            }
         }
 
         BrokerageResource.userprofileget(function(response){
@@ -172,32 +169,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 }
             }
 
-        }
-
-
-        vm.preview = function(document){
-            $rootScope.canEnableOCR = !vm.isBroker;
-            $rootScope.showDocumentPreview();
-            DocumentResource.metadata({documentType: document.documentType}, function(response){
-                const documentData = response.data;
-                let document = documentData;
-                $rootScope.viewingDocument = document;
-                $rootScope.viewingDocument.OCR = null;
-                DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
-                    $rootScope.viewingDocument.OCR = response.data;
-                });
-                $http({
-                    method: 'GET',
-                    url: '/kyck-rest/document/download/string64',
-                    params: {documentId: documentData.documentName},
-                    transformResponse: [function (data) {
-                          return data;
-                      }]
-                }).then((data)=>{
-                    let URL = 'data:' + documentData.mimeType + ';base64,' + data.data;
-                    $rootScope.showDocumentPreview(URL);
-                })
-            });
         }
 
         const leadingZeros = (number, zeros=2)=>{
@@ -406,7 +377,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             $rootScope.mainLoading = true;
             $rootScope.mainLoadingMessage = "Saving Profile details... Please wait."
             UserService.saveProfileFields().then(function(success){
-                 /* show success pop up move to next */
                  $mdToast.showSimple('Personal Details Saved Successfully!');
                  $rootScope.$broadcast('updateProgressChart');
                  $rootScope.mainLoading = false;
@@ -415,7 +385,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             .catch(function(error){
                 vm.personalDetailsError = true;
                  $mdToast.showSimple('Please fill all fields marked *');
-                /* Validation error dont move to next step */ 
                 return;
             });
         }
@@ -425,7 +394,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             $rootScope.mainLoadingMessage = "Saving KYC details... Please wait.";
             $scope.selectedPartners[0]['showCalendar'] = true;
             UserService.saveKYCFields().then(function(success){
-                 /* show success pop up move to next */
                  $mdToast.showSimple('KYC Details Saved Successfully!');
                  $rootScope.$broadcast('updateProgressChart');
                 $rootScope.mainLoading = false;

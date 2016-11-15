@@ -13,13 +13,20 @@ $pale-grey: #e7ecf1;
 	min-height: 200px;
 	min-width: 200px;
 	max-width: 400px;
-	//height: 225px;
 	width: 380px;
 	box-sizing: border-box;
 	border: solid 1px #e7ecf1;
 	border-radius: 5px;
 	background-color: #FFFFFF;
-	//box-shadow: 3px 3px 3px #c3c3c3;
+  .download {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    img {
+      height: 20px;
+      margin-left: 10px;
+    }
+  }
 }
 
 .document-details {
@@ -75,7 +82,6 @@ $pale-grey: #e7ecf1;
 }
 
 .crop-suggestion {
-  //width: 800px;
   height: 50px;
   display: flex;
   flex-flow: column;

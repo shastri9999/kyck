@@ -2,30 +2,35 @@
 	<div class="left">
 		<div class="appointments">
 			<h2>Appointments</h2>
-			<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:3">
-				<div class="date">
-					<div style="font-size: 24px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'Do'}}</div>
-					<div style="opacity: 0.4;padding: 4px; border-bottom: 1px dotted;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'MMM YY'}}</div>
-					<div style="font-size: 12px; opacity: 0.3;padding: 3px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'hh:mm a'}}</div>
+			<div class="appointments-container">
+				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.userAppointments || !vm.userAppointments.length">
+					No Application Requests to Show 
 				</div>
-				<img style="width:120px;padding-right: 20px;align-self: flex-start;padding-left: 20px;" ng-src="/assets/images/partnerLogos/{{appointment.brokerageName}}.png">
-				<div class="detail">
-					<div style="font-size: 14px;margin-bottom: 3px;">{{appointment.brokerageName}}</div>
-					<div style="margin-bottom: 17px;opacity: 0.4;">{{appointment.meetingSubject}}</div>
-					<div ng-switch on="appointment.status">
-						<div ng-switch-when="CONFIRM">
-							<a class="pending-btn">{{appointment.status}}</a>
-							<a class="conference-btn">Join Conference</a>
-						</div>
-						<div ng-switch-when="PENDING">
-							<a class="pending-btn">{{appointment.status}}</a>
-							<a class="conference-btn">Join Conference</a>
-						</div>
-						<div ng-switch-when="completed">
-							<a href="" class="completed-btn">Completed</a>
-						</div>
-						<div ng-switch-default>
-							<a class="pending-btn">{{appointment.status}}</a>
+				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:3">
+					<div class="date">
+						<div style="font-size: 24px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'Do'}}</div>
+						<div style="opacity: 0.4;padding: 4px; border-bottom: 1px dotted;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'MMM YY'}}</div>
+						<div style="font-size: 12px; opacity: 0.3;padding: 3px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'hh:mm a'}}</div>
+					</div>
+					<img style="width:120px;padding-right: 20px;align-self: flex-start;padding-left: 20px;" ng-src="/assets/images/partnerLogos/{{appointment.brokerageName}}.png">
+					<div class="detail">
+						<div style="font-size: 14px;margin-bottom: 3px;">{{appointment.brokerageName}}</div>
+						<div style="margin-bottom: 17px;opacity: 0.4;">{{appointment.meetingSubject}}</div>
+						<div ng-switch on="appointment.status">
+							<div ng-switch-when="CONFIRM">
+								<a class="pending-btn">{{appointment.status}}</a>
+								<a class="conference-btn">Join Conference</a>
+							</div>
+							<div ng-switch-when="PENDING">
+								<a class="pending-btn">{{appointment.status}}</a>
+								<a class="conference-btn">Join Conference</a>
+							</div>
+							<div ng-switch-when="completed">
+								<a href="" class="completed-btn">Completed</a>
+							</div>
+							<div ng-switch-default>
+								<a class="pending-btn">{{appointment.status}}</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -33,19 +38,24 @@
 		</div>
 		<div class="messages">
 			<h2>Messages</h2>
-			<div class="message" ng-repeat="message in vm.messages | orderBy:'-messageDate' | limitTo: 3" ng-click="vm.openMessage(message)">
-				<img ng-if="message.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
-				<div class="avatar-circle" ng-if="!message.avatar">{{message.messageFrom|limitTo:1|capitalize}}</div>
-				<div class="detail">
-					<div>{{message.messageSubject}}</div>
-					<div style="font-size: 12px; margin-bottom: 10px;margin-top: 10px;">From: {{message.messageFromName}} ({{message.messageFrom}})</div>
-					<div style="opacity: 0.4;font-size: 14px; line-height: 25px;">{{message.messageContent}}</div>
+			<div class="message-container">
+				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.messages || !vm.messages.length">
+					No Messages to Show 
 				</div>
-				<div class="time">
-					<div style="white-space: nowrap;padding-right: 10px" am-time-ago="message.messageDate | amParse:'DD/MM/YYYY hh:mm'"></div>
-					<a style="text-decoration: none;cursor: pointer;">
-						<img src="/assets/images/open-message.png">					
-					</a>
+				<div class="message" ng-repeat="message in vm.messages | orderBy:'-messageDate' | limitTo: 3" ng-click="vm.openMessage(message)">
+					<img ng-if="message.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
+					<div class="avatar-circle" ng-if="!message.avatar">{{message.messageFrom|limitTo:1|capitalize}}</div>
+					<div class="detail">
+						<div>{{message.messageSubject}}</div>
+						<div style="font-size: 12px; margin-bottom: 10px;margin-top: 10px;">From: {{message.messageFromName}} ({{message.messageFrom}})</div>
+						<div style="opacity: 0.4;font-size: 14px; line-height: 25px;">{{message.messageContent}}</div>
+					</div>
+					<div class="time">
+						<div style="white-space: nowrap;padding-right: 10px" am-time-ago="message.messageDate | amParse:'DD/MM/YYYY hh:mm'"></div>
+						<a style="text-decoration: none;cursor: pointer;">
+							<img src="/assets/images/open-message.png">					
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -57,6 +67,9 @@
 		</div>
 		<div class="brokerage">
 			<h2>Brokerage Applications</h2>
+			<div style="font-size: 12px;margin-top: 20px;" ng-if="!vm.brokerageApplications || !vm.brokerageApplications.length">
+				No Brokerage Applications
+			</div>
 			<div class="brokerage-item" ng-repeat="application in vm.brokerageApplications">
 				<div class="broker-logo">
 					<img style="width: 60px;" ng-src="/assets/images/partnerLogos/{{application.brokerageId}}.png">
@@ -133,17 +146,22 @@
         </div>
 
 		<div class="appointments" style="z-index: 3;">
-			<h2 style="color:white;">Appointment Slots</h2>		
-			<div class="appointment" ng-repeat="appointment in vm.brokerAppointments">
-				<img ng-if="appointment.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
-				<div class="avatar-circle" ng-if="!appointment.avatar">
-						{{appointment.userFirstName|limitTo:1|capitalize}}
-						{{appointment.userLastName|limitTo:1|capitalize}}
-				</div>
-				<div class="detail">
-					<div style="font-size: 14px;">{{appointment.userFirstName}} {{appointment.userLastName}}</div>
-					<div style="opacity: 0.4; margin-top: 3px;font-size: 13px;">{{appointment.displayTime}}</div>
-					<a class="conference-btn">Start Conference</a>
+			<h2 style="color:white;">Appointment Slots</h2>	
+			<div class="appointments-container">
+				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokerAppointments || !vm.brokerAppointments.length">
+					No Appointments to Show 
+				</div>	
+				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments">
+					<img ng-if="appointment.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
+					<div class="avatar-circle" ng-if="!appointment.avatar">
+							{{appointment.userFirstName|limitTo:1|capitalize}}
+							{{appointment.userLastName|limitTo:1|capitalize}}
+					</div>
+					<div class="detail">
+						<div style="font-size: 14px;">{{appointment.userFirstName}} {{appointment.userLastName}}</div>
+						<div style="opacity: 0.4; margin-top: 3px;font-size: 13px;">{{appointment.displayTime}}</div>
+						<a class="conference-btn">Start Conference</a>
+					</div>
 				</div>
 			</div>
 		</div>

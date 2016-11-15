@@ -51,24 +51,31 @@
             margin-top: 20px;
             border-bottom: 2px solid rgba(231,236,241,0.3);
             flex-flow: column;
-
-            .appointment {
-              border-radius: 5px;
-              border: solid 1px #e7ecf1;
-              margin-top: 20px;
-              display: flex;
-              padding: 15px;
-              .date {
+            .appointments-container {
                 display: flex;
-                flex-flow: column;
-                align-items: center;
-                padding-right: 20px;
-                border-right: 1px solid #e7ecf1;
-              }
-              .detail {
-                display: flex;
-                flex-flow: column;
-              }
+                flex-flow: row wrap;
+                margin-top: 7px;
+                min-height: 150px;
+                max-height: 200px;
+                overflow: auto;
+                .appointment {
+                  border-radius: 5px;
+                  border: solid 1px #e7ecf1;
+                  margin-top: 20px;
+                  display: flex;
+                  padding: 15px;
+                  .date {
+                    display: flex;
+                    flex-flow: column;
+                    align-items: center;
+                    padding-right: 20px;
+                    border-right: 1px solid #e7ecf1;
+                  }
+                  .detail {
+                    display: flex;
+                    flex-flow: column;
+                  }
+                }
             }
     	}
     	.messages {
@@ -77,6 +84,12 @@
             margin-top: 0px;
     		flex-grow: 1;
             flex-flow: column;
+            .message-container {
+                min-height: 300px;
+                max-height: 400px;
+                overflow: auto;
+                padding-right: 20px;
+            }
             .message {
                 display: flex;
                 padding: 30px;
@@ -245,26 +258,32 @@
             display: flex;
             flex-flow: column;
             padding: 10px;
-            .appointment {
-                background-color: #fff;
-                border-radius: 5px;
-                .detail {
-                    display: flex;
-                    flex-flow: column;
-                    align-items: flex-start;
-                    margin-left: 10px
-                }
-                .conference-btn {
-                    font-size: 10px;
-                    padding: 6px 18px;
-                    text-transform: uppercase;
-                    border-radius: 3px;
-                    background-color: #57c3ea;
-                    color: #fff;
-                    cursor: pointer;
-                    margin-top: 6px;
-                }
+            .appointments-container {
+                margin-top: 7px;
+                min-height: 150px;
+                max-height: 310px;
+                overflow: auto;
+                .appointment {
+                    background-color: #fff;
+                    border-radius: 5px;
+                    .detail {
+                        display: flex;
+                        flex-flow: column;
+                        align-items: flex-start;
+                        margin-left: 10px
+                    }
+                    .conference-btn {
+                        font-size: 10px;
+                        padding: 6px 18px;
+                        text-transform: uppercase;
+                        border-radius: 3px;
+                        background-color: #57c3ea;
+                        color: #fff;
+                        cursor: pointer;
+                        margin-top: 6px;
+                    }
 
+                }
             }
         }
     }
