@@ -67,19 +67,21 @@
 		</div>
 		<div class="brokerage">
 			<h2>Brokerage Applications</h2>
-			<div style="font-size: 12px;margin-top: 20px;" ng-if="!vm.brokerageApplications || !vm.brokerageApplications.length">
-				No Brokerage Applications
-			</div>
-			<div class="brokerage-item" ng-repeat="application in vm.brokerageApplications">
-				<div class="broker-logo">
-					<img style="width: 60px;" ng-src="/assets/images/partnerLogos/{{application.brokerageId}}.png">
-
+			<div class="brokerage-container">
+				<div style="font-size: 12px;margin-top: 20px;" ng-if="!vm.brokerageApplications || !vm.brokerageApplications.length">
+					No Brokerage Applications
 				</div>
-				<div class="detail">
-					{{application.brokerageId}}
-					<div style="margin-top: 5px;" am-time-ago="application.startDate | amParse:'YYYY-MM-DD'"></div>
-					<a class="pending-btn" style="margin-top: 10px;">{{application.applicationStatus}}</a>
-				</div>				
+				<div class="brokerage-item" ng-repeat="application in vm.brokerageApplications">
+					<div class="broker-logo">
+						<img style="width: 60px;" ng-src="/assets/images/partnerLogos/{{application.brokerageId}}.png">
+
+					</div>
+					<div class="detail">
+						{{application.brokerageId}}
+						<div style="margin-top: 5px;" am-time-ago="application.startDate | amParse:'YYYY-MM-DD'"></div>
+						<a class="pending-btn" style="margin-top: 10px;">{{application.applicationStatus}}</a>
+					</div>				
+				</div>	
 			</div>
 		</div>
 	</div>

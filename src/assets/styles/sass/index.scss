@@ -80,6 +80,8 @@ table {
 .progress-chart {
   width: 234px;
   margin-top: 20px;
+  height: 234px;
+  overflow: hidden;
   &.vertical {
     width: 190px;
     height: 190px;

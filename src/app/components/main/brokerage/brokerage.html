@@ -161,7 +161,7 @@
                 </md-step-body>
             </md-step>
         </div>
-        <div>
+        <div ng-if="isBroker || !isBroker">
             <md-step md-label="Documents">
                 <md-step-body>
                     <div class="flex-wrapper" style="height: calc(100vh - 90px); margin-bottom: -90px; margin-top: 20px;">
@@ -190,14 +190,6 @@
         <div ng-if="!isBroker">
             <md-step md-label="Selection of Timeslot">
                 <md-step-body layout="column" flex>
-                <!-- <ang-accordion one-at-a-time="true">
-                <collapsible-item item-title="Some Heading 1" initially-open="true">
-                    <div>This is regular html code</div>
-                </collapsible-item>
-                <collapsible-item item-title="Some Heading 2">
-                    <div>This is regular html code</div>
-                </collapsible-item>
-                <collapsible-item item-title="Some Heading 3"> -->
                     <div ng-repeat="partner in selectedPartners" style="margin-top: 30px;">
                         <div class="partnerMenu" layout="row" flex ng-click="vm.toggleShowPartner($index)">
                             <div flex="10"><img ng-src="{{partner.img}}" alt="{{partner.brokerageName}}" class="partnerLogoSmall" /></div>
@@ -223,9 +215,7 @@
                             </div>
                         </div>
                     </div>
-                <!-- </collapsible-item>
-                </ang-accordion>
-                </md-step-body> -->
+                </md-step-body>
             </md-step>
         </div>
         <div ng-if="isBroker">

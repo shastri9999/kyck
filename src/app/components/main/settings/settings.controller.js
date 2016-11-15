@@ -14,19 +14,26 @@ function SettingsController($scope,$state, UserService, $mdToast) {
 
 	vm.save = function(){
 		const name = $state.current.name;
+		this.mainLoading = true;
 		if (name.indexOf('profile') >= 0)
 		{
+			this.mainLoadingMessage = 'Saving Profile Details... Please wait.';
 			UserService.saveProfileFields().then((s)=>{
+				this.mainLoading = false;
 				$mdToast.showSimple("Profile Details Successfully Saved!");
 			}).catch((e)=>{
+				this.mainLoading = false;
 				$mdToast.showSimple("Please fill all fields marked as *");
 			});
 		}
 		else
 		{
+			this.mainLoadingMessage = 'Saving KYC Details... Please wait.';
 			UserService.saveKYCFields().then((s)=>{
+				this.mainLoading = false;
 				$mdToast.showSimple("KYC Details Successfully Saved!");
 			}).catch((e)=>{
+				this.mainLoading = false;
 				$mdToast.showSimple("Please fill all fields marked as *");
 			});
 		}

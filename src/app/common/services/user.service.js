@@ -238,6 +238,9 @@ class UserService{
 			method: 'POST',
 			url: this.URL + '/user/updateusrdetails/action',
 			data: details
+		}).then((s)=>{
+			this._userDetails = angular.copy(this.userDetails);
+			return s;
 		});
 	}
 
@@ -248,7 +251,6 @@ class UserService{
 			data: {"userDetailAnswerList": answerList}
 		}).then((s)=>{
 			this._profileDetails = angular.copy(this.profileDetails);
-			this._userDetails = angular.copy(this.userDetails);
 			const userData = {};
 			this.userDetails
 				.filter(x=>!x.disabled)
@@ -298,10 +300,11 @@ class UserService{
 				}
 				else
 				{
-					answer.answerText = "" + answer.answerText;
+					answer.answerText = answer.answerText ? "" + answer.answerText : "";
 				}
 				return answer;
 			});
+			console.log(answers);
 			return this.updateProfileFields(answers);
 		}
 	}
