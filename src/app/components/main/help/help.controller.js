@@ -6,15 +6,22 @@ function HelpController($http) {
 		method: 'GET',
 		url: '/kyck-rest/blockchain/getnric'
 	}).then((s)=>{
-		console.log(s.data.data);
-		const data = JSON.parse(s.data.data.message.result.message);
-		this.hashes = Object.keys(data).map((key)=>{
-			return {
-				requestId: key,
-				nricId: data[key],
-				hash: ''
-			}
-		});
+		const response = s.data.data;
+		if (response.message)
+		{
+			const data = JSON.parse(s.data.data.message.result.message);
+			this.hashes = Object.keys(data).map((key)=>{
+				return {
+					requestId: key,
+					nricId: data[key],
+					hash: ''
+				}
+			});			
+		}
+		else
+		{
+			
+		}
 	})
 
 	this.validate = function(hash)
