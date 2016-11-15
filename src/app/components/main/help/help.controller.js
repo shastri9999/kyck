@@ -9,7 +9,7 @@ function HelpController($http) {
 		const response = s.data.data;
 		if (response.message)
 		{
-			const data = JSON.parse(s.data.data.message.result.message);
+			const data = JSON.parse(response.message.result.message);
 			this.hashes = Object.keys(data).map((key)=>{
 				return {
 					requestId: key,
@@ -20,7 +20,14 @@ function HelpController($http) {
 		}
 		else
 		{
-			
+			const data = response.nricList;
+			this.hashes = data.map((item)=>{
+				return {
+					requestId: item.requestId,
+					nricId: item.nric,
+					hash: ''
+				}
+			});
 		}
 	})
 
