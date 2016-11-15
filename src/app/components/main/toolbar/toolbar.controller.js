@@ -1,7 +1,7 @@
 'use strict';
 
 class ToolBarController {
-	constructor(AuthenticationService, $state, $filter, MessageService){
+	constructor(AuthenticationService, $state, $filter, MessageService, $rootScope){
 		'ngInject';
 		
 		const loggedInUser = AuthenticationService.getLoggedInUser();
@@ -26,6 +26,11 @@ class ToolBarController {
 			url: '/assets/images/flag-thailand.svg'
 		}];
 		this.activeFlag = this.flags[0];
+
+		$rootScope.$on('logout', ()=>{
+			this.signOut();
+		})
+
 	}
 
 	selectFlag(flag){

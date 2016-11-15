@@ -3,7 +3,7 @@
 		<div class="appointments">
 			<h2>Appointments</h2>
 			<div class="appointments-container">
-				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.userAppointments || !vm.userAppointments.length">
+				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokerAppointments || !vm.brokerAppointments.length">
 					No Application Requests to Show 
 				</div>
 				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:3">

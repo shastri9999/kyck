@@ -22,6 +22,8 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 
 		DashboardResource.userAppointments((response)=>{
 			vm.userAppointments = response.data;
+		}, (error)=>{
+			$rootScope.$broadcast('logout');
 		});
 
 		CalendarService.fetchBrokerMeetings().then((appointments)=>{
