@@ -36,11 +36,15 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         vm.toggleShowPartner = toggleShowPartner;
 
         vm.changeUsers = changeUsers;
+        $rootScope.loadingProgress = false;
+
         if (!vm.isBroker)
         {
+            $rootScope.loadingProgress = true;
             BrokerageResource.contactedBrokerages((response)=>{
                 vm.contactedBrokers = response.data;
                 BrokerageResource.brokeragesList((req)=> {
+                    $rootScope.loadingProgress = false;
                     var brokeragesList = req.data;
                     vm.partners = brokeragesList.map(convert);
                     vm.partners = vm.partners.map((partner)=>{
@@ -56,7 +60,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 });     
             });  
 
+            $rootScope.loadingProgress = true;
             DocumentResource.categories(function(response){
+                $rootScope.loadingProgress = false;
                 vm.documents = response.data;
                 vm.documents.forEach(function(doc){
                     doc.documentID = null;
@@ -81,7 +87,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
         }
 
+        $rootScope.loadingProgress = true;
         BrokerageResource.userprofileget(function(response){
+            $rootScope.loadingProgress = false;
             var questions = response.data;
             vm.questionsmap = {};
             questions.forEach(function(q){
@@ -90,7 +98,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         }, function(error){
         });
 
+        $rootScope.loadingProgress = true;
         BrokerageResource.kycget(function(response){
+            $rootScope.loadingProgress = false;
             var questions = response.data;
             vm.kycquestions = {};
             questions.forEach(function(q){
@@ -119,7 +129,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
         if (vm.isBroker) {
             $rootScope.sideNavCollapsed = true;
+            $rootScope.loadingProgress = true;
             BrokerageResource.userAppointments((response)=>{
+                $rootScope.loadingProgress = false;
                 vm.userAppointments = response.data;
                 vm.userAppointmentsFiltered = vm.userAppointments;
                 shuffletheorder();
@@ -239,9 +251,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     }
 
     function submitApplication(status) {
+        $rootScope.loadingProgress = true;
         BrokerageResource.updateApplication({"status": status,
                 "userId": vm.userAppointment.email},
         function (response) {
+            $rootScope.loadingProgress = false;
             $mdToast.showSimple("Application has been successfully "+status.toLowerCase()+".");
             vm.userAppointment.applicationStatus = status;
             vm.selectedIndex = vm.userAppointments.findIndex(function (a) {return a.email == vm.userAppointment.email;})
@@ -262,11 +276,13 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 return t;
         }
 
+        $rootScope.loadingProgress = true;
         BrokerageResource.updateMeetingStatus({
-                // "status": status,
-                // "userId": vm.userAppointment.email
+                "status": status,
+                "userId": vm.userAppointment.email
             },
         function (response) {
+            $rootScope.loadingProgress = false;
             vm.userSlots = vm.userSlots.map(function(a){
                 if (a.userId == vm.userAppointment.email)
                     a.status = "CONFIRM";
@@ -315,11 +331,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
               "brokerageCalenderSlot": slots
             }
            }).then((s)=>{
-            console.log(s);
+             $rootScope.loadingProgress = true;
              BrokerageResource.contactedBrokerages((response)=>{
-
                 vm.contactedBrokers = response.data;
                 BrokerageResource.brokeragesList((req)=> {
+                    $rootScope.loadingProgress = false;
                     var brokeragesList = req.data;
                     vm.partners = brokeragesList.map(convert);
                     vm.partners = vm.partners.map((partner)=>{
@@ -506,9 +522,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
 
 
+        $rootScope.loadingProgress = true;
         BrokerageResource.brokeragesDetails({'userEmailId':vm.userAppointment.email}, function (req) {
             vm.brokeragesDetails = req.data;
             DocumentResource.categories(function(response){
+                $rootScope.loadingProgress = false;
                 vm.documents = response.data;
                 vm.documents.forEach(function(doc){
                     doc.documentID = null;
@@ -529,7 +547,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
 
 
+        $rootScope.loadingProgress = true;
         BrokerageResource.usermessages({userId: vm.userAppointment.email}, function(req) {
+            $rootScope.loadingProgress = false;
             for(var i=0; i<req.data.length; i++) {
                 var msg = req.data[i]['messageContent'];
                 var messageDate = req.data[i]['messageDate'];
@@ -627,10 +647,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             $scope.addedEmails=[];
 
             $scope.closeDialog = function() {
-                console.log($scope.addedEmails, vm.userAppointment);
+                $rootScope.loadingProgress = true;
                 BrokerageResource.startconference({
                     'emailId' : $scope.addedEmails, 'userId' : vm.userAppointment.email
                 }, function(req){
+                    $rootScope.loadingProgress = false;
                     $window.open(req.data, 'Join Video Conferenence', 'width=1024,height=800');
                     $mdToast.showSimple("Invited for Video Conference.")
                 }, function(error){console.log(error);});

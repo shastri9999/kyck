@@ -5,6 +5,7 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 	const vm=this;
 	vm.isBroker = AuthenticationService.isBroker();
 	vm.bgurl = AuthenticationService.getBGURL();
+	$rootScope.loadingProgress = false;
 
 	if (vm.isBroker)
 	{

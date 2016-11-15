@@ -8,7 +8,7 @@
         <label>Add email address here to invite…
         </label>
         <input type="email" name="extraEmail" ng-model="extraEmail"
-               minlength="4" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+               minlength="4" maxlength="100" ng-pattern="/^.+@.+\..+$/" ng-required/>
 
         <div ng-messages="projectForm.extraEmail.$error" role="alert">
           <div ng-message-exp="['minlength', 'maxlength', 'pattern']">
@@ -16,12 +16,16 @@
           </div>
         </div>
       </md-input-container>
-	<span style="float: right; margin-top: 40px; color: #4f6379; cursor: pointer;" ng-click="addEmail()">Add</span>
+	<span style="float: right; margin-top: 40px; color: #4f6379; cursor: pointer;" ng-click="addEmail()">
+   <img src="/assets/images/add.png" />
+  </span>
  </form>
  <hr ng-if="addedEmails.length"/>
  <div ng-repeat="addedEmail in addedEmails">
  	<span class="addedEmail">{{addedEmail}}</span>
- 	<span ng-click="removeEmail(addedEmail)" style="float:right;">Delete</span>
+ 	<span ng-click="removeEmail(addedEmail)" style="float:right;">
+    <img src="/assets/images/remove.png" />
+  </span>
  	<hr/>
  </div>
  </div>

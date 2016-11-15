@@ -15,6 +15,8 @@ class ToolBarController {
 		this.avatarName = [ loggedInUser.userFname[0].toUpperCase(), loggedInUser.userLname[0].toUpperCase()].join('');
 		this.flagShow = false;
 
+        $rootScope.loadingProgress = true;
+
 		this.flags = [{
 			country: 'SG',
 			url: '/assets/images/flag.png'
