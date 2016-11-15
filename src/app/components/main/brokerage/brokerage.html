@@ -92,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top:10px;display: flex;">
+                <div style="margin-top:10px;display: flex;" ng-if="vm.brokeragesDetails.document && vm.brokeragesDetails.document.length">
                     <a ng-click="vm.toggleAllDocuments()" class="select-all-btn">
                         {{vm.selectedDocumentNames.length!=vm.brokeragesDetails.document.length ? 'Select All' : 'Clear All'}}
                     </a>
