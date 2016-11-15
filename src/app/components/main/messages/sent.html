@@ -1,5 +1,6 @@
 <div class="inbox">
-	<div ng-class="{message: true, active:messageView.activeSentMessage.messageId == message.messageId}" ng-repeat="message in vm.messages|orderBy:'-messageDate' | limitTo:5" 
+	<div style="font-size: 12px;padding-top: 20px;" ng-if="!vm.messages || !vm.messages.length">Inbox is empty</div>
+	<div ng-class="{message: true, active:messageView.activeSentMessage.messageId == message.messageId}" ng-repeat="message in vm.messages|orderBy:'-messageDate'" 
 	ng-click="vm.openMessage(message)">
 		<img ng-if="message.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
 		<div class="avatar-circle" ng-if="!message.avatar">{{message.messageToName|limitTo:1|capitalize}}</div>

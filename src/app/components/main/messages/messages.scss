@@ -1,7 +1,6 @@
 .messages-area {
 	display: flex;
 	color: #4f6379;
-	min-height: 100%;
 	.left {
 		display: flex;
 		flex-flow: column;
@@ -50,6 +49,10 @@
 			}
 		}
 		.inbox,.sent {
+			max-height: 560px;
+			max-width: 700px;
+			padding-right: 20px;
+			overflow: auto;
 			.message {
 				display: flex;
 				outline:none;
