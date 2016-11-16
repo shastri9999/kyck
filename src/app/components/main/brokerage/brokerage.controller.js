@@ -23,7 +23,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         vm.backStep = backStep;
         vm.nextRequestStep = nextRequestStep;
         vm.selectedIndex = 0;
-        vm.activeStep = 1;
+        vm.getActiveStep = getActiveStep;
         vm.isBroker = $scope.isBroker = AuthenticationService.isBroker();
         vm.selectUser = selectUser;
         vm.getSelectedUserEmail =getSelectedUserEmail;
@@ -377,7 +377,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             'ngInject';
             $scope.closeDialog = function() {
                 vm.timeslotSelected = false;
-                vm.activeStep = 1;
                 var steppers = $mdStepper('stepper-demo');
                 steppers.goto(0);
                 $mdDialog.hide();
@@ -390,7 +389,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         vm.kycerror = false;
         vm.personalDetailsError = false;
 
-        if (vm.activeStep == 3 && !vm.isBroker) {
+        if (vm.getActiveStep() == 3 && !vm.isBroker) {
             $rootScope.mainLoading = true;
             $rootScope.mainLoadingMessage = "Saving Profile details... Please wait."
             UserService.saveProfileFields().then(function(success){
@@ -407,7 +406,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             });
         }
         
-        else if (vm.activeStep == 4 && !vm.isBroker) {
+        else if (vm.getActiveStep() == 4 && !vm.isBroker) {
             $rootScope.mainLoading = true;
             $rootScope.mainLoadingMessage = "Saving KYC details... Please wait.";
             $scope.selectedPartners[0]['showCalendar'] = true;
@@ -424,15 +423,13 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 return;
             });
         }
-        else if (vm.activeStep == 5 && !vm.isBroker) {
+        else if (vm.getActiveStep() == 5 && !vm.isBroker) {
             showDialog();
             return;
         }
-        else if (vm.activeStep == 5) {
-            vm.activeStep = 1;
+        else if (vm.getActiveStep() == 5) {
             var steppers = $mdStepper('stepper-demo');
             steppers.goto(0);
-            vm.activeStep = 1;
             vm.selectedDocumentNames = [];
             return;
         }
@@ -442,15 +439,14 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     }
 
     function nextRequestStep() {
-        if (vm.activeStep > 1) {
-            document.getElementsByClassName('md-stepper-indicator ng-scope')[vm.activeStep-1].className+=" md-completed";
+        if (vm.getActiveStep() > 1) {
+            document.getElementsByClassName('md-stepper-indicator ng-scope')[vm.getActiveStep()].className+=" md-completed";
             vm.allVerified = document.getElementsByClassName('md-stepper-indicator ng-scope md-completed').length===4;
             console.log(document.getElementsByClassName('md-stepper-indicator ng-scope md-completed').length, vm.allVerified);
         }
-        if (vm.activeStep == 5) {
+        if (vm.getActiveStep() == 5) {
             var steppers = $mdStepper('stepper-demo');
             steppers.goto(0);
-            vm.activeStep = 1;
             vm.selectedDocumentNames = [];
 
             return;
@@ -460,7 +456,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     }
 
     function moveNext() {
-        vm.activeStep +=1;
         var steppers = $mdStepper('stepper-demo');
         steppers.next();
         $window.scrollTo(0, 0);
@@ -470,13 +465,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     }
 
     function backStep() {
-        if (vm.activeStep == 1)
+        if (vm.getActiveStep() == 1)
             return;
 
-        vm.activeStep -=1 ; 
         var steppers = $mdStepper('stepper-demo');
         steppers.back();
-
         vm.selectedDocumentNames = [];
     }
 
@@ -515,7 +508,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             })
         });
         
-        vm.activeStep = 1;
         var steppers = $mdStepper('stepper-demo');
         steppers.goto(0);
         vm.allVerified = 0;
@@ -635,6 +627,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 $scope.selectedPartners[i]['showCalendar'] = !$scope.selectedPartners[i]['showCalendar'];
             }
         }
+    }
+
+    function getActiveStep() {
+        var steppers = $mdStepper('stepper-demo');
+        return steppers.currentStep + 1;
     }
 
     function showVideoDialog($event) {

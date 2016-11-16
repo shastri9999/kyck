@@ -3,9 +3,7 @@
 function CalendarController($scope, $mdDialog, $filter, AuthenticationService, CalendarService, moment, $rootScope) {
 	'ngInject';
 
-	$scope.events = [
-
-  ];
+	$scope.events = [];
 
   $rootScope.loadingProgress = false;
   
