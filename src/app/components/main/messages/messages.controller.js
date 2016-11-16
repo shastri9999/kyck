@@ -16,6 +16,7 @@ function MessagesController($state, $scope, MessageService, AuthenticationServic
 	vm.refresh = ()=>{
 		MessageService.refresh();
 		$state.go('main.messages.inbox', {}, {reload: true});
+		$rootScope.loadingProgress = false;
 	}
 	
 	vm.closeMessage = (messageType)=>{
