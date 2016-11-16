@@ -3,6 +3,7 @@
 function DocumentsController($rootScope, $state, DocumentResource, $http) {
 	'ngInject';
 	var vm = this;
+	$rootScope.loadingProgress = false;
 
 	DocumentResource.categories(function(response){
 			vm.documents = response.data;

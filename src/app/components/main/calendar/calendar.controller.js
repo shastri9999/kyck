@@ -1,11 +1,14 @@
 'use strict';
 
-function CalendarController($scope, $mdDialog, $filter, AuthenticationService, CalendarService, moment) {
+function CalendarController($scope, $mdDialog, $filter, AuthenticationService, CalendarService, moment, $rootScope) {
 	'ngInject';
 
 	$scope.events = [
 
   ];
+
+  $rootScope.loadingProgress = false;
+  
   const userId = AuthenticationService.getLoggedInUser().userId;
   const isBroker = AuthenticationService.isBroker();
   const month = 11;

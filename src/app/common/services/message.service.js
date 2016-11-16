@@ -1,7 +1,7 @@
 
 
 class MessageService{
-	constructor($http, AppConstants) {
+	constructor($http, AppConstants, $rootScope) {
 		'ngInject';
 		this._$http = $http;
 		this.URL = AppConstants.URL + '/usermessage';

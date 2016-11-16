@@ -11,6 +11,7 @@ class AuthenticationService {
 	}
 
 	login(userId, userPassword) {
+		this._$rootScope.loadingProgress=true;
 		return this._$http({
 			method: 'POST',
  			url: '/kyck-rest/user/login/action',
@@ -20,7 +21,7 @@ class AuthenticationService {
  			}
 		}).then((response)=>{
 			const userData = response.data.data;
-			console.log("USER DATA is", userData);
+			this._$rootScope.loadingProgress=false;
 			this.loggedInUser = userData;
 			this._StorageService.setItem('loggedInUser', this.loggedInUser);
 			return userData;
@@ -28,13 +29,16 @@ class AuthenticationService {
 	}
 
 	logout(){
+		this._$rootScope.loadingProgress=true;
 		return this._$http({
 			method: 'POST',
  			url: '/kyck-rest/user/logout/action',
 		}).then((response)=>{
+			this._$rootScope.loadingProgress=false;
 			this.loggedInUser = null;
 			this._StorageService.setItem('loggedInUser', this.loggedInUser);
 		}).catch(()=>{
+			this._$rootScope.loadingProgress=false;
 			this.loggedInUser = null;
 			this._StorageService.setItem('loggedInUser', this.loggedInUser);
 		});

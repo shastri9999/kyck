@@ -12,6 +12,7 @@ import DashboardCalendarModule from './dashboard-calendar/calendar.module';
 import MessagesModule from './messages/messages.module';
 import ProfileFormModule from './profile-form/profileform.module';
 import KYCFormModule from './kyc-form/kycform.module';
+import MiniCalendarModule from './mini-calendar/miniCalendar.module';
 import SettingsModule from './settings/settings.module';
 import BlockChainModule from './blockchain/blockchain.module';
 import route from './main.route';
@@ -33,6 +34,7 @@ const mainModule = angular.module('main-module', [
 	SettingsModule.name,
 	ProfileFormModule.name,
 	KYCFormModule.name,
+	MiniCalendarModule.name,
 	]);
 
 mainModule

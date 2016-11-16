@@ -1,0 +1,85 @@
+.miniCalendar {
+	z-index: 3;
+	md-event-calendar md-event-calendar-header {
+	    background: none;
+		border: none;
+		margin-bottom: -10px;
+	}
+	.md-event-calendar-header-label {
+		color: white;
+	    font-size: 14px;
+	    line-height: 14px;
+	    z-index: 10;
+	}
+
+	md-event-calendar md-event-calendar-month .md-event-calendar-month-row-header {
+		background: #3e7f9a;
+		color: white;
+	}
+	md-event-calendar md-event-calendar-month .md-event-calendar-month-row {
+		background: rgba(0,0,0,0.1);
+		.different-month {
+			color: rgba(0,0,0,0.15);
+		}
+	}
+	md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content .md-event-calendar-cell-data-label {
+		color: white;
+		font-size: 10px;
+	}
+	md-event-calendar._md md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell.different-month	{
+		background: none;
+		/* rgba(0,0,0,0.20);*/
+	}
+
+	md-event-calendar._md md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell.today {
+		background-color: #f39c12;
+	    border-radius: 50px;
+	    outline: none;
+	    border: 1px white solid;
+	    box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    -webkit-box-sizing: border-box;
+	}
+
+	md-event-calendar._md md-event-calendar-header md-event-calendar-next .md-arrow svg, md-event-calendar._md md-event-calendar-header md-event-calendar-prev .md-arrow svg {
+		fill: white;
+	}
+
+	md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content {
+		position: absolute;
+		top: 0px;
+	    left: 0px;
+	    padding: 7px;
+	}
+	md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content.md-has-events {
+        border: 1px #f39c12 solid;
+	    border-radius: 30px;
+	    background-color: rgba(0,0,0,0.1);
+	}
+	md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content.md-has-events .md-event-calendar-cell-event-show-more-link {
+		position: absolute;
+	    top: -3px;
+	    right: 0px;
+	    background-color: orange;
+	    border-radius: 20px;
+	    color: white;
+	    font-size: 10px;
+	    width: 15px;
+	    height: 15px;
+	    padding: 5px;
+	    padding-top: 2px;
+	    overflow: hidden;
+    }
+
+    md-event-calendar md-event-calendar-month .md-event-calendar-show-more-container.show {
+    	top: 95px !important;
+    	left: 5px !important;
+    }
+
+	md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell.different-month .md-event-calendar-month-cell-content .md-event-calendar-cell-data-label {
+		color: rgba(256,256,256,0.4);
+	}
+	md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell.today .md-event-calendar-month-cell-content .md-event-calendar-cell-data-label {
+		color: rgba(256,256,256,1);
+	}
+}

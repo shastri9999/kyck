@@ -257,55 +257,6 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
     max-width: 300px;
     height: 1000px;
 }
-.rightSide md-event-calendar md-event-calendar-header {
-    background: none;
-	border: none;
-	margin-bottom: -10px;
-}
-.rightSide .md-event-calendar-header-label {
-	color: white;
-    font-size: 14px;
-    line-height: 14px;
-}
-
-.rightSide md-event-calendar md-event-calendar-month .md-event-calendar-month-row-header {
-	background: #3e7f9a;
-	color: white;
-}
-.rightSide md-event-calendar md-event-calendar-month .md-event-calendar-month-row {
-	background: rgba(0,0,0,0.1);
-	.different-month {
-		color: rgba(0,0,0,0.15);
-	}
-}
-.rightSide md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content .md-event-calendar-cell-data-label {
-	color: white;
-	font-size: 10px;
-}
-.rightSide md-event-calendar._md md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell.different-month	{
-	background: none;
-	/* rgba(0,0,0,0.20);*/
-}
-
-.rightSide md-event-calendar._md md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell.today	{
-	background: rgba(0,0,0,0.20);
-}
-.rightSide md-event-calendar._md md-event-calendar-header md-event-calendar-next .md-arrow svg, md-event-calendar._md md-event-calendar-header md-event-calendar-prev .md-arrow svg {
-	fill: white;
-}
-
-.rightSide md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content {
-	position: absolute;
-    top: 8px;
-    left: 6px;
-}
-
-.rightSide md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell.different-month .md-event-calendar-month-cell-content .md-event-calendar-cell-data-label {
-	color: rgba(256,256,256,0.4);
-}
-.rightSide md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell.today .md-event-calendar-month-cell-content .md-event-calendar-cell-data-label {
-	color: rgba(256,256,256,1);
-}
 .contactedUsersTitle {
   line-height: 19px;
   font-family: Lato;
