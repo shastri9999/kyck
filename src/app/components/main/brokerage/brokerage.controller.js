@@ -307,8 +307,10 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
            var slots = [];
            for (var i=0; i<$scope.selectedPartners.length; i++) {
                 var partner = $scope.selectedPartners[i];
+                console.log(partner);
                 if (partner.selectedAppointments) {
-                    for (var j=0; j<partner.selectedAppointments; j++) {
+                    for (var j=0; j<partner.selectedAppointments.length; j++) {
+                        console.log(partner.selectedAppointments[j]);
                         slots.push({
                             "brokerageId": partner.brokerageId+"",
                             "calenderSlot": partner.selectedAppointments[j],
@@ -321,17 +323,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 }
            }
 
-           $http({
-            method: 'POST',
-            url: '/kyck-rest/brokerage/submit',
-            headers: {
-                "Content-Type": "application/json"
-            },            
-            data:{
-              "brokerageCalenderSlot": slots
-            }
-           }).then((s)=>{
-             $rootScope.loadingProgress = true;
+           $rootScope.loadingProgress = true;
+           BrokerageResource.submitBrokerageApplication({"calendarSlots": slots}, function(s) {
+             console.log(slots);
+             console.log(s);
+             $rootScope.loadingProgress = false;
              BrokerageResource.contactedBrokerages((response)=>{
                 vm.contactedBrokers = response.data;
                 BrokerageResource.brokeragesList((req)=> {
@@ -350,7 +346,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                     vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
                 });            
             });
-           }).catch(e=>console.log(e));
+            },
+                function (error) {console.log(error)}
+            );
 
            // $mdToast.showSimple("Your appointment preferences have been sent to the partners.");
 
@@ -359,7 +357,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
              targetEvent: $event,
              template:
                '<md-dialog aria-label="List dialog">' +
-               '  <md-dialog-content style="width:500px;height:200px;">'+
+               '  <md-dialog-content style="width:500px;height:60px;">'+
                 '<div class="dialog-content-broker">'+ 
                 ' Your appointment preferences have been sent to the partners.' +
                 ' </div>' + 

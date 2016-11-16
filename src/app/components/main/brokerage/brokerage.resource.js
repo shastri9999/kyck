@@ -48,20 +48,10 @@ function BrokerageResource($resource) {
             },
             url: URL + '/dashboard/meeting/status'
         },
-        userprofileupdate: {
+        submitBrokerageApplication: {
             method: 'POST',
             params: {
                   brokerageCalenderSlot: '@calendarSlots'
-                  // [
-                  //   {
-                  //         "brokerageId": "@string",
-                  //         "calenderSlot": "@date",
-                  //         "meetingContent": "@string",
-                  //         "meetingLocation": "@string",
-                  //         "meetingStatus": "@string",
-                  //         "meetingSubject": "@string"
-                  //       }
-                  //     ]
                 },
             url: URL + '/brokerage/submit'
         },

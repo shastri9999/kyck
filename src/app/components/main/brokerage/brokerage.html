@@ -294,13 +294,15 @@
     <div layout="column" class="rightSide" ng-if="isBroker" flex>
     <!--  style="background: url(../../../../assets/images/broker-dashboard-background.png) no-repeat; background-color: #47ada4; overflow: scroll;"> -->
         <img style="position: absolute;width: 300px;height:100%; z-index: 0;" ng-src="{{vm.bgurl}}">
-        <md-event-calendar style="z-index: 3;">
+        <mini-calendar style="z-index: 3;"/>
+        <!-- <mini ng-class="{error:vm.kycerror}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/> -->
+        <!-- <md-event-calendar style="z-index: 3;">
             <md-event-calendar-header class="md-center">
                 <md-event-calendar-prev></md-event-calendar-prev>
                 <md-event-calendar-title></md-event-calendar-title>
                 <md-event-calendar-next></md-event-calendar-next>
             </md-event-calendar-header>
-        </md-event-calendar>
+        </md-event-calendar> -->
         <h2 style="color: white;margin: 20px; margin-bottom: 0px; z-index: 3;" ng-if="vm.usermessages">Messages</h2>
         <span ng-repeat="msg in vm.usermessages">
             <div class="msg-requests {{msg.class}}">
