@@ -1,13 +1,5 @@
 $pale-grey: #e7ecf1;
 
-.document-icon {
-	min-height: 50px;
-	min-width: 30px;
-	display: block;
-    margin-top: 40px;
-    margin-left: 10px;
-}
-
 .document {
 	margin: 10px;
 	min-height: 200px;
@@ -75,9 +67,10 @@ $pale-grey: #e7ecf1;
 }
 
 .document-upper {
-	box-sizing: border-box;
-	min-height: 120px;
-	min-width: 180px;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  padding-bottom: 18px;
 }
 
 .red-circle {

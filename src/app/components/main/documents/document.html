@@ -1,7 +1,7 @@
 <div class="document">
-	<div layout="row" class="document-upper">
+	<div class="document-upper">
 		<div class="document-icon">
-			<img ng-src="{{vm.document.iconUrl}}"></img>
+			<img ng-src="/assets/images/documentTypes/{{vm.document.categoryCode}}.png" alt="">
 		</div>
 		<div layout="column" class="document-details">
 			<span> {{ vm.document.categoryName + ' ' + vm.document.documentTypeName }} </span>
