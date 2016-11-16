@@ -90,23 +90,54 @@ footer {
     background-color: #3498db;
 }
 
+.md-stepper-indicator-wrapper
+{
+	flex-flow: column-reverse;
+	background: none;
+}
+
+.md-steppers-horizontal .md-stepper-indicator:after {
+    width: 100%;
+    height: 3px;
+    margin-top: -1px;
+    position: absolute;
+    top: 46px;
+    left: 0;
+    z-index: 1;
+    background-color: #e8e8e8;
+    content: " ";
+}
+.md-steppers-horizontal .md-stepper-indicator.md-completed:after, .md-steppers-horizontal .md-stepper-indicator.md-active:after {
+	background-color: #f39c11;
+}
+
+.md-stepper-indicator.md-active .md-stepper-title, .md-stepper-indicator.md-completed .md-stepper-title {
+    color: #4f6379;
+}
+.md-stepper-title {
+    color: #eccbcb;
+    font-weight: normal;
+}
 .md-stepper-indicator .md-stepper-number, .md-stepper-indicator.md-completed .md-stepper-number {
 	background-color: #fff;
 	width: 40px;
     height: 40px;
     border-radius: 40px;
-    line-height: 40px;
+    line-height: 36px;
     color: #a2a9b1;
     border: solid 2px #e4e9ee;
 }
 .md-stepper-indicator.md-active .md-stepper-number, .md-stepper-indicator.md-completed .md-stepper-number {
 	background-color: #f39c11;
 	color: #fff;
+	border: none;
+	line-height: 40px;
+
 }
 .rightSide md-event-calendar {
 	margin: 0px;
 }
-.md-stepper-number.md-activ {
+.md-stepper-number.md-active {
 	background-color: #f39c11;
 }
 .md-stepper-number {
@@ -122,7 +153,8 @@ md-stepper {
     box-shadow: none;
 }
 .md-steppers:not(.md-steppers-linear) .md-stepper-indicator.md-editable.md-completed:hover, .md-steppers:not(.md-steppers-linear) .md-stepper-indicator.md-editable.md-completed:hover .md-stepper-indicator-wrapper, .md-steppers:not(.md-steppers-linear) .md-stepper-indicator:not(.md-active):not(.md-completed):hover, .md-steppers:not(.md-steppers-linear) .md-stepper-indicator:not(.md-active):not(.md-completed):hover .md-stepper-indicator-wrapper {
-    background-color: #fbfbfb;
+    background-color: transparent;
+    opacity: 0.9;
 }
 md-event-calendar {
 	margin:30px;	
