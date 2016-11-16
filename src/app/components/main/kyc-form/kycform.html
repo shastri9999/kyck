@@ -33,6 +33,7 @@
 				</label>
 				<select ng-disabled="vm.isBroker" name="kyc-{{field.questionId}}" ng-model="field.selectedValue" ng-options="option.answerDescription for option in field.answersList">
 				</select>
+				<div ng-if="field.error" class="error">{{field.error}}</div>		
 				<img src="/assets/images/dropdown.png" class="dropdown">
 			</div>
 			<div class="input" ng-switch-when="RADIO">
@@ -44,15 +45,17 @@
 					<label ng-repeat="option in field.answersList">
 						{{option.answerDescription}}
 						<input ng-disabled="vm.isBroker" type="radio" ng-value="{{option.answerId}}" ng-model="field.answerId" ng-required="field.requireField==='REQUIRED'">
-					</label>					
+					</label>			
 				</div>
+				<div ng-if="field.error" class="error">{{field.error}}</div>		
 			</div>
 			<div class="input" ng-switch-default>
 				<label for="kyc-{{field.questionId}}">
 					{{field.questionDesc}}
 					<span ng-if="field.requireField==='REQUIRED'">*</span>
 				</label>
-				<input ng-disabled="vm.isBroker" name="kyc-{{field.questionId}}" type="{{field.validationType}}" ng-model="field.answerText" ng-required="field.requireField==='REQUIRED'">
+				<input ng-class="{error: field.error}" ng-disabled="vm.isBroker" name="kyc-{{field.questionId}}" type="{{field.validationType}}" ng-model="field.answerText" ng-required="field.requireField==='REQUIRED'">
+				<div ng-if="field.error" class="error">{{field.error}}</div>
 			</div>
 		</div>
 	</div>	

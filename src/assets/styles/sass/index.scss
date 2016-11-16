@@ -113,6 +113,11 @@ kyc-form form, profile-form form{
       color: #4f6379;
       margin-bottom: 12px;
     }
+    div.error {
+      font-size: 10px;
+      padding-top: 4px;
+      color: red;
+    }
     input {
         height: 45px;
         width: 320px;
@@ -121,6 +126,9 @@ kyc-form form, profile-form form{
         padding: 15px;
         font-size: 14px;
         color: #4f6379;
+        &.error {
+          border: 1px solid red;
+        }
     }
     .radio {
       display: flex;

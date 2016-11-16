@@ -103,7 +103,7 @@ class UserService{
 	}
 
 	getUserFields(){
-		if (this.kycFetched)
+		if (this.userFetched)
 		{
 			return new Promise((resolve)=>{
 				resolve(this.userDetails);
@@ -191,16 +191,35 @@ class UserService{
 	}
 
 	saveKYCFields(){
-		const requiredFilled = this.kycDetails.every((field)=>{
-			if (field.requireField=="REQUIRED" && field.questionType==="TEXT")
+		let requiredFilled = true;
+		this.kycDetails.forEach((field)=>{
+			field.error = '';
+			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER"].indexOf(field.questionType)>=0)
 			{
-				return !!field.answerText;
+				if (!field.answerText)
+				{
+					field.error = 'This field is required.'
+				}
+				requiredFilled = requiredFilled && !!field.answerText;
 			}
-			if (field.requireField=="REQUIRED" && field.questionType!=="TEXT")
+			else if(field.requireField=="REQUIRED")
 			{
-				return !!field.selectedValue.answerId;
+				if (!field.selectedValue.answerId)
+				{
+					field.error = 'This field is required.'
+				}
+				requiredFilled = requiredFilled && field.selectedValue.answerId;
 			}
-			return true;
+			if (field.answerText && field.questionType === "NUMBER")
+			{
+				const numberTest = /^\d+(\.\d{1,2})?$/;
+				if (!numberTest.test(field.answerText))
+				{
+					field.error = 'This should be a valid number';
+					requiredFilled = false;
+				}
+			}
+
 		});
 		if (!requiredFilled)
 		{
@@ -285,20 +304,49 @@ class UserService{
 	}
 
 	saveProfileFields(){
-		const userDetailsFilled = this.userDetails.every((field)=>{
-			return !!field.value;
+		let userDetailsFilled = true;
+		this.userDetails.forEach((field)=>{
+			if (!field.value)
+			{
+				field.error = 'This field is required.'
+			}
+			else
+			{
+				field.error = '';
+			}
+			userDetailsFilled = userDetailsFilled && !!field.value;
 		});
 
-		const requiredFilled = this.profileDetails.every((field)=>{
+		let requiredFilled = true;
+		this.profileDetails.forEach((field)=>{
+	
+			field.error = '';
 			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER"].indexOf(field.questionType)>=0)
 			{
-				return !!field.answerText;
+				if (!field.answerText)
+				{
+					field.error = 'This field is required.'
+				}
+				requiredFilled = requiredFilled && !!field.answerText;
 			}
 			else if(field.requireField=="REQUIRED")
 			{
-				return !!field.selectedValue.answerId;
+				if (!field.selectedValue.answerId)
+				{
+					field.error = 'This field is required.'
+				}
+				requiredFilled = requiredFilled && field.selectedValue.answerId;
 			}
-			return true;
+			if (field.answerText && field.questionType === "NUMBER")
+			{
+				const numberTest = /^\d+(\.\d{1,2})?$/;
+				if (!numberTest.test(field.answerText))
+				{
+					field.error = 'This should be a valid number';
+					requiredFilled = false;
+				}
+			}
+
 		});
 
 		if (!requiredFilled || !userDetailsFilled)
