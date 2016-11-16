@@ -12,6 +12,20 @@ function SettingsController($scope,$state, UserService, $mdToast) {
 		}
 	});
 
+	vm.cancel = function(){
+		const name = $state.current.name;
+		if (name.indexOf('profile') >= 0)
+		{
+			UserService.clearProfileFields();
+			UserService.clearUserFields();
+
+		}
+		else
+		{
+			UserService.clearKYCFields();
+		}
+	}
+
 	vm.save = function(){
 		const name = $state.current.name;
 		this.mainLoading = true;

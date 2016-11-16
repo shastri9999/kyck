@@ -397,8 +397,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                  moveNext();
                 })
             .catch(function(error){
+                $rootScope.mainLoading = false;
                 vm.personalDetailsError = true;
-                 $mdToast.showSimple('Please fill all fields marked *');
+                $mdToast.showSimple('Please fill all fields marked *');
                 return;
             });
         }
@@ -414,6 +415,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                  moveNext();
             })
             .catch(function(error){
+                $rootScope.mainLoading = false;
                 $mdToast.showSimple('Please fill all fields marked *');
                 vm.kycerror = true;
                 return;

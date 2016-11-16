@@ -26,13 +26,13 @@ class UserService{
 			field.answerId = +field.answerId || 0;
 			field.selectedValue = null;
 			
-			field.answersList && field.answersList.forEach((answer)=>{
+			field.validationType !== 'RADIO' && field.answersList && field.answersList.forEach((answer)=>{
 				answer.answerId = +answer.answerId || 0;
 				if (answer.answerId == field.answerId)
 				{
 					field.selectedValue = answer;
 				}
-			})
+			});
 
 			if(!field.answerText)
 				return field;
@@ -212,12 +212,35 @@ class UserService{
 		{
 			const answers = this.kycDetails.map((field)=>{
 				const answer = {
-			      "answerDesc": field.selectedValue ? field.selectedValue.answerDescription:"",
-			      "answerId": field.selectedValue ? field.selectedValue.answerId:0,
 			      "answerText": field.answerText,
 			      "questionDesc": field.questionDesc,
 			      "questionId": field.questionId
 			    };
+			    
+			    if (field.selectedValue)
+			    {
+			      answer.answerDesc = field.selectedValue.answerDescription;
+			      answer.answerId = field.selectedValue.answerId;
+			    }
+			    else if (field.answersList.length)
+			    {
+			      answer.answerId = field.answerId;
+			      const answerDescription = field.answersList.filter((al)=>{return al.answerId == answer.answerId;});
+			      if (answerDescription.length)
+			      {
+				      answer.answerDesc = answerDescription[0].answerDescription;
+			      }
+			      else
+			      {
+			      	answer.answerDesc = "";
+			      }
+			    }
+			    else
+			    {
+			      answer.answerDesc = "";
+			      answer.answerId = 0;
+			    }
+
 			    if (field.validationType === 'DATE')
 				{
 					answer.answerText = this.moment(field.answerText).format('DD-MM-YYYY');
@@ -288,12 +311,34 @@ class UserService{
 		{	
 			const answers = this.profileDetails.map((field)=>{
 				const answer = {
-			      "answerDesc": field.selectedValue ? field.selectedValue.answerDescription:"",
-			      "answerId": field.selectedValue ? field.selectedValue.answerId:0,
 			      "answerText": field.answerText,
 			      "questionDesc": field.questionDesc,
 			      "questionId": field.questionId
 			    };
+			    if (field.selectedValue)
+			    {
+			      answer.answerDesc = field.selectedValue.answerDescription;
+			      answer.answerId = field.selectedValue.answerId;
+			    }
+			    else if (field.answersList.length)
+			    {
+			      answer.answerId = field.answerId;
+			      const answerDescription = field.answersList.filter((al)=>{return al.answerId == answer.answerId;});
+			      if (answerDescription.length)
+			      {
+				      answer.answerDesc = answerDescription[0].answerDescription;
+			      }
+			      else
+			      {
+			      	answer.answerDesc = "";
+			      }
+			    }
+			    else
+			    {
+			      answer.answerDesc = "";
+			      answer.answerId = 0;
+			    }
+
 			    if (field.validationType === 'DATE')
 				{
 					answer.answerText = this.moment(field.answerText).format('DD-MM-YYYY');
@@ -304,7 +349,6 @@ class UserService{
 				}
 				return answer;
 			});
-			console.log(answers);
 			return this.updateProfileFields(answers);
 		}
 	}
