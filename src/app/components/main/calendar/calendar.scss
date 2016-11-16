@@ -12,23 +12,18 @@ md-event-calendar .md-event-calendar-cell-event {
 	background-color: #3aafa5;
 	color: white;	
 }
-/*
-md-event-calendar .md-event-calendar-cell-event.pending {
+md-event-calendar .md-event-calendar-cell-event.PENDING {
 	background-color: rgb(63, 81, 181);
-	background-color: #3aafa5;
 	color: white;
 }
-md-event-calendar .md-event-calendar-cell-event.confirmed {
+md-event-calendar .md-event-calendar-cell-event.CONFIRM {
 	background-color: rgb(0, 150, 136);
-	background-color: #3aafa5;
 	color: white;
 }
-md-event-calendar .md-event-calendar-cell-event.rejected {
+md-event-calendar .md-event-calendar-cell-event.REJECT {
 	background-color: rgb(244, 67, 54);
-	background-color: #3aafa5;
 	color: white;
 }
-*/
 .md-dialog-content-body{
 	padding-top:12px;
 }
