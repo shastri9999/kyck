@@ -2,6 +2,10 @@
 
 import inviteDialogTemplateUrl from './dialog.html';
 
+const d3 = require('d3');
+const RadialProgressChart = require('radial-progress-chart');
+
+
 function BrokerageController($state, $scope, $mdToast,$http, $mdStepper, 
         $mdDialog, $rootScope, BrokerageResource, AuthenticationService, 
         DocumentResource, UserService, CalendarService, $window, moment) {
@@ -128,7 +132,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         }
 
         if (vm.isBroker) {
-            $rootScope.sideNavCollapsed = true;
             $rootScope.loadingProgress = true;
             BrokerageResource.userAppointments((response)=>{
                 $rootScope.loadingProgress = false;

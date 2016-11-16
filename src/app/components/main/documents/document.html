@@ -4,7 +4,7 @@
 			<img ng-src="{{vm.document.iconUrl}}"></img>
 		</div>
 		<div layout="column" class="document-details">
-			<span style="font-weight: bold"> {{ vm.document.categoryName + ' ' + vm.document.documentTypeName }} </span>
+			<span> {{ vm.document.categoryName + ' ' + vm.document.documentTypeName }} </span>
 			<div layout="row">
 			 	<figure class="red-circle"></figure>
 			 	<span style="font-weight: 100;font-size: 12px;">{{ vm.document.docType || 'Required' }}</span>
@@ -13,16 +13,15 @@
 		</div>
 	</div>
 	<div class="document-action" ng-if="!vm.document.documentID || vm.document.replaceAction" ngf-drag-over-class="'dragover'" ngf-drop="vm.upload($file, vm.document)">
-		<span ng-if="vm.isBroker">Document not uploaded.</span>
-		<span ng-if="!vm.isBroker">Drag and drop your file here or 
+		<span ng-if="vm.isBroker" class="upload">Document not uploaded.</span>
+		<span ng-if="!vm.isBroker" class="upload">Drag and drop your file here or 
 		<md-button ng-if="!vm.isBroker" ngf-select="vm.upload($file, vm.document)" class="md-primary md-raised" style="background-color: #3598DB">	Upload
 		</md-button>
  		</span>
 	</div>
 	<div class="document-action" ng-if="vm.document.documentID && !vm.document.replaceAction">
-		<div style="width: 50%;cursor: pointer;" ng-click="vm.preview(vm.document)">View</div>
-		<div style="width: 2px; border: solid 1px #e7ecf1;"></div>
-		<div ng-if="!vm.isBroker" style="width: 50%; cursor: pointer;" ng-click="vm.replace(vm.document)">Replace</div>
+		<div class="view" ng-click="vm.preview(vm.document)">View</div>
+		<div ng-if="!vm.isBroker" class="replace" ng-click="vm.replace(vm.document)">Replace</div>
 		<a class="download" ng-if="vm.isBroker" ng-href="/kyck-rest/document/bulkDownload?documentNames={{vm.document.documentName}}&userId={{vm.userId}}">
             Download <img src="/assets/images/download.png"/>                                
         </a>

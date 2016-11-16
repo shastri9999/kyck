@@ -7,7 +7,7 @@
 		</div>
 		<div  ng-if="shouldShowDocumentPreview" class="preview-overlay">
 			<div class="dialog">
-				<div class="close" ng-click="hideDocumentPreview()" >X</div>
+				<div class="close" ng-click="hideDocumentPreview()">×</div>
 				<div ng-class="{top:true, ocr:OCRView}">
 					<img ng-if="!documentPreviewLoading && !OCRView" class="preview" ng-src="{{documentPreviewURL}}" alt="">
 					<div ng-if="documentPreviewLoading && !OCRView" style="display: flex;background-color: #e5eff1;align-items: center; padding: 10px;">
