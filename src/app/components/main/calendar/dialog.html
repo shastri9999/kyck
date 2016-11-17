@@ -1,0 +1,21 @@
+<md-dialog aria-label="List dialog">
+  <md-dialog-content style="width:400px;height:200px;">
+    <div class="dialog-content-broker" style="margin-top:20px;" flex layout="column">
+    <div flex layout="row" style="min-height: 40px;margin-top: 30px;">
+      <div class="avatar-circle" ng-if="!appointment.avatar" flex="20" style="max-height: 40px; max-width: 40px;">
+        {{slot.userFirstName|limitTo:1|capitalize}}
+        {{slot.userLastName|limitTo:1|capitalize}}
+      </div>
+      <div flex="80" style="min-height: 40px; padding-top: 5px; line-height: 17px;">
+      	<div style="color: rgba(0,0,0,0.9)">{{slot.userFirstName}}<br></div>
+      	<div style="color: rgba(0,0,0,0.5)">{{slot.startTime | date: 'HH:MM a'}}</div>
+      </div>
+    </div>
+	<br>
+	<div layout="row" flex align-content="flex-end">
+	  <md-button class="md-raised md-success" ng-click="closeDialog()">Confirm</md-button>
+	  <md-button class="md-raised md-back" ng-click="closeDialog()">Reschedule</md-button>
+	</div>
+    </div>
+  </md-dialog-content>
+</md-dialog>
