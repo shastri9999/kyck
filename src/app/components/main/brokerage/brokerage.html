@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="right-stat" ng-if="!isBroker">
-        <img style="width:250px;height:100%;position: absolute;" src="/assets/images/sidebar-background.png; z-index: 1;">
+        <img style="width:250px;height:100%;position: absolute; z-index: 1;" src="/assets/images/sidebar-background.png">
         <div style="position:absolute;right:15px;left:10px;z-index: 2;">
             <div><progress-display chart-id="brokerage-progress" is-vertical="true"/></div>
              <div class="contact-brokerage">
@@ -263,7 +263,7 @@
         </div>
         </md-stepper>
 
-        <footer style="position: fixed; bottom: 54px; z-index: 1;">
+        <footer style="position: fixed; bottom: 54px; z-index: 0;">
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
                 <md-button class="md-raised md-back" ng-click="vm.backStep()" ng-show="vm.getActiveStep()>1">Back</md-button>
                 <md-button ng-if="!isBroker" class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !vm.timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
