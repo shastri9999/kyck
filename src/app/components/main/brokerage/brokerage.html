@@ -36,8 +36,8 @@
         </div>
     </div>
     <div class="right-stat" ng-if="!isBroker">
-        <img style="width:250px;height:100%;position: absolute;" src="/assets/images/sidebar-background.png">
-        <div style="position:absolute;right:15px;left:10px;">
+        <img style="width:250px;height:100%;position: absolute;" src="/assets/images/sidebar-background.png; z-index: 1;">
+        <div style="position:absolute;right:15px;left:10px;z-index: 2;">
             <div><progress-display chart-id="brokerage-progress" is-vertical="true"/></div>
              <div class="contact-brokerage">
                 <div style="position: relative;display: flex; flex-flow: column;">
@@ -48,7 +48,7 @@
                         <div style="display: flex;background: white;border: none;border-radius: 3px;padding: 20px;margin-bottom: 10px;" ng-repeat="item in vm.contactedBrokers|limitTo:3">
                             <img style="width: 60px; height:36px;margin-right: 15px;" ng-src="/assets/images/partnerLogos/{{item.brokerageId}}.png" alt="">
                             <div style="display: flex; flex-flow: column;">
-                                <div style="font-size: 14px;opacity: 0.4">                              {{item.brokerageId}}
+                                <div style="font-size: 14px;opacity: 0.4">{{item.brokerageId}}
                                 </div>
                                 <div class="pending-btn" style="margin-top: 10px;">
                                     {{item.status}}        
@@ -263,7 +263,7 @@
         </div>
         </md-stepper>
 
-        <footer>
+        <footer style="position: fixed; bottom: 54px; z-index: 1;">
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
                 <md-button class="md-raised md-back" ng-click="vm.backStep()" ng-show="vm.getActiveStep()>1">Back</md-button>
                 <md-button ng-if="!isBroker" class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !vm.timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
@@ -293,7 +293,7 @@
     </div>
     <div layout="column" class="rightSide" ng-if="isBroker" flex>
     <!--  style="background: url(../../../../assets/images/broker-dashboard-background.png) no-repeat; background-color: #47ada4; overflow: scroll;"> -->
-        <img style="position: absolute;width: 300px;height:100%; z-index: 0;" ng-src="{{vm.bgurl}}">
+        <img style="position: absolute;width: 300px;height:100%; z-index: 1;" ng-src="{{vm.bgurl}}">
         <mini-calendar style="z-index: 3;"/>
         <!-- <mini ng-class="{error:vm.kycerror}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/> -->
         <!-- <md-event-calendar style="z-index: 3;">
@@ -304,7 +304,7 @@
             </md-event-calendar-header>
         </md-event-calendar> -->
         <h2 style="color: white;margin: 20px; margin-bottom: 0px; z-index: 3;" ng-if="vm.usermessages">Messages</h2>
-        <span ng-repeat="msg in vm.usermessages">
+        <span ng-repeat="msg in vm.usermessages" style="z-index: 3;">
             <div class="msg-requests {{msg.class}}">
                 <div>{{msg.msg}}</div>
                 <div class="datetime">{{msg.date | date:'dd MMM yy, HH:mm a'}}</div>

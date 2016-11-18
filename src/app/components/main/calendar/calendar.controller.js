@@ -59,6 +59,8 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
         function DialogController($scope, $mdDialog) {
             'ngInject';
             $scope.slot = slot;
+            $scope.isBroker = isBroker;
+            console.log(slot);
 
             $scope.closeDialog = function() {
                 $mdDialog.hide();

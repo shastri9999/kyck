@@ -454,16 +454,14 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     }
 
     function nextRequestStep() {
-        if (vm.getActiveStep() > 1) {
+        if (vm.getActiveStep() >= 1) {
             document.getElementsByClassName('md-stepper-indicator ng-scope')[vm.getActiveStep()].className+=" md-completed";
             vm.allVerified = document.getElementsByClassName('md-stepper-indicator ng-scope md-completed').length===4;
-            console.log(document.getElementsByClassName('md-stepper-indicator ng-scope md-completed').length, vm.allVerified);
         }
-        if (vm.getActiveStep() == 5) {
+        if (vm.getActiveStep() === 4) {
             var steppers = $mdStepper('stepper-demo');
             steppers.goto(0);
             vm.selectedDocumentNames = [];
-
             return;
         }
         else
