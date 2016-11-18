@@ -202,21 +202,25 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         });
 
         var events = [];
-        var currentDate = new Date();
-        currentDate = currentDate.getDate();
+        var currentD = new Date();
+        var currentDate = currentD.getDate();
         for(var j=0; j<= 30; ++j)
         {
-            for(var i=10; i<=19; ++i)
-            {
-                var i2 = 1+i;
-                events.push({
-                    start: getDate(j, i),
-                    allDay: true,
-                    customClass: 'book-appointment',
-                    title: numToTime(i) + ' - ' + numToTime(i2),
-                    mday: currentDate + j,
-                    mhour: i
-                })
+            //if date is valid else don't execute the for loop
+            var day = currentD.getDay() + j;
+            if (day % 7 != 6 && day % 7 !=0) {
+                for(var i=10; i<=19; ++i)
+                {
+                    var i2 = 1+i;
+                    events.push({
+                        start: getDate(j, i),
+                        allDay: true,
+                        customClass: 'book-appointment',
+                        title: numToTime(i) + ' - ' + numToTime(i2),
+                        mday: currentDate + j,
+                        mhour: i
+                    })
+                }
             }
         }
         vm.events = events;
@@ -303,86 +307,97 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     }
 
     function showDialog($event) {
-           var parentEl = angular.element(document.body);
-           var partner = (vm.partners.filter(x=>x.selected)[0]);
 
-           //$scope.selectedPartners.selectedAppointments
-           var slots = [];
-           for (var i=0; i<$scope.selectedPartners.length; i++) {
-                var partner = $scope.selectedPartners[i];
-                console.log(partner);
-                if (partner.selectedAppointments) {
-                    for (var j=0; j<partner.selectedAppointments.length; j++) {
-                        console.log(partner.selectedAppointments[j]);
-                        slots.push({
-                            "brokerageId": partner.brokerageId+"",
-                            "calenderSlot": partner.selectedAppointments[j],
-                            "meetingContent": "Meeting about brokerage application",
-                            "meetingLocation": "Singapore",
-                            "meetingStatus": "PENDING",
-                            "meetingSubject": "Discussion about brokerage application"
-                        });
-                    }
-                }
-           }
+        for (var i=0; i<$scope.selectedPartners.length; i++) {
+            var partner = $scope.selectedPartners[i];
+            console.log('logging', partner.selectedAppointments, !partner.selectedAppointments);
 
-           $rootScope.loadingProgress = true;
-           BrokerageResource.submitBrokerageApplication({"calendarSlots": slots}, function(s) {
-             console.log(slots);
-             console.log(s);
-             $rootScope.loadingProgress = false;
-             BrokerageResource.contactedBrokerages((response)=>{
-                vm.contactedBrokers = response.data;
-                BrokerageResource.brokeragesList((req)=> {
-                    $rootScope.loadingProgress = false;
-                    var brokeragesList = req.data;
-                    vm.partners = brokeragesList.map(convert);
-                    vm.partners = vm.partners.map((partner)=>{
-                        vm.contactedBrokers.forEach((broker)=>{
-                            if (broker.brokerageId == partner.brokerageName)
-                            {
-                                partner.status = broker.status;
-                            }
-                        });
-                        return partner;
-                    })
-                    vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
-                });            
-            });
-            },
-                function (error) {console.log(error)}
-            );
-
-           // $mdToast.showSimple("Your appointment preferences have been sent to the partners.");
-
-           $mdDialog.show({
-             parent: parentEl,
-             targetEvent: $event,
-             template:
-               '<md-dialog aria-label="List dialog">' +
-               '  <md-dialog-content style="width:500px;height:60px;">'+
-                '<div class="dialog-content-broker">'+ 
-                ' Your appointment preferences have been sent to the partners.' +
-                ' </div>' + 
-               '  </md-dialog-content>' +
-               '  <md-dialog-actions>' +
-               '    <md-button ng-click="closeDialog()" class="md-primary">' +
-               '      Okay!' +
-               '    </md-button>' +
-               '  </md-dialog-actions>' +
-               '</md-dialog>',
-             controller: DialogController
-               });
-          function DialogController($scope, $mdDialog) {
-            'ngInject';
-            $scope.closeDialog = function() {
-                vm.timeslotSelected = false;
-                var steppers = $mdStepper('stepper-demo');
-                steppers.goto(0);
-                $mdDialog.hide();
-                vm.selectedDocumentNames = [];
+            if (!partner.selectedAppointments) {
+                $mdToast.showSimple("No time slot selected for "+partner.brokerageName+". Please select atleast 1 time slot.");
+                return;
             }
-          }
+        }
+
+       var parentEl = angular.element(document.body);
+       var partner = (vm.partners.filter(x=>x.selected)[0]);
+
+       //$scope.selectedPartners.selectedAppointments
+       var slots = [];
+       for (var i=0; i<$scope.selectedPartners.length; i++) {
+            var partner = $scope.selectedPartners[i];
+            console.log(partner);
+            if (partner.selectedAppointments) {
+                for (var j=0; j<partner.selectedAppointments.length; j++) {
+                    console.log(partner.selectedAppointments[j]);
+                    slots.push({
+                        "brokerageId": partner.brokerageId+"",
+                        "calenderSlot": partner.selectedAppointments[j],
+                        "meetingContent": "Meeting about brokerage application",
+                        "meetingLocation": "Singapore",
+                        "meetingStatus": "PENDING",
+                        "meetingSubject": "Discussion about brokerage application"
+                    });
+                }
+            }
+       }
+
+       $rootScope.loadingProgress = true;
+       BrokerageResource.submitBrokerageApplication({"calendarSlots": slots}, function(s) {
+         console.log(slots);
+         console.log(s);
+         $rootScope.loadingProgress = false;
+         BrokerageResource.contactedBrokerages((response)=>{
+            vm.contactedBrokers = response.data;
+            BrokerageResource.brokeragesList((req)=> {
+                $rootScope.loadingProgress = false;
+                var brokeragesList = req.data;
+                vm.partners = brokeragesList.map(convert);
+                vm.partners = vm.partners.map((partner)=>{
+                    vm.contactedBrokers.forEach((broker)=>{
+                        if (broker.brokerageId == partner.brokerageName)
+                        {
+                            partner.status = broker.status;
+                        }
+                    });
+                    return partner;
+                })
+                vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+            });            
+        });
+        },
+            function (error) {console.log(error)}
+        );
+
+       // $mdToast.showSimple("Your appointment preferences have been sent to the partners.");
+
+       $mdDialog.show({
+         parent: parentEl,
+         targetEvent: $event,
+         template:
+           '<md-dialog aria-label="List dialog">' +
+           '  <md-dialog-content style="width:500px;height:60px;">'+
+            '<div class="dialog-content-broker">'+ 
+            ' Your appointment preferences have been sent to the partners.' +
+            ' </div>' + 
+           '  </md-dialog-content>' +
+           '  <md-dialog-actions>' +
+           '    <md-button ng-click="closeDialog()" class="md-primary">' +
+           '      Okay!' +
+           '    </md-button>' +
+           '  </md-dialog-actions>' +
+           '</md-dialog>',
+         controller: DialogController
+           });
+      function DialogController($scope, $mdDialog) {
+        'ngInject';
+        $scope.closeDialog = function() {
+            vm.timeslotSelected = false;
+            var steppers = $mdStepper('stepper-demo');
+            steppers.goto(0);
+            $mdDialog.hide();
+            vm.selectedDocumentNames = [];
+        }
+      }
     }
 
     function nextStep() {
