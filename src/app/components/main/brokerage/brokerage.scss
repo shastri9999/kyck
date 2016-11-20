@@ -1,3 +1,8 @@
+.md-steppers-horizontal .md-stepper-indicator {
+	flex-basis: 20%;
+    flex-grow: 0;
+}
+
 .headerProgress {
 	background-color: #f2f8f8;
 	border: 3px solid #e8f8f8;
@@ -93,6 +98,7 @@ footer {
 .md-stepper-indicator-wrapper
 {
 	flex-flow: column-reverse;
+	width: 100%;
 	background: none;
 }
 
