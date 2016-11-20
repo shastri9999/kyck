@@ -322,15 +322,15 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
        var partner = (vm.partners.filter(x=>x.selected)[0]);
 
        //$scope.selectedPartners.selectedAppointments
-       var slots = [];
+       var brokerageReqs = [];
        for (var i=0; i<$scope.selectedPartners.length; i++) {
             var partner = $scope.selectedPartners[i];
-            console.log(partner);
+
+            var calslots = [];
+
             if (partner.selectedAppointments) {
                 for (var j=0; j<partner.selectedAppointments.length; j++) {
-                    console.log(partner.selectedAppointments[j]);
-                    slots.push({
-                        "brokerageId": partner.brokerageId+"",
+                    calslots.push({
                         "calenderSlot": partner.selectedAppointments[j],
                         "meetingContent": "Meeting about brokerage application",
                         "meetingLocation": "Singapore",
@@ -339,13 +339,20 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                     });
                 }
             }
+
+            brokerageReqs.push({
+                "brokerageId": partner.brokerageId+"",
+                "calendarDetails" : calslots
+            });
        }
 
        $rootScope.loadingProgress = true;
-       BrokerageResource.submitBrokerageApplication({"calendarSlots": slots}, function(s) {
-         console.log(slots);
-         console.log(s);
+       BrokerageResource.submitBrokerageApplication({"calendarSlots": brokerageReqs}, function(s) {
          $rootScope.loadingProgress = false;
+         for (var i=0; i<$scope.selectedPartners.length; i++) {
+            $scope.selectedPartners[i].selectedAppointments = [];
+         }
+
          BrokerageResource.contactedBrokerages((response)=>{
             vm.contactedBrokers = response.data;
             BrokerageResource.brokeragesList((req)=> {

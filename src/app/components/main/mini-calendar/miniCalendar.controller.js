@@ -16,7 +16,6 @@ function MiniCalendarController($scope, CalendarService, moment, $rootScope, $fi
           ...slot
         }
       });
-      console.log($scope.events);
     });
 }
 

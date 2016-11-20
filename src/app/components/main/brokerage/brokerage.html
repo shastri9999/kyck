@@ -63,7 +63,7 @@
         </div>
     </div>
     <div flex layout="column">
-        <md-stepper id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker" style="min-height: 79vh;">
+        <md-stepper id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker" style="padding-bottom: 120px;">
         <div ng-if="isBroker">
         <md-step md-label="Account Summary" class="accSummary">
             <md-step-body layout="column">
@@ -293,7 +293,7 @@
     </div>
     <div layout="column" class="rightSide" ng-if="isBroker" flex>
     <!--  style="background: url(../../../../assets/images/broker-dashboard-background.png) no-repeat; background-color: #47ada4; overflow: scroll;"> -->
-        <img style="position: absolute;width: 300px;height:100%; z-index: 1;" ng-src="{{vm.bgurl}}">
+        <img style="position: absolute;width:250px;height:100%; z-index: 1;" ng-src="{{vm.bgurl}}">
         <mini-calendar style="z-index: 3;"/>
         <!-- <mini ng-class="{error:vm.kycerror}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/> -->
         <!-- <md-event-calendar style="z-index: 3;">
