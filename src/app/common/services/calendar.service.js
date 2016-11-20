@@ -19,7 +19,7 @@ class CalendarService{
 				userEmailId,
 				month
 			},
-			url: this.URL + '/user/meeting/month',
+			url: this.URL + '/calender/get/latestuserappointments',
 		}).then((response)=>{
 			this._$rootScope.loadingProgress=false;
 			this.slots = response.data.data;
@@ -31,12 +31,24 @@ class CalendarService{
 		this._$rootScope.loadingProgress=true;
 		return this._$http({
 			method: 'GET',
-			url: this.URL + '/dashboard/users/appointments',
+			url: this.URL + '/calender/get/latestbrokerappointments',
 		}).then((response)=>{
 			this._$rootScope.loadingProgress=false;
 			this.meetings = response.data.data;
 			return this.meetings;
 		});
+	}
+
+	updateAppointmentStatus(calendarDetailRequest) {
+		this._$rootScope.loadingProgress = true;
+		return this._$http({
+			method: 'POST',
+			url: this.URL + '/calendar/update/appointmentstatus',
+			data: calendarDetailRequest
+		}).then((response)=>{
+			this._$rootScope.loadingProgress=false;
+			return response.data;
+		})
 	}
 }
 

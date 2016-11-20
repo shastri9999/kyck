@@ -12,6 +12,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
     const userId = AuthenticationService.getLoggedInUser().userId;
     const isBroker = AuthenticationService.isBroker();
     const month = 11;
+    fetchMeetings();
 
     function formatSlot(slot) {
         var st = moment(slot.startTime, 'DD/MM/YYYY hh:mm').toDate();
@@ -25,16 +26,16 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
         }
     }
 
-    if (!isBroker) {
-        CalendarService.fetchMeetings(userId, month).then((data) => {
-            console.log(data);
-            $scope.events = data.map(formatSlot);
-        });
-    } else {
-        CalendarService.fetchBrokerMeetings().then((data) => {
-            console.log(data);
-            $scope.events = data.map(formatSlot);
-        });
+    function fetchMeetings() {
+        if (!isBroker) {
+            CalendarService.fetchMeetings(userId, month).then((data) => {
+                $scope.events = data.map(formatSlot);
+            });
+        } else {
+            CalendarService.fetchBrokerMeetings().then((data) => {
+                $scope.events = data.map(formatSlot);
+            });
+        }
     }
 
     $scope.eventClicked = function($selectedEvent) {
@@ -42,13 +43,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
             alert = undefined;
         }
 
-        const slot = $selectedEvent;
-
-        // alert = $mdDialog.alert({
-        //   title: slot.meetingSubject,
-        //   textContent: slot.meetingContent,
-        //   ok: 'Close'
-        // });
+        var slot = $selectedEvent;
 
         $mdDialog.show({
             parent: angular.element(document.body),
@@ -60,11 +55,33 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
             'ngInject';
             $scope.slot = slot;
             $scope.isBroker = isBroker;
-            console.log(slot);
+            $scope.updateAppointment = updateAppointment;
+            // $scope.confirmAppointment = confirmAppointment;
+            // $scope.rescheduleAppointment = rescheduleAppointment;
+            console.log("slotis", slot, slot.calendarId, slot.startTime);
 
             $scope.closeDialog = function() {
                 $mdDialog.hide();
             }
+
+            function updateAppointment(status) {
+                var calendarDetailRequest = {
+                  "calendarId": slot.calendarId,
+                  "meetingStatus": status
+                };
+
+                CalendarService.updateAppointmentStatus(calendarDetailRequest).then((data) => {
+                    console.log(calendarDetailRequest);
+                });
+
+                fetchMeetings();
+
+                $mdDialog.hide();
+            }
+
+            // function rescheduleAppointment() {
+
+            // }
         }
     }
 

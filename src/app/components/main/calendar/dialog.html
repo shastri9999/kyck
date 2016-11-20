@@ -20,8 +20,8 @@
 	<br>
 
 	<div layout="row" flex align-content="flex-end" ng-if="isBroker && slot.status == 'PENDING'">
-	  <md-button class="md-raised md-success" ng-click="closeDialog()">Confirm</md-button>
-	  <md-button class="md-raised md-back" ng-click="closeDialog()">Reschedule</md-button>
+	  <md-button class="md-raised md-success" ng-click="updateAppointment('CONFIRM')">Confirm</md-button>
+	  <md-button class="md-raised md-back" ng-click="updateAppointment('RESCHEDULE')">Reschedule</md-button>
 	</div>
     </div>
   </md-dialog-content>
