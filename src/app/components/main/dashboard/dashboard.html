@@ -147,7 +147,7 @@
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokerAppointments || !vm.brokerAppointments.length">
 					No Appointments to Show 
 				</div>	
-				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments">
+				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:10">
 					<img ng-if="appointment.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
 					<div class="avatar-circle" ng-if="!appointment.avatar">
 							{{appointment.userFirstname|limitTo:1|capitalize}}

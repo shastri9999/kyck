@@ -11,6 +11,10 @@ class MessageService{
 		this.sentFetched = false;
 	}
 
+	fetchToList(){
+		
+	}
+	
 	fetchInbox(){
 		if (this.inboxFetched)
 		{

@@ -11,6 +11,9 @@ toolbar {
 			flex-grow: 1;
 		    display: flex;
 		    align-items: center;
+		    img.collapsed {
+		    	transform: rotate(180deg);
+		    }
 		    .flag-dropdown {
 		    	display: flex;
 		    	align-items: center;
