@@ -26,9 +26,10 @@
 	    width: 240px;
 	    overflow: hidden;
 	    position:relative;
+	    height: calc(100vh - 100px);
 	    .contact-brokerage
 	    {
-	    	margin-top: 20px;
+	    	margin-top: 10px;
 	    	input {
 				height: 45px;
 			    padding-left: 10px;
