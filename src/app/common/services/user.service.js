@@ -37,6 +37,8 @@ class UserService{
 			if(!field.answerText)
 				return field;
 
+			field.displayAnswerText = field.answerText;
+			
 			/*Mapping to make date work */
 			if (field.validationType === 'DATE')
 			{
