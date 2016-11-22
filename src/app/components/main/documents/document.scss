@@ -118,3 +118,8 @@ $pale-grey: #e7ecf1;
   overflow: hidden;
   height:350px;
 }
+
+.flex-wrapper {
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+}

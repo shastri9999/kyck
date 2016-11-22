@@ -21,12 +21,13 @@
 	font-weight:bold;
 }
 .mainArea {
+	height: calc(100vh - 300px);
 	.right-stat {
 	    order: 2;
 	    width: 240px;
 	    overflow: hidden;
 	    position:relative;
-	    height: calc(100vh - 100px);
+	    min-height: calc(100vh - 100px);
 	    .contact-brokerage
 	    {
 	    	margin-top: 10px;
@@ -84,6 +85,9 @@ footer {
 		color: #9da9b5;
 		background: #ecf0f1;
 	}
+}
+md-step-body {
+	max-height: calc(100vh - 290px);
 }
 .md-raised.md-back:not([disabled]):hover {
 	color: white;
