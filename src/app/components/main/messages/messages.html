@@ -48,7 +48,7 @@
 		<div style="background-color:#f2f6f8;font-size: 22px;padding: 24px 20px;position: relative;font-weight: 300;"> Compose 
 		<img class="close" src="/assets/images/close-message.png" alt="close" ng-click="vm.closeCompose()">
 		</div>
-		<input type="text" name="to" ng-model="vm.composeMessage.messageFrom" placeholder="To">
+		<select type="text" name="to" ng-model="vm.composeMessage.messageFrom" placeholder="To" ng-options="mail for mail in vm.toList"/>
 		<input type="text" name="subject" ng-model="vm.composeMessage.messageSubject" placeholder="Subject">
 		<textarea name="message" placeholder="Type your message here..." ng-model="vm.composeMessage.messageContent" cols="30" rows="20"></textarea>
 		<a class="send-btn" ng-click="vm.createMessage()">Send</a>

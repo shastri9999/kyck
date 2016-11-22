@@ -12,7 +12,12 @@ class MessageService{
 	}
 
 	fetchToList(){
-		
+		return this._$http({
+			method: 'GET',
+			url: '/kyck-rest/users/contacted'
+		}).then((response)=>{
+			return response.data.data.map((item)=>item.email);
+		});
 	}
 	
 	fetchInbox(){
