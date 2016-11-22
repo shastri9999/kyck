@@ -150,8 +150,8 @@
 				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments">
 					<img ng-if="appointment.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
 					<div class="avatar-circle" ng-if="!appointment.avatar">
-							{{appointment.userFirstName|limitTo:1|capitalize}}
-							{{appointment.userLastName|limitTo:1|capitalize}}
+							{{appointment.userFirstname|limitTo:1|capitalize}}
+							{{appointment.userLastname|limitTo:1|capitalize}}
 					</div>
 					<div class="detail">
 						<div style="font-size: 14px;">{{appointment.userFirstName}} {{appointment.userLastName}}</div>

@@ -291,14 +291,16 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 }
 .contactedUsers {
 	width: 250px;
-	height: 996px;
 	background-color: #f9fbfc;
+	height: calc(100vh - 120px);
+	overflow: hidden;
 }
 
 .rightSide {
     width: 250px;
     max-width: 250px;
-    height: 1000px;
+    height: calc(100vh - 120px);
+   	overflow: hidden;
 }
 .contactedUsersTitle {
   line-height: 19px;
@@ -453,7 +455,7 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 	}
 	.document-container {
 		min-height: 300px;
-	    max-height: 365px;
+	    max-height: 100px;
 	    overflow: auto;
 	    padding-right: 20px;
 	}

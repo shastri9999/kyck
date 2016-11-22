@@ -111,6 +111,9 @@
             </div>
             <div flex="50">
                 <span class="title">Appointment Slots</span>
+                <div style="font-size: 12px;margin-top: 10px;" ng-if="!vm.userSlots.length">
+                    No Appointments
+                </div>
                 <div class="appointmentTile" ng-repeat="slot in vm.userSlots">
                     <div style="float:left; padding:10px;">
                         <div class="header">{{slot.startTime | date:'dd MMM yy, HH:mm a'}}</div>
@@ -157,14 +160,14 @@
         </div>
         <div ng-if="isBroker">
             <md-step md-label="Personal Details">
-                <md-step-body style="min-height:700px;">
+                <md-step-body>
                     <profile-form ng-class="{error:vm.personalDetailsError}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/>
                 </md-step-body>
             </md-step>
         </div>
         <div ng-if="isBroker">
             <md-step md-label="KYC">
-                <md-step-body style="min-height:700px;">
+                <md-step-body>
                     <kyc-form ng-class="{error:vm.kycerror}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/>
                 </md-step-body>
             </md-step>
