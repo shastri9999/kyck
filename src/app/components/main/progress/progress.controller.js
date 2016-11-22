@@ -20,6 +20,9 @@ function ProgressController(DashboardResource, AuthenticationService, $rootScope
         const profileStatus = +values[0];
         const kycStatus = +values[1];
         const documentStatus = +values[2];
+        vm.profileStatus = 'Profile: ' + profileStatus + '%';
+        vm.kycStatus = 'KYC: ' + kycStatus + '%';
+        vm.documentStatus = 'Documents: ' + documentStatus + '%';
         const progress = new RadialProgressChart('.progress-chart', {
             diameter: 110,
             shadow: {

@@ -71,13 +71,21 @@ table {
     line-height: 40px;
     text-decoration: none;
 }
-
+.legend {
+  align-self: stretch;
+}
 .legend.vertical
 {
   color: white;
   flex-flow:column;
   padding-left: 54px;
 }
+.progress-chart-wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
 .progress-chart {
   width: 234px;
   margin-top: 20px;
