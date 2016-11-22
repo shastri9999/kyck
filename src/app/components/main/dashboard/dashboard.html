@@ -6,7 +6,7 @@
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokerAppointments || !vm.brokerAppointments.length">
 					No Application Requests to Show 
 				</div>
-				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:10">
+				<div ng-click="vm.openCalendar()" class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:10">
 					<div class="date">
 						<div style="font-size: 24px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'Do'}}</div>
 						<div style="opacity: 0.4;padding: 4px; border-bottom: 1px dotted;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'MMM YY'}}</div>
