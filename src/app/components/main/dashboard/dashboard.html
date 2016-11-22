@@ -94,7 +94,7 @@
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.userAppointments || !vm.userAppointments.length">
 					No Application Requests to Show 
 				</div>
-				<div class="appointment" ng-click="vm.goToRequests()" ng-repeat="appointment in vm.userAppointments">
+				<div class="appointment" ng-click="vm.goToRequests()" ng-repeat="appointment in vm.userAppointments|orderBy:'-date'|limitTo:6">
 					<a class="overlay-link" ui-sref="main.brokerage"></a>
 					<img ng-if="appointment.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
 					<div class="avatar-circle" ng-if="!appointment.avatar">
@@ -103,7 +103,7 @@
 					</div>
 					<div class="detail">
 						<div style="font-size: 14px;">{{appointment.fname}} {{appointment.lname}}</div>
-						<div ng-if="appointment.date" style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div>
+						<div ng-if="appointment.date" style="margin-top: 3px;opacity: 0.4;" am-time-ago="appointment.date | amParse:'YYYY-MM-DD'"></div>
 						<a class="pending-btn" style="margin-top: 25px;">{{appointment.applicationStatus}}</a>
 					</div>		
 				</div>				
