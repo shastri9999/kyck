@@ -6,7 +6,7 @@
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokerAppointments || !vm.brokerAppointments.length">
 					No Application Requests to Show 
 				</div>
-				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'">
+				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:10">
 					<div class="date">
 						<div style="font-size: 24px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'Do'}}</div>
 						<div style="opacity: 0.4;padding: 4px; border-bottom: 1px dotted;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'MMM YY'}}</div>
@@ -42,7 +42,7 @@
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.messages || !vm.messages.length">
 					No Messages to Show 
 				</div>
-				<div class="message" ng-repeat="message in vm.messages | orderBy:'-messageDate'" ng-click="vm.openMessage(message)">
+				<div class="message" ng-repeat="message in vm.messages | orderBy:'-messageDate'| limitTo:10" ng-click="vm.openMessage(message)">
 					<img ng-if="message.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
 					<div class="avatar-circle" ng-if="!message.avatar">{{message.messageFrom|limitTo:1|capitalize}}</div>
 					<div class="detail">
@@ -71,7 +71,7 @@
 				<div style="font-size: 12px;margin-top: 20px;" ng-if="!vm.brokerageApplications || !vm.brokerageApplications.length">
 					No Brokerage Applications
 				</div>
-				<div class="brokerage-item" ng-repeat="application in vm.brokerageApplications">
+				<div class="brokerage-item" ng-repeat="application in vm.brokerageApplications| orderBy:'-startDate'| limitTo:10">
 					<div class="broker-logo">
 						<img style="width: 60px;" ng-src="/assets/images/partnerLogos/{{application.brokerageId}}.png">
 
