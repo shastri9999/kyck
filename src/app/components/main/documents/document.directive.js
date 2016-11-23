@@ -37,26 +37,52 @@ function documentComponent() {
     vm.preview = function(document){
       $rootScope.canEnableOCR = !vm.isBroker;
       $rootScope.showDocumentPreview();
-      DocumentResource.metadata({documentType: document.documentType}, function(response){
-        const documentData = response.data;
-        let document = documentData;
-        $rootScope.viewingDocument = document;
-        $rootScope.viewingDocument.OCR = null;
-        DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
-          $rootScope.viewingDocument.OCR = response.data;
+      if (!vm.isBroker)
+      {
+        DocumentResource.metadata({documentType: document.documentType}, function(response){
+          const documentData = response.data;
+          let document = documentData;
+          $rootScope.viewingDocument = document;
+          $rootScope.viewingDocument.OCR = null;
+          DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
+            $rootScope.viewingDocument.OCR = response.data;
+          });
+          $http({
+            method: 'GET',
+            url: '/kyck-rest/document/download/string64',
+            params: {documentId: documentData.documentName},
+            transformResponse: [function (data) {
+              return data;
+            }]
+          }).then((data)=>{
+            let URL = 'data:' + documentData.mimeType + ';base64,' + data.data;
+            $rootScope.showDocumentPreview(URL);
+          })
         });
-        $http({
-          method: 'GET',
-          url: '/kyck-rest/document/download/string64',
-          params: {documentId: documentData.documentName},
-          transformResponse: [function (data) {
-            return data;
-          }]
-        }).then((data)=>{
-          let URL = 'data:' + documentData.mimeType + ';base64,' + data.data;
-          $rootScope.showDocumentPreview(URL);
-        })
-      });
+      }
+      else
+      {
+          DocumentResource.metadata({documentType: document.documentType}, function(response){
+          const documentData = response.data;
+          let document = documentData;
+          $rootScope.viewingDocument = document;
+          $rootScope.viewingDocument.OCR = null;
+          DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
+            $rootScope.viewingDocument.OCR = response.data;
+          });
+          $http({
+            method: 'GET',
+            url: '/kyck-rest/document/download/string64',
+            params: {documentId: documentData.documentName},
+            transformResponse: [function (data) {
+              return data;
+            }]
+          }).then((data)=>{
+            let URL = 'data:' + documentData.mimeType + ';base64,' + data.data;
+            $rootScope.showDocumentPreview(URL);
+          })
+        });
+      }
     }
 
 
