@@ -62,18 +62,16 @@ function documentComponent() {
       }
       else
       {
-          DocumentResource.metadata({documentType: document.documentType}, function(response){
+          DocumentResource.brokermetadata({documentType: document.documentType, userId: vm.userId}, function(response){
           const documentData = response.data;
           let document = documentData;
           $rootScope.viewingDocument = document;
           $rootScope.viewingDocument.OCR = null;
-          DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
-            $rootScope.viewingDocument.OCR = response.data;
-          });
           $http({
             method: 'GET',
-            url: '/kyck-rest/document/download/string64',
-            params: {documentId: documentData.documentName},
+            url: '/kyck-rest/document/usr/download/string64',
+            params: {documentName: documentData.documentName,
+              userId:vm.userId},
             transformResponse: [function (data) {
               return data;
             }]

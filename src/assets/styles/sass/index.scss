@@ -99,13 +99,15 @@ table {
 }
 
 .pending-btn {
-        padding: 5px 18px;
-        text-transform: uppercase;
-        border: 1px solid #57c3ea;
-        color: #57c3ea;
-        border-radius: 3px;
-        font-size: 12px;
-        cursor: pointer;
+  padding: 5px 0;
+  text-transform: uppercase;
+  border: 1px solid #57c3ea;
+  color: #57c3ea;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 25px;
+  text-align: center;
 }
 
 kyc-form form, profile-form form{

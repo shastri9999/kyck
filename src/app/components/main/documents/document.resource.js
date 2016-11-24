@@ -14,13 +14,21 @@ function DocumentResource($resource, $rootScope) {
                 userId: '@userId'
             }
     	},
-    	download: {
-    		method: 'GET',
-    		params: {
-    			documentId: '@name'
-    		},
-    		url: URL + 'download/string64'
-    	},
+        download: {
+            method: 'GET',
+            params: {
+                documentId: '@name'
+            },
+            url: URL + 'download/string64'
+        },
+        brokerdownload: {
+            method: 'GET',
+            params: {
+                documentId: '@name',
+                userId: '@userId'
+            },
+            url: URL + 'usr/download/string64'
+        },
         categories: {
             method: 'GET',
             isArray: false,
@@ -37,6 +45,15 @@ function DocumentResource($resource, $rootScope) {
                 documentType: '@type'
             },
             url: URL + 'metadata',
+            isArray: false
+        },
+        brokermetadata: {
+            method: 'GET',
+            params: {
+                documentType: '@type',
+                userId:'@userId'
+            },
+            url: URL + 'usr/metadata',
             isArray: false
         },
         ocrdata: {
