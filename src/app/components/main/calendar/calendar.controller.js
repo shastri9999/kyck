@@ -19,7 +19,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
         var ifConfirmButton=true;
         var ifRescheduleButton=true;
         var formattedStatus=status;
-        var extraContent="mauje mei";
+        var extraContent="";
 
         if (status=="CONFIRM") {
             formattedStatus="Confirmed"
