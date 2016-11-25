@@ -1,12 +1,13 @@
 .access {
 	width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-flow: column;
     color: #7b868a;
     font-size: 16px;
     margin-bottom: 45px;
+    margin-top: 20px;
     .access-container {
     	border: 1px solid #e7ecf1;
     	border-radius: 5px;

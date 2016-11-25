@@ -9,6 +9,7 @@
 	</div>
 	<div class="password">
 		<input name="password" ng-model="password" type="password" placeholder="Password" required> 
+		<a ui-sref="access.forgot-password" class="forgot-password">Forgot password?</a>
 	</div>
 	<div ng-if="signInForm.password.$touched">
 		<div ng-messages="signInForm.password.$error">
