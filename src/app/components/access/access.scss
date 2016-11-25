@@ -16,4 +16,94 @@
     	width: 540px;
     	align-items: center; 
     }
+    .overlay {
+        background-color: rgba(0,0,0, 0.25);
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        z-index: 100;
+        .dialog {
+            height: 600px;
+            width:800px;
+            margin-top: 110px;
+            background-color: #fff;
+            border-radius: 5px;
+            color: #4f6379;
+            font-size: 16px;
+            display: flex;
+            align-items: stretch;
+            flex-flow: column;
+            padding: 1px;
+            position: relative;
+            .close
+            {
+                cursor: pointer;
+                position: absolute;
+                top: 0;
+                right: -20px;
+                color: white;
+                font-weight: 800;
+                font-size: 33px;
+            }
+            .header {
+                background-color: #f5f9fa;
+                height: 60px;
+                font-weight: 600;
+                color: #4f6379;
+                font-size: 14px;
+                padding: 20px;
+            }
+            .footer {
+                background-color: #f5f9fa;
+                height: 84px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                a.btn {
+                    text-decoration: none;
+                    padding: 15px;
+                    font-size: 16px;
+                    text-align: center;
+                    width: 150px;
+                    background-color: #ecf0f1;
+                    border-radius: 3px;
+                    color:rgba(79,99,121,0.4);
+                    cursor: pointer;
+                    margin-right: 15px;
+                    &:hover, &.agree {
+                        color: white;
+                        background-color: #3498db;
+                    }
+                }
+
+            }
+            .content {
+                background-color: #fff;
+                flex: 1;
+                overflow: auto;
+                padding: 5px 20px;
+                line-height: 1.5;
+                font-size: 14px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                h2 {
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-bottom: 20px;
+                }
+                h3 {
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                }
+                p {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+
 }
