@@ -1,3 +1,7 @@
+.dialog-content-broker.calendarPopup {
+	height: auto;
+	align-items: flex-start;
+}
 .md-event-calendar-month-cell-header {
 	text-transform: capitalize;
 	text-align: center;
@@ -12,16 +16,16 @@ md-event-calendar .md-event-calendar-cell-event {
 	background-color: #3aafa5;
 	color: white;	
 }
-md-event-calendar .md-event-calendar-cell-event.PENDING {
-	background-color: rgb(63, 81, 181);
+md-event-calendar .md-event-calendar-cell-event.GREEN {
+	background-color: #1abc9c;
 	color: white;
 }
-md-event-calendar .md-event-calendar-cell-event.CONFIRM {
-	background-color: rgb(0, 150, 136);
+md-event-calendar .md-event-calendar-cell-event.RED {
+	background-color: #ec7063;
 	color: white;
 }
-md-event-calendar .md-event-calendar-cell-event.REJECT {
-	background-color: rgb(244, 67, 54);
+md-event-calendar .md-event-calendar-cell-event.GOLDEN {
+	background-color: #f39c12;
 	color: white;
 }
 .md-dialog-content-body{
@@ -52,4 +56,33 @@ md-event-calendar._md.md-primary md-event-calendar-header {
 }
 md-event-calendar._md.md-primary md-event-calendar-header md-event-calendar-next .md-arrow svg, md-event-calendar._md.md-primary md-event-calendar-header md-event-calendar-prev .md-arrow svg {
 	fill: #4f6379;
+}
+
+.filledDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 3px;
+    margin-right: 9px;
+    &.GREEN {
+    	background-color: #1abc9c;
+	}
+	&.RED {
+		background-color: #ec7063;
+	}
+	&.GOLDEN {
+		background-color: #f39c12;
+    }
+}
+
+.formattedStatus {
+	&.GREEN {
+    	color: #1abc9c;
+	}
+	&.RED {
+		color: #ec7063;
+	}
+	&.GOLDEN {
+		color: #f39c12;
+    }
 }

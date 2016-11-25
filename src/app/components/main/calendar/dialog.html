@@ -1,27 +1,35 @@
 <md-dialog aria-label="List dialog">
-  <md-dialog-content style="width:400px;height:200px;">
+  <md-dialog-content style="width:400px; overflow: hidden;">
     <div style="position: fixed; right: 10px; top: 10px;" ng-click="closeDialog()"><img src="/assets/images/close-message.png" /></div>
-    <div class="dialog-content-broker" style="margin-top:20px;" flex layout="column">
+    <div class="dialog-content-broker calendarPopup" style="padding: 20px; padding-left: 35px;" flex layout="column">
     <div flex layout="row" style="min-height: 40px;margin-top: 30px;" ng-if="isBroker">
       <div class="avatar-circle" ng-if="!appointment.avatar" flex="20" style="max-height: 40px; max-width: 40px;">
-        {{slot.userFirstName|limitTo:1|capitalize}}
-        {{slot.userLastName|limitTo:1|capitalize}}
+        {{slot.userFirstName + slot.brokerFirstname |limitTo:1|capitalize}}
+        {{slot.userLastName + slot.brokerLastname|limitTo:1|capitalize}}
       </div>
       <div flex="80" style="min-height: 40px; padding-top: 5px; line-height: 17px;">
-      	<div style="color: rgba(0,0,0,0.9)">{{slot.userFirstName}}<br></div>
-      	<div style="color: rgba(0,0,0,0.5)">{{slot.startTime | date: 'HH:MM a'}}</div>
+      	<div style="color: rgba(0,0,0,0.9)">{{slot.userFirstName + slot.brokerFirstname + " " + slot.userLastName + slot.brokerLastname}}<br></div>
+        <div ng-if="slot.extraContent" style="color: rgba(0,0,0,0.4); margin-top: 2px;">{{slot.extraContent}}</div>
+      	<div style="color: rgba(0,0,0,0.5); margin-top: 4px; display: flex; margin-bottom: 4px;" flex>
+          <div style="margin-right: 7px; margin-left: 2px;"><img src="../../../../assets/images/clockicon.png" width="12" /></div>
+          <div style="font-size: 12px;">{{slot.startTime | date: 'HH:MM a'}}</div>
+        </div>
+        <div layout="row">
+          <div class="filledDot" ng-class="slot.customClass"></div>
+          <div class="formattedStatus" ng-class="slot.customClass">{{slot.formattedStatus}}</div>
+        </div>
       </div>
     </div>
-    <div style="min-height: 40px;margin-top: 30px; width:100%" ng-if="!isBroker">
+    <div style="min-height: 40px; margin-top: 30px; width:100%" ng-if="!isBroker">
       <div style="color: rgba(0,0,0,0.9); margin-top:10px;">{{slot.meetingContent}}<br></div>
       <div style="color: rgba(0,0,0,0.5); margin-top:10px;">{{slot.startTime | date: 'HH:MM a'}}</div>
       <div style="color: rgba(0,0,0,0.5); margin-top:10px;">{{slot.meetingLocation}}</div>
     </div>
 	<br>
 
-	<div layout="row" flex align-content="flex-end" ng-if="isBroker && slot.status == 'PENDING'">
-	  <md-button class="md-raised md-success" ng-click="updateAppointment('CONFIRM')">Confirm</md-button>
-	  <md-button class="md-raised md-back" ng-click="updateAppointment('RESCHEDULE')">Reschedule</md-button>
+	<div layout="row" flex align-items="center" align-content="flex-end" style="width: 100%; justify-content: center; margin-top: 10px;">
+	  <div><md-button class="md-raised md-success" ng-click="updateAppointment('CONFIRM')" ng-if="slot.ifConfirmButton">Confirm</md-button></div>
+	  <div><md-button class="md-raised md-blue" ng-click="updateAppointment('RESCHEDULE')" ng-if="slot.ifRescheduleButton">Reschedule</md-button></div>
 	</div>
     </div>
   </md-dialog-content>
