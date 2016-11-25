@@ -1,0 +1,88 @@
+{
+  "name": "angular-material-event-calendar",
+  "version": "0.1.2",
+  "author": {
+    "name": "Ben Rubin"
+  },
+  "description": "Angular material event calander component",
+  "keywords": [
+    "material",
+    "material-design",
+    "design",
+    "angular",
+    "component",
+    "calendar",
+    "event",
+    "md"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/B-3PO/angular-material-event-calendar.git"
+  },
+  "main": "index.js",
+  "devDependencies": {
+    "bump": "^0.2.5",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^1.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-bump": "^1.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssnano": "^2.1.0",
+    "gulp-filter": "^4.0.0",
+    "gulp-flatten": "^0.3.0",
+    "gulp-if": "^2.0.1",
+    "gulp-inject": "^4.0.0",
+    "gulp-jasmine": "^2.4.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-main-bower-files": "^1.5.1",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-ng-constant": "^1.1.0",
+    "gulp-preprocess": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sequence": "^0.4.5",
+    "gulp-serve": "^1.2.0",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
+    "gulp-wrap": "^0.11.0",
+    "jshint": "^2.8.0",
+    "karma": "^1.1.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-spec-reporter": "0.0.26",
+    "through2": "^2.0.1"
+  },
+  "scripts": {
+    "local": "gulp",
+    "build": "gulp build"
+  },
+  "gitHead": "784a3bea909d6542553d6722f44c1aadde67aad1",
+  "_id": "angular-material-event-calendar@0.1.2",
+  "_shasum": "b87afaa29dce54b47797d671711e1b739f1a12e7",
+  "_from": "angular-material-event-calendar@*",
+  "_npmVersion": "3.6.0",
+  "_nodeVersion": "5.6.0",
+  "_npmUser": {
+    "name": "b-3po",
+    "email": "ben@benjaminrubin.com"
+  },
+  "dist": {
+    "shasum": "b87afaa29dce54b47797d671711e1b739f1a12e7",
+    "tarball": "https://registry.npmjs.org/angular-material-event-calendar/-/angular-material-event-calendar-0.1.2.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "b-3po",
+      "email": "ben@benjaminrubin.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/angular-material-event-calendar-0.1.2.tgz_1477598260463_0.1866565600503236"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/angular-material-event-calendar/-/angular-material-event-calendar-0.1.2.tgz"
+}
