@@ -69,6 +69,10 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 		$rootScope.messageView.composing = false;
 		$state.go('main.messages');
 	};
+
+	vm.openCalendar = ()=>{
+		$state.go('main.calendar');
+	}
 }
 
 export default DashboardController;

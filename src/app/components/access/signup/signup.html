@@ -1,19 +1,53 @@
-<form class="signup-container">
+<form  name="signUpForm"  class="signup-container" ng-submit="vm.signUp()">
 	<div style="font-size: 18px; width: 434px; line-height: 32px; text-align: center; margin-top: 10px;">
 		Signup to explore investment & trading oppportunities 
 in South East Asia and Asia
 	</div>
-	<input type="text" placeholder="First Name (as in passport)">
-	<input type="text" placeholder="Last Name (as in passport)">
-	<input type="email" placeholder="Email Address">
-	<div>
-		<input type="phone" placeholder="Phone number">		
+	<input type="text" ng-model="firstname" placeholder="First Name (as in passport)" required>
+	<div ng-if="signUpForm.firstname.$touched">
+		<div ng-messages="signUpForm.firstname.$error">
+			<p class="error" ng-message="required">This field cannot be empty.</p>
+		</div>		
 	</div>
-	<a class="button" ui-sref="main.dashboard">Sign Up</a>
+
+	<input type="text" ng-model="lastname" placeholder="Last Name (as in passport)" required>
+	<div ng-if="signUpForm.lastname.$touched">
+		<div ng-messages="signUpForm.lastname.$error">
+			<p class="error" ng-message="required">This field cannot be empty.</p>
+		</div>		
+	</div>
+
+	<input type="email" ng-model="username" placeholder="Email Address" required>
+	<div ng-if="signUpForm.username.$touched">
+		<div ng-messages="signUpForm.username.$error">
+			<p class="error" ng-message="required">This field cannot be empty.</p>
+			<p class="error" ng-message="email">Should be a valid email address.</p>
+		</div>		
+	</div>
+
+	<div class="phonegroup" style="margin-top: 25px;">
+		<div class="extension">{{phoneExtenstion}}</div>
+		<select ng-model="phoneExtenstion" style="height: 60px;">
+			<option value="{{extension.ext}}" ng-selected="extension.ext==phoneExtenstion" ng-repeat="extension in vm.phoneExtenstions">({{extension.ext}}) {{extension.country}}</option>			
+		</select>
+		<input style="width: 290px;" type="phone" ng-model="phonenumber" placeholder="Phone number" required>				
+	</div>
+
+	<div ng-if="signUpForm.phone.$touched">
+		<div ng-messages="signUpForm.phone.$error">
+			<p class="error" ng-message="required">Phone cannot be empty.</p>
+		</div>		
+	</div>
+
+	<input type="submit" class="button" value="Sign Up">
+
 	<div style="display: flex; justify-content: center;margin-top: 25px;">
-		<input type="checkbox" class="checkbox">
-		&nbsp;Agree to&nbsp;<a style="color: #7b868a;cursor: pointer;text-decoration: underline;">Terms & Conditions</a>	
+		<input type="checkbox" class="checkbox" ng-model="terms.agree">
+		&nbsp;Agree to&nbsp;<a style="color: #7b868a;cursor: pointer;text-decoration: underline;" ng-click="terms.agree=false;terms.show=true;">Terms & Conditions</a>	
 	</div>
+	<p class="error" style="color:red;text-align: center;" ng-if="!terms.agree && vm.invalidCredentials">Please agree to terms and condtions.</p>
+
+
 	<div style="margin-top: 30px; margin-bottom: 45px;">
 		Already have an account? <a style="color: #7b868a;cursor: pointer;" ui-sref="access.signin">Click here</a>		
 	</div>

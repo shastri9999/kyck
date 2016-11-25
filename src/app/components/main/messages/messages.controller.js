@@ -13,6 +13,13 @@ function MessagesController($state, $scope, MessageService, AuthenticationServic
 
 	vm.isBroker = AuthenticationService.isBroker();
 
+	if (vm.isBroker)
+	{
+		MessageService.fetchToList().then((toList)=>{
+			vm.toList  = toList;
+		});
+	}
+
 	vm.refresh = ()=>{
 		MessageService.refresh();
 		$state.go('main.messages.inbox', {}, {reload: true});

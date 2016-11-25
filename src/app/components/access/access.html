@@ -1,7 +1,146 @@
 <div class="access">
+	<md-progress-linear id="toolbar-progress" class="md-warn" ng-if="$root.loadingProgress"
+	    md-mode="indeterminate">
+	</md-progress-linear>
+	<div ng-if="terms.show" class="overlay">
+		<div class="dialog">
+			<div class="close" ng-click="terms.show=false">×</div>
+			<div class="header">Terms and Conditions</div>
+			<div class="content">
+				<h2>Acceptance of Terms of Use</h2>
+				<p>1. Please read these terms of use (“Terms”) carefully. These Terms govern your access to and use of the products and services of Finkyck Pte. Ltd. and/or any subsidiaries, affiliates or related companies of Finkyck Pte. Ltd. (“Finkyck Pte. Ltd.”, “We”, “Us”, “Our”) including, without limitation, any applications of Finkyck Pte. Ltd. (including the Kyck website and application (the “Kyck Platform”) and any related services including notifications (collectively, the “Services”) and any information, data, or other content or materials appearing or otherwise made accessible on or through the Services (collectively, the “Content”). By accessing or using our Services or Content, you agree to be bound by these Terms and conclude a legally binding contract with us. If you do not agree to these Terms, please do not download, access or use our Services.</p>
+				<h3>Changes to Terms of Use</h3>
+				<p>2. We reserve the right, at our sole discretion, to modify or update these Terms at any time and all changes will become immediately effective upon posting. Your continued access to or use of our Services after such changes have been posted shall bind you to such changes and the amended Terms. It is your sole responsibility to check these Terms regularly for changes. If you do not agree to the amended Terms, please do not continue to access or use our Services.</p>
+				 
+				<h3>Registration</h3>
+				<p>3. You represent and warrant that if you are registering for the Services as an individual, you are at least 13 years old, and if you are 18 years old or older, that you are fully capable and competent to enter into and to comply with these Terms, or if you are between 13 and 18 years old, that you have permission of a legal parent or guardian who has agreed to assume fully your obligations under these Terms as if such obligations are owed by the said parent or guardian, and if you are registering for the Services for and on behalf on an entity, that you are authorized to enter into and bind the entity to these Terms. We reserve the right, at our sole discretion, to refuse to offer the Services to any person or entity and to change our eligibility criteria at any time. You may not create or use any account with us for any person or entity other than yourself except if you are authorized to do so for and on behalf of such person or entity.</p>
+				<p>4. Your access and use of the Services shall be at your own discretion and risk and you shall be solely responsible for safeguarding and maintaining the confidentiality of your Account, as defined below, including your username and password and all activities in connection with or that occur on or through your Account, as defined below.</p> 
+				 
+				<h3>Access to Services</h3>
+				<p>5. In order to access any Services offered by us, you must register for an account on the Kyck Platform (“Account”) subject to the registration criteria herein. Upon registration, you will receive a unique identifier username and a verification email which shall be assigned exclusively to your Account in order for you to access and use such Services, where applicable, and it shall be your sole responsibility for safeguarding and maintaining the confidentiality of your unique identifier username.</p>
+				 
+				<h3>Intellectual Property and Limitations on Use</h3>
+				<p>6. All rights, title and interest in and to the Services, including all Content pursuant to the Services remains and/or shall be the copyright or intellectual property of either Finkyck Pte. Ltd. or third parties providing technical support or services (“Third Party Providers”) (as the case may be).</p>
+				<p>7. You may not use the Services, including all Content, for publication, distribution, transmission, retransmission, redistribution, broadcast, reproduction or circulation to anyone else unless with our consent.</p>
+				<p>8. You may not modify, copy, distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, transfer, or sell any Content obtained from the Service unless with our consent.</p>
+				<p>9. We hereby grant you a personal, limited, worldwide, royalty-free, non-assignable, non-transferable, revocable, non-exclusive license (without the right to sub-licence) to use the Services and Content for the sole purpose of enabling you to use and enjoy the benefit of the Services in a manner prescribed by these Terms. Such license is subject to these Terms and does not include the distribution of any Content, modifying or otherwise making any derivative uses of the Services or the Content (or any part thereof), the use of any scraping, data mining, robots or similar data gathering or extraction methods, downloading (other than page caching) any part of the Services, Content or information contained therein except as expressly permitted on the Services, and any use of the Services or Content other than for their intended purposes.</p>
+				 
+				<h3>User Conduct</h3>
+				<p>10. You agree not to, and will not assist, encourage, or enable others to: 
+					<ol>
+						<li>disrupt, hinder, abuse or interfere with the security and operations of the Services;</li>
+						<li>transmit through the Services any spam, viruses, bugs or other harmful, disruptive, or destructive files;</li>
+						<li>attempt to obtain unauthorized access to any part of the Services which is restricted from general access;</li>
+						<li>use the Services for any purpose that is illegal, unauthorized or beyond the scope of their intended use;</li>
+						<li>impersonate, bully, stalk or harm any person or entity including the other users of the Services or any of our staff or representatives;</li>
+						<li>falsely imply that a product or service is associated with us or our Services;</li>
+						<li>use domain names or web URLs in your username without our prior written permission; and</li>
+						<li>violate these Terms or any laws, rules and regulations applicable to your access to or use of the Services and the Content.</li>
+					</ol>
+				</p>
+				
+				<p>11. In the event that you violate any of these Terms or otherwise create risk or possible legal exposure for us, we may, at our sole discretion and in addition to our other rights and remedies, terminate your Account with us and stop providing the Services (or any part thereof) to you.</p>
+
+				<p>12. You further agree and acknowledge that the Services are always evolving and that the form, nature, features, availability and limits on the use of the Services may change from time to time without prior notice to you.</p>
+				 
+				<h3>Privacy</h3>
+				<p>13. Any personal information that you provide to us through our Services is subject to our Privacy Policy (www.kyck.sg/Privacy ) which is incorporated into these Terms by reference. Our Privacy Policy governs our collection and use of such information in connection with the Services. By accessing and using the Services, you agree to be bound by the terms of our Privacy Policy.</p>
+				 
+				<h3>Disclaimer of Warranties and Liability</h3>
+				<p>14. The Content made available through the Services are provided and made available for general information purposes only. It is not intended as investment or financial advice and must not be relied upon as such. Finkyck Pte. Ltd. and its Third Party Providers are not giving or purporting to give or representing or holding ourselves out as giving personalized financial, investment, tax, legal or other professional advice. You shall always seek the relevant professional advice before otherwise making any such financial, legal or commercial decisions.</p>
+				<p>15. No such Content provided through the Services is to be construed as an offer, solicitation or recommendation to any person or class of person to buy any of the securities or class of securities referred to in the Services. Finkyck Pte. Ltd. accepts no liability for any loss or damage arising out of the use of the Content through the Services.</p>
+				<p>16. The Content may include inaccuracies or errors and Finkyck Pte. Ltd. and its Third Party Providers reserve the right to periodically make changes to the information or data provided.</p>
+				<p>17. Any data feeds, if any including stock quotes or other price or information feeds or news, are generally believed to be accurate, Finkyck Pte. Ltd. cannot and do not make any representation or warranty as to its accuracy or completeness.</p>
+				<p>18. The Services and Content are provided on an “as is” basis without warranties of any kind. To the fullest extent permitted by law, we do not guarantee, represent or warrant and hereby disclaim all representations, warranties and conditions, whether express or implied, as to the quality, accuracy, correctness, reliability, timeliness, non-infringement, safety or security, title, merchantability or fitness for any particular purpose of the Services or Content.</p>
+				<p>19. Insofar as permitted by law, we disclaim all warranties, representations and obligations of any type, express or implied, including any warranty of merchantability or satisfactory quality, any warranty of fitness for a particular purpose, any warranty of continuous services at any particular time, or integrity of data stored or transmitted via the Services, any representation of any kind that this website will be accessible to any particular standard or be free from any bugs, errors or remain unaffected by viruses or other similar features affecting the performance of the Services, and further disclaim any and all liability for negligence and lack of reasonable care.</p>
+				<p>20. We shall not be liable for any indirect, incidental, special, consequential loss or damage, including but not limited to exemplary or punitive damages, or any loss of business, profits or revenues, whether incurred directly or indirectly, or business interruption, or reputational harm, or any loss of information, data, use, goodwill, or other intangible losses, resulting from (a) your access to or use of or inability to access or use the Services including any Content; (b) the provision of the Services including any Content; or (c) the conduct, actions or omissions of the users of the Services or any businesses, advertisers or other third parties listed or featured on the Services, even if we have been advised of the possibility of such damages. However, nothing in these Terms shall exclude or limit our liability for death or personal injury resulting from our negligence.</p>
+				<p>21. Your sole and exclusive right and remedy against us in the case of dissatisfaction with the Services or any other grievance shall be your termination and discontinuation of access to or use of the Services.</p>
+				<p>22. You understand and agree that your access to or use of our Services is predicated upon your waiver of any right to sue us directly or to participate in a class action suit or class-wide arbitration for any loss or damage resulting from your access to or use of our Services.</p>
+				 
+				<h3>Indemnity</h3>
+				<p>23. Without prejudice to any of our other rights and remedies, you agree to indemnify, defend and hold us harmless from and against all losses, damages, claims, charges, expenses and costs (including legal costs on a full indemnity basis) sustained, incurred or suffered by us in relation to or arising out of (a) your access to or use of the Services including any Content; (b) any breach or violation of any of these Terms by you; and/or (c) any infringement by you, or any third party using your Account, of any intellectual property or other right of any person or entity.</p>
+				 
+				<h3>Termination</h3>
+				<p>24. We reserve the right, at our sole discretion and without notice, to forthwith terminate, suspend, ban, block or prevent your access to or use of the Services (or any part thereof) at any time for any reason whatsoever. Such right shall be without prejudice to any of our other rights and remedies.</p>
+				<p>25. You may terminate your Account and discontinue your access to or use of the Services at any time.</p>
+				<p>26. All provisions of these Terms which by their nature are intended to survive termination shall remain in full force and effect following the termination of these Terms including, without limitation, the provisions relating to ownership rights, disclaimer of warranties and liability, indemnity, governing law and dispute resolution.</p>
+				 
+				<h3>Jurisdictional Matters</h3>
+				<p>27. Our Services are owned by us in Singapore or such other jurisdiction where our subsidiaries, affiliates or related companies are incorporated. We make no representation that our Services are appropriate or available for use outside of Singapore or other applicable jurisdiction. If you choose to access or use our Services from any location, to do so shall be at your own risk and you shall be solely responsible for compliance with local and international laws applicable in such location, if and to the extent such laws are applicable. Any access to or use of our Services is prohibited where it is not allowed by law.</p>
+				 
+				<h3>General Terms</h3>
+				<p>28. In case any provision in these Terms shall be, or at any time shall become invalid, illegal or unenforceable in any respect under any law, such invalidity, illegality or unenforceability shall not in any way affect or impair any other provisions of these Terms.</p>
+				<p>29. No exercise or failure to exercise or delay in exercising any right, power or remedy vested in us under or pursuant to these Terms shall constitute a waiver by us of that or any other right, power or remedy.</p>
+				<p>30. These Terms constitute the entire agreement and understanding between you and us in connection with the Services and supersede all prior oral or written communications, representations or agreements between you and us in relation to the subject matter of these Terms.</p>
+				<p>31. Any third party shall not be entitled to enforce any provisions of these Terms which may confer a benefit on that third party, whether any such entitlement would, but for this provision, arise under the Contracts (Rights of Third Parties) Act (Cap. 53B) or otherwise.</p>
+				<p>32. These Terms shall be governed by and construed in accordance with the laws of Singapore.</p>
+				<p>33. Any dispute arising out of or in connection with these Terms, including any question regarding its existence, validity or termination, shall be referred to and finally resolved by arbitration in Singapore in accordance with the Arbitration Rules of the Singapore International Arbitration Centre (“SIAC Rules”) for the time being in force, which rules are deemed to be incorporated by reference into these Terms. The Tribunal shall consist of one (1) arbitrator to be appointed by us. The language of the arbitration shall be English.</p>
+				
+				<h2>Acceptance of Privacy Policy</h2>
+				<p>1. This privacy policy (“Privacy Policy”) describes how personal data provided by you through our Services (as defined in our Terms of Use www.kyck.sg/Terms) is collected, used, shared, stored and protected by Finkyck  Pte. Ltd. and/or any subsidiaries, affiliates or related companies of Finkyck Pte. Ltd. (“Finkyck Pte. Ltd.”, “We”, “Us”, “Our”) including, without limitation, any applications of Finkyck Pte. Ltd. (including the Kyck website and application (the “Kyck Platform”) and any related services. By accessing and using our Services, you agree to be bound by the terms of this Privacy Policy which is subject to our Terms of Use, and consent to our collection, use and disclosure of your personal data in accordance with this Privacy Policy. If you do not agree to the Terms of Use and/or do not consent to such collection, use and disclosure of your personal data, please do not download, access or use our Services.</p>
+				<h3>Changes to Privacy Policy</h3>
+				<p>2. We reserve the right, at our sole discretion, to modify or update this Privacy Policy at any time and all changes will become immediately effective upon posting. Your continued access to or use of our Services after such changes have been posted shall bind you to such changes and the amended Privacy Policy. It is your sole responsibility to check this Privacy Policy regularly for changes. If you do not agree to the amended Privacy Policy, please do not continue to access or use our Services.</p>
+				<h3>Collection of Information</h3>
+				<p>3. We may collect and store your personal data including, without limitation, any information that: 
+
+					<div>a. you provide directly to us including your name, NRIC or passport number, username, password, e-mail address, phone number and any other user profile information which you may provide when creating or updating your account with us;</div>
+					<div>b. you obtain, submit, post, display or otherwise transmit on or through the Services and any communications or materials shared between you and other users of the Services or third parties; and/or</div>
+					<div>c. your computer or mobile device provided to us in connection with your access to or use of the Services including your IP address, browser type, log files, access times, unique device identifier, location data, cookie information and requested and referring URLs.</div>
+				</p>
+				<h3>Use of Personal Data</h3>
+				<p>4. We may use your personal data for purposes in connection with the Services including, without limitation, any of the following purposes: 
+					<div>a. to process your registration for our Services, including sending a SMS to the mobile number provided by your for verification purposes, which you consent to receive;</div>
+					<div>b. to send you information, notices, updates or to otherwise contact you when necessary;</div>
+					<div>c. to help us provide, maintain, develop, test, enhance and personalize our Services to you;</div>
+					<div>d. to diagnose and resolve any problems with the Services;</div>
+					<div>e. to detect or investigate any prohibited, illegal, unauthorized or fraudulent activities;</div>
+					<div>f. to monitor and analyze user activities and demographic data including trends and usage of the Services;</div>
+				</p>
+				<h3>Choice, Change, Update of and Access to your Personal Data</h3>
+				<p>5. You can choose to limit the processing of your data, access to and amend/correct the data that you have given to us by putting your request down in writing and sending it to:
+					<div>Data Protection Officer <br>
+						Ashley Loo <br>
+						Data@kyck.sg <br>
+						Disclosure of personal data <br>
+					</div>
+				</p>
+
+				<p>6. We may disclose personal data provided by you to the following parties: 
+					a. third parties including Financial Institutions and other companies that require such information as is reasonably necessary to help us provide the Services to you including vendors, advertisers, consultants and advisers of Finkyck Pte. Ltd and the Kyck Platform; and/or <br>
+					b. third parties that require such information in connection with a corporate merger, consolidation, the sale of substantially all assets or other fundamental corporate change of Finkyck Pte. Ltd and/or the Kyck Platform.
+				</p>
+				<p>7. Any personal data provided to us may be transferred to, stored by or disclosed to an overseas recipient. For example, we may use a server hosted overseas to store your personal data.
+				</p>
+				<p>8. We will take appropriate steps before your personal data is disclosed to an overseas recipient, to ensure that the overseas recipient provides a standard of protection to personal data so transferred that is comparable to the protection under the Personal Data Protection Act 2012.
+				</p>
+				<p>9. The parties with whom we share your personal information will be under reasonable confidentiality terms not to use your personally identifiable information for any purpose other than as specified in this Privacy Policy. Notwithstanding the foregoing, we do not control and shall not be responsible or liable in any way for the collection, use and protection of your personal information by any third party.
+				</p>
+				<h3>Cookies</h3>
+				<p>10. We, and the parties with whom we share your personal data, may use cookies, web beacons and other similar tracking technology in connection with your access to or use of the Services and third party services. Cookies are small data files stored on your computer or mobile device which may track information about you and your access to and use of the Services. It may be possible for you to disable some but not all cookies through your device or browser settings, but doing so may affect your ability to access or use the Services.
+				</p>
+				<h3>Storage of Personal Data</h3>
+				<p>11. We will retain your personal data for as long as the purposes for which the data is collected continues or where otherwise necessary for legal purposes or for the purposes of our normal business operations, including but not limited to backup, archival or audit purposes. Such personal data may be accessible only by specific persons authorized by us. We will destroy or delete the data, or remove the means by which the data can be associated with you, when such purposes are no longer served by retention of the personal data or such personal data is no longer necessary for legal or business purposes.
+				</p>
+				<h3>Security</h3>
+				<p>12. We maintain important safeguards to ensure the security and privacy of personal data collected by us including security measures to protect the loss, misuse or alternation of such information under our control. Notwithstanding the foregoing, while we strive to protect your personal data, we cannot guarantee the security or privacy of such data or that such data will not be accessed, disclosed, altered or destroyed.
+				</p>
+				<p>13. It shall be your sole responsibility for safeguarding and maintaining the confidentiality of your account with us and checking your privacy settings regularly to ensure the privacy of your personal data.
+				</p>
+				<h3>Third Party Services</h3>
+				<p>14. You may be directed to links to other services of third parties featured on our Services. We do not control and shall not be responsible or liable in any way for the privacy policy of such third parties and their practices. Your access to or use of such third party services is at your own risk and it shall be your sole responsibility to read the privacy policy of such third parties before providing any personal data to them.
+				</p>
+				<h3>Governing Law</h3>
+				<p>15. This Privacy Policy shall be governed by and construed in accordance with the laws of Singapore.
+				</p>
+			</div>
+			<div class="footer">
+				<a class="btn cancel" ng-click="terms.agree=false;terms.show=false;">Cancel</a>
+				<a class="btn agree" ng-click="terms.agree=true;terms.show=false;">I Agree</a>
+			</div>
+		</div>
+	</div>
 	<img src="../../../assets/images/logo.png" alt="">
 	<div style="margin-top: 11px;">One Portal, One KYC, Ready for the World</div>
 	<div class="access-container" ui-view>
-		
 	</div>
 </div>

@@ -2,7 +2,6 @@ $pale-grey: #e7ecf1;
 
 .document {
 	margin: 10px;
-	min-height: 200px;
 	min-width: 200px;
 	max-width: 400px;
 	width: 380px;
@@ -118,4 +117,13 @@ $pale-grey: #e7ecf1;
   background: #E4E4E4;
   overflow: hidden;
   height:350px;
+}
+
+.flex-wrapper {
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding-bottom: 80px;
 }

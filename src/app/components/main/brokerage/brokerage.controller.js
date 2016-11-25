@@ -410,7 +410,18 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     function nextStep() {
         vm.kycerror = false;
         vm.personalDetailsError = false;
-
+        if (vm.getActiveStep() == 2 && !vm.isBroker) {
+            const requiredDocuments = vm.documents.filter(function(item){
+                return item.categoryCode == "NRIC_FIN" || item.categoryCode == "INCOME_TAX";
+            }).every(function(item){
+                return !!item.documentID;
+            });
+            if (!requiredDocuments)
+            {
+                $mdToast.showSimple('Please upload Income Tax and NRIC Documents before proceeding to next step.');
+                return;
+            }
+        }
         if (vm.getActiveStep() == 3 && !vm.isBroker) {
             $rootScope.mainLoading = true;
             $rootScope.mainLoadingMessage = "Saving Profile details... Please wait."
@@ -563,20 +574,21 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
 
         $rootScope.loadingProgress = true;
-        BrokerageResource.usermessages({userId: vm.userAppointment.email}, function(req) {
+        BrokerageResource.usermessages({userId: vm.userAppointment.email}, function(response) {
             $rootScope.loadingProgress = false;
-            for(var i=0; i<req.data.length; i++) {
-                var msg = req.data[i]['messageContent'];
-                var messageDate = req.data[i]['messageDate'];
-                messageDate = Date.parse(messageDate);
-                var c="";
-                if (req.data[i]['messageFrom']===vm.userAppointment.email) {
-                    c="left";
+            for(let i=0; i<response.data.length; i++) {
+                const message = response.data[i]['messageContent'];
+                const messageDate =  Date.parse(response.data[i]['messageDate']);
+                let className = "";
+                if (response.data[i]['messageFrom']===vm.userAppointment.email) {
+                    className="left";
                 }
                 else
-                    c="right";
+                {
+                    className="right";
+                }
 
-                vm.usermessages.push({'msg':msg, 'class': c, 'date': messageDate});
+                vm.usermessages.push({'message':message, 'class': className, 'date': messageDate});
             }
         }, function() {});
     }

@@ -26,6 +26,11 @@ export default angular.module('kyck', [
 	'ngInject';
 
 	/* Todo: Move all this to service */
+	$rootScope.terms = {
+		agree: false,
+		show: false
+	};
+	
 	$rootScope.sideNavCollapsed = false;
 	$rootScope.shouldShowDocumentPreview = false;
 	$rootScope.documentPreviewLoading = false;

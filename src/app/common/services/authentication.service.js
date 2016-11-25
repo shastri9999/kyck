@@ -21,6 +21,9 @@ class AuthenticationService {
  			}
 		}).then((response)=>{
 			const userData = response.data.data;
+			if (! userData.userType) {
+				return new Promise((resolve, reject)=>{reject("Invalid Credentials");});
+			}
 			this._$rootScope.loadingProgress=false;
 			this.loggedInUser = userData;
 			this._StorageService.setItem('loggedInUser', this.loggedInUser);

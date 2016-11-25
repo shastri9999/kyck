@@ -37,6 +37,8 @@ class UserService{
 			if(!field.answerText)
 				return field;
 
+			field.displayAnswerText = field.answerText;
+			
 			/*Mapping to make date work */
 			if (field.validationType === 'DATE')
 			{
@@ -194,7 +196,7 @@ class UserService{
 		let requiredFilled = true;
 		this.kycDetails.forEach((field)=>{
 			field.error = '';
-			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER"].indexOf(field.questionType)>=0)
+			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER", "CURRENCY"].indexOf(field.questionType)>=0)
 			{
 				if (!field.answerText)
 				{
@@ -321,7 +323,7 @@ class UserService{
 		this.profileDetails.forEach((field)=>{
 	
 			field.error = '';
-			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER"].indexOf(field.questionType)>=0)
+			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER", "CURRENCY"].indexOf(field.questionType)>=0)
 			{
 				if (!field.answerText)
 				{

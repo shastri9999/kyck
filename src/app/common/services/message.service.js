@@ -11,6 +11,15 @@ class MessageService{
 		this.sentFetched = false;
 	}
 
+	fetchToList(){
+		return this._$http({
+			method: 'GET',
+			url: '/kyck-rest/users/contacted'
+		}).then((response)=>{
+			return response.data.data.map((item)=>item.email);
+		});
+	}
+	
 	fetchInbox(){
 		if (this.inboxFetched)
 		{

@@ -1,7 +1,3 @@
-<md-progress-linear id="toolbar-progress" class="md-warn" ng-if="$root.loadingProgress"
-    md-mode="indeterminate">
-</md-progress-linear>
-
 <form name="signInForm" class="signin-container" ng-submit="vm.signIn()">
 	<div style="font-size: 24px; line-height: 42px; margin-top: 50px;">Sign in to your account</div>
 	<input name="username" ng-model="username" type="email" placeholder="Email Address" required>
@@ -13,6 +9,7 @@
 	</div>
 	<div class="password">
 		<input name="password" ng-model="password" type="password" placeholder="Password" required> 
+		<a ui-sref="access.forgot-password" class="forgot-password">Forgot password?</a>
 	</div>
 	<div ng-if="signInForm.password.$touched">
 		<div ng-messages="signInForm.password.$error">

@@ -21,14 +21,16 @@
 	font-weight:bold;
 }
 .mainArea {
+	height: calc(100vh - 300px);
 	.right-stat {
 	    order: 2;
 	    width: 240px;
 	    overflow: hidden;
 	    position:relative;
+	    min-height: calc(100vh - 100px);
 	    .contact-brokerage
 	    {
-	    	margin-top: 20px;
+	    	margin-top: 10px;
 	    	input {
 				height: 45px;
 			    padding-left: 10px;
@@ -83,6 +85,9 @@ footer {
 		color: #9da9b5;
 		background: #ecf0f1;
 	}
+}
+md-step-body {
+	max-height: calc(100vh - 290px);
 }
 .md-raised.md-back:not([disabled]):hover {
 	color: white;
@@ -139,6 +144,29 @@ footer {
 	border: none;
 	line-height: 40px;
 
+}
+.rightSide {
+	.message-container {
+		padding: 10px;	
+		.message-requests {
+			border-radius: 5px;
+		    background-color: #fff;
+		    color: #4f6379;
+    		padding: 5px;
+			width: 140px;
+			margin-bottom: 10px;
+		    .datetime {
+		    	color: #778ba2;
+		    	font-size: 12px;
+    			margin-top: 10px;
+		    }
+		    &.left {
+		    }
+		    &.right {
+		    	margin-left: 40px;
+		    } 
+		}
+	}
 }
 .rightSide md-event-calendar {
 	margin: 0px;
@@ -286,14 +314,16 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 }
 .contactedUsers {
 	width: 250px;
-	height: 996px;
 	background-color: #f9fbfc;
+	height: calc(100vh - 120px);
+	overflow: hidden;
 }
 
 .rightSide {
     width: 250px;
     max-width: 250px;
-    height: 1000px;
+    height: calc(100vh - 120px);
+   	overflow: hidden;
 }
 .contactedUsersTitle {
   line-height: 19px;
@@ -331,13 +361,15 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
         margin-left: 10px;
     }
     .pending-btn {
-        padding: 5px 18px;
+        padding: 5px 0;
         text-transform: uppercase;
         border: 1px solid #57c3ea;
         color: #57c3ea;
         border-radius: 3px;
         font-size: 12px;
         cursor: pointer;
+        text-align: center;
+        min-height: 25px;
     }
 }
 .appointment.active {
@@ -448,7 +480,7 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 	}
 	.document-container {
 		min-height: 300px;
-	    max-height: 365px;
+	    max-height: 100px;
 	    overflow: auto;
 	    padding-right: 20px;
 	}
@@ -462,6 +494,7 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
 	    outline:none;
 	    position: relative;
 	    cursor: pointer;
+	    border-radius: 3px;
 	    &.selected {
 	    	background-color: #f2f2f2;
 	    	img.selected {
@@ -546,28 +579,7 @@ md-event-calendar .md-event-calendar-cell-event.book-appointment {
  	    background-size: 34px;
     }
 }
-.msg-requests {
-	border-radius: 5px;
-    background-color: #ffffff;
-    margin: 20px;
-    padding: 12px;
-    color: #4f6379;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 14px;
-    float: left;
-    width: 140px;
-    margin-bottom: 0px;
-    position: relative;
-    .datetime {
-    	color: #778ba2;
-    }
-}
-.msg-requests.left {
-}
-.msg-requests.right {
-	margin-left: 140px;
-}
+
 
 /* DIALOG INVITE USER */
 .inviteUsersDialog {
