@@ -563,20 +563,21 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
 
         $rootScope.loadingProgress = true;
-        BrokerageResource.usermessages({userId: vm.userAppointment.email}, function(req) {
+        BrokerageResource.usermessages({userId: vm.userAppointment.email}, function(response) {
             $rootScope.loadingProgress = false;
-            for(var i=0; i<req.data.length; i++) {
-                var msg = req.data[i]['messageContent'];
-                var messageDate = req.data[i]['messageDate'];
-                messageDate = Date.parse(messageDate);
-                var c="";
-                if (req.data[i]['messageFrom']===vm.userAppointment.email) {
-                    c="left";
+            for(let i=0; i<response.data.length; i++) {
+                const message = response.data[i]['messageContent'];
+                const messageDate =  Date.parse(response.data[i]['messageDate']);
+                let className = "";
+                if (response.data[i]['messageFrom']===vm.userAppointment.email) {
+                    className="left";
                 }
                 else
-                    c="right";
+                {
+                    className="right";
+                }
 
-                vm.usermessages.push({'msg':msg, 'class': c, 'date': messageDate});
+                vm.usermessages.push({'message':message, 'class': className, 'date': messageDate});
             }
         }, function() {});
     }

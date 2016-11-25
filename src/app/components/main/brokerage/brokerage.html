@@ -299,14 +299,16 @@
     </div>
     <div layout="column" class="rightSide" ng-if="isBroker" flex>
         <img style="position: absolute;width:250px;height:100%; z-index: 1;" ng-src="{{vm.bgurl}}">
-        <mini-calendar style="z-index: 3;"/>
-        <h2 style="color: white;margin: 20px; margin-bottom: 0px; z-index: 3;" ng-if="vm.usermessages">Messages</h2>
-        <span ng-repeat="msg in vm.usermessages|orderBy:'-date'|limitTo:3" style="z-index: 3;">
-            <div class="msg-requests {{msg.class}}">
-                <div>{{msg.msg}}</div>
-                <div class="datetime">{{msg.date | date:'dd MMM yy, HH:mm a'}}</div>
+        <div style="z-index: 3;">
+            <mini-calendar/>            
+        </div>
+        <h2 style="color: white;margin: 20px; margin-bottom: 0px; z-index: 3;">Messages</h2>
+        <div class="message-container" style="z-index: 3;">
+            <div class="message-requests {{message.class}}" ng-repeat="message in vm.usermessages|orderBy:'-date'|limitTo:3">
+                <div>{{message.message}}</div>
+                <div class="datetime">{{message.date | date:'dd MMM yy, HH:mm a'}}</div>
             </div>
-        </span>
-        <input type="text" name="compose" placeholder="Add your message" class="input" style="margin: 10px; margin-left:18px; padding: 10px; border-radius: 7px; z-index: 3;">
+        </div>
+        <input type="text" name="compose" placeholder="Add your message" class="input" style="margin: 10px;margin-left:18px;padding: 10px;border-radius: 7px;z-index: 3;border: none;outline: none;box-shadow: none;">
     </div>
 </div>
