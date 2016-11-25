@@ -196,7 +196,7 @@ class UserService{
 		let requiredFilled = true;
 		this.kycDetails.forEach((field)=>{
 			field.error = '';
-			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER"].indexOf(field.questionType)>=0)
+			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER", "CURRENCY"].indexOf(field.questionType)>=0)
 			{
 				if (!field.answerText)
 				{
@@ -323,7 +323,7 @@ class UserService{
 		this.profileDetails.forEach((field)=>{
 	
 			field.error = '';
-			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER"].indexOf(field.questionType)>=0)
+			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER", "CURRENCY"].indexOf(field.questionType)>=0)
 			{
 				if (!field.answerText)
 				{

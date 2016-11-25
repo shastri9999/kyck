@@ -410,7 +410,18 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     function nextStep() {
         vm.kycerror = false;
         vm.personalDetailsError = false;
-
+        if (vm.getActiveStep() == 2 && !vm.isBroker) {
+            const requiredDocuments = vm.documents.filter(function(item){
+                return item.categoryCode == "NRIC_FIN" || item.categoryCode == "INCOME_TAX";
+            }).every(function(item){
+                return !!item.documentID;
+            });
+            if (!requiredDocuments)
+            {
+                $mdToast.showSimple('Please upload Income Tax and NRIC Documents before proceeding to next step.');
+                return;
+            }
+        }
         if (vm.getActiveStep() == 3 && !vm.isBroker) {
             $rootScope.mainLoading = true;
             $rootScope.mainLoadingMessage = "Saving Profile details... Please wait."
