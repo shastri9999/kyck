@@ -20,7 +20,8 @@ function MessagesController($state, $scope, MessageService, Upload, Authenticati
       Upload.upload({
         url: '/kyck-rest/usermessage/upload?messageId=26',
         data: {
-          file: file
+          file: file,
+          messageId: 26
         }
       }).then(function(response){
         console.log(response);

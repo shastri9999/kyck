@@ -1,7 +1,7 @@
 'use strict';
 
 class ChangePasswordController {
-	constructor(AuthenticationService, $rootScope, $scope){
+	constructor(AuthenticationService, $rootScope, $scope, $state){
 		'ngInject';
 
 		this._AuthenticationService = AuthenticationService;
@@ -14,6 +14,7 @@ class ChangePasswordController {
 			this.invalidCredentials = false;
 			this.invalidPassword = false;
 		});
+		this._$state = $state;
 	}
 
 	changePassword(){
