@@ -10,6 +10,19 @@ class AuthenticationService {
 		this._StorageService = StorageService;
 	}
 
+	reset(userId) {
+		this._$rootScope.loadingProgress=true;
+		return this._$http({
+			method: 'POST',
+			url: '/kyck-rest/user/reset-password/action',
+			data: {
+				userId
+			}
+		}).then((response)=>{
+			return response.data.data;
+		});
+	}
+
 	login(userId, userPassword) {
 		this._$rootScope.loadingProgress=true;
 		return this._$http({
