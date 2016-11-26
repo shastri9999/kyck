@@ -293,7 +293,8 @@ class UserService{
 					answer.answerText = this.moment(field.answerText).format('DD-MM-YYYY');
 				}
 				else if(field.actualType === 'CURRENCY' || field.actualType === 'PHONE'){
-					answer.answerText = field.prefix + "~" + answer.answerText;
+					if (answer.answerText)
+						answer.answerText = field.prefix + "~" + answer.answerText;
 				}
 				else
 				{

@@ -65,6 +65,21 @@
 				<div ng-if="field.error" class="error">{{field.error}}</div>
 				<img src="/assets/images/dropdown.png" class="dropdown">
 			</div>
+			<div ng-switch-when="PHONE" class="phone-input">
+				<label for="kyc-{{field.questionId}}">
+						{{field.questionDesc}}
+					<span ng-if="field.requireField==='REQUIRED'">*</span>
+				</label>
+				<div class="phonegroup">
+					<div class="extension">{{field.prefix}}</div>
+					<select ng-model="field.prefix">
+						<option value="{{extension.ext}}" ng-selected="extension.ext==field.prefix" ng-repeat="extension in vm.phoneExtenstions|orderBy:'country'">({{extension.ext}}) {{extension.country}}</option>			
+					</select>
+					<input ng-class="{error:field.error}" name="kyc-{{field.questionId}}" type="phone" ng-model="field.answerText" ng-required="field.requireField==='REQUIRED'">				
+				</div>
+				<div ng-if="field.error" class="error">{{field.error}}</div>
+			</div>
+	
 			<div class="input" ng-switch-when="RADIO">
 				<label for="kyc-{{field.questionId}}">
 					{{field.questionDesc}}

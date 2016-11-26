@@ -50,6 +50,18 @@ class ProfileFormController {
 			this.UserService.getProfileFields().then((fields)=>{
 				this._$rootScope.loadingProgress = false;
 				this.fields = fields;
+				this.fields.forEach((field)=>{
+					if (field.actualType == 'PHONE')
+					{
+						if(!field.prefix)
+						{
+							field.prefix = "+65";
+							PhoneService.getExtension().then((extension)=>{
+								field.prefix = extension.ext;
+							});							
+						}
+					}
+				});
 			});			
 		}
 
