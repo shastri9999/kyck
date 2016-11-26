@@ -122,7 +122,7 @@ class UserService{
 				return {
 					key,
 					...keyMappings[key],
-					value: data[key]
+					value: data[key].replace("~","-")
 				}
 			}
 			return null;
@@ -328,6 +328,10 @@ class UserService{
 				.filter(x=>!x.disabled)
 				.forEach((detail)=>{
 					userData[detail.key] = detail.value;
+					if (detail.key == 'userPhone')
+					{
+						userData[detail.key] = detail.prefix + "~" + detail.value;
+					}
 				});
 			return this.updateUserDetails(userData);
 		}).catch((e)=>console.log(e))

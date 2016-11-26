@@ -1,12 +1,25 @@
 <form name="profileForm">
 	<div ng-repeat="field in vm.userFields">
-		<div class="input">
+		<div class="input" ng-if="field.key != 'userPhone' || vm.isBroker">
 				<label for="kyc-{{field.key}}">
 					{{field.description}} *
 				</label>
 				<input ng-class="{error:field.error}" name="kyc-{{field.key}}" type="text" ng-model="field.value" required ng-disabled="field.disabled || vm.isBroker">
 				<div ng-if="field.error" class="error">{{field.error}}</div>
+		</div>
+		<div ng-if="field.key == 'userPhone' && !vm.isBroker" class="phone-input">
+			<label for="kyc-{{field.key}}">
+					{{field.description}} *
+			</label>
+			<div class="phonegroup">
+				<div class="extension">{{field.prefix}}</div>
+				<select ng-model="field.prefix">
+					<option value="{{extension.ext}}" ng-selected="extension.ext==field.prefix" ng-repeat="extension in vm.phoneExtenstions|orderBy:'country'">({{extension.ext}}) {{extension.country}}</option>			
+				</select>
+				<input ng-class="{error:field.error}" name="kyc-{{field.key}}" type="phone" ng-model="field.value" required>				
 			</div>
+			<div ng-if="field.error" class="error">{{field.error}}</div>
+		</div>
 	</div>
 	<div ng-repeat="field in vm.fields" ng-if="vm.isBroker">
 		<div ng-switch on="field.questionType">
@@ -34,7 +47,7 @@
 		</div>
 	</div>	
 	<div ng-repeat="field in vm.fields" ng-if="!vm.isBroker">
-		<div ng-switch on="field.questionType">
+		<div ng-switch on="field.actualType">
 			<div class="input" ng-switch-when="DROPDOWN">
 				<label for="kyc-{{field.questionId}}">
 					{{field.questionDesc}}

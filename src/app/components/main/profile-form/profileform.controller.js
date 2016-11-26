@@ -1,12 +1,13 @@
 'use strict';
 
 class ProfileFormController {
-	constructor(UserService, $rootScope) {
+	constructor(UserService, $rootScope, PhoneService) {
 		'ngInject';
 		this.UserService = UserService;
 		this.userFields = [];
 		this.fields = [];
 		this._$rootScope = $rootScope;
+		this.phoneExtenstions = PhoneService.phoneExtensions;
 		if(this.isBroker)
 		{
 			this._$rootScope.loadingProgress = true;
@@ -26,6 +27,15 @@ class ProfileFormController {
 			this.UserService.getUserFields().then((fields)=>{
 				this._$rootScope.loadingProgress = false;
 				this.userFields = fields;
+				this.userFields.forEach((field)=>{
+					if (field.key == 'userPhone')
+					{
+						field.prefix = "+61";
+						PhoneService.getExtension().then((extension)=>{
+							field.prefix = extension.ext;
+						});
+					}
+				});
 			});
 			this.UserService.getProfileFields().then((fields)=>{
 				this._$rootScope.loadingProgress = false;
