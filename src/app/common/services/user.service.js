@@ -25,8 +25,14 @@ class UserService{
 			/* Mapping to make dropdown work */
 			field.answerId = +field.answerId || 0;
 			field.selectedValue = null;
+			field.actualType = field.questionType;
+			if (field.validationType != 'NUMBER' && field.validationType != 'TEXT')
+			{
+				field.actualType = field.validationType;
+			}
+
 			
-			field.validationType !== 'RADIO' && field.answersList && field.answersList.forEach((answer)=>{
+			field.actualType !== 'RADIO' && field.answersList && field.answersList.forEach((answer)=>{
 				answer.answerId = +answer.answerId || 0;
 				if (answer.answerId == field.answerId)
 				{
@@ -34,21 +40,35 @@ class UserService{
 				}
 			});
 
+			if (field.actualType === 'PHONE' || field.actualType === 'CURRENCY')
+			{
+				const  parts = field.answerText.split('~');
+				field.prefix = "";
+				if (parts.length == 2)
+				{
+					field.prefix = parts[0];
+					field.answerText = parts[1];
+				}
+			}
+
+
 			if(!field.answerText)
 				return field;
 
 			field.displayAnswerText = field.answerText;
+			if (field.prefix )
+			{
+				field.displayAnswerText = field.prefix + (field.actualType == "CURRENCY" ? " ": "-") + field.answerText;
+			}
 			
-			/*Mapping to make date work */
-			if (field.validationType === 'DATE')
+			if (field.actualType === 'DATE')
 			{
 				field.answerText = this.moment(field.answerText, 'DD-MM-YYYY').toDate();
 			}
 
-			/*Mapping to make numbers work */
 			if (field.validationType === 'NUMBER')
 			{
-				field.answerText = +field.answerText.replace(',','')
+				field.answerText = +field.answerText.replace(/[^0-9.]*/g,"");
 			}
 
 			return field;
@@ -196,7 +216,7 @@ class UserService{
 		let requiredFilled = true;
 		this.kycDetails.forEach((field)=>{
 			field.error = '';
-			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER", "CURRENCY"].indexOf(field.questionType)>=0)
+			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER"].indexOf(field.validationType)>=0)
 			{
 				if (!field.answerText)
 				{
@@ -212,7 +232,7 @@ class UserService{
 				}
 				requiredFilled = requiredFilled && field.selectedValue.answerId;
 			}
-			if (field.answerText && field.questionType === "NUMBER")
+			if (field.answerText && field.validationType === "NUMBER")
 			{
 				const numberTest = /^\d+(\.\d{1,2})?$/;
 				if (!numberTest.test(field.answerText))
@@ -262,9 +282,12 @@ class UserService{
 			      answer.answerId = 0;
 			    }
 
-			    if (field.validationType === 'DATE')
+			    if (field.actualType === 'DATE')
 				{
 					answer.answerText = this.moment(field.answerText).format('DD-MM-YYYY');
+				}
+				else if(field.actualType === 'CURRENCY' || field.actualType === 'PHONE'){
+					answer.answerText = field.prefix + "~" + answer.answerText;
 				}
 				else
 				{

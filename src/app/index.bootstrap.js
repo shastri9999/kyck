@@ -7,8 +7,7 @@ import "angular-cookies";
 import "angular-sanitize";
 import "angular-messages";
 import "angular-material";
-// import "common/angular-material-event-calendar/dist/angular-material-event-calendar";
-//require('./dist/angular-material-event-calendar'
+import "angular-material-event-calendar";
 import "angular-aria";
 import "angular-resource";
 import 'angular-chart.js';
