@@ -5,10 +5,9 @@ import inviteDialogTemplateUrl from './dialog.html';
 const d3 = require('d3');
 const RadialProgressChart = require('radial-progress-chart');
 
-
 function BrokerageController($state, $scope, $mdToast,$http, $mdStepper, 
         $mdDialog, $rootScope, BrokerageResource, AuthenticationService, 
-        DocumentResource, UserService, CalendarService, $window, moment) {
+        DocumentResource, DashboardResource, UserService, CalendarService, $window, moment) {
     'ngInject';
 
     var vm = this;
@@ -17,6 +16,73 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         obj['img'] = '/assets/images/partnerLogos/' + obj['brokerageName'] + '.png';
         return obj;
     }
+    vm.check = ()=>{
+        if(vm.getActiveStep()==1 && vm.isBroker)
+        {
+            if (!document.querySelector('.chart svg'))
+            {
+                vm.charts = [];
+                drawCharts();                            
+            }
+        }
+    }
+
+    function drawCharts() {
+        Promise.all([DashboardResource.profileStatus({userId: vm.userAppointment.email}).$promise,
+            DashboardResource.kycStatus({userId: vm.userAppointment.email}).$promise,
+            DashboardResource.documentStatus({userId: vm.userAppointment.email}).$promise,
+            DashboardResource.validationStatus({userId: vm.userAppointment.email}).$promise
+            ]).then((values)=>{
+                return values.map(v=>+v.data.percent)
+            }).then((values)=>{
+                const mappings = [{'name':'profile',
+                'solid': '#4bb7f5',
+                'background': '#c9e9fc'}, 
+                {'name':'kyc', 
+                'solid': '#f7b92f',
+                'background': '#fde6b2'}, 
+                {'name':'document', 
+                'solid': '#00ccad',
+                'background': '#a6edee'}, 
+                {'name':'validation',
+                'solid': '#8a88cd',
+                'background': '#c9e9ff'}];
+                vm.statusValues = values;
+                if (!vm.charts || !vm.charts.length)
+                {
+                    vm.charts = values.map((value, index)=>{
+                        const mapping = mappings[index];
+                        return new RadialProgressChart('.broker-'+ mapping.name +'-chart', {
+                            diameter: 55,
+                            shadow: {
+                              width: 0
+                          },
+                          stroke: {
+                              width: 6,
+                          },
+                          animation: {
+                              duration: 1
+                          },
+                          center: function(p){return p + "%";},
+                          series: [
+                              {
+                                value: value,
+                                color: {
+                                  solid: mapping.solid,
+                                  background: mapping.background
+                                }
+                            }]
+                        });
+                    });
+                }
+                else
+                {
+                    values.forEach((value, index)=>{
+                        vm.charts[index].update(value);
+                    });
+                }
+            });
+        }
 
     function init() {
         vm.nextStep = nextStep;
@@ -143,9 +209,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                     selectUser(0);
                 }
             });
-        }
-        if (vm.isBroker)
-        {
+
             vm.getDownloadLink = ()=>{
                 if (vm.userAppointment && vm.selectedDocumentNames.length)
                     return '/kyck-rest/document/bulkDownload?'+ 'userId=' + vm.userAppointment.email + '&documentNames='
@@ -297,8 +361,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             });
 
             vm.userAppointments[vm.selectedIndex]['applicationStatus'] = "APPROVED";
-
-            console.log(vm.userAppointment.email, vm.userAppointments, status);
 
             $mdToast.showSimple("Appointment slot has been successfully "+formatStatus(status)+".");
         }, function (error) {
@@ -490,7 +552,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         var steppers = $mdStepper('stepper-demo');
         steppers.next();
         $window.scrollTo(0, 0);
-        // steppers.goto(4); 
         vm.selectedDocumentNames = [];
         return;
     }
@@ -533,12 +594,12 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             vm.userSlots = data.filter(function(a){
                 return a.userId === vm.userAppointment.email;
             });
-            console.log(vm.userSlots);
             vm.userSlots.map(function(a) {
                 a['startTime'] = moment(a['startTime'], 'DD/MM/YYYY hh:mm').toDate();
             })
         });
         
+
         var steppers = $mdStepper('stepper-demo');
         steppers.goto(0);
         vm.allVerified = 0;
@@ -546,6 +607,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         vm.userAppointment = vm.userAppointments[index];
         vm.selectedDocumentNames = [];
 
+        drawCharts();
 
 
         $rootScope.loadingProgress = true;
@@ -650,12 +712,10 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     }
 
     function toggleShowPartner(index) {
-        console.log(index);
         for (var i=0; i<$scope.selectedPartners.length; i++) {
             if (i!==index) {
                 $scope.selectedPartners[i]['showCalendar'] = false;
             } else {
-                console.log(i, index);
                 $scope.selectedPartners[i]['showCalendar'] = !$scope.selectedPartners[i]['showCalendar'];
             }
         }

@@ -198,10 +198,11 @@
                     display: flex;
                     border: 1px solid #e7ecf1;
                     border-radius: 5px;
-                    padding: 25px 22px;
+                    padding: 10px 22px;
                     margin-top: 20px; 
                     margin-right: 20px;
                     width: 240px;
+                    height: 90px;
                     .detail {
                         display: flex;
                         flex-flow: column;
@@ -274,6 +275,7 @@
                 max-height: 310px;
                 overflow: auto;
                 .appointment {
+                    display: flex;
                     background-color: #fff;
                     border-radius: 5px;
                     .detail {

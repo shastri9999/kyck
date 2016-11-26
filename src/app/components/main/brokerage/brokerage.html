@@ -66,18 +66,51 @@
         </div>
     </div>
     <div flex layout="column">
-        <md-stepper id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker" style="padding-bottom: 120px;">
+        <md-stepper  ng-click="vm.check()" id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker" style="padding-bottom: 120px;outline: none;">
         <div ng-if="isBroker">
         <md-step md-label="Account Summary" class="accSummary">
             <md-step-body layout="column">
             <div layout="row">
                 <div class="appointment ng-scope" layout="column">
-                <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
-                    <div style="font-size: 14px;" class="ng-binding">{{vm.userAppointment.fname}} {{vm.userAppointment.lname}}</div>
-                    <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> -->
-                    <a class="pending-btn ng-binding" style="margin-top: 10px;">{{vm.userAppointment.applicationStatus}}</a>
+                    <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
+                        <div style="font-size: 14px;" class="ng-binding">{{vm.userAppointment.fname}} {{vm.userAppointment.lname}}</div>
+                        <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> -->
+                        <a class="pending-btn ng-binding" style="margin-top: 10px;">{{vm.userAppointment.applicationStatus}}</a>
+                    </div>
                 </div>
-                <div class="container"></div>
+                <div class="chart-container">
+                    <div class="chart">
+                        <div class="broker-profile-chart">
+                            
+                        </div>   
+                        <div ng-attr-title="{{vm.statusValues[0]}}" style="opacity: 0.4;text-align: center; padding: 5px;">
+                            Profile Details
+                        </div> 
+                    </div>
+                    <div class="chart">
+                        <div class="broker-kyc-chart">
+                            
+                        </div>    
+                        <div ng-attr-title="{{vm.statusValues[1]}}" style="opacity: 0.4;text-align: center; padding: 5px;">
+                            KYC Details
+                        </div> 
+                    </div>
+                    <div class="chart">
+                        <div class="broker-document-chart">
+                            
+                        </div> 
+                        <div ng-attr-title="{{vm.statusValues[2]}}" style="opacity: 0.4;text-align: center; padding: 5px;">
+                            Documents
+                        </div>                            
+                    </div>
+                    <div class="chart">
+                        <div class="broker-validation-chart">
+                            
+                        </div>    
+                        <div ng-attr-title="{{vm.statusValues[3]}}" style="opacity: 0.4;text-align: center; padding: 5px;">
+                            Validation Status
+                        </div> 
+                    </div>
                 </div>
             </div>
             <div layout="row" style="margin: 20px; ">
@@ -100,7 +133,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top:10px;display: flex;" ng-if="vm.brokeragesDetails.document && vm.brokeragesDetails.document.length">
+                <div style="margin-top:15px;display: flex;" ng-if="vm.brokeragesDetails.document && vm.brokeragesDetails.document.length">
                     <a ng-click="vm.toggleAllDocuments()" class="select-all-btn">
                         {{vm.selectedDocumentNames.length!=vm.brokeragesDetails.document.length ? 'Select All' : 'Clear All'}}
                     </a>

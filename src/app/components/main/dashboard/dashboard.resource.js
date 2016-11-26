@@ -31,11 +31,16 @@ function DashboardResource($resource, AppConstants) {
     		isArray: false,
     		url: URL + '/dashboard/userkycanswer/status'
     	},
-    	profileStatus: {
-    		method: 'GET',
-    		isArray: false,
-    		url: URL + '/dashboard/profile/status'
-    	},
+        profileStatus: {
+            method: 'GET',
+            isArray: false,
+            url: URL + '/dashboard/profile/status'
+        },
+        validationStatus: {
+            method: 'GET',
+            isArray: false,
+            url: URL + '/dashboard/validation/status'
+        }
     });
 }
 
