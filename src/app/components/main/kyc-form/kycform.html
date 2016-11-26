@@ -25,7 +25,7 @@
 		</div>
 	</div>	
 	<div ng-repeat="field in vm.fields" ng-if="!vm.isBroker">
-		<div ng-switch on="field.questionType">
+		<div ng-switch on="field.actualType">
 			<div class="input" ng-switch-when="DROPDOWN">
 				<label for="kyc-{{field.questionId}}">
 					{{field.questionDesc}}
@@ -35,6 +35,20 @@
 				</select>
 				<div ng-if="field.error" class="error">{{field.error}}</div>		
 				<img src="/assets/images/dropdown.png" class="dropdown">
+			</div>
+			<div ng-switch-when="CURRENCY" class="phone-input">
+				<label for="kyc-{{field.questionId}}">
+						{{field.questionDesc}}
+					<span ng-if="field.requireField==='REQUIRED'">*</span>
+				</label>
+				<div class="phonegroup">
+					<div class="extension">{{field.prefix}}</div>
+					<select ng-model="field.prefix">
+						<option value="{{currency.code}}" ng-selected="currency.code==field.prefix" ng-repeat="currency in vm.currencies|orderBy:'country'">({{currency.code}}) {{currency.name_plural}}</option>			
+					</select>
+					<input ng-class="{error:field.error}" name="kyc-{{field.questionId}}" type="number" ng-model="field.answerText" ng-required="field.requireField==='REQUIRED'">				
+				</div>
+				<div ng-if="field.error" class="error">{{field.error}}</div>
 			</div>
 			<div class="input" ng-switch-when="RADIO">
 				<label for="kyc-{{field.questionId}}">
