@@ -122,7 +122,8 @@ class UserService{
 				return {
 					key,
 					...keyMappings[key],
-					value: data[key].replace("~","-")
+					value: data[key],
+					displayValue: data[key].replace("~","-")
 				}
 			}
 			return null;

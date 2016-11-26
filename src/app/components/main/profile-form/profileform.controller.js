@@ -30,10 +30,20 @@ class ProfileFormController {
 				this.userFields.forEach((field)=>{
 					if (field.key == 'userPhone')
 					{
-						field.prefix = "+61";
-						PhoneService.getExtension().then((extension)=>{
-							field.prefix = extension.ext;
-						});
+						field.value = field.value || "";
+						const parts = field.value.split("~");
+						if (parts.length ==2)
+						{
+							field.value = parts[1];
+							field.prefix = parts[0];
+						}
+						else
+						{
+							field.prefix = "+65";
+							PhoneService.getExtension().then((extension)=>{
+								field.prefix = extension.ext;
+							});							
+						}
 					}
 				});
 			});
