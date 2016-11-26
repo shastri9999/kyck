@@ -18,7 +18,7 @@ function MessagesController($state, $scope, MessageService, Upload, Authenticati
       $rootScope.mainLoadingMessage = "Document is being uploaded... Please wait."
 
       Upload.upload({
-        url: '/kyck-rest/usermessage/upload?messageId=26',
+        url: '/kyck-rest/usermessage/upload',
         data: {
           file: file,
           messageId: 26

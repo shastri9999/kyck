@@ -34,10 +34,10 @@ class AuthenticationService {
 			}
 		}).then((response)=>{
 			const userData = response.data.data;
-			this.signedInUser = {};
-			this.loggedInUser = userData;
-			this._StorageService.setItem('loggedInUser', this.loggedInUser);
-			return userData;
+			this.loggedInUser = this.signedInUser;
+			this._StorageService.setItem('loggedInUser', this.signedInUser);
+			this.signedInUser = null;
+			return this.signedInUser;
 		});
 	}
 
