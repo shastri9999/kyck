@@ -102,9 +102,9 @@
 						{{appointment.lname|limitTo:1|capitalize}}
 					</div>
 					<div class="detail">
-						<div style="font-size: 14px;">{{appointment.fname}} {{appointment.lname}}</div>
+						<div style="font-size: 12px;">{{appointment.fname}} {{appointment.lname}}</div>
 						<div ng-if="appointment.date" style="margin-top: 3px;opacity: 0.4;" am-time-ago="appointment.date | amParse:'YYYY-MM-DD'"></div>
-						<a class="pending-btn" style="margin-top: 25px;">{{appointment.applicationStatus}}</a>
+						<a class="pending-btn" style="margin-top: 5px;">{{appointment.applicationStatus}}</a>
 					</div>		
 				</div>				
 			</div>

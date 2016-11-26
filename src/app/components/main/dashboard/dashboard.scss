@@ -207,6 +207,8 @@
                         display: flex;
                         flex-flow: column;
                         margin-left: 10px;
+                        flex: 1;
+                        justify-content: space-between;
                     }
                     .pending-btn {
                         padding: 5px 18px;
