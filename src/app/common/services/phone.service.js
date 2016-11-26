@@ -2,7 +2,7 @@
 
 
 class PhoneService{
-	constructor($http) {
+	constructor($http, $rootScope) {
 		'ngInject';
 		this._$http = $http;
 		this.phoneExtensions = [
@@ -967,7 +967,12 @@ class PhoneService{
 			"code":"ky"
 		}
 		];
-		this.selectedExtension = this.phoneExtensions[0];
+		let code = "sg";
+		if ($rootScope.ipData && $rootScope.ipData.countryCode)
+			code = $rootScope.ipData.countryCode.toLowerCase();
+		this.selectedExtension = this.phoneExtensions.filter((item)=>{
+			return item.code == code;
+		})[0];
 	}
 }
 

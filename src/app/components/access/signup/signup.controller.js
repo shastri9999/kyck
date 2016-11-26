@@ -11,7 +11,7 @@ class SignUpController {
 		this.invalidCredentials = false;
 		$scope.phoneExtenstion = PhoneService.selectedExtension.ext;
 		this.phoneExtenstions = PhoneService.phoneExtensions;
-		console.log(PhoneService.phoneExtenstions)
+		this.signedUp = false;
 	}
 
 	signUp(){
@@ -19,6 +19,15 @@ class SignUpController {
 		if (this._$rootScope.terms.agree)
 		{
 			this.invalidCredentials = false;
+			const phone = scope.phoneExtenstion + "~" + scope.phonenumber;
+			this._AuthenticationService.register(scope.firstname, scope.lastname, phone, scope.username).then((data)=>{
+				console.log(data);
+				this.signedUp = true;
+				this._$rootScope.loadingProgress=false;
+			}).catch((e)=>{
+				this.signedUp = false;
+				this._$rootScope.loadingProgress=false;
+			})
 		}
 		else
 		{

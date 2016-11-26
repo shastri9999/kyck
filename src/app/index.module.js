@@ -22,7 +22,7 @@ export default angular.module('kyck', [
 	]
 	)
 .config(config)
-.run(function($rootScope, $location, AuthenticationService){
+.run(function($rootScope, $location, AuthenticationService, $http){
 	'ngInject';
 
 	/* Todo: Move all this to service */
@@ -30,6 +30,13 @@ export default angular.module('kyck', [
 		agree: false,
 		show: false
 	};
+
+	$http({
+		'method': 'GET',
+		'url': 'http://ip-api.com/json'
+	}).then((response)=>{
+		$rootScope.ipData = response.data;
+	})
 	
 	$rootScope.sideNavCollapsed = false;
 	$rootScope.shouldShowDocumentPreview = false;

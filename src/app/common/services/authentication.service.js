@@ -23,6 +23,23 @@ class AuthenticationService {
 		});
 	}
 
+	register(firstname, lastname, phone, email) {
+		this._$rootScope.loadingProgress=true;
+		return this._$http({
+			method: 'POST',
+			url: '/kyck-rest/user/register/action',
+			data: {
+			  "userFname": firstname,
+			  "userId":  email,
+			  "userLname": lastname,
+			  "userPhone": phone,
+			  "userType": "USER"
+			}
+		}).then((response)=>{
+			return response.data.data;
+		});
+	}
+
 	login(userId, userPassword) {
 		this._$rootScope.loadingProgress=true;
 		return this._$http({
