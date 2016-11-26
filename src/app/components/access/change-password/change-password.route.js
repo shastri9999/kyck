@@ -10,7 +10,8 @@ function routeConfig($stateProvider) {
 	.state('access.change-password', {
 		url: 'change-password',
 		templateUrl,
-		controller
+		controller,
+		controllerAs: 'vm'
 	});
 }
 

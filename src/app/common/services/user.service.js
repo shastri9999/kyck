@@ -26,6 +26,11 @@ class UserService{
 			field.answerId = +field.answerId || 0;
 			field.selectedValue = null;
 			field.actualType = field.questionType;
+			if (!field.answerText)
+			{
+				field.answerText = "";
+			}
+			
 			if (field.validationType != 'NUMBER' && field.validationType != 'TEXT')
 			{
 				field.actualType = field.validationType;

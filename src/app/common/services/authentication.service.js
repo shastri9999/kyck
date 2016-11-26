@@ -1,13 +1,14 @@
 'use strict';
 
 class AuthenticationService {
-	constructor($http, AppConstants, $rootScope, StorageService) {
+	constructor($http, AppConstants, $rootScope, StorageService, $state) {
 		'ngInject';
 		this._$http = $http;
 		this._AppConstants = AppConstants;
 		this._$rootScope = $rootScope;
 		this.loggedInUser = {};
 		this._StorageService = StorageService;
+		this.signedInUser = {};
 	}
 
 	reset(userId) {
@@ -20,6 +21,23 @@ class AuthenticationService {
 			}
 		}).then((response)=>{
 			return response.data.data;
+		});
+	}
+
+	setPassword(userPassword) {
+		this._$rootScope.loadingProgress=true;
+		return this._$http({
+			method: 'POST',
+			url: '/kyck-rest/user/set-password/action',
+			data: {
+				userPassword: userPassword
+			}
+		}).then((response)=>{
+			const userData = response.data.data;
+			this.signedInUser = {};
+			this.loggedInUser = userData;
+			this._StorageService.setItem('loggedInUser', this.loggedInUser);
+			return userData;
 		});
 	}
 
@@ -36,6 +54,7 @@ class AuthenticationService {
 			  "userType": "USER"
 			}
 		}).then((response)=>{
+			this.signedInUser = null;
 			return response.data.data;
 		});
 	}
@@ -52,11 +71,19 @@ class AuthenticationService {
 		}).then((response)=>{
 			const userData = response.data.data;
 			if (! userData.userType) {
+				this.signedInUser = null;
 				return new Promise((resolve, reject)=>{reject("Invalid Credentials");});
 			}
+			else if (userData.status === "REGISTERED") {
+				this.signedInUser = userData;
+				return new Promise((resolve, reject)=>{reject(userData);});
+			}
+			else {
+				this.signedInUser = null;
+				this.loggedInUser = userData;
+				this._StorageService.setItem('loggedInUser', this.loggedInUser);
+			}
 			this._$rootScope.loadingProgress=false;
-			this.loggedInUser = userData;
-			this._StorageService.setItem('loggedInUser', this.loggedInUser);
 			return userData;
 		});
 	}
@@ -69,10 +96,12 @@ class AuthenticationService {
 		}).then((response)=>{
 			this._$rootScope.loadingProgress=false;
 			this.loggedInUser = null;
+			this.signedInUser = null;
 			this._StorageService.setItem('loggedInUser', this.loggedInUser);
 		}).catch(()=>{
 			this._$rootScope.loadingProgress=false;
 			this.loggedInUser = null;
+			this.signedInUser = null;
 			this._StorageService.setItem('loggedInUser', this.loggedInUser);
 		});
 	}
