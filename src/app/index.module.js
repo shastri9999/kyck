@@ -30,13 +30,6 @@ export default angular.module('kyck', [
 		agree: false,
 		show: false
 	};
-
-	$http({
-		'method': 'GET',
-		'url': 'http://ip-api.com/json'
-	}).then((response)=>{
-		$rootScope.ipData = response.data;
-	})
 	
 	$rootScope.sideNavCollapsed = false;
 	$rootScope.shouldShowDocumentPreview = false;

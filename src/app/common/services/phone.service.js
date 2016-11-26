@@ -967,12 +967,37 @@ class PhoneService{
 			"code":"ky"
 		}
 		];
-		let code = "sg";
-		if ($rootScope.ipData && $rootScope.ipData.countryCode)
-			code = $rootScope.ipData.countryCode.toLowerCase();
-		this.selectedExtension = this.phoneExtensions.filter((item)=>{
-			return item.code == code;
-		})[0];
+		this.extensionSet = false;
+		this.selectedExtension = "+61";
+		this.$rootScope = $rootScope;
+		
+	}
+
+	getExtension(){
+		if (this.extensionSet)
+		{
+			return new Promise((resolve, reject)=>{
+				resolve(this.selectedExtension);
+			});
+		}
+		else
+		{
+			return this._$http({
+				'method': 'GET',
+				'url': 'http://ip-api.com/json'
+			}).then((response)=>{
+				this.$rootScope.ipData = response.data;
+				if (this.$rootScope.ipData && this.$rootScope.ipData.countryCode)
+				{
+					const code = this.$rootScope.ipData.countryCode.toLowerCase();
+					this.selectedExtension = this.phoneExtensions.filter((item)=>{
+						return item.code == code;
+					})[0];
+					this.extensionSet = true;
+				}
+				return this.selectedExtension;
+			})
+		}
 	}
 }
 

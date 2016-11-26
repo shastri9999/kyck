@@ -9,7 +9,9 @@ class SignUpController {
 		this._$scope = $scope;
 		this._$rootScope = $rootScope;
 		this.invalidCredentials = false;
-		$scope.phoneExtenstion = PhoneService.selectedExtension.ext;
+		PhoneService.getExtension().then((extension)=>{
+			$scope.phoneExtenstion = extension.ext;
+		});
 		this.phoneExtenstions = PhoneService.phoneExtensions;
 		this.signedUp = false;
 	}
