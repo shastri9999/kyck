@@ -33,8 +33,14 @@ class SignInController {
 				}
 			}).catch((e)=>{
 				this._$rootScope.loadingProgress = false;
-				console.log(e);
-				this.invalidCredentials = true;
+				if (this._AuthenticationService.signedInUser)
+				{
+					this._$state.go('access.change-password');
+				}
+				else
+				{
+					this.invalidCredentials = true;
+				}
 			});
 		}
 		else

@@ -22,7 +22,7 @@ export default angular.module('kyck', [
 	]
 	)
 .config(config)
-.run(function($rootScope, $location, AuthenticationService){
+.run(function($rootScope, $location, AuthenticationService, $http){
 	'ngInject';
 
 	/* Todo: Move all this to service */

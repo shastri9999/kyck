@@ -145,6 +145,38 @@ table {
 kyc-form form, profile-form form{
    display: flex;
    flex-flow: row wrap;
+  .phone-input {
+    display: flex;
+    flex-flow: column;
+    margin: 10px;
+    position: relative;
+    label {
+      font-size: 14px;
+      color: #4f6379;
+      margin-bottom: 12px;
+    }
+    div.error {
+      font-size: 10px;
+      padding-top: 4px;
+      color: red;
+    }
+    input {
+        height: 45px;
+        width: 205px;
+        border-radius: 3px;
+        border: 1px solid #e7ecf1;
+        padding: 15px;
+        font-size: 14px;
+        color: #4f6379;
+        &.error {
+          border: 1px solid red;
+        }
+    }
+    .extension {
+      color: #4f6379;
+      font-size: 14px;
+    }
+  }
   .input {
     display: flex;
     flex-flow: column;

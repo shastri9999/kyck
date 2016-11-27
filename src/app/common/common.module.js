@@ -6,6 +6,7 @@ import StorageService from './services/storage.service.js';
 import MessageService from './services/message.service.js';
 import CalendarService from './services/calendar.service.js';
 import PhoneService from './services/phone.service.js';
+import CurrencyService from './services/currency.service.js';
 
 const common = angular.module('common', []);
 
@@ -14,7 +15,8 @@ UserService,
 StorageService,
 MessageService,
 CalendarService,
-PhoneService]
+PhoneService,
+CurrencyService]
 .forEach(service=>common.service(service.name, service));
 
 common.filter('capitalize', function() {

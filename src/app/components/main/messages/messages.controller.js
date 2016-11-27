@@ -1,6 +1,6 @@
 'use strict';
 
-function MessagesController($state, $scope, MessageService, AuthenticationService, $rootScope, $mdToast) {
+function MessagesController($state, $scope, MessageService, Upload, AuthenticationService, $rootScope, $mdToast) {
 	'ngInject';
 	const vm = this;
 
@@ -12,6 +12,43 @@ function MessagesController($state, $scope, MessageService, AuthenticationServic
 	});
 
 	vm.isBroker = AuthenticationService.isBroker();
+    
+    vm.upload = function(file){       
+      $rootScope.mainLoading = true;
+      $rootScope.mainLoadingMessage = "Document is being uploaded... Please wait."
+
+      Upload.upload({
+        url: '/kyck-rest/usermessage/upload',
+        data: {
+          file: file,
+          messageId: 26
+        }
+      }).then(function(response){
+        console.log(response);
+        console.log('Success: ' + response.config.data.file.name + 'Uploaded. Response: ' + response.data);
+        $rootScope.mainLoading = false;
+        $mdToast.show(
+          $mdToast.simple()
+          .textContent('File Uploaded Successfully!')
+          .position('bottom left')
+          .toastClass('md-primary')
+          );
+      }, function(error){
+        console.log(error);
+        $rootScope.mainLoading = false;
+        $mdToast.show(
+          $mdToast.simple()
+          .textContent('File Upload Failed!')
+          .position('bottom right')
+          .toastClass('md-warn')
+          .hideDelay(2000)
+          );
+
+      }, function(evt){
+	        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    	    console.log(progressPercentage);
+          });        
+    }
 
 	if (vm.isBroker)
 	{

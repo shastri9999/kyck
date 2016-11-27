@@ -3,6 +3,11 @@
     flex-flow: column;
     align-items: center;
     justify-content: space-between;
+    .wrapper {
+	    display: flex;
+	    flex-flow: column;
+	    align-items: center;
+    }
     input {
     	border: 1px solid #e7ecf1;
 	    border-radius: 3px;

@@ -26,6 +26,11 @@ class UserService{
 			field.answerId = +field.answerId || 0;
 			field.selectedValue = null;
 			field.actualType = field.questionType;
+			if (!field.answerText)
+			{
+				field.answerText = "";
+			}
+			
 			if (field.validationType != 'NUMBER' && field.validationType != 'TEXT')
 			{
 				field.actualType = field.validationType;
@@ -117,7 +122,8 @@ class UserService{
 				return {
 					key,
 					...keyMappings[key],
-					value: data[key]
+					value: data[key],
+					displayValue: data[key].replace("~","-")
 				}
 			}
 			return null;
@@ -287,7 +293,8 @@ class UserService{
 					answer.answerText = this.moment(field.answerText).format('DD-MM-YYYY');
 				}
 				else if(field.actualType === 'CURRENCY' || field.actualType === 'PHONE'){
-					answer.answerText = field.prefix + "~" + answer.answerText;
+					if (answer.answerText)
+						answer.answerText = field.prefix + "~" + answer.answerText;
 				}
 				else
 				{
@@ -323,6 +330,10 @@ class UserService{
 				.filter(x=>!x.disabled)
 				.forEach((detail)=>{
 					userData[detail.key] = detail.value;
+					if (detail.key == 'userPhone')
+					{
+						userData[detail.key] = detail.prefix + "~" + detail.value;
+					}
 				});
 			return this.updateUserDetails(userData);
 		}).catch((e)=>console.log(e))
