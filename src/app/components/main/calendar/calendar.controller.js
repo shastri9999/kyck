@@ -2,17 +2,16 @@
 
 import dialogTemplateURL from './dialog.html';
 
-function CalendarController($scope, $mdDialog, $filter, AuthenticationService, CalendarService, moment, $rootScope) {
+function CalendarController($scope, $mdDialog, $filter, AuthenticationService, CalendarService, moment, $rootScope, $window, $mdToast) {
     'ngInject';
 
     $scope.events = [];
-
     $rootScope.loadingProgress = false;
-
     const userId = AuthenticationService.getLoggedInUser().userId;
     const isBroker = AuthenticationService.isBroker();
     const month = 11;
     fetchMeetings();
+    setEventClick();
 
     function getStatus (status, isBroker) {
         var customClass="GREEN";
@@ -62,7 +61,6 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
         //         formattedStatus = "Pending";
         //     // }
         // }
-
         return [customClass, ifConfirmButton, ifRescheduleButton, ifJoinVideoButton, formattedStatus, extraContent];
     }
 
@@ -72,7 +70,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
         var vals = getStatus(slot.status, isBroker);
 
         return {
-            title: title + " " + slot.meetingSubject,
+            title: slot.meetingSubject,
             start: moment(slot.startTime, 'DD/MM/YYYY hh:mm').toDate(),
             end: moment(slot.endTime, 'DD/MM/YYYY hh:mm').toDate(),
             customClass: vals[0],
@@ -86,6 +84,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
     }
 
     function fetchMeetings() {
+        $scope.events = [];
         if (!isBroker) {
             CalendarService.fetchMeetings(userId, month).then((data) => {
                 $scope.events = data.map(formatSlot);
@@ -97,50 +96,53 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
         }
     }
 
-    $scope.eventClicked = function($selectedEvent) {
-        let closePopup = function() {
-            alert = undefined;
-        }
+    function setEventClick () {
+        $scope.eventClicked = function($selectedEvent) {
+            console.log("slot is ", $selectedEvent);
 
-        var slot = $selectedEvent;
-
-        $mdDialog.show({
-            parent: angular.element(document.body),
-            templateUrl: dialogTemplateURL,
-            controller: DialogController
-        });
-
-        function DialogController($scope, $mdDialog) {
-            'ngInject';
-            $scope.slot = slot;
-            $scope.isBroker = isBroker;
-            $scope.updateAppointment = updateAppointment;
-            // $scope.confirmAppointment = confirmAppointment;
-            // $scope.rescheduleAppointment = rescheduleAppointment;
-            console.log("slotis", slot, slot.calendarId, slot.startTime);
-
-            $scope.closeDialog = function() {
-                $mdDialog.hide();
+            let closePopup = function() {
+                alert = undefined;
             }
 
-            function updateAppointment(status) {
-                var calendarDetailRequest = {
-                  "calendarId": slot.calendarId,
-                  "meetingStatus": status
-                };
+            var slot = $selectedEvent;
 
-                CalendarService.updateAppointmentStatus(calendarDetailRequest).then((data) => {
-                    console.log(calendarDetailRequest);
-                });
+            $mdDialog.show({
+                parent: angular.element(document.body),
+                templateUrl: dialogTemplateURL,
+                controller: DialogController
+            });
 
-                fetchMeetings();
+            function DialogController($scope, $mdDialog) {
+                'ngInject';
+                $scope.slot = slot;
+                $scope.isBroker = isBroker;
+                $scope.updateAppointment = updateAppointment;
 
-                $mdDialog.hide();
+                $scope.closeDialog = function() {
+                    $mdDialog.hide();
+                }
+
+                function updateAppointment(status) {
+                    if (status == "JOIN") {
+                        $window.open(slot, 'Join Video Conferenence', 'width=1024,height=800');
+                        $mdToast.showSimple("Invited for Video Conference."); 
+                    }
+                    else {
+                        var calendarDetailRequest = {
+                          "calendarId": slot.calendarId,
+                          "meetingStatus": status
+                        };
+
+                        CalendarService.updateAppointmentStatus(calendarDetailRequest).then((data) => {
+                            console.log(data);
+                            $mdToast.showSimple("Status of the meeting updated.");
+                        });
+                    }
+
+                    fetchMeetings();
+                    $mdDialog.hide();
+                }
             }
-
-            // function rescheduleAppointment() {
-
-            // }
         }
     }
 

@@ -48,35 +48,13 @@
 		height:90px;
 		width:100%;
 	}
-	.md-raised.md-success {
-		color: #ffffff;
-		font-family: Lato;
-		margin-left: 0px;
-		margin-right: 0px;
-		border-radius: 1px;
-		background: #3bada5;
-	}
-	.md-raised.md-blue {
-		color: #ffffff;
-		font-family: Lato;
-		margin-left: 10px;
-		margin-right: 0px;
-		border-radius: 1px;
-		background: #3498db;
-	}
-	.md-raised.md-back {
-		color: white;
-		margin-right:0px;
-		border-radius: 1px;
-		font-family: Lato;
-		background: #4f6379;
-	}
 	.md-raised.md-edit-form {
 		color: #9da9b5;
 		margin-right: 0px;
 		border-radius: 1px;
 		font-family: Lato;
 		margin-left: 0px;
+
 		background: #ecf0f1;
 		padding-left: 20px;
 		padding-right: 20px;
@@ -88,17 +66,6 @@
 	md-step-body {
 		max-height: calc(100vh - 290px);
 	}
-	.md-raised.md-back:not([disabled]):hover {
-		color: white;
-		background: #4f6379;
-	}
-	.md-raised.md-success:not([disabled]):hover {
-		background-color: #3bada5;
-	}
-	.md-raised.md-blue:not([disabled]):hover {
-		background-color: #3498db;
-	}
-
 	.md-stepper-indicator-wrapper
 	{
 		flex-flow: column-reverse;
@@ -659,4 +626,39 @@
 		}
 	}
 }
+}
+
+
+.md-raised.md-success {
+	color: #ffffff;
+	font-family: Lato;
+	margin-left: 0px;
+	margin-right: 0px;
+	border-radius: 1px;
+	background: #3bada5;
+}
+.md-raised.md-blue {
+	color: #ffffff;
+	font-family: Lato;
+	margin-left: 10px;
+	margin-right: 0px;
+	border-radius: 1px;
+	background: #3498db;
+}
+.md-raised.md-back {
+	color: white;
+	margin-right:0px;
+	border-radius: 1px;
+	font-family: Lato;
+	background: #4f6379;
+}
+.md-raised.md-back:not([disabled]):hover {
+	color: white;
+	background: #4f6379;
+}
+.md-raised.md-success:not([disabled]):hover {
+	background-color: #3bada5;
+}
+.md-raised.md-blue:not([disabled]):hover {
+	background-color: #3498db;
 }
