@@ -18,40 +18,52 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
         var customClass="GREEN";
         var ifConfirmButton=true;
         var ifRescheduleButton=true;
+        var ifJoinVideoButton=true;
         var formattedStatus=status;
         var extraContent="";
 
         if (status=="CONFIRM") {
-            formattedStatus="Confirmed"
+            formattedStatus="Confirmed";
+
+            ifConfirmButton=false;
         }
         else if (status == "REJECT") {
             formattedStatus="Rejected"
             customClass="RED";
-            ifRescheduleButton=false;
-        }
-        else if (status == "RESCHEDULE") {
-            if (isBroker) {
-                customClass = "GOLDEN";
-                formattedStatus="Pending"
-            }
-            else {
-                formattedStatus="New Request"
-                customClass = "RED";
-            }
-        }
-        else if (status == "New Application") {
-            extraContent = "Document Verification Call";
-            if (isBroker) {
-                customClass = "RED";
-                formattedStatus = "New Request";
-            }
-            else {
-                customClass = "GOLDEN";
-                formattedStatus = "Pending";
-            }
-        }
 
-        return [customClass, ifConfirmButton, ifRescheduleButton, formattedStatus, extraContent];
+            ifJoinVideoButton=false;
+            ifRescheduleButton=false;
+            ifConfirmButton=false;
+        }
+        else if(status == "RESCHEDULE") {
+            customClass = "GOLDEN";
+            formattedStatus = "Pending";
+
+            ifJoinVideoButton = false;
+        }
+        // else if (status == "RESCHEDULE") {
+        //     // if (isBroker) {
+        //         customClass = "GOLDEN";
+        //         formattedStatus="Pending"
+        //     // }
+        //     // else {
+        //     //     formattedStatus="New Request"
+        //     //     customClass = "RED";
+        //     // }
+        // }
+        // else if (status == "New Application") {
+        //     extraContent = "Document Verification Call";
+        //     // if (isBroker) {
+        //     //     customClass = "RED";
+        //     //     formattedStatus = "New Request";
+        //     // }
+        //     // else {
+        //         customClass = "GOLDEN";
+        //         formattedStatus = "Pending";
+        //     // }
+        // }
+
+        return [customClass, ifConfirmButton, ifRescheduleButton, ifJoinVideoButton, formattedStatus, extraContent];
     }
 
     function formatSlot(slot) {
@@ -66,8 +78,9 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
             customClass: vals[0],
             ifConfirmButton: vals[1],
             ifRescheduleButton: vals[2],
-            formattedStatus: vals[3],
-            extraContent: vals[4],
+            ifJoinVideoButton: vals[3],
+            formattedStatus: vals[4],
+            extraContent: vals[5],
             ...slot
         }
     }
