@@ -2,6 +2,8 @@ import config from './index.config';
 import Components from './index.components';
 import Routes from './index.routes';
 import Common from './common/common.module'
+import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.min.css';
 
 export default angular.module('kyck', [
 	'ui.router',
@@ -22,7 +24,7 @@ export default angular.module('kyck', [
 	]
 	)
 .config(config)
-.run(function($rootScope, $location, AuthenticationService, $http){
+.run(function($rootScope, $location, AuthenticationService, $http, $timeout){
 	'ngInject';
 
 	/* Todo: Move all this to service */
@@ -38,11 +40,53 @@ export default angular.module('kyck', [
 	$rootScope.viewingDocument = {};
 	$rootScope.OCRView = false;
 	$rootScope.canEnableOCR = false;
+	$rootScope.cropping = false;
+	$rootScope.originalPreviewURL = null;
+
+	window.cropper = null;
+
+	$rootScope.toggleCropper = ()=>{
+		if (window.cropper)
+		{
+			const canvasElement = window.cropper.getCroppedCanvas();
+			$rootScope.documentPreviewURL = canvasElement.toDataURL();
+			window.cropper.destroy();
+			window.cropper = null;
+			$rootScope.cropping = false;
+		}
+		else
+		{
+			const image = document.getElementById('image');
+			window.cropper = new Cropper(image, {
+			  aspectRatio: NaN,
+			  dragMode: 'move',
+			});
+			$rootScope.cropping = true;
+		}
+	}
+
+	$rootScope.resetCropper = ()=>{
+		if (window.cropper && $rootScope.cropping)
+			window.cropper.reset();
+		else
+			$rootScope.documentPreviewURL = $rootScope.originalPreviewURL;
+	}
+
+	$rootScope.closeCropper = ()=>{
+		$rootScope.documentPreviewURL = $rootScope.originalPreviewURL;
+		if (window.cropper)
+		{
+			window.cropper.destroy();
+			window.cropper = null;
+			$rootScope.cropping = false;
+		}
+	}
 
 	$rootScope.hideDocumentPreview = ()=>{
 		$rootScope.shouldShowDocumentPreview = false;
 		$rootScope.canEnableOCR = false;
 		$rootScope.OCRView = false;	
+		$rootScope.cropping = false;		
 	}
 	
 	$rootScope.showDocumentPreview = (URL)=>{
@@ -50,6 +94,7 @@ export default angular.module('kyck', [
 		{
 			$rootScope.documentPreviewLoading = false;
 			$rootScope.documentPreviewURL = URL;
+			$rootScope.originalPreviewURL = $rootScope.documentPreviewURL;
 		}
 		else
 		{
@@ -69,12 +114,15 @@ export default angular.module('kyck', [
 		$rootScope.OCRView = false;	
 	}
 
+	
+
 	$rootScope.messageView = {
 		activeInboxMessage: null,
 		activeSentMessage: null,
 		composing: false,
 		reply: ""
 	};
+
 	$rootScope.$on('$stateChangeStart', function (event, next, toParams) {
 		const loggedIn = AuthenticationService.getLoggedInUser();
 		const isAccessPage = next.name.indexOf("access.")==0;
