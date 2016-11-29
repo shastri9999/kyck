@@ -8,7 +8,7 @@
 	</div>
 	<div class="blocks" ng-if="vm.expanded">
 		<div id="blockchain-{{block.number}}" class="block-wrapper" ng-repeat="block in vm.currentBlocks" ng-if="$index >= vm.startFrom">
-			<div class="block" ng-mouseover="vm.fetchInfo(block.number)">
+			<div class="block {{block.className}}" ng-mouseover="vm.fetchInfo(block.number)">
 				<div class="block-number">{{block.number}}</div>
 				<div class="block-top"></div>
 				<div class="block-left"></div>

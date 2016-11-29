@@ -59,6 +59,7 @@ class BlockChainController{
 				params: {blockId: number}
 			}).then((s)=>{
 				const transaction = s.data.data.firstTransaction;
+				transaction.className = "color-" + transaction.type;
 				this.currentBlocks[number] = {
 					...block,
 					...transaction

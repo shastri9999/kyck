@@ -84,7 +84,7 @@
 						display: block;
 					}
 					.block-top, .block-left, .block-right, .block-number {
-						transition: all 0.75s;
+						transition: transform 0.75s;
 					}
 					.block-top {
 						transform: rotate(90deg) translateX(-5px);
@@ -98,6 +98,39 @@
 					.block-number {
 						transform: translateY(-5px);
 					}
+				}
+				
+				&.color-1 {
+					.block-top, .block-left, .block-right {
+						border-bottom-color: #ceb8b5;
+						&:after {
+							border-top-color: #ceb8b5;
+						}
+					}	
+				}
+				&.color-3 {
+					.block-top, .block-left, .block-right {
+						border-bottom-color: #FCE6C1;
+						&:after {
+							border-top-color: #FCE6C1;
+						}
+					}	
+				}
+				&.color-2 {
+					.block-top, .block-left, .block-right {
+						border-bottom-color: #FFD0CA;
+						&:after {
+							border-top-color: #FFD0CA;
+						}
+					}	
+				}
+				&.color-4 {
+					.block-top, .block-left, .block-right {
+						border-bottom-color: #D4E8CF;
+						&:after {
+							border-top-color: #D4E8CF;
+						}
+					}	
 				}
 				.block-top, .block-left, .block-right {
 				    width: 0;
