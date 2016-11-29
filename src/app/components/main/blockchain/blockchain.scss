@@ -31,17 +31,26 @@
 	.blocks {
 		 padding-top: 10px;
 		 padding-bottom: 10px;
-		 overflow-x: scroll;
+		 overflow-x: hidden;
 		 background-color: #fff;
 		.block-wrapper {
 			display: inline-block;
 			position: relative;
+			transition: transform 0.5s, opacity 0.5s;
 			&::after{
 				content: ".....";
 			    position: absolute;
 			    top: 20px;
 			    right: -18px;
 			    opacity: 0.4;
+			}
+			&.ng-enter {
+				transform: translateX(700px);
+				opacity: 0;
+			}
+			&.ng-enter.ng-active {
+				transform: translateX(0px);
+				opacity: 1;
 			}
 			.info {
 			    position: fixed;
@@ -136,7 +145,7 @@
 				    width: 0;
 				    height: 0;
 				    border: 12px solid transparent;
-				    border-bottom: 20px solid #CAEAFF;
+				    border-bottom: 21px solid #CAEAFF;
 				    position: absolute;
 					&:after {
 						content: '';
