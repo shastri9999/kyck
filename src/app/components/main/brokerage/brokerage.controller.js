@@ -383,7 +383,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
        var parentEl = angular.element(document.body);
        var partner = (vm.partners.filter(x=>x.selected)[0]);
 
-       //$scope.selectedPartners.selectedAppointments
        var brokerageReqs = [];
        for (var i=0; i<$scope.selectedPartners.length; i++) {
             var partner = $scope.selectedPartners[i];
@@ -404,7 +403,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
             brokerageReqs.push({
                 "brokerageId": partner.brokerageId+"",
-                "calendarDetails" : calslots
+                "calenderDetails" : calslots
             });
        }
 
