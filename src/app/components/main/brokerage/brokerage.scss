@@ -546,25 +546,6 @@
 }
 
 
-/* DIALOG INVITE USER */
-.inviteUsersDialog {
-	padding: 30px;
-	.heading {
-		font-size: 22px;
-		line-height: 27px;
-		color: #4f6379;
-	}
-	hr {
-		border-top: solid 1px #e7ecf1;
-	}
-	.addedEmail {
-		color: #3aafa5;
-		font-size: 14px;
-		line-height: 16px;
-		margin: 15px;
-	}
-}
-
 .md-event-calendar-cell-event-time {
 	display: none;
 }
@@ -661,4 +642,22 @@
 }
 .md-raised.md-blue:not([disabled]):hover {
 	background-color: #3498db;
+}
+/* DIALOG INVITE USER */
+.inviteUsersDialog {
+	padding: 30px;
+	.heading {
+		font-size: 22px;
+		line-height: 27px;
+		color: #4f6379;
+	}
+	hr {
+		border-top: solid 1px #e7ecf1;
+	}
+	.addedEmail {
+		color: #3aafa5;
+		font-size: 14px;
+		line-height: 16px;
+		margin: 15px;
+	}
 }

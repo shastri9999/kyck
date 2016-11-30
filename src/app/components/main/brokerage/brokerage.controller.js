@@ -726,10 +726,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         return steppers.currentStep + 1;
     }
 
-    function showVideoDialog($event) {
+    function showVideoDialog(slot) {
         $mdDialog.show({
              parent: angular.element(document.body),
-             targetEvent: $event,
              templateUrl: inviteDialogTemplateUrl,
              controller: InviteDialogController
         });
@@ -740,15 +739,14 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
             $scope.closeDialog = function() {
                 $rootScope.loadingProgress = true;
-                BrokerageResource.startconference({
-                    'emailId' : $scope.addedEmails, 'userId' : vm.userAppointment.email
+                BrokerageResource.getroom({},{
+                    'calendarId':slot.calendarId,'emailId' : $scope.addedEmails, 'userId' : vm.userAppointment.email
                 }, function(req){
                     $rootScope.loadingProgress = false;
                     $window.open(req.data, 'Join Video Conferenence', 'width=1024,height=800');
                     $mdToast.showSimple("Invited for Video Conference.")
                 }, function(error){console.log(error);});
                 $mdDialog.hide();
-                //use $scope.addedEmails & make an API Call
             }
             $scope.addEmail = function() {
                 $scope.addedEmails.push($scope.extraEmail);
