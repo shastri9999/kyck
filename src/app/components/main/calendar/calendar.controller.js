@@ -2,7 +2,7 @@
 
 import dialogTemplateURL from './dialog.html';
 
-function CalendarController($scope, $mdDialog, $filter, AuthenticationService, CalendarService, moment, $rootScope, $window, $mdToast) {
+function CalendarController($scope, $mdDialog, $filter, AuthenticationService, BrokerageResource, CalendarService, moment, $rootScope, $window, $mdToast) {
     'ngInject';
 
     $scope.events = [];
@@ -124,7 +124,14 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
 
                 function updateAppointment(status) {
                     if (status == "JOIN") {
-                        $window.open(slot, 'Join Video Conferenence', 'width=1024,height=800');
+                        BrokerageResource.getroom({},{
+                            'calendarId':$scope.slot.calendarId, 
+                            'userId' : $scope.isBroker ? $scope.slot.userEmailId : $scope.slot.brokerEmailId
+                        }, function(req){
+                            $rootScope.loadingProgress = false;
+                            $window.open(req.data, 'Join Video Conferenence', 'width=1024,height=800');
+                            $mdToast.showSimple("Invited for Video Conference.")
+                        }, function(error){console.log(error);});
                         $mdToast.showSimple("Invited for Video Conference."); 
                     }
                     else {
