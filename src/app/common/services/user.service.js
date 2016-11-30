@@ -222,7 +222,16 @@ class UserService{
 		let requiredFilled = true;
 		this.kycDetails.forEach((field)=>{
 			field.error = '';
-			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER"].indexOf(field.validationType)>=0)
+			
+			if(field.requireField=="REQUIRED" && field.questionType==="DROPDOWN")
+			{
+				if (!field.selectedValue || !field.selectedValue.answerId)
+				{
+					field.error = 'This field is required.'
+				}
+				requiredFilled = requiredFilled && field.selectedValue.answerId;
+			}
+			else if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER"].indexOf(field.validationType)>=0)
 			{
 				if (!field.answerText)
 				{
@@ -230,14 +239,7 @@ class UserService{
 				}
 				requiredFilled = requiredFilled && !!field.answerText;
 			}
-			else if(field.requireField=="REQUIRED")
-			{
-				if (!field.selectedValue.answerId)
-				{
-					field.error = 'This field is required.'
-				}
-				requiredFilled = requiredFilled && field.selectedValue.answerId;
-			}
+
 			if (field.answerText && field.validationType === "NUMBER")
 			{
 				const numberTest = /^\d+(\.\d{1,2})?$/;
@@ -357,7 +359,15 @@ class UserService{
 		this.profileDetails.forEach((field)=>{
 	
 			field.error = '';
-			if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER", "CURRENCY"].indexOf(field.questionType)>=0)
+			if(field.requireField=="REQUIRED" && field.questionType==="DROPDOWN")
+			{
+				if (!!field.selectedValue || !field.selectedValue.answerId)
+				{
+					field.error = 'This field is required.'
+				}
+				requiredFilled = requiredFilled && field.selectedValue.answerId;
+			}
+			else if (field.requireField=="REQUIRED" && ["TEXT", "NUMBER", "CURRENCY"].indexOf(field.questionType)>=0)
 			{
 				if (!field.answerText)
 				{
@@ -365,14 +375,7 @@ class UserService{
 				}
 				requiredFilled = requiredFilled && !!field.answerText;
 			}
-			else if(field.requireField=="REQUIRED")
-			{
-				if (!field.selectedValue.answerId)
-				{
-					field.error = 'This field is required.'
-				}
-				requiredFilled = requiredFilled && field.selectedValue.answerId;
-			}
+
 			if (field.answerText && field.questionType === "NUMBER")
 			{
 				const numberTest = /^\d+(\.\d{1,2})?$/;
