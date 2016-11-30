@@ -361,7 +361,7 @@ class UserService{
 			field.error = '';
 			if(field.requireField=="REQUIRED" && field.questionType==="DROPDOWN")
 			{
-				if (!!field.selectedValue || !field.selectedValue.answerId)
+				if (!field.selectedValue || !field.selectedValue.answerId)
 				{
 					field.error = 'This field is required.'
 				}
