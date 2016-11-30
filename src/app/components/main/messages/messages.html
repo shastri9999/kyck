@@ -22,9 +22,13 @@
 				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;padding-top: 20px;">{{messageView.activeInboxMessage.messageContent}}</div>
 			</div>
 		</div>
-		<div ng-if="messageView.activeInboxMessage.attachUrl">
+		<div class="message-attachment" ng-if="messageView.activeInboxMessage.attachUrl">
 			{{messageView.activeInboxMessage.attachName}}
+			<a ng-href="/kyck-rest/usermessage/download?messageId={{messageView.activeInboxMessage.messageId}}">
+	            <img src="/assets/images/download.png"/>                                
+	        </a>
 		</div>
+
 		<div class="reply" ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)">
 			<textarea name="reply" placeholder="Type your message here..." ng-model="messageView.reply" id="" cols="30" rows="2"></textarea>
 			<a class="send-btn" ng-click="vm.sendMessage(messageView.activeInboxMessage, false)">Send</a>
