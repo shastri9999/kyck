@@ -409,7 +409,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
        }
 
        $rootScope.loadingProgress = true;
-       BrokerageResource.submitBrokerageApplication({"calendarSlots": brokerageReqs}, function(s) {
+       BrokerageResource.submitBrokerageApplication({},{"brokerageCalenderSlot": brokerageReqs}, function(s) {
          $rootScope.loadingProgress = false;
          for (var i=0; i<$scope.selectedPartners.length; i++) {
             $scope.selectedPartners[i].selectedAppointments = [];
@@ -592,7 +592,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     function selectUser(index) {
         CalendarService.fetchBrokerMeetings().then((data)=>{
             vm.userSlots = data.filter(function(a){
-                return a.userId === vm.userAppointment.email;
+                return a.userEmailId === vm.userAppointment.email;
             });
             vm.userSlots.map(function(a) {
                 a['startTime'] = moment(a['startTime'], 'DD/MM/YYYY hh:mm').toDate();

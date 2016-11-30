@@ -50,9 +50,6 @@ function BrokerageResource($resource) {
         },
         submitBrokerageApplication: {
             method: 'POST',
-            params: {
-                  brokerageCalenderSlot: '@calendarSlots'
-                },
             url: URL + '/brokerage/submit'
         },
     	brokeragesDetails: {
