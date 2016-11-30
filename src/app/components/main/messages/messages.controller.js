@@ -12,21 +12,25 @@ function MessagesController($state, $scope, MessageService, Upload, Authenticati
 	});
 
 	vm.isBroker = AuthenticationService.isBroker();
-    
-    vm.upload = function(file){       
-      $rootScope.mainLoading = true;
-      $rootScope.mainLoadingMessage = "Document is being uploaded... Please wait."
+    vm.addAttachment = function(file){
+    	$rootScope.messageAttachment = file;
+    }
+    vm.removeAttachment = function(file){
+    	$rootScope.messageAttachment = null;
+    }
 
+    vm.upload = function(messageId){       
+      $rootScope.mainLoadingMessage = 'Sending Message... Please Wait.';
+      $rootScope.mainLoading = true;
       Upload.upload({
         url: '/kyck-rest/usermessage/upload',
         data: {
-          file: file,
-          messageId: 26
+          file: $rootScope.messageAttachment,
+          messageId: messageId
         }
       }).then(function(response){
-        console.log(response);
-        console.log('Success: ' + response.config.data.file.name + 'Uploaded. Response: ' + response.data);
         $rootScope.mainLoading = false;
+    	$rootScope.messageAttachment = null;        
         $mdToast.show(
           $mdToast.simple()
           .textContent('File Uploaded Successfully!')
@@ -34,11 +38,11 @@ function MessagesController($state, $scope, MessageService, Upload, Authenticati
           .toastClass('md-primary')
           );
       }, function(error){
-        console.log(error);
+    	$rootScope.messageAttachment = null;        
         $rootScope.mainLoading = false;
         $mdToast.show(
           $mdToast.simple()
-          .textContent('File Upload Failed!')
+          .textContent('File Attachment Failed!')
           .position('bottom right')
           .toastClass('md-warn')
           .hideDelay(2000)
@@ -66,6 +70,7 @@ function MessagesController($state, $scope, MessageService, Upload, Authenticati
 	vm.closeMessage = (messageType)=>{
 		$rootScope.messageView['active' + messageType + 'Message'] = null;
 		$rootScope.messageView.reply = "";
+		vm.attachment = null;
 	}
 
 	vm.compose = ()=>{
@@ -74,18 +79,22 @@ function MessagesController($state, $scope, MessageService, Upload, Authenticati
 		$rootScope.messageView.activeInboxMessage = null;
 		$rootScope.messageView.activeSentMessage = null;
 		$rootScope.messageView.composing = true;
+    	$rootScope.messageAttachment = null;        
 	}
 
 	vm.closeCompose = ()=>{
 		vm.composeMessage = {};
-		$rootScope.messageView.composing = false;		
+		$rootScope.messageView.composing = false;
+    	$rootScope.messageAttachment = null;        
 	}
 	
 	vm.sendMessage = (message, forSent)=>{
 		if (!$rootScope.messageView.reply)
 			return;
 		MessageService.sendMessage(message, $rootScope.messageView.reply, forSent)
-		.then(()=>{
+		.then((response)=>{
+			if ($rootScope.messageAttachment)
+				vm.upload(response.data.data.messageId);
 			$rootScope.messageView.reply = "";
 			$mdToast.showSimple('Message Successfully Sent!');
 		});
@@ -95,7 +104,9 @@ function MessagesController($state, $scope, MessageService, Upload, Authenticati
 		if (!vm.composeMessage.messageFrom || !vm.composeMessage.messageSubject || !vm.composeMessage.messageContent)
 			return;
 		MessageService.sendMessage(vm.composeMessage, vm.composeMessage.messageContent)
-		.then(()=>{
+		.then((response)=>{
+			if ($rootScope.messageAttachment)
+				vm.upload(response.data.data.messageId);
 			vm.closeCompose();
 			$mdToast.showSimple('Message Successfully Sent!');
 		});
