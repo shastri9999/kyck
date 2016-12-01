@@ -670,8 +670,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         vm.selectedDay = day;
         vm.selectedHour = hour;
         vm.selectedTimeSlot = $selectedEvent.start.toISOString();
-
-        textContent = "You are booking an appointment on November " + day +" at "+ numToTime(hour) + " . Are you sure?";
+        textContent = "You are booking an appointment on December " + day +" at "+ numToTime(hour) + " . Are you sure?";
 
         confirm = $mdDialog.confirm({
             title: 'Book Your Appointment',

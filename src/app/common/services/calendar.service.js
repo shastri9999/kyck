@@ -23,7 +23,7 @@ class CalendarService{
 		}).then((response)=>{
 			this._$rootScope.loadingProgress=false;
 			this.slots = response.data.data;
-			return this.slots;
+			return this.slots || [];
 		});
 	}
 

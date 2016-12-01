@@ -1,13 +1,14 @@
 'use strict';
 
 class AuthenticationService {
-	constructor($http, AppConstants, $rootScope, StorageService, $state) {
+constructor($http, AppConstants, $rootScope, StorageService, $state, UserService) {
 		'ngInject';
 		this._$http = $http;
 		this._AppConstants = AppConstants;
 		this._$rootScope = $rootScope;
 		this.loggedInUser = {};
 		this._StorageService = StorageService;
+		this._UserService = UserService;
 		this.signedInUser = {};
 	}
 
@@ -90,6 +91,7 @@ class AuthenticationService {
 
 	logout(){
 		this._$rootScope.loadingProgress=true;
+		this._UserService.reInit();
 		return this._$http({
 			method: 'POST',
  			url: '/kyck-rest/user/logout/action',

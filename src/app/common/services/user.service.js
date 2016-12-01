@@ -19,6 +19,18 @@ class UserService{
 		this.brokeragesDetail = {};
 	}
 
+	reInit(){
+		this.kycDetails = [];
+		this.profileDetails = [];
+		this._kycDetails = [];
+		this._profileDetails = [];
+		this.kycFetched = false;
+		this.profileFetched = false;
+		this.userDetails = [];
+		this._userDetails = [];
+		this.userFetched = false;
+		this.brokeragesDetail = {};		
+	}
 	transFormData(fields){
 		return fields.map((field)=>{
 
