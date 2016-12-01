@@ -173,6 +173,18 @@
 			flex: 1;
 			border-radius: 3px; 
 		}
+		.message-attachment {
+			position: absolute;
+		    bottom: 150px;
+		    background: white;
+		    padding: 15px;
+		    img {
+		    	height: 16px;
+			    padding-left: 10px;
+			    border-left: 1px solid gray;
+			    margin-left: 10px;
+		    }
+		}
 		.reply {
 			display: flex;
 		}

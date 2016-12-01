@@ -35,6 +35,7 @@ function InboxController(MessageService, $rootScope) {
 		$rootScope.messageView.reply = "";
 		$rootScope.messageView.activeInboxMessage = message;
 		$rootScope.messageView.composing = false;
+		$rootScope.messageAttachment = null;
 	};
 }
 

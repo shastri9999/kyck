@@ -22,7 +22,14 @@
 				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;padding-top: 20px;">{{messageView.activeInboxMessage.messageContent}}</div>
 			</div>
 		</div>
-		<div class="reply" ngf-drag-over-class="'dragover'" ngf-drop="vm.upload($file)">
+		<div class="message-attachment" ng-if="messageView.activeInboxMessage.attachUrl">
+			{{messageView.activeInboxMessage.attachName}}
+			<a ng-href="/kyck-rest/usermessage/download?messageId={{messageView.activeInboxMessage.messageId}}">
+	            <img src="/assets/images/download.png"/>                                
+	        </a>
+		</div>
+
+		<div class="reply" ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)">
 			<textarea name="reply" placeholder="Type your message here..." ng-model="messageView.reply" id="" cols="30" rows="2"></textarea>
 			<a class="send-btn" ng-click="vm.sendMessage(messageView.activeInboxMessage, false)">Send</a>
 		</div>
@@ -39,11 +46,16 @@
 				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;padding-top: 20px;">{{messageView.activeSentMessage.messageContent}}</div>
 			</div>
 		</div>
-		<div class="reply" ngf-drag-over-class="'dragover'" ngf-drop="vm.upload($file)">
+		<div class="message-attachment" ng-if="messageView.activeSentMessage.attachUrl">
+			{{messageView.activeSentMessage.attachName}}
+			<a ng-href="/kyck-rest/usermessage/download?messageId={{messageView.activeSentMessage.messageId}}">
+	            <img src="/assets/images/download.png"/>                                
+	        </a>
+		</div>
+		<div class="reply" ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)">
 			<textarea name="reply" placeholder="Type your message here..." ng-model="messageView.reply" id="" cols="30" rows="2"></textarea>
 			<a class="send-btn" ng-click="vm.sendMessage(messageView.activeSentMessage, true)">Send</a>
-<!-- 			<a class="send-btn" ngf-select="vm.upload($file)">Upload</a>
- -->		</div>
+		</div>
 	</div>
 	<div ng-if="messageView.composing" class="right composing">
 		<div style="background-color:#f2f6f8;font-size: 22px;padding: 24px 20px;position: relative;font-weight: 300;"> Compose 
@@ -52,7 +64,7 @@
 		<div ng-if="vm.composeMessage.messageFrom" style="position: absolute;"">To</div>
 		<select type="text" name="to" ng-model="vm.composeMessage.messageFrom" placeholder="To" ng-options="mail for mail in vm.toList"/>
 		<input type="text" name="subject" ng-model="vm.composeMessage.messageSubject" placeholder="Subject">
-		<textarea ngf-drag-over-class="'dragover'" ngf-drop="vm.upload($file)" name="message" placeholder="Type your message here..." ng-model="vm.composeMessage.messageContent" cols="30" rows="20"></textarea>				
+		<textarea ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)" name="message" placeholder="Type your message here..." ng-model="vm.composeMessage.messageContent" cols="30" rows="20"></textarea>				
 		<a class="send-btn" ng-click="vm.createMessage()">Send</a>
 	</div>
 

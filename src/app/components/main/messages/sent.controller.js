@@ -36,6 +36,7 @@ function SentController(MessageService, $rootScope) {
 		$rootScope.messageView.reply = "";
 		$rootScope.messageView.activeSentMessage = message;
 		$rootScope.messageView.composing = false;
+		$rootScope.messageAttachment = null;
 	};
 }
 

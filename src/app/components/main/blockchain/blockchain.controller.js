@@ -2,7 +2,7 @@
 
 
 class BlockChainController{
-	constructor($http, $scope, $interval, $rootScope) {
+	constructor($http, $scope, $interval, $rootScope, $timeout) {
 		'ngInject';
 		this.$http = $http;
 		this.$rootScope = $rootScope;
@@ -13,6 +13,7 @@ class BlockChainController{
 		$scope.$on('$destroy', ()=>{
 			$interval.cancel(this.timer);
 		});
+		this.$timeout = $timeout;
 	}
 	
 	populateBlocks(updateStartFrom)
@@ -21,14 +22,24 @@ class BlockChainController{
 			'method':'GET',
 			url: '/kyck-rest/blockchain/blocks',
 		}).then((s)=>{
-			this.totalBlocks = +s.data.data.height;
-			if (updateStartFrom)
-				this.startFrom = Math.max(0, this.totalBlocks-12);
-			for(let i=this.currentBlocks.length; i < this.totalBlocks; ++i)
+			const newTotalBlocks =  +s.data.data.height;
+			let totalBlocks = this.currentBlocks.length;
+
+			if((newTotalBlocks - totalBlocks) > 1)
+			{
+				this.startFrom = Math.max(0, newTotalBlocks-10);
+			}
+
+			for(let i=totalBlocks; i < newTotalBlocks; ++i)
 			{
 				this.currentBlocks.push({
 					number: i,
 				});
+			}
+
+			if (newTotalBlocks > totalBlocks)
+			{
+				this.$timeout(()=>{this.startFrom = Math.max(0, newTotalBlocks-10);}, 5000);
 			}
 		}).catch((error)=>{
 			this.$rootScope.$broadcast('logout');
@@ -59,6 +70,7 @@ class BlockChainController{
 				params: {blockId: number}
 			}).then((s)=>{
 				const transaction = s.data.data.firstTransaction;
+				transaction.className = "color-" + transaction.type;
 				this.currentBlocks[number] = {
 					...block,
 					...transaction

@@ -50,9 +50,6 @@ function BrokerageResource($resource) {
         },
         submitBrokerageApplication: {
             method: 'POST',
-            params: {
-                  brokerageCalenderSlot: '@calendarSlots'
-                },
             url: URL + '/brokerage/submit'
         },
     	brokeragesDetails: {
@@ -92,13 +89,9 @@ function BrokerageResource($resource) {
     		},
     		url: URL + '/kyckuseranswer/update/action'
     	},
-        startconference: {
+        getroom: {
             method: 'POST',
-            params: {
-                emailId : '@emailId',
-                userId : '@userId'
-            },
-            url: URL + '/webconf/startconference'
+            url: URL + '/webconf/getroom'
         }
     });
 }

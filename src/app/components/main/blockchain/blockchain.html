@@ -7,12 +7,17 @@
 		Block chain
 	</div>
 	<div class="blocks" ng-if="vm.expanded">
-		<div id="blockchain-{{block.number}}" ng-mouseover="vm.fetchInfo(block.number)" class="block-wrapper" ng-repeat="block in vm.currentBlocks" ng-if="$index >= vm.startFrom">
-			<div class="block">{{block.number}}</div>
-			<div class="info" id="blockinfo-{{block.number}}">
-				<div ng-if="block.timestamp" style="padding-bottom: 5px;">Date: {{block.timestamp}}</div>
-				<div ng-if="block.timestamp">Type: Invocation</div>
-				<img ng-if="!block.timestamp" style="width: 40px; height: 40px;" src="/assets/images/loading.gif" alt="">
+		<div id="blockchain-{{block.number}}" class="block-wrapper" ng-repeat="block in vm.currentBlocks" ng-if="$index >= vm.startFrom">
+			<div class="block {{block.className}}" ng-mouseover="vm.fetchInfo(block.number)">
+				<div class="block-number">{{block.number}}</div>
+				<div class="block-top"></div>
+				<div class="block-left"></div>
+				<div class="block-right"></div>
+				<div class="info" id="blockinfo-{{block.number}}">
+					<div ng-if="block.timestamp" style="padding-bottom: 5px;">Date: {{block.timestamp}}</div>
+					<div ng-if="block.timestamp">Type: Invocation</div>
+					<img ng-if="!block.timestamp" style="width: 40px; height: 40px;" src="/assets/images/loading.gif" alt="">
+				</div>
 			</div>
 		</div>
 	</div>
