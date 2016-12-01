@@ -24,7 +24,7 @@ export default angular.module('kyck', [
 	]
 	)
 .config(config)
-.run(function($rootScope, $location, AuthenticationService, $http, $timeout){
+.run(function($rootScope, $location, AuthenticationService, $http, $timeout, Upload){
 	'ngInject';
 
 	/* Todo: Move all this to service */
@@ -42,6 +42,7 @@ export default angular.module('kyck', [
 	$rootScope.canEnableOCR = false;
 	$rootScope.cropping = false;
 	$rootScope.originalPreviewURL = null;
+	$rootScope.croppedBlob = null;
 
 	window.cropper = null;
 
@@ -50,9 +51,13 @@ export default angular.module('kyck', [
 		{
 			const canvasElement = window.cropper.getCroppedCanvas();
 			$rootScope.documentPreviewURL = canvasElement.toDataURL();
-			window.cropper.destroy();
-			window.cropper = null;
-			$rootScope.cropping = false;
+			canvasElement.toBlob((blob)=>{
+				blob.name = $rootScope.viewingDocument.documentName;
+				$rootScope.croppedBlob = blob;
+				window.cropper.destroy();
+				window.cropper = null;
+				$rootScope.cropping = false;
+			});
 		}
 		else
 		{
@@ -70,6 +75,28 @@ export default angular.module('kyck', [
 			window.cropper.reset();
 		else
 			$rootScope.documentPreviewURL = $rootScope.originalPreviewURL;
+		$rootScope.croppedBlob = null;
+	}
+
+	$rootScope.uploadCroppedImage = ()=>{
+		if ($rootScope.documentPreviewURL == $rootScope.originalPreviewURL && !$rootScope.croppedBlob)
+			return;
+		$rootScope.cropping = false;
+		$rootScope.documentPreviewLoading = true;
+		const blob = $rootScope.croppedBlob; //Upload.dataUrltoBlob($rootScope.documentPreviewURL, $rootScope.viewingDocument.documentName);
+		Upload.upload({
+			url: '/kyck-rest/document/upload?documentType='+ $rootScope.viewingDocument.documentType,
+			data: {
+			  file: blob
+			}
+		}).then((response)=>{
+			$rootScope.cropping = true;
+			$rootScope.documentPreviewLoading = false;
+			$rootScope.originalPreviewURL = $rootScope.documentPreviewURL;
+		}).catch((e)=>{
+			$rootScope.cropping = true;
+			$rootScope.documentPreviewLoading = false;			
+		});
 	}
 
 	$rootScope.closeCropper = ()=>{
@@ -86,7 +113,10 @@ export default angular.module('kyck', [
 		$rootScope.shouldShowDocumentPreview = false;
 		$rootScope.canEnableOCR = false;
 		$rootScope.OCRView = false;	
-		$rootScope.cropping = false;		
+		$rootScope.cropping = false;
+		$rootScope.croppedBlob = null;
+		$rootScope.originalPreviewURL = null;
+		$rootScope.documentPreviewURL = null;		
 	}
 	
 	$rootScope.showDocumentPreview = (URL)=>{

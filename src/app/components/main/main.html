@@ -43,9 +43,9 @@
 						<img style="margin-right: 18px;cursor: pointer;outline: none;" ng-click="toggleCropper()" ng-src="/assets/images/crop{{cropping?'':'-expand'}}.png" title="Crop" ng-if="!OCRView && !documentPreviewLoading" alt="Crop">
 						<img style="margin-right: 18px;cursor: pointer;outline: none;"  ng-click="resetCropper()" src="/assets/images/retake.png" title="Reset" ng-if="!OCRView && !documentPreviewLoading" alt="Reset">
 						<img style="margin-right: 18px;cursor: pointer;outline: none;"  ng-click="closeCropper()" src="/assets/images/crop-delete.png" title="Close" ng-if="!OCRView && !documentPreviewLoading && cropping" alt="Close">
-						<a class="verify-btn" ng-click="crop()" ng-if="!OCRView && cropping && !documentPreviewLoading || (documentPreviewURL!=originalPreviewURL && !documentPreviewLoading)">Upload</a>
+						<a class="verify-btn" ng-click="uploadCroppedImage()" ng-if="!OCRView && cropping && !documentPreviewLoading || (documentPreviewURL!=originalPreviewURL && !documentPreviewLoading)" ng-disabled="documentPreviewURL==originalPreviewURL">Upload</a>
 						<a class="verify-btn" ng-click="showOCRView()" ng-if="!OCRView && viewingDocument.OCR.length && !cropping && documentPreviewURL==originalPreviewURL">Verify OCR</a>
-						<a class="done-btn" ng-click="hideDocumentPreview()" ng-if="OCRView || !viewingDocument.OCR.length">Done</a>
+						<a class="done-btn" ng-click="hideDocumentPreview()" ng-if="(OCRView || !viewingDocument.OCR.length) && !cropping">Done</a>
 					</div>
 				</div>
 			</div>
