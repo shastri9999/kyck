@@ -1,6 +1,6 @@
 'use strict';
 
-function DashboardController (DashboardResource, AuthenticationService, MessageService, CalendarService, $rootScope, $state, moment) {
+function DashboardController (DashboardResource, AuthenticationService, MessageService, BrokerageResource, CalendarService, $rootScope, $state, moment) {
 	'ngInject';
 	const vm=this;
 	vm.isBroker = AuthenticationService.isBroker();
@@ -53,9 +53,11 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 		});
 	}
 	
-	$rootScope.loadingProgress = true;
+	vm.joinConference = (appointment)=>{
+		console.log(appointment);
+	}
+
 	MessageService.fetchInbox().then((messages)=>{
-		$rootScope.loadingProgress = false;
 		vm.messages = messages;
 	})
 

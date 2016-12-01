@@ -19,11 +19,10 @@
 						<div ng-switch on="appointment.status">
 							<div ng-switch-when="CONFIRM">
 								<a class="pending-btn">{{appointment.status}}</a>
-								<a class="conference-btn">Join Conference</a>
+								<a class="conference-btn" ng-click="joinConference(appointment)">Join Conference</a>
 							</div>
 							<div ng-switch-when="PENDING">
 								<a class="pending-btn">{{appointment.status}}</a>
-								<a class="conference-btn">Join Conference</a>
 							</div>
 							<div ng-switch-when="completed">
 								<a href="" class="completed-btn">Completed</a>
