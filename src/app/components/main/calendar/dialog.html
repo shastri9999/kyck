@@ -2,7 +2,7 @@
   <md-dialog-content style="width:400px; overflow: hidden;">
     <div style="position: fixed; right: 10px; top: 10px;" ng-click="closeDialog()"><img src="/assets/images/close-message.png" /></div>
     <div class="dialog-content-broker calendarPopup" style="padding: 20px; padding-left: 35px;" flex layout="column">
-    <div flex layout="row" style="min-height: 40px;margin-top: 30px;" ng-if="isBroker">
+    <div flex layout="row" style="min-height: 40px;margin-top: 30px;">
       <div class="avatar-circle" ng-if="!appointment.avatar" flex="20" style="max-height: 40px; max-width: 40px;">
         {{slot.userFirstName + slot.brokerFirstname |limitTo:1|capitalize}}
         {{slot.userLastName + slot.brokerLastname|limitTo:1|capitalize}}
@@ -20,17 +20,20 @@
         </div>
       </div>
     </div>
-    <div style="min-height: 40px; margin-top: 30px; width:100%" ng-if="!isBroker">
+<!--     <div style="min-height: 40px; margin-top: 30px; width:100%" ng-if="!isBroker">
       <div style="color: rgba(0,0,0,0.9); margin-top:10px;">{{slot.meetingContent}}<br></div>
       <div style="color: rgba(0,0,0,0.5); margin-top:10px;">{{slot.startTime | date: 'HH:MM a'}}</div>
       <div style="color: rgba(0,0,0,0.5); margin-top:10px;">{{slot.meetingLocation}}</div>
-    </div>
+    </div> -->
 	<br>
 
 	<div layout="row" flex align-items="center" align-content="flex-end" style="width: 100%; justify-content: center; margin-top: 10px;">
-	  <div><md-button class="md-raised md-success" ng-click="updateAppointment('CONFIRM')" ng-if="slot.ifConfirmButton">Confirm</md-button></div>
-    <div><md-button class="md-raised md-success" ng-click="updateAppointment('JOIN')" ng-if="slot.ifJoinVideoButton">Join Conference</md-button></div>
-	  <div><md-button class="md-raised md-blue" ng-click="updateAppointment('RESCHEDULE')" ng-if="slot.ifRescheduleButton">Reschedule</md-button></div>
+	  <div><md-button class="md-raised md-success" ng-click="updateAppointment('CONFIRM')" ng-if="slot.ifConfirmButton"><span style="    text-transform: none;
+    padding: 20px;">Confirm</span></md-button></div>
+    <div><md-button class="md-raised md-success" ng-click="updateAppointment('JOIN')" ng-if="slot.ifJoinVideoButton"><span style="    text-transform: none;
+    padding: 20px;">Join Conference</span></md-button></div>
+	  <div><md-button class="md-raised md-blue" ng-click="updateAppointment('RESCHEDULE')" ng-if="slot.ifRescheduleButton"><span style="    text-transform: none;
+    padding: 20px;">Reschedule</span></md-button></div>
 	</div>
     </div>
   </md-dialog-content>

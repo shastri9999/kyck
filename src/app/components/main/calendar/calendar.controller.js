@@ -26,6 +26,12 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
 
             ifConfirmButton=false;
         }
+        if (status == "PENDING") {
+            formattedStatus="Pending";
+            customClass="GOLDEN";
+            ifConfirmButton=false;
+            ifJoinVideoButton=false;
+        }
         else if (status == "REJECT") {
             formattedStatus="Rejected"
             customClass="RED";
@@ -37,7 +43,6 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, C
         else if(status == "RESCHEDULE") {
             customClass = "GOLDEN";
             formattedStatus = "Pending";
-
             ifJoinVideoButton = false;
         }
         // else if (status == "RESCHEDULE") {
