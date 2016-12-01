@@ -517,7 +517,6 @@
 }
 
 .ticked {
-	background: url(../../../../assets/images/ticked.png) no-repeat;
 	outline: none;
 	height: 34px;
 	width:34px;
@@ -526,13 +525,11 @@
 	margin-right: 5px;
 	background-size: 34px;
 	&.grey {
-		background: url(../../../../assets/images/tickedgrey.png) no-repeat;
 		background-size: 34px;
 	}
 }
 
 .unticked {
-	background: url(../../../../assets/images/unticked.png) no-repeat;	
 	outline: none;
 	height: 34px;
 	width:34px;
@@ -540,7 +537,6 @@
 	float: left;
 	background-size: 34px;
 	&.grey {
-		background: url(../../../../assets/images/untickedgrey.png) no-repeat;
 		background-size: 34px;
 	}
 }
