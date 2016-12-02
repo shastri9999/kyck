@@ -116,7 +116,12 @@ export default angular.module('kyck', [
 		$rootScope.cropping = false;
 		$rootScope.croppedBlob = null;
 		$rootScope.originalPreviewURL = null;
-		$rootScope.documentPreviewURL = null;		
+		$rootScope.documentPreviewURL = null;
+		if (window.cropper)
+		{
+			window.cropper.destroy();
+			window.cropper = null;
+		}
 	}
 	
 	$rootScope.showDocumentPreview = (URL)=>{
