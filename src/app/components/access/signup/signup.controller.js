@@ -1,5 +1,7 @@
 'use strict';
 
+import LibPhoneNumber from 'google-libphonenumber';
+
 class SignUpController {
 	constructor(AuthenticationService, PhoneService, $state, $scope, $rootScope){
 		'ngInject';
@@ -17,11 +19,22 @@ class SignUpController {
 		this._$rootScope.terms.agreeEnabled = false;
 		this._$rootScope.terms.agree = false;
 		this._$rootScope.terms.show = false;
-
+		this.PhoneUtil = LibPhoneNumber.PhoneNumberUtil.getInstance();
 	}
 
+	validatePhone(extension, number)
+	{
+ 		const phoneNumber = this.PhoneUtil.parse(number , this.PhoneUtil.getRegionCodeForCountryCode(extension.slice(1)));
+ 		return this.PhoneUtil.isValidNumber(phoneNumber);
+	}
 	signUp(){
 		const scope = this._$scope;
+		this.invalidPhone = false;
+		if (!this.validatePhone(scope.phoneExtenstion, scope.phonenumber))
+		{
+			this.invalidPhone = true;
+			return;
+		}
 		if (this._$rootScope.terms.agree)
 		{
 			this.invalidCredentials = false;

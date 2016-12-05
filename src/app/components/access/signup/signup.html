@@ -33,6 +33,9 @@
 			</select>
 			<input style="width: 290px;" type="phone" ng-model="phonenumber" placeholder="Phone number" required>				
 		</div>
+		<p class="error" style="color:red;text-align: center;" ng-if="phonenumber && vm.invalidPhone">Please enter a valid phone number for selected region.</p>
+
+
 
 		<div ng-if="signUpForm.phone.$touched">
 			<div ng-messages="signUpForm.phone.$error">
