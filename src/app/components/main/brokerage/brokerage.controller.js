@@ -161,6 +161,10 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
         }
 
+        else {
+            $rootScope.sideNavCollapsed = true;
+        }
+
         $rootScope.loadingProgress = true;
         BrokerageResource.userprofileget(function(response){
             $rootScope.loadingProgress = false;
