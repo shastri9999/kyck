@@ -6,7 +6,7 @@
 		<div class="dialog">
 			<div class="close" ng-click="terms.show=false">×</div>
 			<div class="header">Terms and Conditions</div>
-			<div class="content">
+			<div class="content" term-scroller>
 				<h2>Acceptance of Terms of Use</h2>
 				<p>1. Please read these terms of use (“Terms”) carefully. These Terms govern your access to and use of the products and services of Finkyck Pte. Ltd. and/or any subsidiaries, affiliates or related companies of Finkyck Pte. Ltd. (“Finkyck Pte. Ltd.”, “We”, “Us”, “Our”) including, without limitation, any applications of Finkyck Pte. Ltd. (including the Kyck website and application (the “Kyck Platform”) and any related services including notifications (collectively, the “Services”) and any information, data, or other content or materials appearing or otherwise made accessible on or through the Services (collectively, the “Content”). By accessing or using our Services or Content, you agree to be bound by these Terms and conclude a legally binding contract with us. If you do not agree to these Terms, please do not download, access or use our Services.</p>
 				<h3>Changes to Terms of Use</h3>
@@ -135,7 +135,7 @@
 			</div>
 			<div class="footer">
 				<a class="btn cancel" ng-click="terms.agree=false;terms.show=false;">Cancel</a>
-				<a class="btn agree" ng-click="terms.agree=true;terms.show=false;">I Agree</a>
+				<a ng-class="{btn:true, agree:true,disabled:!terms.agreeEnabled}" ng-click="agreeTerms()">I Agree</a>
 			</div>
 		</div>
 	</div>

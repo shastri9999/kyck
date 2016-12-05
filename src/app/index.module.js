@@ -30,9 +30,17 @@ export default angular.module('kyck', [
 	/* Todo: Move all this to service */
 	$rootScope.terms = {
 		agree: false,
-		show: false
+		show: false,
+		agreeEnabled: false
 	};
-	
+	$rootScope.agreeTerms = ()=>{
+		if ($rootScope.terms.agreeEnabled)
+		{
+			$rootScope.terms.agree = true;
+			$rootScope.terms.show = false;
+		}
+	};
+
 	$rootScope.sideNavCollapsed = false;
 	$rootScope.shouldShowDocumentPreview = false;
 	$rootScope.documentPreviewLoading = false;

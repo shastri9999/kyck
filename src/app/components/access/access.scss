@@ -79,6 +79,11 @@
                         color: white;
                         background-color: #3498db;
                     }
+                    &.disabled:hover, &.agree.disabled {
+                        color:rgba(79,99,121,0.4);
+                        background-color: #ecf0f1;
+                        cursor: not-allowed;
+                    }
                 }
 
             }

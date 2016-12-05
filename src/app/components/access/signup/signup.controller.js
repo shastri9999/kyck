@@ -14,6 +14,10 @@ class SignUpController {
 		});
 		this.phoneExtenstions = PhoneService.phoneExtensions;
 		this.signedUp = false;
+		this._$rootScope.terms.agreeEnabled = false;
+		this._$rootScope.terms.agree = false;
+		this._$rootScope.terms.show = false;
+
 	}
 
 	signUp(){
@@ -23,7 +27,6 @@ class SignUpController {
 			this.invalidCredentials = false;
 			const phone = scope.phoneExtenstion + "~" + scope.phonenumber;
 			this._AuthenticationService.register(scope.firstname, scope.lastname, phone, scope.username).then((data)=>{
-				console.log(data);
 				this.signedUp = true;
 				this._$rootScope.loadingProgress=false;
 			}).catch((e)=>{

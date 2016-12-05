@@ -43,7 +43,7 @@
 		<input type="submit" class="button" value="Sign Up">
 
 		<div style="display: flex; justify-content: center;margin-top: 25px;">
-			<input type="checkbox" class="checkbox" ng-model="terms.agree">
+			<input ng-disabled="!terms.agreeEnabled" type="checkbox" class="checkbox" ng-model="terms.agree">
 			&nbsp;Agree to&nbsp;<a style="color: #7b868a;cursor: pointer;text-decoration: underline;" ng-click="terms.agree=false;terms.show=true;">Terms & Conditions</a>	
 		</div>
 		<p class="error" style="color:red;text-align: center;" ng-if="!terms.agree && vm.invalidCredentials">Please agree to terms and condtions.</p>

@@ -1,5 +1,6 @@
 'use strict';
 
+import TermScroller from './term-scroller.directive';
 import SignUpModule from './signup/signup.module';
 import SignInModule from './signin/signin.module';
 import ForgotPasswordModule from './forgot-password/forgot-password.module';
@@ -14,6 +15,8 @@ const AccessModule = angular.module('access-module', [
 	 ForgotPasswordModule.name,
 	 ChangePasswordModule.name
 	]);
+
+AccessModule.directive('termScroller', TermScroller);
 
 AccessModule.config(route);
 
