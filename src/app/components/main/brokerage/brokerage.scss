@@ -25,7 +25,7 @@
 	.right-stat {
 		order: 2;
 		width: 240px;
-		overflow: hidden;
+		overflow: scroll;
 		position:relative;
 		min-height: calc(100vh - 100px);
 		.contact-brokerage
