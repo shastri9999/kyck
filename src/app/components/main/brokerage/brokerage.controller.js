@@ -272,7 +272,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         var events = [];
         var currentD = new Date();
         var currentDate = currentD.getDate();
-        for(var j=0; j<= 30; ++j)
+        for(var j=0; j<= 300; ++j)
         {
             //if date is valid else don't execute the for loop
             var day = currentD.getDay() + j;
