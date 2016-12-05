@@ -253,6 +253,10 @@
 
 			.partnerLogo.selected {
 				outline: none;
+				background: url(../../../../assets/images/ticked.png) no-repeat;
+			    background-position-x: 175px;
+			    background-position-y: 5px;
+				background-size: 16px;
 				border: 0;
 				border: solid 2px #3aafa5;
 			}
