@@ -142,6 +142,11 @@ table {
 
   }
 }
+
+md-step-body kyc-form form, md-step-body profile-form form {
+  justify-content: center;
+}
+
 kyc-form form, profile-form form{
    display: flex;
    flex-flow: row wrap;

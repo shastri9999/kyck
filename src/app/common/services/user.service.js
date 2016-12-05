@@ -158,7 +158,7 @@ class UserService{
 				const data = response.data.data;
 				this._userDetails = this.transFormUserData(data);
 				this.userDetails = angular.copy(this._userDetails);
-				this.userFetched = true;
+				//this.userFetched = true;
 				return this.userDetails;
 			});
 		}
@@ -180,7 +180,7 @@ class UserService{
 			}).then((response)=>{
 				this._kycDetails = this.transFormData(response.data.data);
 				this.kycDetails = angular.copy(this._kycDetails);
-				this.kycFetched = true;
+				//this.kycFetched = true;
 				return this.kycDetails;
 			});
 		}
@@ -213,7 +213,7 @@ class UserService{
 			}).then((response)=>{
 				this._profileDetails = this.transFormData(response.data.data);
 				this.profileDetails = angular.copy(this._profileDetails);
-				this.profileFetched = true;
+				//this.profileFetched = true;
 				return this.profileDetails;
 			});
 		}
