@@ -106,6 +106,8 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         vm.toggleShowPartner = toggleShowPartner;
 
         vm.changeUsers = changeUsers;
+        vm.changeBrokerageApplications = changeBrokerageApplications;
+
         $rootScope.loadingProgress = false;
 
         if (!vm.isBroker)
@@ -113,6 +115,8 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             $rootScope.loadingProgress = true;
             BrokerageResource.contactedBrokerages((response)=>{
                 vm.contactedBrokers = response.data;
+                vm.filteredContactedBrokers = vm.contactedBrokers;
+
                 BrokerageResource.brokeragesList((req)=> {
                     $rootScope.loadingProgress = false;
                     var brokeragesList = req.data;
@@ -575,6 +579,12 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
     function changeUsers() {
         vm.userAppointmentsFiltered = vm.userAppointments.filter(searchAppointment);
+    }
+
+    function changeBrokerageApplications() {
+        vm.filteredContactedBrokers = vm.contactedBrokers.filter(function(item) {
+            return searchText(vm.searchBrokerageApplications.toLowerCase(), item.brokerageId.toLowerCase());
+        })
     }
 
     function getDate(offsetDays, hour) {
