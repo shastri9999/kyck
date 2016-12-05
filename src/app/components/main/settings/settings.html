@@ -1,7 +1,7 @@
 <div class="settings-area">
 	<div class="navigation">
 		<a ui-sref-active="active" class="tab" ui-sref="main.settings.profile"> Personal Details </a>
-		<a ui-sref-active="active" class="tab" ui-sref="main.settings.kyc"> KYC </a>	
+		<a ng-if="!vm.isBroker" ui-sref-active="active" class="tab" ui-sref="main.settings.kyc"> KYC </a>	
 		<a ui-sref-active="active" class="tab" ui-sref="main.settings.changepassword"> Change Password </a>	
 	</div>
 	<div class="form-area" ui-view>
