@@ -353,6 +353,14 @@ class UserService{
 		}).catch((e)=>console.log(e))
 	}
 
+	changePassword(oldPassword, newPassword){
+		return this._$http({
+			method: 'POST',
+			url: this.URL + '/user/change-password/action',
+			data: {"userPassword": oldPassword, "newPassword": newPassword}
+		});
+	}
+
 	saveProfileFields(){
 		let userDetailsFilled = true;
 		this.userDetails.forEach((field)=>{

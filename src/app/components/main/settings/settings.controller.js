@@ -41,7 +41,7 @@ function SettingsController($scope,$state, UserService, AuthenticationService, $
 				$mdToast.showSimple("Please fill all fields marked as *");
 			});
 		}
-		else
+		else if (name.indexOf('kyc') >= 0)
 		{
 			this.mainLoadingMessage = 'Saving KYC Details... Please wait.';
 			UserService.saveKYCFields().then((s)=>{
@@ -51,6 +51,11 @@ function SettingsController($scope,$state, UserService, AuthenticationService, $
 				this.mainLoading = false;
 				$mdToast.showSimple("Please fill all fields marked as *");
 			});
+		}
+		else if (name.indexOf('change-password') >= 0)
+		{
+			this.mainLoadingMessage = 'Changing Password... Please wait.';
+			UserService.changePassword()
 		}
 	}
 }
