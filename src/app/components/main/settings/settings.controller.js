@@ -1,10 +1,11 @@
 'use strict';
 
-function SettingsController($scope,$state, UserService, $mdToast) {
+function SettingsController($scope,$state, UserService, AuthenticationService, $mdToast) {
 	'ngInject';
 	
 	const vm = this;
-
+	vm.isBroker = AuthenticationService.isBroker();
+	
 	$scope.state = $state;
 	$scope.$watch('state.current', function(state){
 		if(state.name === 'main.settings'){

@@ -42,7 +42,7 @@ class BlockChainController{
 				this.$timeout(()=>{this.startFrom = Math.max(0, newTotalBlocks-10);}, 5000);
 			}
 		}).catch((error)=>{
-			this.$rootScope.$broadcast('logout');
+			//this.$rootScope.$broadcast('logout');
 		})
 	}
 

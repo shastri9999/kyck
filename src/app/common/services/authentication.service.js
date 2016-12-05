@@ -124,6 +124,19 @@ constructor($http, AppConstants, $rootScope, StorageService, $state, UserService
 		return this.getLoggedInUser().userType;
 	}
 
+	checkSignedIn() {
+		if (this.loggedInUser)
+		{
+			this._$http({
+				method: 'GET',
+				url: '/kyck-rest/user/get/action'
+			}).then((data)=>{
+			}).catch((error)=>{
+				this._$rootScope.$broadcast('logout');
+			})
+		}
+	}
+
 	getLoggedInUser(){
 		return this._StorageService.getItem('loggedInUser');
 	}

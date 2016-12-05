@@ -172,7 +172,11 @@ export default angular.module('kyck', [
 		if (!loggedIn && !isAccessPage) {
 			$location.url('/signin');              	
 		}
-
+		else
+		{
+			AuthenticationService.checkSignedIn();
+		}
+		
 		/* Todo: Move all this to service */
 		$rootScope.breadCrumb = next.breadCrumb;
 		$rootScope.messageView.reply = "";
