@@ -58,13 +58,13 @@ export default angular.module('kyck', [
 		if (window.cropper)
 		{
 			const canvasElement = window.cropper.getCroppedCanvas();
+			$rootScope.cropping = false;
 			$rootScope.documentPreviewURL = canvasElement.toDataURL();
 			canvasElement.toBlob((blob)=>{
 				blob.name = $rootScope.viewingDocument.documentName;
 				$rootScope.croppedBlob = blob;
 				window.cropper.destroy();
 				window.cropper = null;
-				$rootScope.cropping = false;
 			});
 		}
 		else
@@ -78,11 +78,23 @@ export default angular.module('kyck', [
 		}
 	}
 
+	$rootScope.rotateCropper = (value)=>{
+		if (window.cropper)
+		{
+			window.cropper.rotate(value)
+		}
+	}
+
 	$rootScope.resetCropper = ()=>{
-		if (window.cropper && $rootScope.cropping)
+		if (window.cropper)
+		{
 			window.cropper.reset();
-		else
-			$rootScope.documentPreviewURL = $rootScope.originalPreviewURL;
+			window.cropper.destroy();
+			window.cropper = null;
+		}
+
+		$rootScope.documentPreviewURL = $rootScope.originalPreviewURL;
+		$rootScope.cropping = false;
 		$rootScope.croppedBlob = null;
 	}
 
@@ -91,7 +103,7 @@ export default angular.module('kyck', [
 			return;
 		$rootScope.cropping = false;
 		$rootScope.documentPreviewLoading = true;
-		const blob = $rootScope.croppedBlob; //Upload.dataUrltoBlob($rootScope.documentPreviewURL, $rootScope.viewingDocument.documentName);
+		const blob = $rootScope.croppedBlob;
 		Upload.upload({
 			url: '/kyck-rest/document/upload?documentType='+ $rootScope.viewingDocument.documentType,
 			data: {
@@ -105,16 +117,6 @@ export default angular.module('kyck', [
 			$rootScope.cropping = true;
 			$rootScope.documentPreviewLoading = false;			
 		});
-	}
-
-	$rootScope.closeCropper = ()=>{
-		$rootScope.documentPreviewURL = $rootScope.originalPreviewURL;
-		if (window.cropper)
-		{
-			window.cropper.destroy();
-			window.cropper = null;
-			$rootScope.cropping = false;
-		}
 	}
 
 	$rootScope.hideDocumentPreview = ()=>{
