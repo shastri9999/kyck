@@ -258,21 +258,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
         }
 
-        const leadingZeros = (number, zeros=2)=>{
-            let string = (number || 0) + "";
-            while (string.length < zeros)
-                string = "0" + string;
-            return string;
-        } 
-        BrokerageResource.validationReports({
-            userId: AuthenticationService.getLoggedInUser().userId
-        },(response)=>{
-            vm.validationReports = response.data.checkList;
-            vm.validationAcceptedCount = leadingZeros(vm.validationReports.filter(x=>x.status==="PASS").length);
-            vm.validationRejectedCount = leadingZeros(vm.validationReports.filter(x=>x.status!=="PASS").length);
-            vm.validationTotalCount = leadingZeros(vm.validationReports.length);
-        });
-
         var events = [];
         var currentD = new Date();
         var currentDate = currentD.getDate();
@@ -624,6 +609,21 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
         drawCharts();
 
+        const leadingZeros = (number, zeros=2)=>{
+            let string = (number || 0) + "";
+            while (string.length < zeros)
+                string = "0" + string;
+            return string;
+        } 
+      
+        BrokerageResource.validationReports({
+            userId: vm.userAppointment.email
+        },(response)=>{
+            vm.validationReports = response.data.checkList;
+            vm.validationAcceptedCount = leadingZeros(vm.validationReports.filter(x=>x.status==="PASS").length);
+            vm.validationRejectedCount = leadingZeros(vm.validationReports.filter(x=>x.status!=="PASS").length);
+            vm.validationTotalCount = leadingZeros(vm.validationReports.length);
+        });
 
         $rootScope.loadingProgress = true;
         BrokerageResource.brokeragesDetails({'userEmailId':vm.userAppointment.email}, function (req) {
