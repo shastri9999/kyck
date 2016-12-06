@@ -44,7 +44,7 @@
         <div style="position:absolute;right:15px;left:10px;z-index: 2;">
             <div><progress-display chart-id="brokerage-progress" is-vertical="true"/></div>
              <div class="contact-brokerage">
-                <div style="position: relative;display: flex; flex-flow: column;">
+                <div style="position: relative;display: flex; flex-flow: column; margin-top: 15px;">
                     <h2 style="color:white;">Brokerage Applications</h2>
                     <input type="text" placeholder="Search" ng-model="vm.searchBrokerageApplications" type="search" ng-change="vm.changeBrokerageApplications()" > 
                     <img src="/assets/images/search.png" alt="Search" style="position: absolute;right:2px;top:40px;">   
@@ -258,7 +258,7 @@
                                 <div class="meetingDetailsHeading">Meeting Details</div>
                                 <div class="meetingDetailsContent" layout="row" flex ng-repeat="slot in selectedPartners[$index]['selectedAppointments']">
                                     <div flex="10"><img src="../../../../assets/images/clockicon.png" width="24" /></div>
-                                    <div flex="90" class="timings">Time slot - {{slot | date:'medium'}}</div>
+                                    <div flex="90" class="timings">Time slot - {{slot | date:'MMM dd, yyyy HH:mm a'}}</div>
                                 </div>
                             </div>
                         </div>
@@ -306,7 +306,7 @@
         </div>
         </md-stepper>
 
-        <footer style="position: fixed; bottom: 54px; z-index: 0;">
+        <footer style="position: fixed; bottom: 40px; z-index: 0; background: none;">
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
                 <md-button class="md-raised md-back" ng-click="vm.backStep()" ng-show="vm.getActiveStep()>1">Back</md-button>
                 <md-button ng-if="!isBroker" class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !vm.timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
