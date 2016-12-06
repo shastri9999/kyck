@@ -30,7 +30,7 @@
 		min-height: calc(100vh - 100px);
 		.contact-brokerage
 		{
-			margin-top: 10px;
+			margin-top: 45px;
 			input {
 				height: 45px;
 				padding-left: 10px;
@@ -286,7 +286,8 @@
 	width: 250px;
 	background-color: #f9fbfc;
 	height: calc(100vh - 120px);
-	overflow: hidden;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .rightSide {

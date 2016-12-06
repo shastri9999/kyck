@@ -346,14 +346,18 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 "userId": vm.userAppointment.email
             },
         function (response) {
-            $rootScope.loadingProgress = false;
-            vm.userSlots = vm.userSlots.map(function(a){
-                if (a.userId == vm.userAppointment.email)
-                    a.status = "CONFIRM";
-                return a;
+            CalendarService.fetchBrokerMeetings().then((data)=>{
+                $rootScope.loadingProgress = false;
+                vm.userSlots = data.filter(function(a){
+                    return a.userEmailId === vm.userAppointment.email;
+                });
+                vm.userSlots.map(function(a) {
+                    a['startTime'] = moment(a['startTime'], 'DD/MM/YYYY hh:mm').toDate();
+                })
             });
+            
 
-            vm.userAppointments[vm.selectedIndex]['applicationStatus'] = "APPROVED";
+            // vm.userAppointments[vm.selectedIndex]['applicationStatus'] = "APPROVED";
 
             $mdToast.showSimple("Appointment slot has been successfully "+formatStatus(status)+".");
         }, function (error) {
@@ -365,8 +369,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
         for (var i=0; i<$scope.selectedPartners.length; i++) {
             var partner = $scope.selectedPartners[i];
-            console.log('logging', partner.selectedAppointments, !partner.selectedAppointments);
-
             if (!partner.selectedAppointments) {
                 $mdToast.showSimple("No time slot selected for "+partner.brokerageName+". Please select atleast 1 time slot.");
                 return;
