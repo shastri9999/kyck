@@ -52,10 +52,52 @@ function SettingsController($scope,$state, UserService, AuthenticationService, $
 				$mdToast.showSimple("Please fill all fields marked as *");
 			});
 		}
-		else if (name.indexOf('change-password') >= 0)
+		else if (name.indexOf('changepassword') >= 0)
 		{
+			const details = UserService.getChangePasswordDetails();
+			let valid = true;
+			
+			if (details.userPassword.length == 0)
+			{
+				valid = false;
+				details.error = 'Password cannot be empty';
+			}
+			else if(details.newPassword.length > 15 || details.newPassword.length < 8)
+			{
+				details.error = 'New Password must contain 8-15 characters';
+				valid = false;
+			}
+			else if(details.newPassword != details.confirmPassword)
+			{
+				details.error = 'Passwords donot match.';
+				valid = false;
+			}
+
+			if (!valid)
+			{
+				return;
+			}
+			details.error = '';
 			this.mainLoadingMessage = 'Changing Password... Please wait.';
-			UserService.changePassword()
+			this.mainLoading = true;
+			UserService.changePassword().then((data)=>{
+				UserService.resetChangePasswordDetails();
+				this.mainLoading = false;
+				const response = data.data;
+				if(!response.data && response.Message)
+				{
+					details.error = response.Message;
+				}
+				else
+				{
+					$mdToast.showSimple("Password Successfully changed!");
+					details.error = '';
+				}
+			}).catch((e)=>{
+				UserService.resetChangePasswordDetails();
+				this.mainLoading = false;
+				details.error = e.data.message;				
+			});
 		}
 	}
 }
