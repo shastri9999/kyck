@@ -34,7 +34,11 @@ function routeConfig($stateProvider) {
 	.state('main.settings.changepassword', {
 		url: '/change-password',
 		templateUrl: changePasswordTemplateUrl,
-		controller: function(){},
+		controller: function(UserService, $scope){
+			'ngInject';
+			UserService.resetChangePasswordDetails();
+			this.details = UserService.getChangePasswordDetails();
+		},
 		controllerAs: 'vm',
 		breadCrumb: 'Settings - Change Password'
 	})

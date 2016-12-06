@@ -17,6 +17,12 @@ class UserService{
 		this.userFetched = false;
 		this.moment = moment;
 		this.brokeragesDetail = {};
+		this.changePasswordDetails = {
+			userPassword: '',
+			newPassword: '',
+			confirmPassword: '',
+			error: ''
+		};
 	}
 
 	reInit(){
@@ -90,6 +96,17 @@ class UserService{
 
 			return field;
 		})
+	}
+
+	getChangePasswordDetails(){
+		return this.changePasswordDetails;
+	}
+
+	resetChangePasswordDetails(){
+		this.changePasswordDetails.userPassword = '';
+		this.changePasswordDetails.newPassword = '';
+		this.changePasswordDetails.confirmPassword = '';
+		this.changePasswordDetails.error = '';
 	}
 
 	getBrokerageDetails(email, type){
@@ -353,11 +370,13 @@ class UserService{
 		}).catch((e)=>console.log(e))
 	}
 
-	changePassword(oldPassword, newPassword){
+	changePassword(){
+		const userPassword = this.changePasswordDetails.userPassword;
+		const newPassword = this.changePasswordDetails.newPassword;
 		return this._$http({
 			method: 'POST',
 			url: this.URL + '/user/change-password/action',
-			data: {"userPassword": oldPassword, "newPassword": newPassword}
+			data: {"userPassword": userPassword, "newPassword": newPassword}
 		});
 	}
 
