@@ -7,7 +7,7 @@ const RadialProgressChart = require('radial-progress-chart');
 
 function BrokerageController($state, $scope, $mdToast,$http, $mdStepper, 
         $mdDialog, $rootScope, BrokerageResource, AuthenticationService, 
-        DocumentResource, DashboardResource, UserService, CalendarService, $window, moment) {
+        DocumentResource, DashboardResource, UserService, CalendarService, $window, moment, MessageService, Upload) {
     'ngInject';
 
     var vm = this;
@@ -16,6 +16,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         obj['img'] = '/assets/images/partnerLogos/' + obj['brokerageName'] + '.png';
         return obj;
     }
+
     vm.check = ()=>{
         if(vm.getActiveStep()==1 && vm.isBroker)
         {
@@ -104,6 +105,10 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         vm.selectedDocumentNames = [];
         vm.bgurl = AuthenticationService.getBGURL();
         vm.toggleShowPartner = toggleShowPartner;
+        vm.addAttachment = addAttachment;
+        vm.sendMessage = sendMessage;
+        vm.upload = upload;
+        // vm.removeAttachment = removeAttachment;
 
         vm.changeUsers = changeUsers;
         vm.changeBrokerageApplications = changeBrokerageApplications;
@@ -738,6 +743,70 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     function getActiveStep() {
         var steppers = $mdStepper('stepper-demo');
         return steppers.currentStep + 1;
+    }
+
+    function addAttachment(file) {
+        $rootScope.messageAttachment = file;
+        $mdToast.showSimple("Attached file - "+ file.name);
+    }
+    // function removeAttachment(file){
+    //     $rootScope.messageAttachment = null;
+    // }
+
+    function sendMessage() {
+        var messageDict = {
+            messageContent: vm.messageReplyText,
+            messageSubject: "",
+            messageToEmail: vm.userAppointment.email,
+            messageToName: vm.userAppointment.fname + " " + vm.userAppointment.lname
+        }
+
+       if (!vm.messageReplyText && !$rootScope.messageAttachment)
+            return;
+
+        MessageService.sendMessage(messageDict, vm.messageReplyText, true)
+        .then((response)=>{
+            if ($rootScope.messageAttachment)
+                vm.upload(response.data.data.messageId);
+            vm.messageReplyText = "";
+            $mdToast.showSimple('Message Successfully Sent!');
+        });
+    }
+
+    function upload(messageId){
+      console.log("upload started");
+      $rootScope.mainLoadingMessage = 'Sending Message... Please Wait.';
+      $rootScope.mainLoading = true;
+      Upload.upload({
+        url: '/kyck-rest/usermessage/upload',
+        data: {
+          file: $rootScope.messageAttachment,
+          messageId: messageId
+        }
+      }).then(function(response){
+        $rootScope.mainLoading = false;
+        $rootScope.messageAttachment = null;        
+        $mdToast.show(
+          $mdToast.simple()
+          .textContent('File Uploaded Successfully!')
+          .position('bottom left')
+          .toastClass('md-primary')
+          );
+      }, function(error){
+        $rootScope.messageAttachment = null;        
+        $rootScope.mainLoading = false;
+        $mdToast.show(
+          $mdToast.simple()
+          .textContent('File Attachment Failed!')
+          .position('bottom right')
+          .toastClass('md-warn')
+          .hideDelay(2000)
+          );
+
+      }, function(evt){
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log(progressPercentage);
+      });
     }
 
     function showVideoDialog(slot) {
