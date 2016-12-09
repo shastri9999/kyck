@@ -46,7 +46,7 @@ function BrokerageResource($resource) {
                 "status": "@status",
                 "userId": "@userId"
             },
-            url: URL + '/dashboard/meeting/status'
+            url: URL + '/calendar/update/appointmentstatus'
         },
         submitBrokerageApplication: {
             method: 'POST',

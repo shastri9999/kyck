@@ -103,7 +103,6 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
 
     function setEventClick () {
         $scope.eventClicked = function($selectedEvent) {
-            console.log("slot is ", $selectedEvent);
 
             let closePopup = function() {
                 alert = undefined;

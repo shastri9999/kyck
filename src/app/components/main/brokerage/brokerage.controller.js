@@ -334,7 +334,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         });
     }
 
-    function updateMeetingStatus(status) {
+    function updateMeetingStatus(status, slot) {
+        console.log("cal id is", slot.calendarId);
+
         function formatStatus(status) {
             var t = status.toLowerCase();
             if (t=="CONFIRM")
@@ -345,12 +347,18 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 return t;
         }
 
+        console.log("imp ar", {
+            "meetingStatus": status,
+            "calenderId": slot.calendarId
+        });
+
         $rootScope.loadingProgress = true;
         BrokerageResource.updateMeetingStatus({
-                "status": status,
-                "userId": vm.userAppointment.email
-            },
-        function (response) {
+            "meetingStatus": status,
+            "calenderId": slot.calendarId
+        },
+
+          function (response) {
             CalendarService.fetchBrokerMeetings().then((data)=>{
                 $rootScope.loadingProgress = false;
                 vm.userSlots = data.filter(function(a){
@@ -360,12 +368,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                     a['startTime'] = moment(a['startTime'], 'DD/MM/YYYY hh:mm').toDate();
                 })
             });
-            
-
             // vm.userAppointments[vm.selectedIndex]['applicationStatus'] = "APPROVED";
-
             $mdToast.showSimple("Appointment slot has been successfully "+formatStatus(status)+".");
-        }, function (error) {
+          }, function (error) {
             console.log(error);
         });
     }

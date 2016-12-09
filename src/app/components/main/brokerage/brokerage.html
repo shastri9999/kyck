@@ -158,8 +158,8 @@
                     </div>
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
                         <span ng-show="slot.status==='PENDING'">
-                            <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
-                            <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
+                            <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM', slot)">CONFIRM</div>
+                            <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE', slot)">RESCHEDULE</div>
                         </span>
                         <span ng-show="slot.status==='CONFIRM'">
                             <div class="actnItem" ng-click="vm.showVideoDialog(slot)" style="line-height:22px;">JOIN VIDEO<br/>CONFERENCE</div>
