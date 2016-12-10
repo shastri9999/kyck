@@ -19,7 +19,7 @@ function DashboardResource($resource, AppConstants) {
     	brokerageApplications: {
     		method: 'GET',
     		isArray: false,
-    		url: URL + '/dashboard/brokerages'    		
+    		url: URL + '/brokerages/contacted'    		
     	},
     	documentStatus: {
     		method: 'GET',

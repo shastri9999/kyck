@@ -22,7 +22,7 @@ function BrokerageResource($resource) {
         contactedBrokerages: {
             method: 'GET',
             isArray: false,
-            url: URL + '/dashboard/brokerages'
+            url: URL + '/brokerages/contacted'
         },
     	brokeragesList: {
     		method : 'GET',
