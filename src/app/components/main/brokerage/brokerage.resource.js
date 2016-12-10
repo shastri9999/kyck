@@ -22,7 +22,7 @@ function BrokerageResource($resource) {
         contactedBrokerages: {
             method: 'GET',
             isArray: false,
-            url: URL + '/dashboard/brokerages'
+            url: URL + '/brokerages/contacted'
         },
     	brokeragesList: {
     		method : 'GET',
@@ -46,7 +46,7 @@ function BrokerageResource($resource) {
                 "status": "@status",
                 "userId": "@userId"
             },
-            url: URL + '/dashboard/meeting/status'
+            url: URL + '/calendar/update/appointmentstatus'
         },
         submitBrokerageApplication: {
             method: 'POST',

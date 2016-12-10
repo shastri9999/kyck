@@ -158,8 +158,8 @@
                     </div>
                     <div style="float: right; border-left: solid 1px #e7ecf1;">
                         <span ng-show="slot.status==='PENDING'">
-                            <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM')">CONFIRM</div>
-                            <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE')">RESCHEDULE</div>
+                            <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM', slot)">CONFIRM</div>
+                            <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE', slot)">RESCHEDULE</div>
                         </span>
                         <span ng-show="slot.status==='CONFIRM'">
                             <div class="actnItem" ng-click="vm.showVideoDialog(slot)" style="line-height:22px;">JOIN VIDEO<br/>CONFERENCE</div>
@@ -347,9 +347,17 @@
             </div>
         </div>
         <div style="z-index: 3;">
-            <img src="/assets/images/clip.png" style="position: absolute; right: 55px; height: 24px; margin-top: 16px;" />
-            <img src="/assets/images/clip.png" style="position: absolute; right: 30px; height: 24px; margin-top: 16px;" />
-            <input type="text" name="compose" placeholder="Add your message" class="input" style="margin: 10px;margin-left:18px;padding: 10px;border-radius: 7px;z-index: 3;border: none; outline: none;box-shadow: none; width: 218px;">
+            <!-- <img src="/assets/images/clip.png" style="position: absolute; right: 55px; height: 24px; margin-top: 16px;" /> -->
+            <img ng-click="vm.sendMessage()" src="/assets/images/open-message.png" style="position: absolute; right: 18px; height: 20px; margin-top: 18px; cursor: pointer; outline: none;" />
+            <div ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)">
+                <input
+                    type="text"
+                    name="compose"
+                    placeholder="Add your message"
+                    ng-model="vm.messageReplyText"
+                    class="input"
+                    style="margin: 10px; margin-left:18px; padding: 10px; border-radius: 7px; z-index: 3; border: none; outline: none; box-shadow: none; width: 218px;">
+                </div>
         </div>
     </div>
 </div>
