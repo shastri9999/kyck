@@ -837,8 +837,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 $mdDialog.hide();
             }
             $scope.addEmail = function() {
-                $scope.addedEmails.push($scope.extraEmail);
-                $scope.extraEmail = "";
+                console.log('hi', $scope.extraEmail, 'hello');
+                if ($scope.extraEmail != undefined) {
+                    $scope.addedEmails.push($scope.extraEmail);
+                    $scope.extraEmail = "";
+                }
             }
             $scope.removeEmail = function(email) {
                 var index = $scope.addedEmails.indexOf(email);

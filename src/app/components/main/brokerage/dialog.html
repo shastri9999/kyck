@@ -1,10 +1,10 @@
 <md-dialog aria-label="List dialog">
-  <md-dialog-content style="width:500px; height:400px;">
+  <md-dialog-content style="max-width:500px; width: 90%;  margin: auto; height:400px; background: white;">
 <div class="inviteUsersDialog">
  <span class="heading">Invite</span>
  <hr/>
  <form name="projectForm" style="overflow:hidden;">
-	 <md-input-container class="md-block" style="margin-top: 30px; float: left; width: 380px;">
+	 <md-input-container class="md-block" style="margin-top: 30px; float: left; width: 380px; max-width: 90%; font-size: 14px;">
         <label>Add email address here to invite…
         </label>
         <input type="email" name="extraEmail" ng-model="extraEmail"
@@ -21,17 +21,19 @@
   </span>
  </form>
  <hr ng-if="addedEmails.length"/>
- <div ng-repeat="addedEmail in addedEmails">
- 	<span class="addedEmail">{{addedEmail}}</span>
- 	<span ng-click="removeEmail(addedEmail)" style="float:right;">
-    <img src="/assets/images/remove.png" />
-  </span>
- 	<hr/>
+ <div>
+   <div ng-repeat="addedEmail in addedEmails">
+   	<span class="addedEmail">{{addedEmail}}</span>
+  	<span ng-click="removeEmail(addedEmail)" style="float:right;">
+      <img src="/assets/images/remove.png" />
+    </span>
+    <hr/>
+   </div>
  </div>
  </div>
   </md-dialog-content>
-  <md-dialog-actions>
-    <md-button ng-click="closeDialog()" class="md-primary">
+  <md-dialog-actions style="background: #3bada5; color: white;">
+    <md-button ng-click="closeDialog()" class="md-primary" style="margin:auto;">
       Join &amp; Start
     </md-button>
   </md-dialog-actions>
