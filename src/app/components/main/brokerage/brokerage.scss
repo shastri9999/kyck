@@ -21,13 +21,13 @@
 	font-weight:bold;
 }
 .mainArea {
-	height: calc(100vh - 300px);
+	height: calc(100vh - 90px);
 	.right-stat {
 		order: 2;
 		width: 240px;
 		overflow: scroll;
 		position:relative;
-		min-height: calc(100vh - 100px);
+		min-height: calc(100vh - 80px);
 		.contact-brokerage
 		{
 			margin-top: 45px;
@@ -285,7 +285,7 @@
 .contactedUsers {
 	width: 250px;
 	background-color: #f9fbfc;
-	height: calc(100vh - 120px);
+	height: calc(100vh - 80px);
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
