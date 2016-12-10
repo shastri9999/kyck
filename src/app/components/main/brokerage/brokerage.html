@@ -320,14 +320,14 @@
                 <!-- <md-button class="md-raised md-edit-form" ng-click="vm.editForm()">Edit Form</md-button> -->
             </div>
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="isBroker">
-                <md-button class="md-raised md-success" ng-click="vm.nextRequestStep()">
+                <md-button class="md-raised md-success" ng-click="vm.nextRequestStep()" ng-show="!vm.allVerified || vm.getActiveStep()>1">
                     <span ng-show="vm.getActiveStep()==1">Start</span>
                     <span ng-show="vm.getActiveStep()>1">Accept</span>
                 </md-button>
-                <md-button class="md-raised md-success" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.getActiveStep()==1" ng-disabled="!vm.allVerified">
+                <md-button class="md-raised md-success" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.getActiveStep()==1" ng-hide="!vm.allVerified">
                     <div>Approve</div>
                 </md-button>
-                <md-button class="md-raised md-warn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.getActiveStep()==1" ng-disabled="!vm.allVerified">
+                <md-button class="md-raised md-warn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.getActiveStep()==1" ng-hide="!vm.allVerified">
                     <div>Reject</div>
                 </md-button>
             </div>

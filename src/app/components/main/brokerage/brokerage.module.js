@@ -2,6 +2,7 @@
 
 import route from './brokerage.route';
 import './brokerage.scss';
+import './brokerage.responsive.scss';
 import brokerageResource from './brokerage.resource';
 
 const brokerageModule = angular.module('brokerage-module', [

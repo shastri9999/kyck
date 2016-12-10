@@ -9,7 +9,7 @@ function DashboardResource($resource, AppConstants) {
     	userAppointments: {
     		method: 'GET',
     		isArray: false,
-    		url: URL + '/dashboard/users'
+    		url: URL + '/users/contacted'
     	},
     	brokerAppointments: {
     		method: 'GET',
