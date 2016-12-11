@@ -46,11 +46,6 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 			$rootScope.loadingProgress = false;
 			vm.brokerAppointments = response.data;
 		});
-
-		DashboardResource.brokerageApplications((response)=>{
-			$rootScope.loadingProgress = false;
-			vm.brokerageApplications = response.data;
-		});
 	}
 	
 	vm.joinConference = (appointment)=>{

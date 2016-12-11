@@ -837,8 +837,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 $mdDialog.hide();
             }
             $scope.addEmail = function() {
-                console.log('hi', $scope.extraEmail, 'hello');
-                if ($scope.extraEmail != undefined) {
+                if ($scope.extraEmail != undefined && $scope.extraEmail != "") {
                     $scope.addedEmails.push($scope.extraEmail);
                     $scope.extraEmail = "";
                 }

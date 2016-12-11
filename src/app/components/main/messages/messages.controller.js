@@ -12,6 +12,7 @@ function MessagesController($state, $scope, MessageService, Upload, Authenticati
 	});
 
 	vm.isBroker = AuthenticationService.isBroker();
+	
     vm.addAttachment = function(file){
     	$rootScope.messageAttachment = file;
     }
