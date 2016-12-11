@@ -3,7 +3,7 @@
 function config($logProvider, $mdThemingProvider) {
 	'ngInject';
 	$logProvider.debugEnabled(true);
-  	$mdThemingProvider.disableTheming();
+  	// $mdThemingProvider.disableTheming();
 }
 
 export default config;
