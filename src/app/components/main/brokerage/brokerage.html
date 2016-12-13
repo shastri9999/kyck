@@ -90,7 +90,7 @@
         <md-stepper  ng-click="vm.check()" id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker" style="padding-bottom: 120px;outline: none;">
         <div ng-if="isBroker">
         <md-step md-label="Account Summary" class="accSummary">
-            <md-step-body layout="column">
+            <md-step-body layout="column" class="accSumStep">
             <div layout="row">
                 <div class="appointment ng-scope" id="primaryApp" layout="column">
                     <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
@@ -135,7 +135,7 @@
                 </div>
             </div>
             <div layout="row" class="dashClassAfterElements">
-            <div flex="50" style="margin-right: 30px; ">
+            <div class="dashClassAfterElementsChild">
                 <span class="title">Download Documents</span>
                 <div class="document-container">
                     <div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokeragesDetails.document || !vm.brokeragesDetails.document.length">
@@ -163,7 +163,7 @@
                     </a>
                 </div>
             </div>
-            <div flex="50">
+            <div class="dashClassAfterElementsChild">
                 <span class="title">Appointment Slots</span>
                 <div style="font-size: 12px;margin-top: 10px;" ng-if="!vm.userSlots.length">
                     No Appointments

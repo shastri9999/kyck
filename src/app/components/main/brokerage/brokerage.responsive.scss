@@ -21,11 +21,29 @@
 .dashClassAfterElements {
 	margin: 20px;
 }
+.dashClassAfterElementsChild {
+	/*margin-right: 30px;*/
+	flex: 0 0 50%;
+	padding: 20px;
+/*	max-width: 40%;
+	min-width: 280px;
+*/}
 @media (max-width: 600px) {
 	#bottomFullFooter {
 		.md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled] {
 		background-color: rgba(240,240,240,1);
 		}
+	}
+	.rightSide {
+		display: none;
+	}
+	.dashClassAfterElementsChild {
+		/*max-width: 90%;*/
+		flex: 0 0 100%;
+		flex-wrap: wrap;
+	}
+	.mainArea md-step-body.accSumStep {
+		max-height: none;
 	}
 	.chart-container {
 		max-width: 80vw;
@@ -49,7 +67,6 @@
 		}
 	}
 	.dashClassAfterElements {
-		margin-top: 300px;
 	}
 	#userContactDetails {
 		display: block;
