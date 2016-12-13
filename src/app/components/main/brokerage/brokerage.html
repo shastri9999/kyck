@@ -246,7 +246,10 @@
                         </div>
                         <div layout="row" flex ng-show="partner.showCalendar">
                             <div flex="70">
-                                <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent, $index)" md-label="title" md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis" class="md-primary" style="margin-top: 2px;">
+                            <!--     md-show-create-link="true" md-create-event-click="vm.eventCreate($date)" md-create-disabled="dis"
+                             -->
+                                <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent, $index)" md-label="title"
+                                class="md-primary" style="margin-top: 2px;">
                                     <md-event-calendar-header class="md-center">
                                         <md-event-calendar-prev></md-event-calendar-prev>
                                         <md-event-calendar-title></md-event-calendar-title>

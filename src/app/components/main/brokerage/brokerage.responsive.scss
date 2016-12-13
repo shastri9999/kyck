@@ -7,6 +7,11 @@
 }
 
 @media (max-width: 600px) {
+	#bottomFullFooter {
+		.md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled] {
+		background-color: rgba(240,240,240,1);
+		}
+	}
 	.md-steppers-header-region {
 		display: none;
 	}

@@ -450,7 +450,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
          targetEvent: $event,
          template:
            '<md-dialog aria-label="List dialog">' +
-           '  <md-dialog-content style="width:500px;height:60px;">'+
+           '  <md-dialog-content style="width:500px; max-width: 90%; min-height:60px;">'+
             '<div class="dialog-content-broker">'+ 
             ' Your appointment preferences have been sent to the partners.' +
             ' </div>' + 
