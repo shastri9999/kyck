@@ -329,6 +329,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             $rootScope.loadingProgress = false;
             $mdToast.showSimple("Application has been successfully "+status.toLowerCase()+".");
             vm.userAppointment.applicationStatus = status;
+            vm.allVerified=false;
             vm.selectedIndex = vm.userAppointments.findIndex(function (a) {return a.email == vm.userAppointment.email;})
             shuffletheorder();
         }, function (error) {

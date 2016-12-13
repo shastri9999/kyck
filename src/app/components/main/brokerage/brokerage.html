@@ -323,10 +323,10 @@
                     <span ng-show="vm.getActiveStep()==1">Start</span>
                     <span ng-show="vm.getActiveStep()>1">Accept</span>
                 </md-button>
-                <md-button class="md-raised md-success" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.getActiveStep()==1" ng-hide="!vm.allVerified">
-                    <div>Approve</div>
+                <md-button class="md-raised md-success" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.getActiveStep()==1 && vm.allVerified">
+                    <div>Approve{{vm.getActiveStep()==1}}{{!vm.allVerified}}{{vm.getActiveStep()==1 && !vm.allVerified}}</div>
                 </md-button>
-                <md-button class="md-raised md-warn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.getActiveStep()==1" ng-hide="!vm.allVerified">
+                <md-button class="md-raised md-warn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.getActiveStep()==1 && vm.allVerified">
                     <div>Reject</div>
                 </md-button>
             </div>
@@ -345,10 +345,10 @@
                     <span ng-show="vm.getActiveStep()==1">Start</span>
                     <span ng-show="vm.getActiveStep()>1">Accept</span>
                 </md-button>
-                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.getActiveStep()==1" ng-hide="!vm.allVerified">
+                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.getActiveStep()==1 && vm.allVerified">
                     <div>Approve</div>
                 </md-button>
-                <md-button class="md-raised md-warn footerBottomBtn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.getActiveStep()==1" ng-hide="!vm.allVerified">
+                <md-button class="md-raised md-warn footerBottomBtn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.getActiveStep()==1 && vm.allVerified">
                     <div>Reject</div>
                 </md-button>
             </div>
