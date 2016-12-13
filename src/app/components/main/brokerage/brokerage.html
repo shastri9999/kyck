@@ -71,8 +71,8 @@
     </div>
     <div flex layout="column">
         <div ng-if="isBroker" id="userContactDetails">
-            <md-select id="userSelector" ng-model="weapon" placeholder="{{firstAppointment}}" class="md-no-underline">
-                <md-option ng-repeat="appointment in vm.userAppointmentsFiltered" ng-click="vm.selectUser($index)" ng-value="appointment.fname" style="height: 80px;padding: 15px;padding-bottom: 20px;padding-top: 0px;">
+            <md-select id="userSelector" ng-model="weapon" placeholder="{{firstAppointment}}" md-container-class="userSel" class="md-no-underline">
+                <md-option ng-repeat="appointment in vm.userAppointmentsFiltered" ng-click="vm.selectUser($index)" ng-value="appointment.fname">
                     <div class="appointment ng-scope">
                         <div class="avatar-circle" ng-if="!appointment.avatar">
                             {{appointment.fname|limitTo:1|capitalize}}

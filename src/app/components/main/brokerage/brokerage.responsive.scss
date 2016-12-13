@@ -30,6 +30,18 @@
 	.contactedUsers {
 		display: none;
 	}
+	.userSel {
+	    left: 50px !important;
+	    top: 140px !important;
+		md-option {
+			height: 80px;
+			padding: 15px;
+			padding-bottom: 20px;
+			padding-top: 0px;
+			background: #f9fbfc !important;
+			border-bottom: solid 1px #e5e9ee;
+		}
+	}
 	#userContactDetails {
 		display: block;
 	}
