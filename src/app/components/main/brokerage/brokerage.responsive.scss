@@ -1,16 +1,31 @@
 #bottomFullFooter {
 	display:none;
-	/*position: fixed;
-	bottom: 40px;
-	z-index: 0;
-	background: none;*/
+}
+#userContactDetails {
+	display: none;
 }
 
+#userSelector {
+	margin: 0px;
+	background: #f9fbfc;
+	md-select-value {
+	    margin-top: -15px;
+	}
+}
 @media (max-width: 600px) {
 	#bottomFullFooter {
 		.md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled] {
 		background-color: rgba(240,240,240,1);
 		}
+	}
+	#primaryApp {
+		display: none;
+	}
+	.contactedUsers {
+		display: none;
+	}
+	#userContactDetails {
+		display: block;
 	}
 	.md-steppers-header-region {
 		display: none;
@@ -38,5 +53,30 @@
 		padding: 0px;
 		height: 80px;
 		font-size: 16px;
+	}
+	.appointment {
+		outline: none;
+		display: flex;
+		padding: 15px;
+		margin-top: 20px; 
+		padding-top: 20px;
+		padding-bottom: 20px;
+		cursor: pointer;
+		.detail {
+			display: flex;
+			flex-flow: column;
+			margin-left: 10px;
+		}
+		.pending-btn {
+			padding: 5px 0;
+			text-transform: uppercase;
+			border: 1px solid #57c3ea;
+			color: #57c3ea;
+			border-radius: 3px;
+			font-size: 12px;
+			cursor: pointer;
+			text-align: center;
+			min-height: 25px;
+		}
 	}
 }

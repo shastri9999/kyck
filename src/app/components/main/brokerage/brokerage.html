@@ -70,12 +70,33 @@
         </div>
     </div>
     <div flex layout="column">
+<!--     ng-class='{active: $index==vm.selectedIndex}' -->
+        <div ng-if="isBroker" id="userContactDetails">
+            <md-select ng-model="weapon" placeholder="{{firstAppointment}}" class="md-no-underline" style="margin: 0px;">
+            <md-option ng-repeat="appointment in vm.userAppointmentsFiltered" ng-value="appointment.fname" style="height: 80px;padding: 15px;padding-bottom: 20px;padding-top: 0px;">
+                <div class="appointment ng-scope" ng-click="vm.selectUser($index)">
+                    <div class="avatar-circle" ng-if="!appointment.avatar">
+                        {{appointment.fname|limitTo:1|capitalize}}
+                        {{appointment.lname|limitTo:1|capitalize}}
+                    </div>
+
+                    <div class="detail">
+                        <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div>
+                        <a class="pending-btn ng-binding" style="margin-top: 4px;">{{appointment.applicationStatus}}</a>
+                    </div> 
+                </div>
+            </md-option>
+            </md-select>
+                <!-- <md-option ng-repeat="state in ctrl.states" ng-value="state.abbrev" ng-disabled="$index === 1">
+                  {{state.abbrev}}
+                </md-option> -->
+        </div>
         <md-stepper  ng-click="vm.check()" id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker" style="padding-bottom: 120px;outline: none;">
         <div ng-if="isBroker">
         <md-step md-label="Account Summary" class="accSummary">
             <md-step-body layout="column">
             <div layout="row">
-                <div class="appointment ng-scope" layout="column">
+                <div class="appointment ng-scope" id="primaryApp" layout="column">
                     <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
                         <div style="font-size: 14px;" class="ng-binding">{{vm.userAppointment.fname}} {{vm.userAppointment.lname}}</div>
                         <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> -->

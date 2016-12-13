@@ -218,6 +218,18 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 $rootScope.loadingProgress = false;
                 vm.userAppointments = response.data;
                 vm.userAppointmentsFiltered = vm.userAppointments;
+
+                $scope.firstAppointment = '<div class="appointment ng-scope" ng-click="vm.selectUser(0)">' +
+                    '<div class="avatar-circle">' +
+                        vm.userAppointmentsFiltered[0].fname[0].toUpperCase() + 
+                        vm.userAppointmentsFiltered[0].lname[0].toUpperCase() +
+                    '</div>' +
+                    '<div class="detail">' + 
+                        '<div style="font-size: 14px;" class="ng-binding">'+ vm.userAppointmentsFiltered[0].fname + vm.userAppointmentsFiltered[0].lname +'</div>' +
+                        '<a class="pending-btn ng-binding" style="margin-top: 4px;">'+vm.userAppointmentsFiltered[0].applicationStatus+'</a>' +
+                    '</div>' +
+                '</div>';
+
                 shuffletheorder();
                 vm.userAppointment = vm.userAppointments[0];
                 if (vm.userAppointments.length > 0) {
