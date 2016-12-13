@@ -18,11 +18,17 @@
 		padding-top: 0px;
 	}
 }
+.dashClassAfterElements {
+	margin: 20px;
+}
 @media (max-width: 600px) {
 	#bottomFullFooter {
 		.md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled] {
 		background-color: rgba(240,240,240,1);
 		}
+	}
+	.chart-container {
+		max-width: 80vw;
 	}
 	#primaryApp {
 		display: none;
@@ -41,6 +47,9 @@
 			background: #f9fbfc !important;
 			border-bottom: solid 1px #e5e9ee;
 		}
+	}
+	.dashClassAfterElements {
+		margin-top: 300px;
 	}
 	#userContactDetails {
 		display: block;

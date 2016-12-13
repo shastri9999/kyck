@@ -599,6 +599,7 @@
 	display: flex;
 	flex: 1;
 	justify-content: space-around;
+	flex-wrap: wrap;
 	.chart {
 		.broker-profile-chart, .broker-kyc-chart, .broker-document-chart, .broker-validation-chart {
 			width: 120px;
