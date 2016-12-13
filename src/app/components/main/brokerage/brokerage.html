@@ -306,7 +306,7 @@
         </div>
         </md-stepper>
 
-        <footer style="position: fixed; bottom: 40px; z-index: 0; background: none;">
+        <footer id="bottomFooter">
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
                 <md-button class="md-raised md-back" ng-click="vm.backStep()" ng-show="vm.getActiveStep()>1">Back</md-button>
                 <md-button class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !vm.timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
@@ -324,6 +324,28 @@
                     <div>Approve</div>
                 </md-button>
                 <md-button class="md-raised md-warn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.getActiveStep()==1" ng-hide="!vm.allVerified">
+                    <div>Reject</div>
+                </md-button>
+            </div>
+        </footer>
+
+        <footer id="bottomFullFooter">
+            <div style="display: flex" ng-if="!isBroker">
+                <md-button class="md-raised md-back footerBottomBtn" ng-click="vm.backStep()" ng-show="vm.getActiveStep()>1">{{vm.steps[vm.getActiveStep()-2]}}</md-button>
+                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !vm.timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
+                    <span ng-show="vm.getActiveStep()<5">{{vm.steps[vm.getActiveStep()]}}</span>
+                    <span ng-show="vm.getActiveStep()==5">Submit</span>
+                </md-button>
+            </div>
+            <div style="display: flex" ng-if="isBroker">
+                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.nextRequestStep()" ng-show="!vm.allVerified || vm.getActiveStep()>1">
+                    <span ng-show="vm.getActiveStep()==1">Start</span>
+                    <span ng-show="vm.getActiveStep()>1">Accept</span>
+                </md-button>
+                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.getActiveStep()==1" ng-hide="!vm.allVerified">
+                    <div>Approve</div>
+                </md-button>
+                <md-button class="md-raised md-warn footerBottomBtn" ng-click="vm.submitApplication('REJECT')" ng-show="vm.getActiveStep()==1" ng-hide="!vm.allVerified">
                     <div>Reject</div>
                 </md-button>
             </div>

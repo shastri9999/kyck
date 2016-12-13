@@ -1,3 +1,11 @@
+#bottomFullFooter {
+	display:none;
+	/*position: fixed;
+	bottom: 40px;
+	z-index: 0;
+	background: none;*/
+}
+
 @media (max-width: 600px) {
 	.md-steppers-header-region {
 		display: none;
@@ -7,5 +15,23 @@
 	}
 	.right-stat {
 		display: none;
+	}
+	#bottomFooter {
+		display: none;
+	}
+	#bottomFullFooter {
+		display: block;
+		position: fixed;
+		bottom: 50px;
+		z-index: 0;
+		background: none;
+		left: 0px;
+	}
+	.footerBottomBtn {
+		flex-grow: 1;
+		margin: 0px;
+		padding: 0px;
+		height: 80px;
+		font-size: 16px;
 	}
 }

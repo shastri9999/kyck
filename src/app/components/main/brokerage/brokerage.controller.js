@@ -28,6 +28,8 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         }
     }
 
+    vm.steps = ["Select Broker", "Personal Details", "KYC", "Documents", "Selection of Timeslot"]
+
     function drawCharts() {
         Promise.all([DashboardResource.profileStatus({userId: vm.userAppointment.email}).$promise,
             DashboardResource.kycStatus({userId: vm.userAppointment.email}).$promise,
