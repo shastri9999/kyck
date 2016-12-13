@@ -20,6 +20,7 @@
 }
 .dashClassAfterElements {
 	margin: 20px;
+	flex-wrap: wrap;
 }
 .dashClassAfterElementsChild {
 	/*margin-right: 30px;*/
@@ -35,7 +36,8 @@
 		}
 	}
 	.mainArea md-step-body {
-	    max-height: 100vh;
+	    max-height: calc(100vh - 140px);
+	    padding-bottom: 20px;
 	}
 	.rightSide {
 		display: none;
@@ -47,6 +49,7 @@
 	}
 	.mainArea md-step-body.accSumStep {
 		max-height: none;
+		padding-bottom: 140px;
 	}
 	.chart-container {
 		max-width: 80vw;
