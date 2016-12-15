@@ -292,6 +292,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                         start: getDate(j, i),
                         allDay: true,
                         customClass: 'book-appointment',
+                        customText: 'slots',
                         title: numToTime(i) + ' - ' + numToTime(i2),
                         mday: currentDate + j,
                         mhour: i

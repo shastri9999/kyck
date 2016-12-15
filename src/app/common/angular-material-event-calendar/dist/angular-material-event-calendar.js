@@ -463,7 +463,8 @@ function mdEventCalendarBuilderService($$mdEventCalendarUtil, $templateCache) {
       // add spacer items for overflow events from last day
       while (i < placeDiff) {
         if (place >= options.maxEvents) {
-          cellContent.appendChild(createShowMore(matchingEvents.length - pos, options.date));
+          console.log('in angular material calendar', eventItem.customText);
+          cellContent.appendChild(createShowMore(matchingEvents.length - pos, options.date, eventItem.customText));
           return false;
         }
         cellContent.appendChild(createEventSpacerElement());
@@ -471,7 +472,7 @@ function mdEventCalendarBuilderService($$mdEventCalendarUtil, $templateCache) {
       }
 
       if (place >= options.maxEvents) {
-        cellContent.appendChild(createShowMore(matchingEvents.length - pos, options.date));
+        cellContent.appendChild(createShowMore(matchingEvents.length - pos, options.date, eventItem.customText));
         return false;
       }
       cellContent.appendChild(createEventElement(type, eventItem, options));
@@ -484,10 +485,12 @@ function mdEventCalendarBuilderService($$mdEventCalendarUtil, $templateCache) {
   }
 
 
-  function createShowMore(num, date) {
+  function createShowMore(num, date, customText) {
     var showMoreElement = document.createElement('div');
     showMoreElement.classList.add('md-event-calendar-cell-event-show-more-link');
     showMoreElement.textContent = num+' more';
+    if (customText)
+      showMoreElement.textContent = num+' '+customText;
     showMoreElement.setAttribute('md-show-more', date.toISOString());
     return showMoreElement;
   }
