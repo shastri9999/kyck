@@ -36,12 +36,48 @@
     max-height: 100%;
     box-sizing: border-box;	
 }
+.meetingDetailsContent.mobile {display:none;}
 @media (max-width: 600px) {
 	#bottomFullFooter {
 		.md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled] {
 		background-color: rgba(240,240,240,1);
 		}
 	}
+	.mainArea .partnerMenu .partnerTitle {
+		border-left: none;
+		border-right: none;
+	}
+	.meetingDetailsContent {
+		display: none;
+	}
+	.meetingDetailsContent.mobile {
+		display:flex;
+	    font-size: 14px;
+	    margin-top: 8px;
+	    opacity: 0.6;
+	    .timeclock {
+	    	max-width: 18px;
+	    	padding-top: 2px;
+	    	img {
+	    		max-width: 15px;
+	    	}
+	    }
+	}
+
+	md-event-calendar._md.md-primary md-event-calendar-month .md-event-calendar-month-row-header {
+		font-size: 14px;
+	    padding-bottom: 15px;
+	    height: 46px
+	}
+
+	md-event-calendar._md.md-primary md-event-calendar-header {
+		height: 46px;
+	}
+
+	md-event-calendar md-event-calendar-header md-event-calendar-title {
+		font-size: 16px;
+	}
+
 	.parentPartnerLogoSmall {
 		max-width: inherit !important;
 	}
@@ -52,6 +88,7 @@
 	}
 	.mainArea .partnerMenu {
 		margin-left: 0px;
+		margin-right: 0px;
 	}
 	.mainArea md-event-calendar {
 		margin: 0px;
