@@ -9,7 +9,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
     $rootScope.loadingProgress = false;
     const userId = AuthenticationService.getLoggedInUser().userId;
     const isBroker = AuthenticationService.isBroker();
-    const month = 11;
+    const month = (new Date()).getMonth();
     fetchMeetings();
     setEventClick();
 

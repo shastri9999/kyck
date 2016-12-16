@@ -40,7 +40,7 @@
 @media (max-width: 600px) {
 	#bottomFullFooter {
 		.md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled] {
-		background-color: rgba(240,240,240,1);
+			background-color: rgba(240,240,240,1);
 		}
 	}
 	.mainArea .partnerMenu .partnerTitle {
@@ -157,7 +157,8 @@
 	#bottomFullFooter {
 		display: block;
 		position: fixed;
-		bottom: 50px;
+		bottom: 0px;
+		height: 80px;
 		z-index: 0;
 		background: none;
 		left: 0px;

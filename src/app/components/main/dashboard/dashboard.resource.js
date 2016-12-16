@@ -14,7 +14,11 @@ function DashboardResource($resource, AppConstants) {
     	brokerAppointments: {
     		method: 'GET',
     		isArray: false,
-    		url: URL + '/dashboard/appointments'
+            params: {
+                "month": "@month",
+                "year": "@year"
+            },
+    		url: URL + '/calendar/get/brokerappointments'
     	},
     	brokerageApplications: {
     		method: 'GET',
