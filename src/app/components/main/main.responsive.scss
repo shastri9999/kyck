@@ -1,0 +1,212 @@
+@media (max-width: 600px) {
+	.main-container {
+		display: flex;
+		width: 100%;
+		position: relative;
+		margin-bottom: 50px;
+		.overlay {
+			background-color: rgba(0,0,0, 0.25);
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			display: flex;
+			justify-content: center;
+			z-index: 100;
+			.dialog {
+				height: 100px;
+				width:410px;
+				margin-top: 300px;
+				background-color: #fff;
+				border-radius: 3px;
+				color: #4f6379;
+				font-size: 16px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+
+		.preview-overlay {
+			background-color: rgba(79, 99, 121, 0.78);
+			position: fixed;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			display: flex;
+			justify-content: center;
+			z-index: 100;
+			.dialog {
+				position: relative;
+				height: 700px;
+				width:800px;
+				margin-top: 30px;
+				background-color: #fff;
+				border-radius: 3px;
+				color: #4f6379;
+				font-size: 16px;
+				display: flex;
+				flex-flow: column;
+				justify-content: center;
+				align-items: stretch;
+				z-index: 101;
+				.close
+				{
+					cursor: pointer;
+					position: absolute;
+					top: 0;
+					right: -20px;
+					color: white;
+					font-weight: 800;
+					font-size: 25px;
+				}
+				.top {
+					flex-grow: 1;
+					background: #9b9b9b;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					img.preview {
+						max-width: 700px;
+						max-height: 510px;
+					}
+					&.ocr {
+						padding: 0;
+						margin: 30px;
+						.input {
+							display: flex;
+							flex-flow: column;
+							margin: 10px;
+							position: relative;
+							label {
+								font-size: 14px;
+								color: #4f6379;
+								margin-bottom: 12px;
+								opacity: 0.5;
+							}
+							input {
+								height: 45px;
+								width: 220px;
+								border-radius: 3px;
+								border: 1px solid #e7ecf1;
+								padding: 15px;
+								font-size: 14px;
+								color: #4f6379;
+								background-color: #f7f8f9;
+							}
+						}
+					}
+					.ocr-view {
+						display: flex;
+						flex: 1;
+						background: #fff;
+						height: 570px;
+						flex-flow: row wrap;
+						align-content: flex-start;
+						padding: 10px;
+					}
+				}
+				.bottom {
+					height: 112px;
+					font-weight: 500;
+					align-items: center;
+					display: flex;
+					justify-content: center;
+					text-align: center;
+					line-height: 24px;
+					background-color: #f5f9fa;
+					&.ocr {
+						height: 130px;
+						justify-content: space-around;
+					}
+					.buttons {
+						display: flex;
+					}
+					.preview-btn {
+						height: 100px;
+						width: 100px;
+						border: 1px solid #3aafa5;
+						display: flex;
+						align-items: center;
+						border-radius: 5px;
+						justify-content: center;
+						background-color: #fff;
+						position: relative;
+						img {
+							height: 60px;
+						}
+						&.active
+						{
+							border: 2px solid #3aafa5;
+						}
+						outline: none;
+						cursor: pointer;
+						&::after {
+							content: "Preview";
+							position: absolute;
+							bottom: 3px;
+							font-size: 12px;
+						}
+					}
+					.ocr-btn {
+						position: relative;
+						margin-left: 15px;
+						height: 100px;
+						width: 100px;
+						border-radius: 5px;
+						border: 1px solid #3aafa5;
+						background-color: #fff;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						img {
+							height: 42px;
+						}
+						&.active
+						{
+							border: 2px solid #3aafa5;
+						}
+						outline: none;
+						cursor: pointer;
+					}
+					.verify-btn, .done-btn {
+						height: 35px;
+						padding: 10px 30px;
+						background-color: #3498db;
+						color: white;
+						cursor: pointer;
+						border-radius: 5px;
+						&:hover{
+							opacity: 0.9;
+						}
+					}
+				}
+			}
+		}
+
+		.navigation-wrapper {
+			display: flex;
+			position: fixed;
+			z-index: 5;
+			height: 100vh;
+		}
+		.area {
+			display: flex;
+			flex-flow: column;
+			flex-grow: 1;
+			&>.menu-bar {
+				display: flex;
+
+			}
+			&>.display-area {
+				flex-grow: 1;
+				width: 100%;
+				height:calc(100% - 70px);
+				display: flex;
+				flex-flow: column;
+			}
+		}
+	}
+}

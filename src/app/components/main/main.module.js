@@ -17,6 +17,7 @@ import SettingsModule from './settings/settings.module';
 import BlockChainModule from './blockchain/blockchain.module';
 import route from './main.route';
 import './main.scss';
+import './main.responsive.scss';
 
 const mainModule = angular.module('main-module', [
 	'ui.router',
