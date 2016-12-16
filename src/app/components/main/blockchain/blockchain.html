@@ -20,7 +20,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="blockchain-{{block.number}}" class="mini-block-wrapper" ng-repeat="block in vm.currentBlocks" ng-if="$index >= (vm.currentBlocks.length - 7)">
+		<div id="blockchain-{{block.number}}" class="mini-block-wrapper" ng-repeat="block in vm.currentBlocks" ng-if="$index >= (vm.currentBlocks.length - 6)">
 			<div class="block {{block.className}}" ng-mouseover="vm.fetchInfo(block.number)">
 				<div class="block-number">{{block.number}}</div>
 				<div class="mini-info" id="blockinfo-{{block.number}}">

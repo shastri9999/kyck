@@ -101,10 +101,12 @@
     }
     .messages {
       display: flex;
-      margin: 40px;
+      margin: 40px 0px;
+      margin-left: 10px;
       margin-top: 0px;
       flex-grow: 1;
       flex-flow: column;
+      width: calc(100vw - 15px);
       .message-container {
         min-height: 260px;
         max-height: 400px;
