@@ -1,4 +1,4 @@
-<div class="block-chain">
+<div ng-class="{'block-chain':true,'collapsed':!vm.expanded}">
 	<div class="top-bar">
 		<div class="action" ng-click="vm.toggle()"> 
 			<img ng-if="!vm.expanded" src="/assets/images/expand.png" alt="Expand">
@@ -17,6 +17,16 @@
 					<div ng-if="block.timestamp" style="padding-bottom: 5px;">Date: {{block.timestamp}}</div>
 					<div ng-if="block.timestamp">Type: Invocation</div>
 					<img ng-if="!block.timestamp" style="width: 40px; height: 40px;" src="/assets/images/loading.gif" alt="">
+				</div>
+			</div>
+		</div>
+		<div id="blockchain-{{block.number}}" class="mini-block-wrapper" ng-repeat="block in vm.currentBlocks" ng-if="$index >= (vm.currentBlocks.length - 6)">
+			<div class="block {{block.className}}" ng-mouseover="vm.fetchInfo(block.number)">
+				<div class="block-number">{{block.number}}</div>
+				<div class="mini-info" id="blockinfo-{{block.number}}">
+					<div style="display: inline-block;margin-right: 5px;" ng-if="block.timestamp">Date: {{block.timestamp}}</div>
+					<div style="display: inline-block;" ng-if="block.timestamp">Type: Invocation</div>
+					<img ng-if="!block.timestamp" style="width: 20px; height: 20px;" src="/assets/images/loading.gif" alt="">
 				</div>
 			</div>
 		</div>

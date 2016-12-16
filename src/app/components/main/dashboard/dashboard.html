@@ -15,8 +15,8 @@
 					<img style="width:120px;padding-right: 20px;align-self: flex-start;padding-left: 20px;" ng-src="/assets/images/partnerLogos/{{appointment.brokerageName}}.png">
 					<div class="detail">
 						<div style="font-size: 14px;margin-bottom: 3px;">{{appointment.brokerageName}}</div>
-						<div style="margin-bottom: 17px;opacity: 0.4;">{{appointment.meetingSubject}}</div>
-						<div ng-switch on="appointment.status">
+						<div style="margin-bottom: 17px;opacity: 0.4;" class="message">{{appointment.meetingSubject}}</div>
+						<div class="status-btns" ng-switch on="appointment.status">
 							<div ng-switch-when="CONFIRM">
 								<a class="pending-btn">{{appointment.status}}</a>
 								<a class="conference-btn" ng-click="joinConference(appointment)">Join Conference</a>

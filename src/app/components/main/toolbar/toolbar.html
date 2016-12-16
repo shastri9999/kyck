@@ -1,6 +1,6 @@
 <div class="toolbar">
 	<div class="display-area">
-		<img ng-click="sideNavCollapsed=!sideNavCollapsed" ng-class="{collapsed:sideNavCollapsed}" src="/assets/images/hide-bar.png" style="padding: 0 13px;cursor: pointer;outline: none;">	
+		<img ng-click="sideNavCollapsed=!sideNavCollapsed;sideNavExpanded=true;" ng-class="{collapsed:sideNavCollapsed, left:true}" src="/assets/images/hide-bar.png" style="padding: 0 13px;cursor: pointer;outline: none;">	
 		<div class="grow">{{breadCrumb}}</div>
 		 <md-input-container md-no-float class="md-block">
           <input ng-if="vm.showSearch" style="position: relative;top:20px; left:30px;font-size: 12px;" ng-model="vm.search" placeholder="Search here">
@@ -25,7 +25,7 @@
 
 	</div>
 	<div class="avatar-area">
-		<div style="padding: 15px; cursor: pointer; padding-right: 5px;font-size: 14px;" ui-sref="main.settings.profile">{{vm.displayName}}</div>
+		<div style="padding: 15px; cursor: pointer; padding-right: 5px;font-size: 14px;" class="fullname" ui-sref="main.settings.profile">{{vm.displayName}}</div>
 		<a class="avatar-circle" ui-sref="main.settings.profile" ng-if="!message.avatar">{{vm.avatarName}}</a>		
 		<a ng-click="vm.signOut()" style="cursor: pointer;" title="Logout">
 			<img style="height: 35px;" src="/assets/images/logout.svg" alt="Logout">

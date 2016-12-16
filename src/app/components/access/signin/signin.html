@@ -1,5 +1,5 @@
 <form name="signInForm" class="signin-container" ng-submit="vm.signIn()">
-	<div style="font-size: 24px; line-height: 42px; margin-top: 50px;">Sign in to your account</div>
+	<div class="heading">Sign in to your account</div>
 	<input name="username" ng-model="username" type="email" placeholder="Email Address" required>
 	<div ng-if="signInForm.username.$touched">
 		<div ng-messages="signInForm.username.$error">

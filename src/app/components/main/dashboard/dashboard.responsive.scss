@@ -1,0 +1,332 @@
+@media (max-width: 600px) {
+    .user-dashboard-area {
+     color: #4f6379;
+     font-size: 16px;
+     display: flex;
+     flex-grow: 1;
+     flex-flow: column;
+     max-height: initial;
+     overflow: auto;    
+     width: 100vw;
+     position: relative;
+     padding-top: 285px;
+     h2 {
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+    .pending-btn {
+        padding: 5px 18px !important;
+        text-transform: uppercase;
+        border: 1px solid #57c3ea;
+        color: #57c3ea;
+        border-radius: 3px;
+        font-size: 12px;
+        cursor: pointer;
+    }
+    .completed-btn {
+        padding: 5px 18px;
+        text-transform: uppercase;
+        border: 1px solid #b3bbc3;
+        color: #b3bbc3;
+        border-radius: 3px;
+        font-size: 12px;
+        cursor: pointer;
+    }
+    .conference-btn {
+        font-size: 11px;
+        padding: 6px;
+        text-transform: uppercase;
+        border-radius: 3px;
+        background-color: #b3bbc3;
+        color: #fff;
+        cursor: pointer;
+        margin-left: 6px;
+    }
+    .left {
+    	display: flex;
+    	flex-flow: column;
+    	flex-grow: 1;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-right: 2px solid rgba(231,236,241,0.3);
+        .appointments{
+          display: flex;
+          padding-bottom: 40px;
+          margin: 15px;
+          margin-top: 35px;
+          border-bottom: 2px solid rgba(231,236,241,0.3);
+          flex-flow: column;
+          .appointments-container {
+            display: flex;
+            flex-flow: row wrap;
+            margin-top: 7px;
+            min-height: 150px;
+            max-height: 50vh;
+            overflow: auto;
+            padding-right: 20px;
+            .appointment {
+              border-radius: 5px;
+              border: solid 1px #e7ecf1;
+              margin-top: 20px;
+              display: flex;
+              padding: 10px;
+              position: relative;
+              .date {
+                display: flex;
+                flex-flow: column;
+                align-items: center;
+                padding-right: 20px;
+                border-right: 1px solid #e7ecf1;
+              }
+                .detail {
+                    display: flex;
+                    flex-flow: column;
+                    .message {
+                        font-size: 14px;
+                    }
+                }
+                .status-btns {
+                    position: absolute;
+                    left: 90px;
+                    right: 4px;
+                    bottom: 9px;
+                    .pending-btn {
+                        padding: 6px !important;
+                        font-size: 11px;
+                    }
+                  }
+
+            }
+        }
+    }
+    .messages {
+      display: flex;
+      margin: 40px 0px;
+      margin-left: 10px;
+      margin-top: 0px;
+      flex-grow: 1;
+      flex-flow: column;
+      width: calc(100vw - 15px);
+      .message-container {
+        min-height: 260px;
+        max-height: 400px;
+        overflow: auto;
+        padding-right: 20px;
+      }
+    .message {
+        display: flex;
+        padding: 30px;
+        padding-right: 20px;
+        margin-top: 20px;
+        padding-bottom: 10px;
+        border: 1px solid #e7ecf1;
+        border-radius: 5px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: 5px solid #3498db;
+        cursor: pointer;
+        .time {
+            display: flex;
+            align-items: flex-start;
+            font-size: 14px;
+            opacity: 0.4;
+        }
+        .detail {
+            flex-grow: 1;
+        }
+    }
+    }
+    }
+    .right {
+     display: flex;
+     flex-flow: column;
+     flex-basis: 0px;
+     margin-top: 20px;
+     margin-bottom: 20px;
+     min-height: initial;
+        .statistics{
+                display: flex;
+                margin: 40px;
+                border-bottom: 2px solid rgba(231,236,241,0.3);
+                margin-top: 20px;  
+                flex-flow: column; 
+                padding-bottom:20px;
+                position: absolute;
+                top: 0;  
+                width: calc(100vw - 70px);       
+        }
+.brokerage {
+    display: flex;
+    margin: 40px;
+    flex-grow: 1;
+    margin-top: 0px;
+    flex-flow: column;
+    .brokerage-container {
+        overflow: auto;
+        max-height:initial;
+        min-height: 50px;
+        padding-right: 20px;
+    }
+    .brokerage-item {
+        display: flex;
+        margin-top: 20px;
+        .broker-logo {
+            height: 100px;
+            width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e7ecf1;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+        .detail {
+            font-size: 14px;
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+            padding: 20px;
+        }
+    }
+}
+}
+}
+.broker-dashboard-area {
+    color: #4f6379;
+    font-size: 16px;
+    display: flex;
+    flex-grow: 1;
+    max-height: calc(100vh - 120px);
+    overflow: auto;    
+    .left {
+        display: flex;
+        flex-flow: column;
+        flex-grow: 1;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-right: 2px solid rgba(231,236,241,0.3);
+        .appointments{
+            display: flex;
+            padding-bottom: 40px;
+            margin: 40px;
+            margin-top: 20px;
+            border-bottom: 2px solid rgba(231,236,241,0.3);
+            flex-flow: column;
+            .appointments-container {
+                display: flex;
+                flex-flow: row wrap;
+                margin-top: 7px;
+                min-height: 150px;
+                max-height: 50vh;
+                overflow: auto;
+                .appointment {
+                    display: flex;
+                    border: 1px solid #e7ecf1;
+                    border-radius: 5px;
+                    padding: 10px 22px;
+                    margin-top: 20px; 
+                    margin-right: 20px;
+                    width: 240px;
+                    height: 90px;
+                    .detail {
+                        display: flex;
+                        flex-flow: column;
+                        margin-left: 10px;
+                        flex: 1;
+                        justify-content: space-between;
+                    }
+                    .pending-btn {
+                        padding: 5px 18px;
+                        text-transform: uppercase;
+                        border: 1px solid #57c3ea;
+                        color: #57c3ea;
+                        border-radius: 3px;
+                        font-size: 12px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .messages {
+            display: flex;
+            margin: 40px;
+            margin-top: 0px;
+            flex-grow: 1;
+            flex-flow: column;
+            .message-container {
+                min-height: 260px;
+                max-height: 400px;
+                overflow: auto;
+                padding-right: 20px;
+            }
+            .message {
+                display: flex;
+                padding: 30px;
+                padding-right: 20px;
+                padding-bottom: 10px;
+                margin-top: 20px;
+                border: 1px solid #e7ecf1;
+                border-radius: 5px;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                border-left: 5px solid #3498db;
+                cursor: pointer;
+                .time {
+                    display: flex;
+                    align-items: flex-start;
+                    font-size: 14px;
+                    opacity: 0.4;
+                }
+                .detail {
+                    flex-grow: 1;
+                }
+            }
+        }
+
+    }
+    .right {
+        display: flex;
+        flex-flow: column;
+        flex-basis: 250px;
+        overflow: hidden;
+        flex-shrink:0;
+        position:relative;
+        .appointments {
+            z-index: 1;
+            display: flex;
+            flex-flow: column;
+            padding: 10px;
+            .appointments-container {
+                margin-top: 7px;
+                min-height: 150px;
+                max-height: 310px;
+                overflow: auto;
+                .appointment {
+                    display: flex;
+                    background-color: #fff;
+                    border-radius: 5px;
+                    padding: 15px 5px;
+                    margin-bottom: 15px;
+                    .detail {
+                        display: flex;
+                        flex-flow: column;
+                        align-items: flex-start;
+                        margin-left: 10px
+                    }
+                    .conference-btn {
+                        font-size: 10px;
+                        padding: 6px 18px;
+                        text-transform: uppercase;
+                        border-radius: 3px;
+                        background-color: #57c3ea;
+                        color: #fff;
+                        cursor: pointer;
+                        margin-top: 6px;
+                    }
+
+                }
+            }
+        }
+    }
+}
+}

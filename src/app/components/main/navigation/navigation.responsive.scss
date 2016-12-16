@@ -1,0 +1,16 @@
+@media (max-width: 600px) {
+	navigation {
+		.navigation {
+			&.collapsed{
+				width: 200px;
+				.logo {
+					width: 120px;
+					display: initial;
+				}
+				.logo-min {
+					display: none;
+				}
+			}
+		}
+	}
+}
