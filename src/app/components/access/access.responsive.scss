@@ -7,16 +7,30 @@
         flex-flow: column;
         color: #7b868a;
         font-size: 16px;
-        margin-bottom: 45px;
-        margin-top: 20px;
+        margin-top: 10px;
         .access-container {
         	border: 1px solid #e7ecf1;
         	border-radius: 5px;
         	display: flex;
         	flex-flow: column;
         	margin-top: 45px;
-        	width: 540px;
+        	width: calc(100vw - 40px);
         	align-items: center; 
+            .heading {
+                font-size: 15px;
+                width: calc(100vw - 60px);
+                line-height: 24px;
+                text-align: center;
+                margin-top: 10px;
+            }
+            .phonegroup {
+                input[type=phone] {
+                    width: calc(100vw - 208px); 
+                }
+                select {
+                    height: 50px;
+                }
+            }
         }
         .overlay {
             background-color: rgba(0,0,0, 0.25);
@@ -29,9 +43,9 @@
             justify-content: center;
             z-index: 100;
             .dialog {
-                height: 600px;
-                width:800px;
-                margin-top: 110px;
+                height: calc(100vh - 100px);
+                width: calc(100vw - 60px);
+                margin-top: 40px;
                 background-color: #fff;
                 border-radius: 5px;
                 color: #4f6379;

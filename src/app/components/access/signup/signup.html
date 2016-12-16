@@ -1,6 +1,6 @@
 <form  name="signUpForm"  class="signup-container" ng-submit="vm.signUp()">
 	<div class="wrapper" ng-show="!vm.signedUp" style="text-align: center;">		
-		<div style="font-size: 18px; width: 434px; line-height: 32px; text-align: center; margin-top: 10px;">
+		<div class="heading">
 			Signup to explore investment & trading oppportunities 
 				in South East Asia and Asia
 		</div>
@@ -28,10 +28,10 @@
 
 		<div class="phonegroup" style="margin-top: 25px;">
 			<div class="extension">{{phoneExtenstion}}</div>
-			<select ng-model="phoneExtenstion" style="height: 60px;">
+			<select ng-model="phoneExtenstion">
 				<option value="{{extension.ext}}" ng-selected="extension.ext==phoneExtenstion" ng-repeat="extension in vm.phoneExtenstions|orderBy:'country'">({{extension.ext}}) {{extension.country}}</option>			
 			</select>
-			<input style="width: 290px;" type="phone" ng-model="phonenumber" placeholder="Phone number" required>				
+			<input type="phone" ng-model="phonenumber" placeholder="Phone number" required>				
 		</div>
 		<p class="error" style="color:red;text-align: center;" ng-if="phonenumber && vm.invalidPhone">Please enter a valid phone number for selected region.</p>
 
