@@ -1,4 +1,4 @@
-<div class="block-chain">
+<div ng-class="{'block-chain':true,'collapsed':!vm.expanded}">
 	<div class="top-bar">
 		<div class="action" ng-click="vm.toggle()"> 
 			<img ng-if="!vm.expanded" src="/assets/images/expand.png" alt="Expand">
