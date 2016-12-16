@@ -1,3 +1,11 @@
+.calSelectDialog {
+	width: 90%;
+}
+@media (max-width: 600px) {
+	.calSelectDialog {
+		width: 98%;
+	}
+}
 .dialog-content-broker.calendarPopup {
 	height: auto;
 	align-items: flex-start;

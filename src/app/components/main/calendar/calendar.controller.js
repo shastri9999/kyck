@@ -1,6 +1,7 @@
 'use strict';
 
 import dialogTemplateURL from './dialog.html';
+import calSelectDialogURL from './calselect.html';
 
 function CalendarController($scope, $mdDialog, $filter, AuthenticationService, BrokerageResource, CalendarService, moment, $rootScope, $window, $mdToast) {
     'ngInject';
@@ -126,6 +127,8 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                     $mdDialog.hide();
                 }
 
+                var parentEl = angular.element(document.body);
+
                 function updateAppointment(status) {
                     if (status == "JOIN") {
                         BrokerageResource.getroom({},{
@@ -139,22 +142,29 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                         $mdToast.showSimple("Invited for Video Conference."); 
                     }
                     else if (status == "RESCHEDULE") {
-                         $mdDialog.show({
-                             parent: angular.element(document.body),
-                             template:
-                               '<md-dialog aria-label="List dialog">' +
-                               '  <md-dialog-content style="width:500px; max-width: 90%; min-height:60px;">'+
-                               ' <select-slot selected-partners="selectedPartners" timeslot-selected="timeslotSelected"/>' +
-                               '  </md-dialog-actions>' +
-                               '</md-dialog>',
-                             controller: DialogController
-                          });
-                          function DialogController($scope, $mdDialog) {
+                        var partner = {
+                            'brokerageName' : slot['brokerageName'],
+                            'img' : '/assets/images/partnerLogos/' + $scope.slot['brokerageName'] + '.png',
+                            'showCalendar' : true,
+                            'selectedAppointments' : []
+                        };
+
+                        var selectedPartners = [partner];
+                        
+                        $mdDialog.show({
+                            parent: parentEl,
+                            templateUrl: calSelectDialogURL,
+                            controller: DialogController2
+                        });
+
+                        function DialogController2($scope, $mdDialog) {
                             'ngInject';
+
+                            $scope.selectedPartners = selectedPartners;
                             $scope.closeDialog = function() {
                                 $mdDialog.hide();
                             }
-                          }
+                        }
                     }
                     else {
                         var calendarDetailRequest = {
