@@ -117,6 +117,12 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
         $rootScope.loadingProgress = false;
 
+        $rootScope.$on('timeslotSelected', function(event, data) {
+            $scope.timeslotSelected = true;
+            console.log(data);
+            console.log($scope.selectedPartners);
+        });
+
         if (!vm.isBroker)
         {
             $rootScope.loadingProgress = true;
@@ -300,6 +306,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
     function submitApplication(status) {
         $rootScope.loadingProgress = true;
+        $scope.timeslotSelected = false;
         BrokerageResource.updateApplication({"status": status,
                 "userId": vm.userAppointment.email},
         function (response) {

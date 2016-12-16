@@ -93,6 +93,7 @@ class SelectFormController {
 	                }
 
 	                vm.timeslotSelected = true;
+	                $rootScope.$broadcast('timeslotSelected', vm.selectedPartners); 
 	            }, function() {
 	            	console.log("NO");
 	            });
