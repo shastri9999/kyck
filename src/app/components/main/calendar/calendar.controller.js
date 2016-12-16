@@ -138,6 +138,24 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                         }, function(error){console.log(error);});
                         $mdToast.showSimple("Invited for Video Conference."); 
                     }
+                    else if (status == "RESCHEDULE") {
+                         $mdDialog.show({
+                             parent: angular.element(document.body),
+                             template:
+                               '<md-dialog aria-label="List dialog">' +
+                               '  <md-dialog-content style="width:500px; max-width: 90%; min-height:60px;">'+
+                               ' <select-slot selected-partners="selectedPartners" timeslot-selected="timeslotSelected"/>' +
+                               '  </md-dialog-actions>' +
+                               '</md-dialog>',
+                             controller: DialogController
+                          });
+                          function DialogController($scope, $mdDialog) {
+                            'ngInject';
+                            $scope.closeDialog = function() {
+                                $mdDialog.hide();
+                            }
+                          }
+                    }
                     else {
                         var calendarDetailRequest = {
                           "calendarId": slot.calendarId,
