@@ -463,7 +463,6 @@ function mdEventCalendarBuilderService($$mdEventCalendarUtil, $templateCache) {
       // add spacer items for overflow events from last day
       while (i < placeDiff) {
         if (place >= options.maxEvents) {
-          console.log('in angular material calendar', eventItem.customText);
           cellContent.appendChild(createShowMore(matchingEvents.length - pos, options.date, eventItem.customText));
           return false;
         }

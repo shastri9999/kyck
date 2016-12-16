@@ -259,40 +259,7 @@
         <div ng-if="!isBroker">
             <md-step md-label="Selection of Timeslot">
                 <md-step-body layout="column" flex>
-                    <div class="mainHeader">Selection of Timeslot
-                        <div class="subText">Please select the time slots for brokerage document verification meeting.</div>
-                    </div>
-                    <div ng-repeat="partner in selectedPartners" style="margin-top: 30px;">
-                        <div class="partnerMenu" layout="row" flex ng-click="vm.toggleShowPartner($index)">
-                            <div flex="10" class="parentPartnerLogoSmall"><img ng-src="{{partner.img}}" alt="{{partner.brokerageName}}" class="partnerLogoSmall"/></div>
-                            <div flex="90" class="partnerTitle">{{partner.brokerageName}}
-                                <div class="meetingDetailsContent mobile" layout="row" flex ng-repeat="slot in selectedPartners[$index]['selectedAppointments']">
-                                    <div flex="10" class="timeclock"><img src="../../../../assets/images/clockicon.png" width="24" /></div>
-                                    <div flex="90" class="timings">Time slot - {{slot | date:'MMM dd, yyyy HH:mm a'}}</div>
-                                </div>
-                            </div>
-                            <div flex="5" class="parentPartnerLogoSmall"><img class="calicon" src="../../../../assets/images/calendaricon.png"/></div>
-                        </div>
-                        <div layout="row" flex ng-show="partner.showCalendar">
-                            <div class="mainCalBrokerage">
-                                <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent, $index)" md-label="title"
-                                class="md-primary" style="margin-top: 2px;">
-                                    <md-event-calendar-header class="md-center">
-                                        <md-event-calendar-prev></md-event-calendar-prev>
-                                        <md-event-calendar-title></md-event-calendar-title>
-                                        <md-event-calendar-next></md-event-calendar-next>
-                                    </md-event-calendar-header>
-                                </md-event-calendar>
-                            </div>
-                            <div class="meetingDetails">
-                                <div class="meetingDetailsHeading">Meeting Details</div>
-                                <div class="meetingDetailsContent" layout="row" flex ng-repeat="slot in selectedPartners[$index]['selectedAppointments']">
-                                    <div flex="10"><img src="../../../../assets/images/clockicon.png" width="24" /></div>
-                                    <div flex="90" class="timings">Time slot - {{slot | date:'MMM dd, yyyy HH:mm a'}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <select-slot selected-partners="selectedPartners" timeslot-selected="timeslotSelected"/>
                 </md-step-body>
             </md-step>
         </div>
@@ -339,7 +306,7 @@
         <footer id="bottomFooter">
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
                 <md-button class="md-raised md-back" ng-click="vm.backStep()" ng-show="vm.getActiveStep()>1">Back</md-button>
-                <md-button class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !vm.timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
+                <md-button class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
                     <span ng-show="vm.getActiveStep()<5">Next</span>
                     <span ng-show="vm.getActiveStep()==5">Submit</span>
                 </md-button>
@@ -362,7 +329,7 @@
         <footer id="bottomFullFooter">
             <div style="display: flex" ng-if="!isBroker">
                 <md-button class="md-raised md-back footerBottomBtn" ng-click="vm.backStep()" ng-show="vm.getActiveStep()>1">{{vm.steps[vm.getActiveStep()-2]}}</md-button>
-                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !vm.timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
+                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
                     <span ng-show="vm.getActiveStep()<5">{{vm.steps[vm.getActiveStep()]}}</span>
                     <span ng-show="vm.getActiveStep()==5">Submit</span>
                 </md-button>
