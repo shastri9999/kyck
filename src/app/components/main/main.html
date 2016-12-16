@@ -52,8 +52,8 @@
 			</div>
 		</div>
 
-		<div class="navigation-wrapper">
-			<navigation />			
+		<div ng-class="{'navigation-wrapper':true, expanded: sideNavExpanded}" ng-click="sideNavExpanded = false;">
+			<navigation/>			
 		</div>
 		<div class="area">
 			<div class="menubar"><toolbar /></div>

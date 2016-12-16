@@ -185,20 +185,26 @@
 				}
 			}
 		}
-
 		.navigation-wrapper {
-			display: flex;
+			display: none;
 			position: fixed;
 			z-index: 5;
 			height: 100vh;
+			right: 0;
+		    left: 0;
+		    background: rgba(0,0,0,0.2);
+		    &.expanded {
+		    	display: flex;
+		    }
 		}
 		.area {
 			display: flex;
 			flex-flow: column;
 			flex-grow: 1;
-			&>.menu-bar {
+			&>.menubar {
 				display: flex;
-
+				max-width: 100vw;
+				height: 57px;
 			}
 			&>.display-area {
 				flex-grow: 1;

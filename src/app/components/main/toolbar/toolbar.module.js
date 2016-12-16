@@ -2,6 +2,7 @@
 
 import ToolbarDirective from './toolbar.directive';
 import './toolbar.scss';
+import './toolbar.responsive.scss';
 
 const ToolbarModule = angular.module('toolbar-module', []);
 

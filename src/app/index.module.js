@@ -42,6 +42,7 @@ export default angular.module('kyck', [
 	};
 
 	$rootScope.sideNavCollapsed = false;
+	$rootScope.sideNavExpanded = false;
 	$rootScope.shouldShowDocumentPreview = false;
 	$rootScope.documentPreviewLoading = false;
 	$rootScope.documentPreviewURL = '/assets/images/nric.jpg'
