@@ -173,7 +173,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                                   "calenderSlot": data[0].selectedAppointments[0],
                                   "meetingContent": slot.meetingContent,
                                   "meetingLocation": slot.meetingLocation,
-                                  "meetingStatus": slot.meetingStatus,
+                                  "meetingStatus": "RESCHEDULE", //slot.meetingStatus,
                                   "meetingSubject": slot.meetingSubject
                                 }
 
