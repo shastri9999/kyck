@@ -179,8 +179,9 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
 
                                 console.log("hello", calendarDetailRequest);
 
-                                CalendarService.updateAppointmentStatus(calendarDetailRequest).then((data) => {
+                                CalendarService.updateAppointmentEvent(calendarDetailRequest).then((data) => {
                                     $mdToast.showSimple("Meeting has been rescheduled.");
+                                    fetchMeetings();
                                 });
                             });
                     

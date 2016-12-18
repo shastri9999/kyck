@@ -18,7 +18,7 @@ function DashboardResource($resource, AppConstants) {
                 "month": "@month",
                 "year": "@year"
             },
-    		url: URL + '/calendar/get/brokerappointments'
+    		url: URL + '/calender/get/brokerappointments'
     	},
     	brokerageApplications: {
     		method: 'GET',

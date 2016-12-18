@@ -129,8 +129,9 @@
 		display: none;
 	}
 	.userSel {
-	    left: 50px !important;
+	    left: 0px !important;
 	    top: 140px !important;
+	    width: 100%;
 		md-option {
 			height: 80px;
 			padding: 15px;
@@ -138,6 +139,9 @@
 			padding-top: 0px;
 			background: #f9fbfc !important;
 			border-bottom: solid 1px #e5e9ee;
+		}
+		md-select-menu:not(.md-overflow) md-content {
+			padding: 0px;
 		}
 	}
 	.dashClassAfterElements {

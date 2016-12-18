@@ -119,8 +119,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
         $rootScope.$on('timeslotSelected', function(event, data) {
             $scope.timeslotSelected = true;
-            console.log(data);
-            console.log($scope.selectedPartners);
         });
 
         if (!vm.isBroker)

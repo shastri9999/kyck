@@ -163,11 +163,12 @@
                     </a>
                 </div>
             </div>
-            <div class="dashClassAfterElementsChild" style="max-height: 400px;overflow-y: scroll;overflow-x: hidden;">
+            <div class="dashClassAfterElementsChild">
                 <span class="title">Appointment Slots</span>
                 <div style="font-size: 12px;margin-top: 10px;" ng-if="!vm.userSlots.length">
                     No Appointments
                 </div>
+                <div class="document-container">
                 <div class="appointmentTile" ng-repeat="slot in vm.userSlots">
                     <div style="float:left; padding:10px;">
                         <div class="header">{{slot.startTime | date:'dd MMM yy, HH:mm a'}}</div>
@@ -182,6 +183,7 @@
                             <div class="actnItem" ng-click="vm.showVideoDialog(slot)" style="line-height:22px;">JOIN VIDEO<br/>CONFERENCE</div>
                         </span>
                     </div>
+                </div>
                 </div>
             </div>
             </div>

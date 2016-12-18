@@ -50,6 +50,17 @@ class CalendarService{
 			return response.data;
 		})
 	}
+	updateAppointmentEvent(calendarDetailRequest) {
+		this._$rootScope.loadingProgress = true;
+		return this._$http({
+			method: 'POST',
+			url: this.URL + '/calendar/update/appointmentevent',
+			data: calendarDetailRequest
+		}).then((response)=>{
+			this._$rootScope.loadingProgress=false;
+			return response.data;
+		})
+	}
 }
 
 export default CalendarService;
