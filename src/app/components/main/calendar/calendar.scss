@@ -1,9 +1,11 @@
 .calSelectDialog {
 	width: 90%;
+	max-width: 90%;
 }
 @media (max-width: 600px) {
 	.calSelectDialog {
 		width: 98%;
+		max-width: 98%;
 	}
 }
 .dialog-content-broker.calendarPopup {

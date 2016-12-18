@@ -161,6 +161,29 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                             'ngInject';
 
                             $scope.selectedPartners = selectedPartners;
+
+                            $rootScope.$on('timeslotSelected', function(event, data) {
+                                
+                                console.log("Hi", data, slot);
+
+                                $scope.timeslotSelected = true;
+
+                                var calendarDetailRequest = {
+                                  "calenderId": slot.calendarId,
+                                  "calenderSlot": data[0].selectedAppointments[0],
+                                  "meetingContent": slot.meetingContent,
+                                  "meetingLocation": slot.meetingLocation,
+                                  "meetingStatus": slot.meetingStatus,
+                                  "meetingSubject": slot.meetingSubject
+                                }
+
+                                console.log("hello", calendarDetailRequest);
+
+                                CalendarService.updateAppointmentStatus(calendarDetailRequest).then((data) => {
+                                    $mdToast.showSimple("Meeting has been rescheduled.");
+                                });
+                            });
+                    
                             $scope.closeDialog = function() {
                                 $mdDialog.hide();
                             }
