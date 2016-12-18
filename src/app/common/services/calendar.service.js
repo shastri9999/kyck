@@ -11,14 +11,10 @@ class CalendarService{
 		this.meetings = [];
 	}
 
-	fetchMeetings(userEmailId, month){
+	fetchMeetings(){
 		this._$rootScope.loadingProgress=true;
 		return this._$http({
 			method: 'GET',
-			params: {
-				userEmailId,
-				month
-			},
 			url: this.URL + '/calender/get/latestuserappointments',
 		}).then((response)=>{
 			this._$rootScope.loadingProgress=false;

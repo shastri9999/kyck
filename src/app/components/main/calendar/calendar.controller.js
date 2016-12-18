@@ -41,7 +41,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
             ifRescheduleButton=false;
             ifConfirmButton=false;
         }
-        else if(status == "RESCHEDULE") {
+        else if(status == "NEW") {
             customClass = "GOLDEN";
             formattedStatus = "Pending";
             ifJoinVideoButton = false;
@@ -92,7 +92,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
     function fetchMeetings() {
         $scope.events = [];
         if (!isBroker) {
-            CalendarService.fetchMeetings(userId, month).then((data) => {
+            CalendarService.fetchMeetings().then((data) => {
                 $scope.events = data.map(formatSlot);
             });
         } else {
@@ -161,23 +161,16 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                             'ngInject';
 
                             $scope.selectedPartners = selectedPartners;
-
                             $rootScope.$on('timeslotSelected', function(event, data) {
-                                
-                                console.log("Hi", data, slot);
-
                                 $scope.timeslotSelected = true;
-
                                 var calendarDetailRequest = {
                                   "calenderId": slot.calendarId,
                                   "calenderSlot": data[0].selectedAppointments[0],
                                   "meetingContent": slot.meetingContent,
                                   "meetingLocation": slot.meetingLocation,
-                                  "meetingStatus": "RESCHEDULE", //slot.meetingStatus,
+                                  "meetingStatus": isBroker ? "NEW" : "PENDING",
                                   "meetingSubject": slot.meetingSubject
                                 }
-
-                                console.log("hello", calendarDetailRequest);
 
                                 CalendarService.updateAppointmentEvent(calendarDetailRequest).then((data) => {
                                     $mdToast.showSimple("Meeting has been rescheduled.");
@@ -196,13 +189,14 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                           "meetingStatus": status
                         };
 
+                        console.log(slot, calendarDetailRequest);
+
                         CalendarService.updateAppointmentStatus(calendarDetailRequest).then((data) => {
-                            console.log(data);
+                            console.log(slot, calendarDetailRequest, data);
                             $mdToast.showSimple("Status of the meeting updated.");
+                            fetchMeetings();
                         });
                     }
-
-                    fetchMeetings();
                     $mdDialog.hide();
                 }
             }

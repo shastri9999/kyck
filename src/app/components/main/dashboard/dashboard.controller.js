@@ -43,7 +43,7 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 		/* Get user related info */
 		$rootScope.loadingProgress=true;
 
-		DashboardResource.brokerAppointments({"month": (new Date()).getMonth(), "year": (new Date()).getFullYear()}, (response)=>{
+		CalendarService.fetchMeetings({"month": (new Date()).getMonth(), "year": (new Date()).getFullYear()}, (response)=>{
 			$rootScope.loadingProgress = false;
 			vm.brokerAppointments = response.data;
 		});
