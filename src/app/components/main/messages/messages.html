@@ -7,7 +7,7 @@
 			<img src="/assets/images/refresh.png" alt="Refresh" class="refresh" ng-click="vm.refresh()">
 			<a ng-if="vm.isBroker" class="compose-btn" ng-click="vm.compose()">Compose</a>
 		</div>
-		<div ui-view>
+		<div ui-view ng-class="{'messages-list':true, 'hide': (messageView.activeInboxMessage && breadCrumb=='Messages - Inbox') || (messageView.activeSentMessage && breadCrumb=='Messages - Sent') || (messageView.composing)}">
 		</div>
 	</div>
 	<div ng-if="messageView.activeInboxMessage && breadCrumb=='Messages - Inbox'" class="right send">
@@ -61,7 +61,8 @@
 		<div style="background-color:#f2f6f8;font-size: 22px;padding: 24px 20px;position: relative;font-weight: 300;"> Compose 
 		<img class="close" src="/assets/images/close-message.png" alt="close" ng-click="vm.closeCompose()">
 		</div>
-		<div ng-if="vm.composeMessage.messageFrom" style="position: absolute;"">To</div>
+		<div ng-if="vm.composeMessage.messageFrom" style="position: absolute;" class="compose-hide">To</div>
+		<div style="position: absolute;" class="compose-to">To</div>
 		<select type="text" name="to" ng-model="vm.composeMessage.messageFrom" placeholder="To" ng-options="mail for mail in vm.toList"/>
 		<input type="text" name="subject" ng-model="vm.composeMessage.messageSubject" placeholder="Subject">
 		<textarea ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)" name="message" placeholder="Type your message here..." ng-model="vm.composeMessage.messageContent" cols="30" rows="20"></textarea>				

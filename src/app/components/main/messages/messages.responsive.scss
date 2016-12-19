@@ -1,12 +1,17 @@
+@media (max-width: 600px) {
 .messages-area {
 	display: flex;
 	color: #4f6379;
+	width: 100vw;
+	flex-flow: column;
 	.left {
 		display: flex;
 		flex-flow: column;
-		padding: 40px;
-		padding-top: 10px;
+		padding: 10px;
 		flex-grow: 1;
+		.messages-list.hide {
+			display: none;
+		}
 		.navigation {
 			display: flex;
 			align-items: center;
@@ -18,10 +23,10 @@
 			.left-btn,.right-btn,.center-btn {
 				display: flex;
 				align-items: center;
-				height: 50px;
-				width: 150px;
+				height: 35px;
+				width: 65px;
 				color: rgba(79,99,121,0.4);
-				font-size: 16px;
+				font-size: 12px;
 				cursor: pointer;
 				border:1px solid #e7ecf1;
 				justify-content: center;
@@ -33,8 +38,8 @@
 				}
 			}
 			.compose-btn{
-				height: 50px;
-				width: 150px;
+				height: 35px;
+				width: 90px;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -43,16 +48,16 @@
 				cursor: pointer;
 				outline: none;
 				background-color: #3498db;
-				margin-left: 10px;
+				margin-left: 5px;
 				&:hover {
 					background-color: #569bca;
 				}
 			}
 		}
 		.inbox,.sent {
-			max-height: 560px;
-			min-height: 525px;
-			max-width: 700px;
+			max-height: initial;
+			min-height: initial;
+			max-width: 100vw;
 			padding-right: 20px;
 			overflow: auto;
 			.message {
@@ -84,17 +89,18 @@
 		} 
 		.pagination {
 			display: flex;
-			justify-content: flex-end;
-			max-width: 700px;
+			justify-content: center;
+			max-width: 100vw;
 			margin-top: 10px;
+			font-size: 12px;
 			.pages{
-				padding: 10px;
-				margin-right: 10px;
+				padding: 5px;
+				margin-right: 5px;
 				border:1px solid #e7ecf1;
 			}
 			.previous, .next {
-				padding: 10px;
-				margin-right: 10px;
+				padding: 5px;
+				margin-right: 5px;
 				cursor: pointer;
 				background-color: #3aafa5;
 				color: white;
@@ -106,22 +112,24 @@
 	.right {
 		display: flex;
 		flex-flow: column;
-		width: 576px;
+		width: 100vw;
 		background: #f2f6f8;
-		padding: 30px;
+		padding: 15px;
 		position: relative;
-		height: calc(100vh - 120px);
-		.compose-to {
-			visibility: hidden;
-		}
-		.compose-hide {
-			z-index: 7;
-			top:72px;
-			left: 12px;
-			font-size: 14px;
-		}
+		height: calc(100vh - 112px);
+		z-index: 6;
 		&.send {
 			justify-content: space-between;
+		}
+		.compose-hide {
+			visibility: hidden;
+		}
+		.compose-to {
+			top: 75px;
+		    z-index: 7;
+		    left: 16px;
+		    font-size: 12px;
+		    display: block !important;
 		}
 		&.composing {
 			padding: 0;
@@ -177,8 +185,8 @@
 			box-shadow: none;
 			resize: none;
 			color: #4f6379;
-			font-size: 14px;
-			height:60px;
+			font-size: 12px;
+			height:40px;
 			flex: 1;
 			border-radius: 3px; 
 		}
@@ -198,8 +206,8 @@
 			display: flex;
 		}
 		.send-btn{
-			height: 60px;
-			width: 150px;
+			height: 40px;
+			width: 100px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -214,4 +222,5 @@
 			}
 		}
 	}
+}
 }
