@@ -41,7 +41,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
             ifRescheduleButton=false;
             ifConfirmButton=false;
         }
-        else if(status == "NEW") {
+        else if(status == "NEW" || status == "RESCHEDULE") {
             customClass = "GOLDEN";
             formattedStatus = "Pending";
             ifJoinVideoButton = false;

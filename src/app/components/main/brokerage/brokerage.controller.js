@@ -548,6 +548,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
                 vm.usermessages.push({'message':message, 'class': className, 'date': messageDate});
             }
+            console.log(response, vm.usermessages);
         }, function() {});
     }
 
