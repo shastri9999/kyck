@@ -110,6 +110,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         vm.addAttachment = addAttachment;
         vm.sendMessage = sendMessage;
         vm.upload = upload;
+        vm.showRightDrawer = showRightDrawer;
         // vm.removeAttachment = removeAttachment;
 
         vm.changeUsers = changeUsers;
@@ -633,6 +634,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             console.log(progressPercentage);
       });
+    }
+
+    function showRightDrawer() {
+        console.log('showRightDrawer');
+        $rootScope.rightSideNavCollapsed = !$rootScope.rightSideNavCollapsed;
     }
 
     function showVideoDialog(slot) {

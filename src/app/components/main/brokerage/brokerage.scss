@@ -39,13 +39,14 @@ md-step-body {
 	font-weight:bold;
 }
 .mainArea {
-	height: calc(100vh - 90px);
+	height: calc(100vh - 107px);
 	.right-stat {
 		order: 2;
 		width: 240px;
 		overflow: scroll;
 		position:relative;
-		min-height: calc(100vh - 80px);
+		height: calc(100vh - 52px);
+    	overflow-x: hidden;
 		.contact-brokerage
 		{
 			margin-top: 45px;

@@ -27,9 +27,12 @@
 	<div class="avatar-area">
 		<div style="padding: 15px; cursor: pointer; padding-right: 5px;font-size: 14px;" class="fullname" ui-sref="main.settings.profile">{{vm.displayName}}</div>
 		<a class="avatar-circle" ui-sref="main.settings.profile" ng-if="!message.avatar">{{vm.avatarName}}</a>		
-		<a ng-click="vm.signOut()" style="cursor: pointer;" title="Logout">
+		<a ng-click="vm.signOut()" style="cursor: pointer;" class="mo-hide" title="Logout">
 			<img style="height: 35px;" src="/assets/images/logout.svg" alt="Logout">
-		</a>	
+		</a>
+		<a class="mo-show" ng-click="vm.showRightDrawer()" ng-show="ifRightDrawer">
+			<img style="height: 35px;" src="/assets/images/logout.svg" alt="Logout">
+		</a>
 	</div>
 </div>
 <md-progress-linear id="toolbar-progress" class="md-warn" ng-if="$root.loadingProgress"

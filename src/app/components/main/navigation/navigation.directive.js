@@ -2,13 +2,20 @@
 
 import templateUrl from './navigation.html';
 
-function NavigationController($mdStepper, $mdDialog, $filter, BrokerageResource, AuthenticationService, $log, $scope) {
+function NavigationController($mdStepper, $mdDialog, $filter, BrokerageResource, $log, $scope, $state, MessageService, AuthenticationService) {
   'ngInject';
 
   var vm=this;
   $scope.isBroker = AuthenticationService.isBroker();
   $scope.bgurl = AuthenticationService.getBGURL();
   $scope.isIA = AuthenticationService.isIA();
+
+  $scope.signOut = function() {
+    AuthenticationService.logout().then(()=>{
+      MessageService.refresh();
+      $state.go('access.signin');
+    });
+  }
 }
 
 function NavigationComponent() {

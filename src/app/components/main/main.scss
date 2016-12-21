@@ -1,3 +1,14 @@
+.mo-show {
+	display:none;
+}
+@media (max-width: 600px){
+	.mo-show {
+		display: block;	
+	}
+	.mo-hide {
+		display:none;
+	}
+}
 .main-container {
 	display: flex;
 	width: 100%;
