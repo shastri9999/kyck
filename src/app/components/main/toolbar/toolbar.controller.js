@@ -52,6 +52,7 @@ class ToolBarController {
 	}
 
 	showRightDrawer() {
+		console.log('showRightDrawer in toolbar');
 		this._$rootScope.rightSideNavCollapsed = !this._$rootScope.rightSideNavCollapsed;
 	}
 

@@ -1,4 +1,13 @@
 @media (max-width: 600px) {
+    .broker-dashboard-area {
+        .right {
+            display: flex;
+            &.collapsed {
+                display:none;
+            }
+        }
+    }
+
     .user-dashboard-area {
      color: #4f6379;
      font-size: 16px;
