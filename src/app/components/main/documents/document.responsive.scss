@@ -1,0 +1,17 @@
+.uploadIcons {
+	display: none;
+}
+@media (max-width: 600px) {
+	.uploadIcon {
+		img {
+			border-right: 1px solid #e7ecf1;
+		    width: 50px;
+		    padding-right: 10px;
+		}
+	}
+	.uploadIcons {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+}
