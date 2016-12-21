@@ -2,6 +2,7 @@
 
 import documentHtml from './document.html';
 import './document.scss';
+import './document.responsive.scss';
 
 function documentComponent() {
 	'ngInject';

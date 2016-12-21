@@ -1,4 +1,8 @@
 @media (max-width: 600px) {
+	.mochange {
+		display:flex;
+		margin-top: 10px;
+	}
 	.main-container {
 		display: flex;
 		width: 100%;
@@ -25,9 +29,13 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				max-width: 90%;
+				max-height: 90%;
 			}
 		}
-
+		.moheight25{
+			height: 25px;
+		}
 		.preview-overlay {
 			background-color: rgba(79, 99, 121, 0.78);
 			position: fixed;
@@ -52,12 +60,14 @@
 				justify-content: center;
 				align-items: stretch;
 				z-index: 101;
+				max-width: 90%;
+				max-height: 90%;
 				.close
 				{
 					cursor: pointer;
 					position: absolute;
 					top: 0;
-					right: -20px;
+					right: 10px;
 					color: white;
 					font-weight: 800;
 					font-size: 25px;
@@ -71,10 +81,13 @@
 					img.preview {
 						max-width: 700px;
 						max-height: 510px;
+						max-width: 90%;
 					}
 					&.ocr {
 						padding: 0;
 						margin: 30px;
+						overflow-y: scroll;
+    					overflow-x: hidden;
 						.input {
 							display: flex;
 							flex-flow: column;
@@ -106,6 +119,7 @@
 						flex-flow: row wrap;
 						align-content: flex-start;
 						padding: 10px;
+						margin-top: 90px;
 					}
 				}
 				.bottom {
@@ -118,8 +132,9 @@
 					line-height: 24px;
 					background-color: #f5f9fa;
 					&.ocr {
-						height: 130px;
+						height: 170px;
 						justify-content: space-around;
+						flex-wrap: wrap;
 					}
 					.buttons {
 						display: flex;

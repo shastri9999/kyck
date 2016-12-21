@@ -31,10 +31,12 @@
 				border:1px solid #e7ecf1;
 				justify-content: center;
 				text-decoration: none;
+				outline: none;
 				&.active {
 					background-color: #3aafa5;
 					color: white;
 					border: none;
+					outline: none;
 				}
 			}
 			.compose-btn{
