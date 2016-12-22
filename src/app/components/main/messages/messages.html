@@ -7,7 +7,7 @@
 			<img src="/assets/images/refresh.png" alt="Refresh" class="refresh" ng-click="vm.refresh()">
 			<a ng-if="vm.isBroker" class="compose-btn" ng-click="vm.compose()">Compose</a>
 		</div>
-		<div ui-view ng-class="{'messages-list':true, 'hide': (messageView.activeInboxMessage && breadCrumb=='Messages - Inbox') || (messageView.activeSentMessage && breadCrumb=='Messages - Sent') || (messageView.composing)}">
+		<div ui-view ng-class="{'messages-list':true, 'messages-hide': (messageView.activeInboxMessage && breadCrumb=='Messages - Inbox') || (messageView.activeSentMessage && breadCrumb=='Messages - Sent') || (messageView.composing)}">
 		</div>
 	</div>
 	<div ng-if="messageView.activeInboxMessage && breadCrumb=='Messages - Inbox'" class="right send">
@@ -28,9 +28,13 @@
 	            <img src="/assets/images/download.png"/>                                
 	        </a>
 		</div>
-
+		<div class="uploaded-message-attachment" ng-if="messageAttachment">
+			{{messageAttachment.name}}
+			<img src="/assets/images/close-message.png" ng-click="vm.removeAttachment()" alt="">
+		</div>
 		<div class="reply" ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)">
 			<textarea name="reply" placeholder="Type your message here..." ng-model="messageView.reply" id="" cols="30" rows="2"></textarea>
+			<img src="/assets/images/paper-clips.png" alt="Attach" class="attach" ngf-select="vm.addAttachment($file)">
 			<a class="send-btn" ng-click="vm.sendMessage(messageView.activeInboxMessage, false)">Send</a>
 		</div>
 	</div>
@@ -52,8 +56,13 @@
 	            <img src="/assets/images/download.png"/>                                
 	        </a>
 		</div>
+		<div class="uploaded-message-attachment" ng-if="messageAttachment">
+			{{messageAttachment.name}}
+			<img src="/assets/images/close-message.png" ng-click="vm.removeAttachment()" alt="">
+		</div>
 		<div class="reply" ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)">
 			<textarea name="reply" placeholder="Type your message here..." ng-model="messageView.reply" id="" cols="30" rows="2"></textarea>
+			<img src="/assets/images/paper-clips.png" alt="Attach" class="attach" ngf-select="vm.addAttachment($file)">
 			<a class="send-btn" ng-click="vm.sendMessage(messageView.activeSentMessage, true)">Send</a>
 		</div>
 	</div>
@@ -65,7 +74,8 @@
 		<div style="position: absolute;" class="compose-to">To</div>
 		<select type="text" name="to" ng-model="vm.composeMessage.messageFrom" placeholder="To" ng-options="mail for mail in vm.toList"/>
 		<input type="text" name="subject" ng-model="vm.composeMessage.messageSubject" placeholder="Subject">
-		<textarea ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)" name="message" placeholder="Type your message here..." ng-model="vm.composeMessage.messageContent" cols="30" rows="20"></textarea>				
+		<textarea ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)" name="message" placeholder="Type your message here..." ng-model="vm.composeMessage.messageContent" cols="30" rows="20"></textarea>
+		<img src="/assets/images/paper-clips.png" alt="Attach" class="compose-attach" ngf-select="vm.addAttachment($file)">				
 		<a class="send-btn" ng-click="vm.createMessage()">Send</a>
 	</div>
 

@@ -9,7 +9,7 @@
 		flex-flow: column;
 		padding: 10px;
 		flex-grow: 1;
-		.messages-list.hide {
+		.messages-list.messages-hide {
 			display: none;
 		}
 		.navigation {
@@ -122,6 +122,27 @@
 		z-index: 6;
 		&.send {
 			justify-content: space-between;
+		}
+		img.attach {
+			height: 20px;
+		    cursor: pointer;
+		    position: relative;
+		    left: -26px;
+		    top: 9px;
+		}
+		.uploaded-message-attachment {
+			position: absolute;
+		    bottom: 75px;
+		    background: rgba(227,227,227,0.84);
+		    padding: 10px;
+		    border-radius: 3px;
+		}
+		img.compose-attach {
+			position: absolute;
+		    bottom: 10px;
+		    right: 110px;
+		    height: 20px;
+		    cursor: pointer;
 		}
 		.compose-hide {
 			visibility: hidden;

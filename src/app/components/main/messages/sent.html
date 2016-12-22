@@ -10,9 +10,10 @@
 			<div style="opacity: 0.4;font-size: 14px;">{{message.messageContent}}</div>
 		</div>
 		<div class="time">
-			<div style="white-space: nowrap;padding-right: 10px" am-time-ago="message.messageDate | amParse:'DD/MM/YYYY hh:mm'"></div>
+			<div style="white-space: nowrap;" am-time-ago="message.messageDate | amParse:'DD/MM/YYYY hh:mm'"></div>
+			<img src="/assets/images/paper-clips.png" ng-if="message.attachUrl" style="height: 16px; padding-left: 10px;" class="attachment">
 			<a style="text-decoration: none;cursor: pointer;">
-				<img src="/assets/images/open-message.png" style="outline: none;">					
+				<img src="/assets/images/open-message.png" style="outline: none;padding-left: 10px;">					
 			</a>
 		</div>
 	</div>

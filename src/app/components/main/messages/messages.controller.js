@@ -15,6 +15,7 @@ function MessagesController($state, $scope, MessageService, Upload, Authenticati
 	
     vm.addAttachment = function(file){
     	$rootScope.messageAttachment = file;
+    	console.log($rootScope.messageAttachment);
     }
     vm.removeAttachment = function(file){
     	$rootScope.messageAttachment = null;
@@ -32,23 +33,9 @@ function MessagesController($state, $scope, MessageService, Upload, Authenticati
       }).then(function(response){
         $rootScope.mainLoading = false;
     	$rootScope.messageAttachment = null;        
-        $mdToast.show(
-          $mdToast.simple()
-          .textContent('File Uploaded Successfully!')
-          .position('bottom left')
-          .toastClass('md-primary')
-          );
       }, function(error){
     	$rootScope.messageAttachment = null;        
         $rootScope.mainLoading = false;
-        $mdToast.show(
-          $mdToast.simple()
-          .textContent('File Attachment Failed!')
-          .position('bottom right')
-          .toastClass('md-warn')
-          .hideDelay(2000)
-          );
-
       }, function(evt){
 	        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
     	    console.log(progressPercentage);
