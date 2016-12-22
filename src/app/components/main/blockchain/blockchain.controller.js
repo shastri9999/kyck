@@ -22,7 +22,7 @@ class BlockChainController{
 			'method':'GET',
 			url: '/kyck-rest/blockchain/blocks',
 		}).then((s)=>{
-			const newTotalBlocks =  +s.data.data.height;
+			const newTotalBlocks =  +s.data.data;
 			let totalBlocks = this.currentBlocks.length;
 
 			if((newTotalBlocks - totalBlocks) > 1)
