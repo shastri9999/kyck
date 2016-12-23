@@ -1,7 +1,13 @@
+.navigation a.mo-show {
+	display: none;
+}
 .mo-show {
 	display:none;
 }
 @media (max-width: 600px){
+	.navigation a.mo-show {
+		display: flex;
+	}
 	.mo-show {
 		display: block;	
 	}
