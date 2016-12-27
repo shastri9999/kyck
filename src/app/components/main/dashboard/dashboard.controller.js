@@ -43,10 +43,19 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 		/* Get user related info */
 		$rootScope.loadingProgress=true;
 
-		CalendarService.fetchMeetings({"month": (new Date()).getMonth(), "year": (new Date()).getFullYear()}, (response)=>{
+		CalendarService.fetchMeetings().then((appointments)=>{
 			$rootScope.loadingProgress = false;
-			vm.brokerAppointments = response.data;
+			vm.brokerAppointments = appointments;
 		});
+
+		DashboardResource.brokerageApplications((response)=>{
+			$rootScope.loadingProgress = false;
+			vm.brokerageApplications = response.data;
+		}, (error)=>{
+			$rootScope.loadingProgress = false;
+			$rootScope.$broadcast('logout');
+		});
+
 	}
 	
 	vm.joinConference = (appointment)=>{
