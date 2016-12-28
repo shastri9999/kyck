@@ -12,7 +12,7 @@
         </div>
         <div flex="5" class="parentPartnerLogoSmall"><img class="calicon" src="../../../../assets/images/calendaricon.png"/></div>
     </div>
-    <div layout="row" flex ng-show="partner.showCalendar">
+    <div layout="row" flex ng-show="partner.showCalendar" style="margin-right: 30px;">
         <div class="mainCalBrokerage">
             <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent, $index)" md-label="title"
             class="md-primary" style="margin-top: 2px;">

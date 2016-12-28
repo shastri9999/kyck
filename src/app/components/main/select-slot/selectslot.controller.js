@@ -1,7 +1,7 @@
 'use strict';
 
 class SelectFormController {
-	constructor($rootScope, BrokerageResource, $mdDialog, $mdToast) {
+	constructor($rootScope, BrokerageResource, $mdDialog, $mdToast,  $mdStepper) {
 		'ngInject';
         var currentD = new Date();
         var currentDate = currentD.getDate();
@@ -16,7 +16,24 @@ class SelectFormController {
 	        else
 	            return (i-12) + ':00 PM';
 	    }
+	
+	    function convert(obj) {
+	        obj['img'] = '/assets/images/partnerLogos/' + obj['brokerageName'] + '.png';
+	        return obj;
+	    }
+	    
+	    function toggleShowPartner(index) {
+	        for (var i=0; i<this.selectedPartners.length; i++) {
+	            if (i!==index) {
+	                this.selectedPartners[i]['showCalendar'] = false;
+	            } else {
+	                this.selectedPartners[i]['showCalendar'] = !this.selectedPartners[i]['showCalendar'];
+	            }
+	        }
+	    }
 
+	    vm.toggleShowPartner = toggleShowPartner;
+	    
 	    function getDate(offsetDays, hour) {
 	        offsetDays = offsetDays || 0;
 	        var offset = offsetDays * 24 * 60 * 60 * 1000;
@@ -98,7 +115,7 @@ class SelectFormController {
 	            	console.log("NO");
 	            });
 
-	        $rootScope.$on('showDialog', function(event, e) {
+	        $rootScope.$on('showDialog', function($event, e) {
 		        for (var i=0; i<vm.selectedPartners.length; i++) {
 		            var partner = vm.selectedPartners[i];
 		            if (!partner.selectedAppointments) {
@@ -108,7 +125,6 @@ class SelectFormController {
 		        }
 
 		       var parentEl = angular.element(document.body);
-		       var partner = (vm.partners.filter(x=>x.selected)[0]);
 
 		       var brokerageReqs = [];
 		       for (var i=0; i<vm.selectedPartners.length; i++) {
@@ -163,32 +179,39 @@ class SelectFormController {
 		            function (error) {console.log(error)}
 		        );
 
-		       $mdDialog.show({
-		         parent: parentEl,
-		         targetEvent: $event,
-		         template:
-		           '<md-dialog aria-label="List dialog">' +
-		           '  <md-dialog-content style="width:500px; max-width: 90%; min-height:60px;">'+
-		            '<div class="dialog-content-broker">'+ 
-		            ' Your appointment preferences have been sent to the partners.' +
-		            ' </div>' + 
-		           '  </md-dialog-content>' +
-		           '  <md-dialog-actions>' +
-		           '    <md-button ng-click="closeDialog()" class="md-primary">' +
-		           '      Okay!' +
-		           '    </md-button>' +
-		           '  </md-dialog-actions>' +
-		           '</md-dialog>',
-		         controller: DialogController
-		      });
+		       if (!vm.dialogShown) 
+		       {
+		       	   vm.dialogShown = true;
+			       $mdDialog.show({
+			         parent: parentEl,
+			         targetEvent: $event,
+			         template:
+			           '<md-dialog aria-label="List dialog">' +
+			           '  <md-dialog-content style="width:500px; max-width: 90%; min-height:60px;">'+
+			            '<div class="dialog-content-broker">'+ 
+			            ' Your appointment preferences have been sent to the partners.' +
+			            ' </div>' + 
+			           '  </md-dialog-content>' +
+			           '  <md-dialog-actions>' +
+			           '    <md-button ng-click="closeDialog()" class="md-primary">' +
+			           '      Okay!' +
+			           '    </md-button>' +
+			           '  </md-dialog-actions>' +
+			           '</md-dialog>',
+			         controller: DialogController
+			      });		       	
+		      }
+
 		      function DialogController($scope, $mdDialog) {
 		        'ngInject';
 		        $scope.closeDialog = function() {
 		            vm.timeslotSelected = false;
+		            vm.dialogShown = false;
 		            var steppers = $mdStepper('stepper-demo');
 		            steppers.goto(0);
 		            $mdDialog.hide();
 		            vm.selectedDocumentNames = [];
+		            window.location.reload();
 		        }
 		      }
 	      });
