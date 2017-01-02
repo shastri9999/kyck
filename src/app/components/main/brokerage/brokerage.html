@@ -366,7 +366,7 @@
                 <div class="datetime">{{message.date | date:'dd MMM yy, HH:mm a'}}</div>
             </div>
         </div>
-        <div style="z-index: 3;">
+        <div style="z-index: 3; position: relative;">
             <!-- <img src="/assets/images/clip.png" style="position: absolute; right: 55px; height: 24px; margin-top: 16px;" /> -->
             <img ng-click="vm.sendMessage()" src="/assets/images/open-message.png" class="sendMsgButton"/>
             <div ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)">

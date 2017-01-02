@@ -8,6 +8,20 @@
 		max-width: 98%;
 	}
 }
+@media (max-width: 400px) {
+	md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content .md-event-calendar-cell-event-show-more-link {
+	    margin-top: -15px;
+	    text-align: right;
+		font-size: 10px !important;
+	}
+}
+@media (max-width: 600px) {
+	md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content .md-event-calendar-cell-event-show-more-link {
+	    margin-top: -15px;
+	    text-align: right;
+		font-size: 13px !important;
+	}
+}
 .dialog-content-broker.calendarPopup {
 	height: auto;
 	align-items: flex-start;

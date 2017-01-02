@@ -49,7 +49,7 @@
 .meetingDetailsContent.mobile {display:none;}
 .sendMsgButton {
 	position: absolute;
-	right: -25px;
+	right: 20px;
 	height: 20px;
 	margin-top: 18px;
 	cursor: pointer;
@@ -135,11 +135,6 @@
 
 	.parentPartnerLogoSmall {
 		max-width: inherit !important;
-	}
-	.md-event-calendar-cell-event-show-more-link {
-	    /*margin-top: -6px;*/
-	    cursor: pointer;
-	    text-align: right;
 	}
 	.mainArea .partnerMenu {
 		margin-left: 0px;

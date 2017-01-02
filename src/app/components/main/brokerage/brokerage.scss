@@ -16,6 +16,15 @@ md-step-body {
   }
 }
 
+md-event-calendar {
+	margin-left: 10px;
+    margin-right: 10px;
+}
+.md-stepper-title {
+	max-height: 25px;
+	overflow: hidden;
+}
+
 .md-steppers-horizontal .md-stepper-indicator {
 	flex-basis: 20%;
 	flex-grow: 0;
@@ -108,9 +117,8 @@ md-step-body {
 	}
 
 	.md-stepper-indicator.md-active .md-stepper-title, .md-stepper-indicator.md-completed .md-stepper-title {
-		color: #4f6379;
-	}
-	.md-stepper-title {
+		max-height:25px;
+		overflow: hidden;
 		color: #eccbcb;
 		font-weight: normal;
 	}
@@ -309,6 +317,7 @@ md-step-body {
 	height: calc(100vh - 80px);
 	overflow-y: scroll;
 	overflow-x: hidden;
+	padding-bottom: 50px;
 }
 
 .rightSide {
