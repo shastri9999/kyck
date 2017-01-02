@@ -143,8 +143,8 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                     }
                     else if (status == "RESCHEDULE") {
                         var partner = {
-                            'brokerageName' : slot['brokerageName'],
-                            'img' : '/assets/images/partnerLogos/' + $scope.slot['brokerageName'] + '.png',
+                            'brokerageName' : slot['brokerName'],
+                            'img' : '/assets/images/partnerLogos/' + $scope.slot['brokerName'] + '.png',
                             'showCalendar' : true,
                             'selectedAppointments' : []
                         };

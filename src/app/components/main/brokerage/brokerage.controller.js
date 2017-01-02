@@ -533,6 +533,10 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
 
         $rootScope.loadingProgress = true;
+        updateMessages();
+    }
+
+    function updateMessages() {
         BrokerageResource.usermessages({userId: vm.userAppointment.email}, function(response) {
             $rootScope.loadingProgress = false;
             for(let i=0; i<response.data.length; i++) {
@@ -549,7 +553,6 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
                 vm.usermessages.push({'message':message, 'class': className, 'date': messageDate});
             }
-            console.log(response, vm.usermessages);
         }, function() {});
     }
 
@@ -598,6 +601,8 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             vm.messageReplyText = "";
             $mdToast.showSimple('Message Successfully Sent!');
         });
+
+        updateMessages();
     }
 
     function upload(messageId){
