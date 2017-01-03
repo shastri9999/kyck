@@ -161,8 +161,9 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                             'ngInject';
 
                             $scope.selectedPartners = selectedPartners;
+                            $scope.timeslotSelected = true;
+                            
                             $rootScope.$on('timeslotSelected', function(event, data) {
-                                $scope.timeslotSelected = true;
                                 var calendarDetailRequest = {
                                   "calenderId": slot.calendarId,
                                   "calenderSlot": data[0].selectedAppointments[0],

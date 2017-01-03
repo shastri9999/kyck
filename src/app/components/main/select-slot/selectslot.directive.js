@@ -10,6 +10,7 @@ function SelectSlotForm() {
     restrict: 'E',
     scope: {
     	selectedPartners: '=',
+      openInPopup: '=',
       timeslotSelected: '='
     },
     templateUrl,

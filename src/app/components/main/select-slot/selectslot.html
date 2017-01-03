@@ -5,14 +5,14 @@
     <div class="partnerMenu" layout="row" flex ng-click="vm.toggleShowPartner($index)">
         <div flex="10" class="parentPartnerLogoSmall"><img ng-src="{{partner.img}}" alt="{{partner.brokerageName}}" class="partnerLogoSmall"/></div>
         <div flex="90" class="partnerTitle">{{partner.brokerageName}}
-            <div class="meetingDetailsContent mobile" layout="row" flex ng-repeat="slot in vm.selectedPartners[$index]['selectedAppointments']">
+            <div class="meetingDetailsContent mobile" layout="row" flex ng-repeat="slot in vm.selectedPartners[$index]['selectedAppointments']" ng-if="!vm.openInPopup">
                 <div flex="10" class="timeclock"><img src="../../../../assets/images/clockicon.png" width="24" /></div>
                 <div flex="90" class="timings">Time slot - {{slot | date:'MMM dd, yyyy HH:mm a'}}</div>
             </div>
         </div>
         <div flex="5" class="parentPartnerLogoSmall"><img class="calicon" src="../../../../assets/images/calendaricon.png"/></div>
     </div>
-    <div layout="row" flex ng-show="partner.showCalendar" style="margin-right: 30px;">
+    <div layout="row" flex ng-show="partner.showCalendar">
         <div class="mainCalBrokerage">
             <md-event-calendar md-events="vm.events" md-event-click="vm.eventClicked($selectedEvent, $index)" md-label="title"
             class="md-primary" style="margin-top: 2px;">
@@ -23,7 +23,7 @@
                 </md-event-calendar-header>
             </md-event-calendar>
         </div>
-        <div class="meetingDetails">
+        <div class="meetingDetails" ng-if="!vm.openInPopup">
             <div class="meetingDetailsHeading">Meeting Details</div>
             <div class="meetingDetailsContent" layout="row" flex ng-repeat="slot in vm.selectedPartners[$index]['selectedAppointments']">
                 <div flex="10"><img src="../../../../assets/images/clockicon.png" width="24" style="max-width: 100%;" /></div>

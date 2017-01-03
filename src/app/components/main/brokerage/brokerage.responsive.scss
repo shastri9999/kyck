@@ -56,6 +56,9 @@
 	outline: none;
 }
 @media (max-width: 600px) {
+	select-slot md-event-calendar md-event-calendar-month .md-event-calendar-show-more-container.show {
+		max-width: 160px;
+	}
 	.right-stat {
         display: block;
         &.collapsed{
