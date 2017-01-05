@@ -57,6 +57,7 @@
     "ngtemplate-loader": "^1.3.1",
     "node-sass": "^3.4.2",
     "oclazyload": "^1.0.9",
+    "pdfjs-dist": "^1.6.422",
     "postcss-loader": "^0.6.0",
     "radial-progress-chart": "0.0.4",
     "sass-loader": "^3.1.1",
