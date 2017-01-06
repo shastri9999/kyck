@@ -4,6 +4,9 @@ import Routes from './index.routes';
 import Common from './common/common.module'
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
+import pdfjsLib from 'pdfjs-dist';
+pdfjsLib.PDFJS.workerSrc = '../../build/webpack/pdf.worker.bundle.js';
+window.pdfjsLib = pdfjsLib;
 
 export default angular.module('kyck', [
 	'ui.router',
@@ -45,17 +48,19 @@ export default angular.module('kyck', [
 	$rootScope.sideNavExpanded = false;
 	$rootScope.shouldShowDocumentPreview = false;
 	$rootScope.documentPreviewLoading = false;
-	$rootScope.documentPreviewURL = '/assets/images/nric.jpg'
+	$rootScope.documentPreviewURL = '';
 	$rootScope.viewingDocument = {};
 	$rootScope.OCRView = false;
 	$rootScope.canEnableOCR = false;
 	$rootScope.cropping = false;
 	$rootScope.originalPreviewURL = null;
 	$rootScope.croppedBlob = null;
+	$rootScope.pdfView = false;
 
 	window.cropper = null;
 
 	$rootScope.toggleCropper = ()=>{
+		if ($rootScope.pdfView) return;
 		if (window.cropper)
 		{
 			const canvasElement = window.cropper.getCroppedCanvas();
@@ -128,6 +133,7 @@ export default angular.module('kyck', [
 		$rootScope.croppedBlob = null;
 		$rootScope.originalPreviewURL = null;
 		$rootScope.documentPreviewURL = null;
+		$rootScope.pdfView = false;
 		if (window.cropper)
 		{
 			window.cropper.destroy();
@@ -136,11 +142,44 @@ export default angular.module('kyck', [
 	}
 	
 	$rootScope.showDocumentPreview = (URL)=>{
+		$rootScope.documentPreviewURL = '';
+		$rootScope.originalPreviewURL = $rootScope.documentPreviewURL;
 		if (URL)
 		{
-			$rootScope.documentPreviewLoading = false;
-			$rootScope.documentPreviewURL = URL;
-			$rootScope.originalPreviewURL = $rootScope.documentPreviewURL;
+			if (URL.slice(0,20) === 'data:application/pdf')
+			{
+				$rootScope.pdfView = true;
+				$rootScope.documentPreviewURL = URL;
+				$rootScope.originalPreviewURL = $rootScope.documentPreviewURL;
+
+				const loadingTask = pdfjsLib.getDocument(URL);
+				loadingTask.promise.then(function (pdfDocument) {
+				  return pdfDocument.getPage(1).then(function (pdfPage) {
+				  	$rootScope.pdfPage = pdfPage;
+				    const canvas = document.getElementById('pdf-canvas');
+				    const viewport = pdfPage.getViewport(canvas.width / pdfPage.getViewport(1.0).width);
+        			canvas.height = viewport.height;
+				    const ctx = canvas.getContext('2d');
+					$rootScope.$apply(()=>{
+						$rootScope.documentPreviewLoading = false;
+					});
+				    const renderTask = pdfPage.render({
+				      canvasContext: ctx,
+				      viewport: viewport
+				    });
+				    return renderTask.promise;
+				  });
+				}).catch(function (reason) {
+				  console.error('Error: ' + reason);
+				});
+			}
+			else
+			{
+				$rootScope.pdfView = false;
+				$rootScope.documentPreviewLoading = false;
+				$rootScope.documentPreviewURL = URL;
+				$rootScope.originalPreviewURL = $rootScope.documentPreviewURL;
+			}
 		}
 		else
 		{
@@ -157,10 +196,25 @@ export default angular.module('kyck', [
 	}
 
 	$rootScope.closeOCRView = ()=>{
-		$rootScope.OCRView = false;	
+		$rootScope.OCRView = false;
+		$timeout(()=>{
+			if ($rootScope.pdfPage)
+			{
+				const pdfPage = $rootScope.pdfPage;
+			    const canvas = document.getElementById('pdf-canvas');
+			    const viewport = pdfPage.getViewport(canvas.width / pdfPage.getViewport(1.0).width);
+				canvas.height = viewport.height;
+			    const ctx = canvas.getContext('2d');
+			    pdfPage.render({
+			      canvasContext: ctx,
+			      viewport: viewport
+			    });
+			    $rootScope.$apply(()=>{
+				    $rootScope.documentPreviewLoading = false;
+			    });
+			}
+		}, 100);
 	}
-
-	
 
 	$rootScope.messageView = {
 		activeInboxMessage: null,
