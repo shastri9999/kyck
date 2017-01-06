@@ -211,7 +211,7 @@ class SelectFormController {
 		            steppers.goto(0);
 		            $mdDialog.hide();
 		            vm.selectedDocumentNames = [];
-		            window.location.reload();
+		            // window.location.reload();
 		        }
 		      }
 	      });

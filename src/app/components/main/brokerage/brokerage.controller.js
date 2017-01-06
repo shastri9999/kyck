@@ -28,6 +28,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         }
     }
 
+
+    $rootScope.$on('resetBrokersList', function($event, e) {
+        init();
+    });
+
     vm.steps = ["Select Broker", "Personal Details", "KYC", "Documents", "Selection of Timeslot"]
 
     function drawCharts() {
@@ -417,9 +422,8 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         }
         else
             moveNext();
-
     }
-
+    
     function nextRequestStep() {
         if (vm.getActiveStep() > 1) {
             document.getElementsByClassName('md-stepper-indicator ng-scope')[vm.getActiveStep()-1].className+=" md-completed";
