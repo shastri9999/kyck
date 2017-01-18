@@ -35,6 +35,31 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
     vm.steps = ["Select Broker", "Personal Details", "KYC", "Documents", "Selection of Timeslot"]
 
+    function setUserAppointments() {
+        BrokerageResource.userAppointments((response)=>{
+            $rootScope.loadingProgress = false;
+            vm.userAppointments = response.data;
+            vm.userAppointmentsFiltered = vm.userAppointments;
+
+            $scope.firstAppointment = '<div class="appointment ng-scope" ng-click="vm.selectUser(0)">' +
+                '<div class="avatar-circle">' +
+                    vm.userAppointmentsFiltered[0].fname[0].toUpperCase() + 
+                    vm.userAppointmentsFiltered[0].lname[0].toUpperCase() +
+                '</div>' +
+                '<div class="detail">' + 
+                    '<div style="font-size: 14px;" class="ng-binding">'+ vm.userAppointmentsFiltered[0].fname + vm.userAppointmentsFiltered[0].lname +'</div>' +
+                    '<a class="pending-btn ng-binding" style="margin-top: 4px;">'+vm.userAppointmentsFiltered[0].applicationStatus+'</a>' +
+                '</div>' +
+            '</div>';
+
+            shuffletheorder();
+            vm.userAppointment = vm.userAppointments[0];
+            if (vm.userAppointments.length > 0) {
+                selectUser(0);
+            }
+        });
+    }
+
     function drawCharts() {
         Promise.all([DashboardResource.profileStatus({userId: vm.userAppointment.email}).$promise,
             DashboardResource.kycStatus({userId: vm.userAppointment.email}).$promise,
@@ -224,28 +249,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
 
         if (vm.isBroker) {
             $rootScope.loadingProgress = true;
-            BrokerageResource.userAppointments((response)=>{
-                $rootScope.loadingProgress = false;
-                vm.userAppointments = response.data;
-                vm.userAppointmentsFiltered = vm.userAppointments;
-
-                $scope.firstAppointment = '<div class="appointment ng-scope" ng-click="vm.selectUser(0)">' +
-                    '<div class="avatar-circle">' +
-                        vm.userAppointmentsFiltered[0].fname[0].toUpperCase() + 
-                        vm.userAppointmentsFiltered[0].lname[0].toUpperCase() +
-                    '</div>' +
-                    '<div class="detail">' + 
-                        '<div style="font-size: 14px;" class="ng-binding">'+ vm.userAppointmentsFiltered[0].fname + vm.userAppointmentsFiltered[0].lname +'</div>' +
-                        '<a class="pending-btn ng-binding" style="margin-top: 4px;">'+vm.userAppointmentsFiltered[0].applicationStatus+'</a>' +
-                    '</div>' +
-                '</div>';
-
-                shuffletheorder();
-                vm.userAppointment = vm.userAppointments[0];
-                if (vm.userAppointments.length > 0) {
-                    selectUser(0);
-                }
-            });
+            setUserAppointments();
 
             vm.getDownloadLink = ()=>{
                 if (vm.userAppointment && vm.selectedDocumentNames.length)
@@ -311,18 +315,21 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
     function submitApplication(status) {
         $rootScope.loadingProgress = true;
         $scope.timeslotSelected = false;
-        BrokerageResource.updateApplication({"status": status,
-                "userId": vm.userAppointment.email},
-        function (response) {
-            $rootScope.loadingProgress = false;
-            $mdToast.showSimple("Application has been successfully "+status.toLowerCase()+".");
-            vm.userAppointment.applicationStatus = status;
-            vm.allVerified=false;
-            vm.selectedIndex = vm.userAppointments.findIndex(function (a) {return a.email == vm.userAppointment.email;})
-            shuffletheorder();
-        }, function (error) {
-            console.log(error);
-        });
+        BrokerageResource.updateApplication(
+            {"status": status, "userId": vm.userAppointment.email},
+            function (response) {
+                console.log(response);
+                $rootScope.loadingProgress = false;
+                $mdToast.showSimple("Application has been successfully "+status.toLowerCase()+".");
+                vm.userAppointment.applicationStatus = status;
+                vm.allVerified=false;
+                setUserAppointments();
+                // vm.selectedIndex = vm.userAppointments.findIndex(function (a) {return a.email == vm.userAppointment.email;})
+                shuffletheorder();
+            }, function (error) {
+                console.log(error);
+            }
+        );
     }
 
     function updateMeetingStatus(status, slot) {
