@@ -61,7 +61,7 @@
         <div ng-if="isBroker">
         <md-step md-label="Account Summary" class="accSummary">
             <md-step-body layout="column" class="accSumStep">
-            <div layout="row">
+            <div layout="row" style="min-height: 150px;">
                 <div class="appointment ng-scope" id="primaryApp" layout="column">
                     <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
                         <div style="font-size: 14px;" class="ng-binding">{{vm.userAppointment.fname}} {{vm.userAppointment.lname}}</div>
