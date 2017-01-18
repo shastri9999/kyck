@@ -1,7 +1,7 @@
 'use strict';
 
 class SelectFormController {
-	constructor($rootScope, BrokerageResource, $mdDialog, $mdToast,  $mdStepper) {
+	constructor($rootScope, BrokerageResource, $mdDialog, $mdToast,  $mdStepper, CalendarService, moment) {
 		'ngInject';
         var currentD = new Date();
         var currentDate = currentD.getDate();
@@ -45,26 +45,47 @@ class SelectFormController {
 	        return date;
 	    }
 
-        for(var j=0; j<= 300; ++j)
-        {
-            //if date is valid else don't execute the for loop
-            var day = currentD.getDay() + j;
-            if (day % 7 != 6 && day % 7 !=0) {
-                for(var i=10; i<=19; ++i)
-                {
-                    var i2 = 1+i;
-                    vm.events.push({
-                        start: getDate(j, i),
-                        allDay: true,
-                        customClass: 'book-appointment',
-                        customText: 'slots',
-                        title: numToTime(i) + ' - ' + numToTime(i2),
-                        mday: currentDate + j,
-                        mhour: i
-                    })
-                }
-            }
-        }
+	    // CalendarService.fetchBrokerMeetings().then((data)=>{
+     //        var userSlots = data.map(
+     //        	function(a) {
+     //        		return moment(a['startTime'], 'DD/MM/YYYY hh:mm').toDate();
+     //        	}
+     //        );
+
+            for(var j=0; j<= 300; ++j)
+	        {
+	            //if date is valid else don't execute the for loop
+	            var day = currentD.getDay() + j;
+	            if (day % 7 != 6 && day % 7 !=0) {
+	                for(var i=10; i<=19; ++i) {
+	                    var i2 = 1+i;
+						var startD = getDate(j, i);
+	                    vm.events.push({
+	                        start: startD,
+	                        allDay: true,
+	                        customClass: 'book-appointment',
+	                        customText: 'slots',
+	                        title: numToTime(i) + ' - ' + numToTime(i2),
+	                        mday: startD.getDay(),
+	                        mhour: startD.getHours(),
+	                        mmonth: startD.getMonth()
+	                    });
+	                }
+	            }
+	 		}
+
+	 		// for (var j=0; j<userSlots.length; j++) {
+	 		// 	vm.events = vm.events.filter(function (a) {
+		 	// 		console.log(userSlots[j].getHours(), a['mhour']);
+	 		// 		return !userSlots[j].getHours() == a['mhour'];
+	 		// // 		!(
+	   //          		// (userSlots[j].getDay() == a['mday']) && 
+	   // //          		(userSlots[j].getMonth() == a['mmonth']) &&
+	   //          		// (userSlots[j].getHours() == a['mhour'])
+    // //         		)
+	 		// 	});
+	 		// }
+        // });
 
         vm.eventClicked = eventClicked;
 	
