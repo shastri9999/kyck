@@ -8,6 +8,13 @@
 		max-width: 98%;
 	}
 }
+md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content .md-event-calendar-cell-event-show-more-link {
+	position: absolute;
+	text-align: right;
+	bottom: -2px;
+	right: -2px;
+}
+
 @media (max-width: 400px) {
 	md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content .md-event-calendar-cell-event-show-more-link {
 	    margin-top: -15px;
