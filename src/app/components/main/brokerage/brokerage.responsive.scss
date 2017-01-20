@@ -42,7 +42,7 @@
     .bgimage {
 		width:250px;
 		min-height:calc(100vh - 107px);
-		position: absolute;
+		position: fixed;
 		z-index: 1;
 	}
 }
