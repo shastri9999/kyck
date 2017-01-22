@@ -28,6 +28,31 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         }
     }
 
+    function updateBrokers() {
+        $rootScope.loadingProgress = true;
+        BrokerageResource.contactedBrokerages((response)=>{
+            vm.contactedBrokers = response.data;
+            vm.filteredContactedBrokers = vm.contactedBrokers;
+
+            BrokerageResource.brokeragesList((req)=> {
+                $rootScope.loadingProgress = false;
+                var brokeragesList = req.data;
+                vm.partners = brokeragesList.map(convert);
+                vm.partners = vm.partners.map((partner)=>{
+                    vm.contactedBrokers.forEach((broker)=>{
+                        if (broker.brokerageId == partner.brokerageName)
+                        {
+                            partner.status = broker.status;
+                        }
+                    });
+                    return partner;
+                })
+                vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
+            });     
+        });  
+
+        $scope.selectedPartners = [];
+    }
 
     $rootScope.$on('resetBrokersList', function($event, e) {
         init();
@@ -152,30 +177,13 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             $scope.timeslotSelected = true;
         });
 
+        $rootScope.$on('brokerageSubmitted', function($event, e) {
+            updateBrokers();            
+        });
+
         if (!vm.isBroker)
         {
-            $rootScope.loadingProgress = true;
-            BrokerageResource.contactedBrokerages((response)=>{
-                vm.contactedBrokers = response.data;
-                vm.filteredContactedBrokers = vm.contactedBrokers;
-
-                BrokerageResource.brokeragesList((req)=> {
-                    $rootScope.loadingProgress = false;
-                    var brokeragesList = req.data;
-                    vm.partners = brokeragesList.map(convert);
-                    vm.partners = vm.partners.map((partner)=>{
-                        vm.contactedBrokers.forEach((broker)=>{
-                            if (broker.brokerageId == partner.brokerageName)
-                            {
-                                partner.status = broker.status;
-                            }
-                        });
-                        return partner;
-                    })
-                    vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
-                });     
-            });  
-
+            updateBrokers();
             $rootScope.loadingProgress = true;
             DocumentResource.categories(function(response){
                 $rootScope.loadingProgress = false;
@@ -418,7 +426,7 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
             });
         }
         else if (vm.getActiveStep() == 5 && !vm.isBroker) {
-            $rootScope.$broadcast('showDialog'); 
+            $rootScope.$broadcast('submitBrokerage'); 
             return;
         }
         else if (vm.getActiveStep() == 5) {

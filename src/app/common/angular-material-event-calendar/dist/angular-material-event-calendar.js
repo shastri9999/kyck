@@ -462,7 +462,7 @@ function mdEventCalendarBuilderService($$mdEventCalendarUtil, $templateCache) {
       i = 0;
       // add spacer items for overflow events from last day
       while (i < placeDiff) {
-        if (place >= options.maxEvents) {
+        if (place >= options.maxEvents - 1) {
           cellContent.appendChild(createShowMore(matchingEvents.length - pos, options.date, eventItem.customText));
           return false;
         }
@@ -470,7 +470,7 @@ function mdEventCalendarBuilderService($$mdEventCalendarUtil, $templateCache) {
         i += 1;
       }
 
-      if (place >= options.maxEvents) {
+      if (place >= options.maxEvents - 1) {
         cellContent.appendChild(createShowMore(matchingEvents.length - pos, options.date, eventItem.customText));
         return false;
       }

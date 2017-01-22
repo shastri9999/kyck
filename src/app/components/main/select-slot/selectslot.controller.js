@@ -114,7 +114,6 @@ class SelectFormController {
 	            .show(confirm).then(function() {
 	            	$mdToast.showSimple('Request for appointment successfully created.');
 	                if (vm.selectedPartners[index]['selectedAppointments']) {
-	                    vm.selectedPartners[index]['selectedAppointments'].push(vm.selectedTimeSlot);
 
 	                    if (vm.selectedPartners[index]['selectedAppointments'].length >=3) {
 	                        vm.selectedPartners[index]['showCalendar'] = false;
@@ -124,6 +123,9 @@ class SelectFormController {
 	                        } else {
 	                            $mdToast.showSimple("3 appointments booked. Click Submit to continue.");
 	                        }
+	                    }
+	                    else {
+	                    	vm.selectedPartners[index]['selectedAppointments'].push(vm.selectedTimeSlot);
 	                    }
 	                }
 	                else {
@@ -136,7 +138,7 @@ class SelectFormController {
 	            	console.log("NO");
 	            });
 
-	        $rootScope.$on('showDialog', function($event, e) {
+	        $rootScope.$on('submitBrokerage', function($event, e) {
 		        for (var i=0; i<vm.selectedPartners.length; i++) {
 		            var partner = vm.selectedPartners[i];
 		            if (!partner.selectedAppointments) {
@@ -174,28 +176,7 @@ class SelectFormController {
 		       $rootScope.loadingProgress = true;
 		       BrokerageResource.submitBrokerageApplication({},{"brokerageCalenderSlot": brokerageReqs}, function(s) {
 		         $rootScope.loadingProgress = false;
-		         for (var i=0; i<vm.selectedPartners.length; i++) {
-		            vm.selectedPartners[i].selectedAppointments = [];
-		         }
-
-		         BrokerageResource.contactedBrokerages((response)=>{
-		            vm.contactedBrokers = response.data;
-		            BrokerageResource.brokeragesList((req)=> {
-		                $rootScope.loadingProgress = false;
-		                var brokeragesList = req.data;
-		                vm.partners = brokeragesList.map(convert);
-		                vm.partners = vm.partners.map((partner)=>{
-		                    vm.contactedBrokers.forEach((broker)=>{
-		                        if (broker.brokerageId == partner.brokerageName)
-		                        {
-		                            partner.status = broker.status;
-		                        }
-		                    });
-		                    return partner;
-		                })
-		                vm.premiumPartnersCount = brokeragesList.filter(function(obj){return obj['brokerageCategory']=='PREMIUM'}).length;
-		            });            
-		        });
+		         $rootScope.$broadcast('brokerageSubmitted'); 
 		        },
 		            function (error) {console.log(error)}
 		        );
