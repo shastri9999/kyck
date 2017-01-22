@@ -687,6 +687,9 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
                 }, function(error){console.log(error);});
                 $mdDialog.hide();
             }
+            $scope.justCloseDialog = function () {
+                $mdDialog.hide();
+            }
             $scope.addEmail = function() {
                 if ($scope.extraEmail != undefined && $scope.extraEmail != "") {
                     $scope.addedEmails.push($scope.extraEmail);
