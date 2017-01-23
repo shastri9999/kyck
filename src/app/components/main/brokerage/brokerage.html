@@ -360,7 +360,7 @@
             <mini-calendar/>            
         </div>
         <h2 style="color: white;margin: 20px; margin-bottom: 0px; z-index: 3;">Messages</h2>
-        <div class="message-container" style="z-index: 3;">
+        <div class="message-container" style="z-index: 3; margin-bottom: 60px;">
             <div class="message-requests {{message.class}}" ng-repeat="message in vm.usermessages|orderBy:'-date'|limitTo:3">
                 <div>{{message.message}}</div>
                 <div class="datetime">{{message.date | date:'dd MMM yy, HH:mm a'}}</div>
@@ -376,7 +376,7 @@
                     placeholder="Add your message"
                     ng-model="vm.messageReplyText"
                     class="input"
-                    style="margin: 10px; margin-left:18px; padding: 10px; border-radius: 7px; z-index: 3; border: none; outline: none; box-shadow: none; width: 218px;">
+                    style="margin: 10px; margin-left:18px; padding: 10px; border-radius: 7px; z-index: 3; border: none; outline: none; box-shadow: none; width: 218px; position: fixed; bottom: 60px; right: 0px;">
                 </div>
         </div>
     </div>

@@ -48,9 +48,11 @@
 }
 .meetingDetailsContent.mobile {display:none;}
 .sendMsgButton {
-	position: absolute;
+	position: fixed;
 	right: 20px;
 	height: 20px;
+	bottom: 80px;
+	z-index: 10;
 	margin-top: 18px;
 	cursor: pointer;
 	outline: none;
