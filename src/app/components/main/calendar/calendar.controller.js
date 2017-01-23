@@ -97,6 +97,13 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
             });
         } else {
             CalendarService.fetchBrokerMeetings().then((data) => {
+                // var eles = document.getElementsByClassName('md-event-calendar-month-cell');
+                // console.log(eles);
+                // for (let n=0; n<eles.length; n++) {
+                //     console.log(n, (($window.innerHeight - 250) / 5) + "px");
+                //     eles[n].style.maxHeight = (($window.innerHeight - 200) / 5) + "px";
+                // }
+
                 $scope.events = data.map(formatSlot);
             });
         }

@@ -504,6 +504,11 @@ function BrokerageController($state, $scope, $mdToast,$http, $mdStepper,
         var steppers = $mdStepper('stepper-demo');
         steppers.goto(0);
         vm.allVerified = 0;
+
+        for(let i=0; i<5; i++) {
+            document.getElementsByClassName('md-stepper-indicator ng-scope')[i].className = document.getElementsByClassName('md-stepper-indicator ng-scope')[i].className.replace(" md-completed","");
+        }
+
         vm.selectedIndex=index;
         vm.userAppointment = vm.userAppointments[index];
         vm.selectedDocumentNames = [];

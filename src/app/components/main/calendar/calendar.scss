@@ -12,6 +12,10 @@ md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event
 	padding: 6px;
 }
 
+md-event-calendar._md md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell {
+	max-height: calc(calc(100vh - 280px) / 5);
+}
+
 md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell .md-event-calendar-month-cell-content .md-event-calendar-cell-event-show-more-link {
 	position: absolute;
 	text-align: right;
@@ -68,7 +72,7 @@ md-event-calendar .md-event-calendar-cell-event.GOLDEN {
 }
 md-event-calendar._md.md-primary md-event-calendar-month .md-event-calendar-month-row-header {
 	background: #3498db;
-    height: 60px;
+    min-height: 60px;
     font-size: 16px;
     padding-bottom: 20px;
 }
