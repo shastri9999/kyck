@@ -96,12 +96,40 @@ class SelectFormController {
 	        var closePopup = function() {
 	            confirm = undefined;
 	        }
+
+	        function getMonth(num) {
+	        	if (num==0)
+	        		return "January";
+	        	else if (num==1)
+	        		return "February";
+	        	else if (num==2)
+	        		return "March";
+	        	else if (num==3)
+	        		return "April"
+				else if (num==4)
+					return "May";
+				else if (num==5)
+					return "June";
+				else if (num==6)
+					return "July";
+				else if (num==7)
+					return "August";
+				else if (num==8)
+					return "September";
+				else if (num==9)
+					return "October";
+				else if (num==10)
+					return "November";
+				else if (num==11)
+					return "December";
+	        }
+
 	        var day = $selectedEvent.mday;
 	        var hour = $selectedEvent.mhour;
 	        vm.selectedDay = day;
 	        vm.selectedHour = hour;
 	        vm.selectedTimeSlot = $selectedEvent.start.toISOString();
-	        textContent = "You are booking an appointment on January " + day +" at "+ numToTime(hour) + " . Are you sure?";
+	        textContent = "You are booking an appointment on "+getMonth($selectedEvent.start.getMonth()) + " " + day +" at "+ numToTime(hour) + " . Are you sure?";
 
 	        confirm = $mdDialog.confirm({
 	            title: 'Book Your Appointment',
