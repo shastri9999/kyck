@@ -230,8 +230,8 @@
         </div>
         <div ng-if="!isBroker">
             <md-step md-label="Selection of Timeslot">
-                <md-step-body layout="column" flex>
-                    <select-slot selected-partners="selectedPartners" timeslot-selected="timeslotSelected"/>
+                <md-step-body layout="column" flex style="overflow-x: hidden;">
+                    <select-slot selected-partners="selectedPartners" timeslot-selected="timeslotSelected" style="margin-right: 10px;"/>
                 </md-step-body>
             </md-step>
         </div>

@@ -2,9 +2,6 @@ md-step-body {
 	padding-bottom: 60px;
 }
 
-.partnerLogoSmall {
-	max-width:100%;
-}
 .mainHeader {
   font-family: Lato;
   font-size: 18px;
@@ -192,129 +189,132 @@ md-event-calendar {
 	}
 
 	.inputdemoErrors .inputErrorsApp {
-		min-height: 48px; }
+		min-height: 48px;
+	}
 
-		.inputdemoErrors md-input-container > p {
-			font-size: 0.8em;
-			text-align: left;
-			width: 100%; }
+	.inputdemoErrors md-input-container > p {
+		font-size: 0.8em;
+		text-align: left;
+		width: 100%; 
+	}
 
-			.col {
-				margin: 5px 20px 10px 20px;
-			}
+	.col {
+		margin: 5px 20px 10px 20px;
+	}
 
-			#bottomFooter {
-				.footerBtns {
-					margin: 15px;
-				}
-			}
+	#bottomFooter {
+		.footerBtns {
+			margin: 15px;
+		}
+	}
 
-			md-input-container.md-block {
-				margin-top: 0px;
-			}
+	md-input-container.md-block {
+		margin-top: 0px;
+	}
 
-			.detailsForm {
-				margin-top:45px;
-			}
+	.detailsForm {
+		margin-top:45px;
+	}
 
-			.partnersHeader {
-				font-family: Lato;
-				font-size: 16px;
-				font-weight: 700;
-				color: #4f6379;
-				text-align: center;
-				margin-top: 40px;
-				width: 100%;
-			}
+	.partnersHeader {
+		font-family: Lato;
+		font-size: 16px;
+		font-weight: 700;
+		color: #4f6379;
+		text-align: center;
+		margin-top: 40px;
+		width: 100%;
+	}
 
-			md-event-calendar .md-event-calendar-cell-event.book-appointment {
-				background-color: #3aafa5;
-				color: white;
-			}
+	md-event-calendar .md-event-calendar-cell-event.book-appointment {
+		background-color: #3aafa5;
+		color: white;
+	}
 
-			.partnerBox {
-				width: 200px;
-				height: 100px;
-				object-fit: contain;
-				border-radius: 5px;
-				background-color: #ffffff;
-				background-color: var(--white);
-				border: solid 1px #e7ecf1;
-				border: solid 1px var(--pale-grey);
-			}
+	.partnerBox {
+		width: 200px;
+		height: 100px;
+		object-fit: contain;
+		border-radius: 5px;
+		background-color: #ffffff;
+		background-color: var(--white);
+		border: solid 1px #e7ecf1;
+		border: solid 1px var(--pale-grey);
+	}
 
-			.partnerSelected {
-				border-radius: 5px;
-				border: solid 1px #3aafa5;
-				border: solid 1px var(--greeny-blue);
-			}
+	.partnerSelected {
+		border-radius: 5px;
+		border: solid 1px #3aafa5;
+		border: solid 1px var(--greeny-blue);
+	}
 
-			.partnerLogo {
-				width: 200px;
-				height: 100px;
-				object-fit: contain;
-				border-radius: 5px;
-				background-color: #ffffff;
-				border: solid 1px #e7ecf1;
-				margin: 20px;
-				position: relative;
-				-webkit-transition : border 400ms ease-out;
-				-moz-transition : border 400ms ease-out;
-				-o-transition : border 400ms ease-out;
-				transition : border 400ms ease-out;
+	.partnerLogo {
+		width: 200px;
+		height: 100px;
+		object-fit: contain;
+		border-radius: 5px;
+		background-color: #ffffff;
+		border: solid 1px #e7ecf1;
+		margin: 20px;
+		position: relative;
+		-webkit-transition : border 400ms ease-out;
+		-moz-transition : border 400ms ease-out;
+		-o-transition : border 400ms ease-out;
+		transition : border 400ms ease-out;
 
-				img {
-					height: 40px;
-					margin-top: 25px;
-				}
-				.premiereIcon {
-					position: absolute;
-					height: 20px;
-					top: -25px;
-					left: 15px;
-				}
-			}
-			.partnerLogo:focus {
-				outline: none;
-				border: 0;
-				border: solid 1px #e7ecf1;
-				&.deactivated {
-					border: none;
-				}
+		img {
+			height: 40px;
+			margin-top: 25px;
+		}
+		.premiereIcon {
+			position: absolute;
+			height: 20px;
+			top: -25px;
+			left: 15px;
+		}
+	}
+	.partnerLogo:focus {
+		outline: none;
+		border: 0;
+		border: solid 1px #e7ecf1;
+		&.deactivated {
+			border: none;
+		}
 
-			}
+	}
 
-			.partnerLogo.selected {
-				outline: none;
-				background: url(../../../../assets/images/ticked.png) no-repeat;
-			    background-position-x: 175px;
-			    background-position-y: 5px;
-				background-size: 16px;
-				border: 0;
-				border: solid 2px #3aafa5;
-			}
+	.partnerLogo.selected {
+		outline: none;
+		background: url(../../../../assets/images/ticked.png) no-repeat;
+	    background-position-x: 175px;
+	    background-position-y: 5px;
+		background-size: 16px;
+		border: 0;
+		border: solid 2px #3aafa5;
+	}
 
-			.partnerLogo.deactivated, .partnerLogo.selected.deactived {
-				outline: none;
-				border: solid 1px #e7ecf1;
-				background: #f2f2f2;
-			}
+	.partnerLogo.deactivated, .partnerLogo.selected.deactived {
+		outline: none;
+		border: solid 1px #e7ecf1;
+		background: #f2f2f2;
+	}
 
-			.partnerLogo:hover {
-				border : solid 2px #3aafa5; 
-				&.deactivated {
-					border: none;
-				}
-			}
+	.partnerLogo:hover {
+		border : solid 2px #3aafa5; 
+		&.deactivated {
+			border: none;
+		}
+	}
 
-			#stepper-demo.rightSideBar {
-	/*
-	min-width: 900px;
-	right: 0px;
-    position: relative;
-    left: 0px;
-    */
-}
+	#stepper-demo.rightSideBar {
+		/*
+		min-width: 900px;
+		right: 0px;
+	    position: relative;
+	    left: 0px;
+	    */
+	}
+
 .contactedUsers {
 	width: 250px;
 	background-color: #f9fbfc;
@@ -586,33 +586,6 @@ md-event-calendar {
 	display: none;
 }
 
-.partnerMenu {
-	border: 1px solid #e7ecf1;
-	margin: 30px;
-	margin-right: 0px;
-	cursor: pointer;
-	margin-bottom: 0px;
-	outline: none;
-	margin-top: -25px;
-	.partnerLogoSmall {
-		max-width:100px;
-		padding: 5px;
-		max-height: 40px;
-		float: left;
-	}
-	.partnerTitle {
-		float:left;
-		font-size: 16px;
-		padding: 15px;
-		line-height: 20px;
-		border-left: 1px solid #e7ecf1;
-		border-right: 1px solid #e7ecf1;
-	}
-	.calicon {
-		width:24px;
-		margin: 12px;
-	}
-}
 .meetingDetails{
 	margin-top: 2px;
 	margin-left: -27px;
@@ -701,5 +674,38 @@ md-event-calendar {
 		font-size: 14px;
 		line-height: 16px;
 		margin: 15px;
+	}
+}
+
+md-dialog .partnerMenu {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.partnerMenu {
+	border: 1px solid #e7ecf1;
+	margin: 30px;
+	margin-right: 0px;
+	cursor: pointer;
+	margin-bottom: 0px;
+	outline: none;
+	margin-top: -25px;
+	.partnerLogoSmall {
+		/* max-width:100px; */
+		padding: 5px;
+		max-width:100%;
+		max-height: 40px;
+		float: left;
+	}
+	.partnerTitle {
+		float:left;
+		font-size: 16px;
+		padding: 15px;
+		line-height: 20px;
+		border-left: 1px solid #e7ecf1;
+		border-right: 1px solid #e7ecf1;
+	}
+	.calicon {
+		width:24px;
+		margin: 12px;
 	}
 }

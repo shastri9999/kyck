@@ -12,6 +12,12 @@ md-event-calendar md-event-calendar-month .md-event-calendar-month-row .md-event
 	padding: 6px;
 }
 
+/*
+md-dialog md-event-calendar._md md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell {
+	max-height: calc(calc(80vh - 280px) / 5);
+}
+*/
+
 md-event-calendar._md md-event-calendar-month .md-event-calendar-month-row .md-event-calendar-month-cell {
 	max-height: calc(calc(100vh - 280px) / 5);
 }
