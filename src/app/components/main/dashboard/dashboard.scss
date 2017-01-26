@@ -17,6 +17,8 @@
         border-radius: 3px;
         font-size: 12px;
         cursor: pointer;
+        margin-right: 6px;
+        margin-bottom: 6px;
     }
     .completed-btn {
         padding: 5px 18px;
@@ -26,6 +28,9 @@
         border-radius: 3px;
         font-size: 12px;
         cursor: pointer;
+        margin-right: 6px;
+        whitespace: nowrap;
+        height: 25px;
     }
     .conference-btn {
         font-size: 11px;
@@ -35,7 +40,8 @@
         background-color: #b3bbc3;
         color: #fff;
         cursor: pointer;
-        margin-left: 6px;
+        whitespace: nowrap;
+        height: 25px;
     }
     .left {
     	display: flex;
@@ -65,6 +71,7 @@
                   margin-top: 20px;
                   display: flex;
                   padding: 15px;
+                  width: 100%;
                   .date {
                     display: flex;
                     flex-flow: column;
@@ -75,6 +82,10 @@
                   .detail {
                     display: flex;
                     flex-flow: column;
+                    .status-btn-container {
+                        display: flex;
+                        flex-flow: row wrap;   
+                    }
                   }
                 }
             }

@@ -17,17 +17,17 @@
 						<div style="font-size: 14px;margin-bottom: 3px;">{{appointment.brokerageName}}</div>
 						<div style="margin-bottom: 17px;opacity: 0.4;" class="message">{{appointment.meetingSubject}}</div>
 						<div class="status-btns" ng-switch on="appointment.status">
-							<div ng-switch-when="CONFIRM">
+							<div ng-switch-when="CONFIRM" class="status-btn-container">
 								<a class="pending-btn">{{appointment.status}}</a>
 								<a class="conference-btn" ng-click="joinConference(appointment)">Join Conference</a>
 							</div>
-							<div ng-switch-when="PENDING">
+							<div ng-switch-when="PENDING" class="status-btn-container">
 								<a class="pending-btn">{{appointment.status}}</a>
 							</div>
-							<div ng-switch-when="completed">
+							<div ng-switch-when="completed" class="status-btn-container">
 								<a href="" class="completed-btn">Completed</a>
 							</div>
-							<div ng-switch-default>
+							<div ng-switch-default class="status-btn-container">
 								<a class="pending-btn">{{appointment.status}}</a>
 							</div>
 						</div>
