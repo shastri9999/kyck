@@ -1,7 +1,7 @@
 'use strict';
 
 class SelectFormController {
-	constructor($rootScope, BrokerageResource, $mdDialog, $mdToast,  $mdStepper, CalendarService, moment) {
+	constructor($rootScope, BrokerageResource, $mdDialog, $mdToast,  $mdStepper, CalendarService, moment, AuthenticationService) {
 		'ngInject';
         var currentD = new Date();
         var currentDate = currentD.getDate();
@@ -45,14 +45,19 @@ class SelectFormController {
 	        return date;
 	    }
 
-	    // CalendarService.fetchBrokerMeetings().then((data)=>{
-     //        var userSlots = data.map(
-     //        	function(a) {
-     //        		return moment(a['startTime'], 'DD/MM/YYYY hh:mm').toDate();
-     //        	}
-     //        );
+	    function processEvents(data) {
 
-            for(var j=0; j<= 300; ++j)
+            var userSlots = data.map(
+            	function(a) {
+            		return moment(a['startTime'], 'DD/MM/YYYY hh:mm').toDate();
+            	}
+            ).reverse();
+
+
+            var ctr=0;
+            var userSlot = userSlots[ctr];
+
+            for(var j=0; j<= 150; ++j)
 	        {
 	            //if date is valid else don't execute the for loop
 	            var day = currentD.getDay() + j;
@@ -60,16 +65,24 @@ class SelectFormController {
 	                for(var i=10; i<=19; ++i) {
 	                    var i2 = 1+i;
 						var startD = getDate(j, i);
-	                    vm.events.push({
-	                        start: startD,
-	                        allDay: true,
-	                        customClass: 'book-appointment',
-	                        customText: 'slots',
-	                        title: numToTime(i) + ' - ' + numToTime(i2),
-	                        mday: startD.getDay(),
-	                        mhour: startD.getHours(),
-	                        mmonth: startD.getMonth()
-	                    });
+
+						if (startD > userSlot && ctr < userSlots.length) {
+							userSlot = userSlots[ctr];
+							ctr+=1;
+						}
+
+						if (startD != userSlot) {
+		                    vm.events.push({
+		                        start: startD,
+		                        allDay: true,
+		                        customClass: 'book-appointment',
+		                        customText: 'slots',
+		                        title: numToTime(i) + ' - ' + numToTime(i2),
+		                        mday: startD.getDay(),
+		                        mhour: startD.getHours(),
+		                        mmonth: startD.getMonth()
+		                    });
+		                }
 	                }
 	            }
 	 		}
@@ -83,9 +96,19 @@ class SelectFormController {
 	   // //          		(userSlots[j].getMonth() == a['mmonth']) &&
 	   //          		// (userSlots[j].getHours() == a['mhour'])
     // //         		)
-	 		// 	});
+	 			// });
 	 		// }
-        // });
+	    }
+
+	    if(AuthenticationService.isBroker()) {
+		    CalendarService.fetchBrokerMeetings().then((data)=>{
+		 		processEvents(data);
+	        });
+		} else {
+			CalendarService.fetchMeetings().then((data) => {
+				processEvents(data);
+			});
+		}
 
         vm.eventClicked = eventClicked;
 	
