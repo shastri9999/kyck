@@ -89,6 +89,22 @@ constructor($http, AppConstants, $rootScope, StorageService, $state, UserService
 		});
 	}
 
+	refreshLoggedInUser(){
+		if (this.loggedInUser)
+		{
+			return this._$http({
+				method: 'GET',
+				url: '/kyck-rest/user/getusrdetails/action'
+			}).then((response)=>{
+				const loggedInUser = response.data.data;
+				this.loggedInUser = loggedInUser;
+				this._StorageService.setItem('loggedInUser', loggedInUser);
+			}).catch((error)=>{
+				this._$rootScope.$broadcast('logout');
+			})
+		}	
+	}
+	
 	logout(){
 		this._$rootScope.loadingProgress=true;
 		this._UserService.reInit();
@@ -129,7 +145,7 @@ constructor($http, AppConstants, $rootScope, StorageService, $state, UserService
 		{
 			this._$http({
 				method: 'GET',
-				url: '/kyck-rest/user/get/action'
+				url: '/kyck-rest/user/getusrdetails/action'
 			}).then((data)=>{
 			}).catch((error)=>{
 				this._$rootScope.$broadcast('logout');

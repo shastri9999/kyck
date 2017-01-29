@@ -1,10 +1,12 @@
 'use strict';
+import LibPhoneNumber from 'google-libphonenumber';
 
 
 class UserService{
-	constructor($http, AppConstants, moment) {
+	constructor($http, $rootScope, AppConstants, moment) {
 		'ngInject';
 		this._$http = $http;
+		this._$rootScope = $rootScope;
 		this.URL = AppConstants.URL;
 		this.kycDetails = [];
 		this.profileDetails = [];
@@ -23,8 +25,21 @@ class UserService{
 			confirmPassword: '',
 			error: ''
 		};
-	}
+		this.PhoneUtil = LibPhoneNumber.PhoneNumberUtil.getInstance();
 
+	}
+	
+	validatePhone(extension, number)
+	{
+		try {
+	 		const phoneNumber = this.PhoneUtil.parse(number , this.PhoneUtil.getRegionCodeForCountryCode(extension.slice(1)));
+	 		return this.PhoneUtil.isValidNumber(phoneNumber);
+		}
+		catch(e){
+			return false;
+		}
+	}
+	
 	reInit(){
 		this.kycDetails = [];
 		this.profileDetails = [];
@@ -37,6 +52,7 @@ class UserService{
 		this.userFetched = false;
 		this.brokeragesDetail = {};		
 	}
+	
 	transFormData(fields){
 		return fields.map((field)=>{
 
@@ -170,7 +186,7 @@ class UserService{
 		{
 			return this._$http({
 				method: 'GET',
-				url: this.URL + '/user/get/action'
+				url: this.URL + '/user/getusrdetails/action'
 			}).then((response)=>{
 				const data = response.data.data;
 				this._userDetails = this.transFormUserData(data);
@@ -256,7 +272,7 @@ class UserService{
 			{
 				if (!field.selectedValue || !field.selectedValue.answerId)
 				{
-					field.error = 'This field is required.'
+					field.error = 'This field is required.';
 				}
 				requiredFilled = requiredFilled && field.selectedValue.answerId;
 			}
@@ -264,11 +280,21 @@ class UserService{
 			{
 				if (!field.answerText)
 				{
-					field.error = 'This field is required.'
+					field.error = 'This field is required.';
 				}
 				requiredFilled = requiredFilled && !!field.answerText;
 			}
-
+			
+			
+			if (field.answerText && field.validationType === "PHONE")
+			{
+				if(!this.validatePhone(field.prefix, field.answerText))
+				{
+					field.error = 'This should be a valid phone number';
+					requiredFilled = false;
+				}
+			}
+			
 			if (field.answerText && field.validationType === "NUMBER")
 			{
 				const numberTest = /^\d+(\.\d{1,2})?$/;
@@ -283,8 +309,8 @@ class UserService{
 		if (!requiredFilled)
 		{
 			return new Promise((resolve, reject)=>{
-				reject(new Error("All fields marked * are required!"))
-			})
+				reject(new Error("All fields marked * are required!"));
+			});
 		}
 		else
 		{
@@ -345,6 +371,7 @@ class UserService{
 			data: details
 		}).then((s)=>{
 			this._userDetails = angular.copy(this.userDetails);
+			this._$rootScope.$broadcast('userchanged');
 			return s;
 		});
 	}
@@ -385,11 +412,23 @@ class UserService{
 		this.userDetails.forEach((field)=>{
 			if (!field.value)
 			{
-				field.error = 'This field is required.'
+				field.error = 'This field is required.';
 			}
 			else
 			{
 				field.error = '';
+			}
+			if (field.key == 'userPhone' && field.value)
+			{
+				if(!this.validatePhone(field.prefix, field.value))
+				{
+					field.error = 'This should be a valid phone number';
+					userDetailsFilled = false;
+				}
+				else
+				{
+					field.error = '';
+				}
 			}
 			userDetailsFilled = userDetailsFilled && !!field.value;
 		});
@@ -415,6 +454,15 @@ class UserService{
 				requiredFilled = requiredFilled && !!field.answerText;
 			}
 
+			if (field.answerText && field.validationType === "PHONE")
+			{
+				if(!this.validatePhone(field.prefix, field.answerText))
+				{
+					field.error = 'This should be a valid phone number';
+					requiredFilled = false;
+				}
+			}
+			
 			if (field.answerText && field.questionType === "NUMBER")
 			{
 				const numberTest = /^\d+(\.\d{1,2})?$/;
