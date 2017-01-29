@@ -185,7 +185,7 @@
     display: flex;
     flex-grow: 1;
     max-height: calc(100vh - 120px);
-    overflow: auto;    
+    overflow: hidden;    
     .left {
         display: flex;
         flex-flow: column;
@@ -280,6 +280,7 @@
         overflow: hidden;
         flex-shrink:0;
         position:relative;
+        height: 760px;
         .appointments {
             z-index: 1;
             display: flex;
@@ -288,7 +289,7 @@
             .appointments-container {
                 margin-top: 7px;
                 min-height: 150px;
-                max-height: 310px;
+                max-height: 430px;
                 overflow: auto;
                 .appointment {
                     display: flex;

@@ -37,13 +37,17 @@ navigation {
 		    }
 		    .icon {
 		    	padding-left: 17px;
-		    	padding-right: 17px;		    	
+		    	padding-right: 17px;	
+		    	height: 17px;
+		    	width: 50px;
 		    }
 		    &.active {
 		    	background: white;
 		    	color: #4f6379;
 		    	.icon-active {
 		    		display: initial;
+		    		width: 50px;
+		    		height: 17px;
 		    	}
 				.icon {
 					display: none;

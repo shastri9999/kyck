@@ -228,7 +228,7 @@
                 flex-flow: row wrap;
                 margin-top: 7px;
                 min-height: 150px;
-                max-height: 50vh;
+                max-height: calc(100vh - 500px);
                 overflow: auto;
                 .appointment {
                     display: flex;

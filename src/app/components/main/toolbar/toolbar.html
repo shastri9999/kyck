@@ -1,15 +1,15 @@
 <div class="toolbar">
 	<div class="display-area">
-		<img ng-click="sideNavCollapsed=!sideNavCollapsed;sideNavExpanded=true;" ng-class="{collapsed:sideNavCollapsed, left:true}" src="/assets/images/hide-bar.png" style="padding: 0 13px;cursor: pointer;outline: none;">	
+		<img ng-click="sideNavCollapsed=!sideNavCollapsed;sideNavExpanded=true;" ng-class="{collapsed:sideNavCollapsed, left:true}" src="/assets/images/hide-bar.png" style="padding: 0 13px;width:42px;height:15px;cursor: pointer;outline: none;">	
 		<div class="grow">{{breadCrumb}}</div>
 		 <md-input-container md-no-float class="md-block">
           <input ng-if="vm.showSearch" style="position: relative;top:20px; left:30px;font-size: 12px;" ng-model="vm.search" placeholder="Search here">
         </md-input-container>
-		<img ng-click="vm.showSearch = !vm.showSearch" src="/assets/images/search.png" style="padding: 0 13px;cursor: pointer;z-index: 1;cursor: pointer;outline: none;">
+		<img ng-click="vm.showSearch = !vm.showSearch" src="/assets/images/search.png" style="height:44px; width"17px;padding: 0 13px;cursor: pointer;z-index: 1;cursor: pointer;outline: none;">
 		<div class="flag-dropdown">
-			<img ng-src="{{vm.activeFlag.url}}" style="padding: 0 13px; height: 32px;">
+			<img ng-src="{{vm.activeFlag.url}}" style="padding: 0 13px; height: 32px;height:32px; width: 74px;">
 			<div style="font-size: 14px;">{{vm.activeFlag.country}}</div>		
-			<img src="/assets/images/dropdown.png" style="padding: 0 13px;cursor: pointer;">
+			<img src="/assets/images/dropdown.png" style="width:37px; height:7px;padding: 0 13px;cursor: pointer;">
 			<div class="flag-dropdown-overlay" 
 				 ng-click="vm.flagShow=!vm.flagShow"  
 				 outside-id="{{parameter.id}}" outside-click="vm.flagClose()">
@@ -21,7 +21,7 @@
 				</div>
 			</div>
 		</div>		
-		<img src="/assets/images/heartbeat.png" style="padding: 0 13px;">		
+		<img src="/assets/images/heartbeat.png" style="width:55px;height:24px;padding: 0 13px;">		
 
 	</div>
 	<div class="avatar-area">
