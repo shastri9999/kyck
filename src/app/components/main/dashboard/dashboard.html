@@ -154,7 +154,7 @@
 					<div class="detail">
 						<div style="font-size: 14px;">{{appointment.userFirstName}} {{appointment.userLastName}}</div>
 						<div style="opacity: 0.4; margin-top: 3px;font-size: 13px;">{{appointment.displayTime}}</div>
-						<a class="conference-btn">Start Conference</a>
+						<a class="conference-btn" ng-if="appointment.status === 'CONFIRM'" ng-click="vm.joinRoom(appointment)">Start Conference</a>
 					</div>
 				</div>
 			</div>
