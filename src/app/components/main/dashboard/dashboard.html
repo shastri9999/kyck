@@ -39,7 +39,7 @@
 			<h2>Messages</h2>
 			<div class="message-container">
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.messages || !vm.messages.length">
-					No Messages to Show 
+					No Messages
 				</div>
 				<div class="message" ng-repeat="message in vm.messages | orderBy:'-messageDate'| limitTo:10" ng-click="vm.openMessage(message)">
 					<img ng-if="message.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
@@ -91,7 +91,7 @@
 			<h2>Brokerage Application Request</h2>
 			<div class="appointments-container">
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.userAppointments || !vm.userAppointments.length">
-					No Application Requests to Show 
+					No Application Requests
 				</div>
 				<div class="appointment" ng-click="vm.goToRequests()" ng-repeat="appointment in vm.userAppointments|orderBy:'-date'|limitTo:6">
 					<a class="overlay-link" ui-sref="main.brokerage"></a>
