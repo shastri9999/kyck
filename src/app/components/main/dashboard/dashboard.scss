@@ -54,6 +54,7 @@
     		display: flex;
             padding-bottom: 40px;
             margin: 40px;
+            margin-bottom: 0;
             margin-top: 20px;
             border-bottom: 2px solid rgba(231,236,241,0.3);
             flex-flow: column;
@@ -94,6 +95,7 @@
     		display: flex;
             margin: 40px;
             margin-top: 0px;
+            padding-top: 20px;
     		flex-grow: 1;
             flex-flow: column;
             .message-container {

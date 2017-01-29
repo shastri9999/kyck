@@ -4,7 +4,7 @@
 			<h2>Appointments</h2>
 			<div class="appointments-container">
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokerAppointments || !vm.brokerAppointments.length">
-					No Application Requests to Show 
+					No Appointments
 				</div>
 				<div ng-click="vm.openCalendar()" class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:10">
 					<div class="date">
@@ -112,7 +112,7 @@
 			<h2>Messages</h2>
 			<div class="message-container">
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.messages || !vm.messages.length">
-					No Messages to Show 
+					No Messages 
 				</div>
 
 				<div class="message" ng-repeat="message in vm.messages | orderBy:'-messageDate'|limitTo:3" ng-click="vm.openMessage(message)">
