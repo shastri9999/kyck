@@ -27,7 +27,7 @@ export default angular.module('kyck', [
 	]
 	)
 .config(config)
-.run(function($rootScope, $location, AuthenticationService, $http, $timeout, Upload){
+.run(function($rootScope, $location, AuthenticationService, MessageService, $http, $timeout, Upload){
 	'ngInject';
 
 	/* Todo: Move all this to service */
@@ -56,6 +56,9 @@ export default angular.module('kyck', [
 	$rootScope.originalPreviewURL = null;
 	$rootScope.croppedBlob = null;
 	$rootScope.pdfView = false;
+	$rootScope.unreadMessages = 0;
+	
+	MessageService.unread().then(count=>$rootScope.unreadMessages=count);
 
 	window.cropper = null;
 

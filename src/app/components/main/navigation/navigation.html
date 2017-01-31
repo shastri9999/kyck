@@ -18,6 +18,9 @@
 		<img class="icon" src="/assets/images/messages.png" alt="">
 		<img class="icon-active" src="/assets/images/messages-active.png" alt="">
 		Messages
+		<div class="messages-count">
+			{{unreadMessages}}
+		</div>
 	</a>
 	<a ui-sref-active="active" ui-sref="main.document" ng-if="!isBroker && !isIA">
 		<img class="icon" src="/assets/images/documents.png" alt="">

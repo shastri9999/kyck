@@ -36,6 +36,13 @@ function InboxController(MessageService, $rootScope) {
 		$rootScope.messageView.activeInboxMessage = message;
 		$rootScope.messageView.composing = false;
 		$rootScope.messageAttachment = null;
+		if (message.messageStatus === 'UNREAD')
+		{
+			MessageService.getMail(message.messageId).then(()=>{
+				message.messageStatus = "READ";
+				$rootScope.unreadMessages -= 1;	
+			});
+		}
 	};
 }
 

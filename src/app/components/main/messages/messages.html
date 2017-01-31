@@ -19,7 +19,7 @@
 				<div>{{messageView.activeInboxMessage.messageSubject}}</div>
 				<div style="font-size: 12px; margin-bottom: 10px;margin-top: 10px;">From: {{messageView.activeInboxMessage.messageFromName}} ({{messageView.activeInboxMessage.messageFrom}})</div>
 				<div style="white-space: nowrap;padding-right: 10px" am-time-ago="messageView.activeInboxMessage.messageDate | amParse:'DD/MM/YYYY hh:mm'"></div>
-				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;padding-top: 20px;">{{messageView.activeInboxMessage.messageContent}}</div>
+				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;padding-top: 20px;white-space:pre-wrap;">{{messageView.activeInboxMessage.messageContent}}</div>
 			</div>
 		</div>
 		<div class="message-attachment" ng-if="messageView.activeInboxMessage.attachUrl">
@@ -47,7 +47,7 @@
 				<div>{{messageView.activeSentMessage.messageSubject}}</div>
 				<div style="font-size: 12px; margin-bottom: 10px;margin-top: 10px;">To: {{messageView.activeSentMessage.messageToName}} ({{messageView.activeSentMessage.messageToEmail}})</div>
 				<div style="white-space: nowrap;padding-right: 10px" am-time-ago="messageView.activeSentMessage.messageDate | amParse:'DD/MM/YYYY hh:mm'"></div>
-				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;padding-top: 20px;">{{messageView.activeSentMessage.messageContent}}</div>
+				<div style="opacity: 0.4;font-size: 14px; line-height: 25px;padding-top: 20px;white-space:pre-wrap;">{{messageView.activeSentMessage.messageContent}}</div>
 			</div>
 		</div>
 		<div class="message-attachment" ng-if="messageView.activeSentMessage.attachUrl">
