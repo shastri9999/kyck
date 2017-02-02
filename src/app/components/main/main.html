@@ -28,7 +28,7 @@
 					{{viewingDocument.documentName}}
 				</div>
 				<div class="bottom ocr" ng-if="canEnableOCR">
-					<div ng-if="viewingDocument.OCR" class="buttons">
+					<div ng-if="viewingDocument.OCR || setUpload" class="buttons">
 						<div ng-class='{"preview-btn":true, "active":!OCRView}' ng-click="closeOCRView()">
 							<img ng-if="!documentPreviewLoading && !pdfView" ng-src="{{documentPreviewURL}}" style="overflow:hidden;" alt="Preview">
 						</div>
@@ -45,9 +45,9 @@
 						<img style="margin-right: 18px;cursor: pointer;outline: none;"  ng-click="rotateCropper(-10)" src="/assets/images/retake.png" title="Rotate Left" ng-if="!OCRView && !documentPreviewLoading && cropping" alt="Rotate">
 						<img style="margin-right: 18px;cursor: pointer;outline: none;transform: rotate(180deg);"  ng-click="rotateCropper(10)" src="/assets/images/retake.png" title="Rotate Right" ng-if="!OCRView && !documentPreviewLoading && cropping" alt="Rotate">
 						<img style="margin-right: 18px;cursor: pointer;outline: none;"  ng-click="resetCropper()" src="/assets/images/crop-delete.png" title="Reset" ng-if="!OCRView && !documentPreviewLoading" alt="Reset" class="moheight25" />
-						<a class="verify-btn" ng-click="uploadCroppedImage()" ng-if="!OCRView && (documentPreviewURL!=originalPreviewURL && !documentPreviewLoading) && !cropping" ng-disabled="documentPreviewURL==originalPreviewURL">Upload</a>
+						<a class="verify-btn" ng-click="uploadCroppedImage()" ng-if="!OCRView && (documentPreviewURL!=originalPreviewURL || setUpload) && !documentPreviewLoading && !cropping" ng-disabled="documentPreviewURL==originalPreviewURL">Upload</a>
 						<a class="verify-btn" ng-click="showOCRView()" ng-if="!OCRView && viewingDocument.OCR.length && !cropping && documentPreviewURL==originalPreviewURL">Verify OCR</a>
-						<a class="done-btn" ng-click="hideDocumentPreview()" ng-if="(OCRView || !viewingDocument.OCR.length) && !cropping">Done</a>
+						<a class="done-btn" ng-click="hideDocumentPreview()" ng-if="(OCRView || !viewingDocument.OCR.length) && !cropping && !setUpload">Done</a>
 					</div>
 				</div>
 			</div>

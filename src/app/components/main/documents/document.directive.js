@@ -85,6 +85,29 @@ function documentComponent() {
     }
 
 
+    vm.startUpload = function(file, document)
+    {
+      if(!file)
+        return;
+      document.documentName = file.name;
+      $rootScope.viewingDocument = document;
+      $rootScope.viewingDocument.OCR = null;
+      $rootScope.canEnableOCR = true;
+      if (file.type === "image/jpeg" || file.type === "image/png")
+      {
+
+        Upload.dataUrl(file, true).then((URL)=>{
+          $rootScope.showDocumentPreview(URL, true);
+        });
+        
+      }
+      else
+      {
+        vm.upload(file, document);
+      }
+      
+    }
+    
     vm.upload = function(file, document){       
       $rootScope.mainLoading = true;
       $rootScope.mainLoadingMessage = "Document is being uploaded... Please wait."
@@ -98,6 +121,7 @@ function documentComponent() {
         $log.debug(response);
         $log.debug('Success: ' + response.config.data.file.name + 'Uploaded. Response: ' + response.data);
         $rootScope.mainLoading = false;
+        $rootScope.setUpload = false;
         $mdToast.show(
           $mdToast.simple()
           .textContent('File Uploaded Successfully!')
