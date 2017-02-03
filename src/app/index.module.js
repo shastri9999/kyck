@@ -115,7 +115,6 @@ export default angular.module('kyck', [
 		const blob = $rootScope.croppedBlob;
 		if(!blob && $rootScope.setUpload)
 		{
-			debugger;
 			Upload.urlToBlob($rootScope.documentPreviewURL).then(function(blob) {
 				Upload.upload({
 					url: '/kyck-rest/document/upload?documentType='+ $rootScope.viewingDocument.documentType,

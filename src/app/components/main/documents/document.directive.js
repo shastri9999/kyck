@@ -34,6 +34,28 @@ function documentComponent() {
       document.replaceAction = true;
     }
 
+    const processOCRData = (data)=>{
+      let photo = {}
+      let ocr = data.filter((field)=>{
+        if (field.name == 'Photo')
+        {
+          photo.value = field.value;
+        }
+        if (field.name == 'PhotoType')
+        {
+          photo.type = field.value;
+        }
+        return (field.name != 'Photo' && field.name !='PhotoType');
+      });
+      if (photo.value)
+      {
+        ocr.push({
+          name: 'Photo',
+          value: `data:${photo.type};base64,${photo.value}`,
+        });
+      }
+      return ocr;
+    };
 
     vm.preview = function(document){
       $rootScope.canEnableOCR = !vm.isBroker;
@@ -46,7 +68,8 @@ function documentComponent() {
           $rootScope.viewingDocument = document;
           $rootScope.viewingDocument.OCR = null;
           DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
-            $rootScope.viewingDocument.OCR = response.data;
+            
+            $rootScope.viewingDocument.OCR = processOCRData(response.data);
           });
           $http({
             method: 'GET',
@@ -79,10 +102,10 @@ function documentComponent() {
           }).then((data)=>{
             let URL = 'data:' + documentData.mimeType + ';base64,' + data.data;
             $rootScope.showDocumentPreview(URL);
-          })
+          });
         });
       }
-    }
+    };
 
 
     vm.startUpload = function(file, document)

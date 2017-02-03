@@ -124,6 +124,11 @@
 					align-content: flex-start;
 				    padding: 10px;
 				    max-height: calc(90vh - 185px);
+				    img {
+				    	max-height: 100px;
+					    border: 1px solid #e7ecf1;
+					    border-radius: 3px;
+				    }
 				}
 			}
 			.bottom {

@@ -20,7 +20,8 @@
 							<label>
 								{{field.name}}
 							</label>
-							<input disabled type="text" ng-model="field.value">
+							<input disabled type="text" ng-model="field.value" ng-if="field.name!='Photo'">
+							<img ng-src="{{field.value}}" ng-if="field.name=='Photo'">
 						</div>
 					</div>
 				</div>
