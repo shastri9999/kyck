@@ -44,6 +44,13 @@
 				</label>
 				<input disabled name="kyc-{{field.questionId}}" type="text" ng-model="field.answerDesc">
 			</div>
+			<div class="input" ng-switch-when="TEXTAREA">
+				<label for="kyc-{{field.questionId}}">
+					{{field.questionDesc}}
+					<span ng-if="field.requireField==='REQUIRED'">*</span>
+				</label>
+				<textarea disabled name="kyc-{{field.questionId}}" ng-model="field.displayAnswerText"></textarea>
+			</div>
 			<div class="input" ng-switch-default>
 				<label for="kyc-{{field.questionId}}">
 					{{field.questionDesc}}
@@ -92,6 +99,14 @@
 					</label>
 					<div ng-if="field.error" class="error">{{field.error}}</div>					
 				</div>
+			</div>
+			<div class="input" ng-switch-when="TEXTAREA">
+				<label for="kyc-{{field.questionId}}">
+					{{field.questionDesc}}
+					<span ng-if="field.requireField==='REQUIRED'">*</span>
+				</label>
+				<textarea ng-class="{error:field.error}" ng-disabled="vm.isBroker" name="kyc-{{field.questionId}}" ng-model="field.answerText" ng-required="field.requireField==='REQUIRED'"></textarea>
+				<div ng-if="field.error" class="error">{{field.error}}</div>
 			</div>
 			<div class="input" ng-switch-default>
 				<label for="kyc-{{field.questionId}}">
