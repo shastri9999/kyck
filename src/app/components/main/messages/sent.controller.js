@@ -9,6 +9,10 @@ function SentController(MessageService, $rootScope) {
 
 	MessageService.fetchSent().then((messages)=>{
 		vm.messages = messages;
+		if (typeof messages === "string")
+		{
+			vm.messages = [];
+		}
 		vm.pages = Math.floor(vm.messages.length / vm.messageLimit);
 		if (vm.messages.length % vm.messageLimit)
 		{
