@@ -21,6 +21,7 @@
 								{{field.name}}
 							</label>
 							<input disabled type="text" ng-model="field.value" ng-if="field.name!='Photo'">
+							<div class="overlay" style="background: transparent;cursor: pointer;" ng-if="field.name!='Photo'" ng-attr-title="{{field.value}}"></div>
 							<img ng-src="{{field.value}}" ng-if="field.name=='Photo'">
 						</div>
 					</div>
