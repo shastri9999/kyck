@@ -6,8 +6,8 @@
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokerAppointments || !vm.brokerAppointments.length">
 					No Appointments
 				</div>
-				<div ng-click="vm.openCalendar()" class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:10">
-					<div class="date">
+				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:10">
+					<div ng-click="vm.openCalendar()"  class="date">
 						<div style="font-size: 24px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'Do'}}</div>
 						<div style="opacity: 0.4;padding: 4px; border-bottom: 1px dotted;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'MMM YY'}}</div>
 						<div style="font-size: 12px; opacity: 0.3;padding: 3px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'hh:mm a'}}</div>
@@ -19,7 +19,7 @@
 						<div class="status-btns" ng-switch on="appointment.status">
 							<div ng-switch-when="CONFIRMED" class="status-btn-container">
 								<a class="pending-btn">{{appointment.status}}</a>
-								<a class="conference-btn" ng-click="joinConference(appointment)">Join Conference</a>
+								<a class="conference-btn" ng-click="vm.joinRoom(appointment)">Join Conference</a>
 							</div>
 							<div ng-switch-when="PENDING" class="status-btn-container">
 								<a class="pending-btn">{{appointment.status}}</a>
