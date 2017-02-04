@@ -17,7 +17,7 @@
 						<div style="font-size: 14px;margin-bottom: 3px;">{{appointment.brokerageName}}</div>
 						<div style="margin-bottom: 17px;opacity: 0.4;" class="message">{{appointment.meetingSubject}}</div>
 						<div class="status-btns" ng-switch on="appointment.status">
-							<div ng-switch-when="CONFIRM" class="status-btn-container">
+							<div ng-switch-when="CONFIRMED" class="status-btn-container">
 								<a class="pending-btn">{{appointment.status}}</a>
 								<a class="conference-btn" ng-click="joinConference(appointment)">Join Conference</a>
 							</div>
