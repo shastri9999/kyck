@@ -425,7 +425,7 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
 
     function searchAppointment(appointment) {
         var search_str = appointment.fname + " " + appointment.lname;
-        return searchText(vm.searchUsername, search_str.toLowerCase());
+        return searchText(vm.searchUsername.toLowerCase(), search_str.toLowerCase());
     }
 
     function changeUsers() {
