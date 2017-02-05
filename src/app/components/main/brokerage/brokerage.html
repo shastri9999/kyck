@@ -1,42 +1,38 @@
 <style>
-.ticked {
-    background: url(../../../../assets/images/ticked.png) no-repeat;
-    background-size: 34px;
-}
-.ticked.grey {
-    background: url(../../../../assets/images/tickedgrey.png) no-repeat;
-    background-size: 34px;
-}
-.unticked {
-    background: url(../../../../assets/images/unticked.png) no-repeat;
-    background-size: 34px;
-}
-.unticked.grey {
-    background: url(../../../../assets/images/untickedgrey.png) no-repeat;
-    background-size: 34px;
-}
-.partnerLogo.selected {
-    outline: none;
-    background: url(../../../../assets/images/ticked.png) no-repeat;
-}
+    .ticked {
+        background: url(/assets/images/ticked.png) no-repeat;
+        background-size: 34px;
+    }
+    
+    .ticked.grey {
+        background: url(/assets/images/tickedgrey.png) no-repeat;
+        background-size: 34px;
+    }
+    
+    .unticked {
+        background: url(/assets/images/unticked.png) no-repeat;
+        background-size: 34px;
+    }
+    
+    .unticked.grey {
+        background: url(/assets/images/untickedgrey.png) no-repeat;
+        background-size: 34px;
+    }
+    
+    .partnerLogo.selected {
+        outline: none;
+        background: url(/assets/images/ticked.png) no-repeat;
+    }
 </style>
-
 <div layout="row" class="mainArea">
     <div class="contactedUsers" ng-if="isBroker">
         <div class="contactedUsersTitle">Contacted Users</div>
         <div>
-            <input name="search" ng-model="vm.searchUsername" type="search" ng-change="vm.changeUsers()" placeholder="Search" class="searchBar">
-        </div>
+            <input name="search" ng-model="vm.searchUsername" type="search" ng-change="vm.changeUsers()" placeholder="Search" class="searchBar"> </div>
         <div class="appointment ng-scope" ng-class='{active: $index==vm.selectedIndex}' ng-repeat="appointment in vm.userAppointmentsFiltered" ng-click="vm.selectUser($index)">
-            <div class="avatar-circle" ng-if="!appointment.avatar">
-                {{appointment.fname|limitTo:1|capitalize}}
-                {{appointment.lname|limitTo:1|capitalize}}
-            </div>
-
+            <div class="avatar-circle" ng-if="!appointment.avatar"> {{appointment.fname|limitTo:1|capitalize}} {{appointment.lname|limitTo:1|capitalize}} </div>
             <div class="detail">
-                <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div>
-                <a class="pending-btn ng-binding" style="margin-top: 4px;">{{appointment.applicationStatus}}</a>
-            </div> 
+                <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div> <a class="pending-btn ng-binding" style="margin-top: 4px;">{{appointment.applicationStatus}}</a> </div>
         </div>
     </div>
     <div flex layout="column">
@@ -44,251 +40,186 @@
             <md-select id="userSelector" ng-model="weapon" placeholder="{{firstAppointment}}" md-container-class="userSel" class="md-no-underline">
                 <md-option ng-repeat="appointment in vm.userAppointmentsFiltered" ng-click="vm.selectUser($index)" ng-value="appointment.fname">
                     <div class="appointment ng-scope">
-                        <div class="avatar-circle" ng-if="!appointment.avatar">
-                            {{appointment.fname|limitTo:1|capitalize}}
-                            {{appointment.lname|limitTo:1|capitalize}}
-                        </div>
-
+                        <div class="avatar-circle" ng-if="!appointment.avatar"> {{appointment.fname|limitTo:1|capitalize}} {{appointment.lname|limitTo:1|capitalize}} </div>
                         <div class="detail">
-                            <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div>
-                            <a class="pending-btn ng-binding" style="margin-top: 4px;">{{appointment.applicationStatus}}</a>
-                        </div> 
+                            <div style="font-size: 14px;" class="ng-binding">{{appointment.fname}} {{appointment.lname}}</div> <a class="pending-btn ng-binding" style="margin-top: 4px;">{{appointment.applicationStatus}}</a> </div>
                     </div>
                 </md-option>
             </md-select>
         </div>
-        <md-stepper  ng-click="vm.check()" id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker" style="outline: none;">
-        <div ng-if="isBroker">
-        <md-step md-label="Account Summary" class="accSummary">
-            <md-step-body layout="column" class="accSumStep">
-            <div layout="row" style="min-height: 150px;">
-                <div class="appointment ng-scope" id="primaryApp" layout="column">
-                    <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
-                        <div style="font-size: 14px;" class="ng-binding">{{vm.userAppointment.fname}} {{vm.userAppointment.lname}}</div>
-                        <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> -->
-                        <a class="pending-btn ng-binding" style="margin-top: 10px;">{{vm.userAppointment.applicationStatus}}</a>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <div class="chart">
-                        <div class="broker-profile-chart">
-                            
-                        </div>   
-                        <div ng-attr-title="{{vm.statusValues[0]}}" style="opacity: 0.4;text-align: center; padding: 5px;">
-                            Profile Details
-                        </div> 
-                    </div>
-                    <div class="chart">
-                        <div class="broker-kyc-chart">
-                            
-                        </div>    
-                        <div ng-attr-title="{{vm.statusValues[1]}}" style="opacity: 0.4;text-align: center; padding: 5px;">
-                            KYC Details
-                        </div> 
-                    </div>
-                    <div class="chart">
-                        <div class="broker-document-chart">
-                            
-                        </div> 
-                        <div ng-attr-title="{{vm.statusValues[2]}}" style="opacity: 0.4;text-align: center; padding: 5px;">
-                            Documents
-                        </div>                            
-                    </div>
-                    <div class="chart">
-                        <div class="broker-validation-chart">
-                            
-                        </div>    
-                        <div ng-attr-title="{{vm.statusValues[3]}}" style="opacity: 0.4;text-align: center; padding: 5px;">
-                            Validation Status
-                        </div> 
-                    </div>
-                </div>
-            </div>
-            <div layout="row" class="dashClassAfterElements">
-            <div class="dashClassAfterElementsChild">
-                <span class="title">Download Documents</span>
-                <div class="document-container">
-                    <div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokeragesDetails.document || !vm.brokeragesDetails.document.length">
-                        No uploaded Documents for this user.
-                    </div>
-                    <div ng-class="{documentTile:true,selected:vm.hasDocument(document)}" ng-click="vm.toggleDocument(document)" ng-repeat="document in vm.documents" ng-if="document.documentID" class="documentTile">
-                        <div style="float:left; padding:10px;">
-                            <div class="header">{{document.categoryName}}</div>
-                            <div class="description">Click to select/de-select</div>
+        <md-stepper ng-click="vm.check()" id="stepper-demo" ng-class="{'rightSideBar': isBroker}" md-linear="!isBroker" style="outline: none;">
+            <div ng-if="isBroker">
+                <md-step md-label="Account Summary" class="accSummary">
+                    <md-step-body layout="column" class="accSumStep">
+                        <div layout="row" style="min-height: 150px;">
+                            <div class="appointment ng-scope" id="primaryApp" layout="column">
+                                <div class="detail" layout="row" ng-if="vm.userAppointment" style="max-width: 90px;">
+                                    <div style="font-size: 14px;" class="ng-binding">{{vm.userAppointment.fname}} {{vm.userAppointment.lname}}</div>
+                                    <!-- <div style="margin-top: 3px;opacity: 0.4;">3 Days Ago</div> --><a class="pending-btn ng-binding" style="margin-top: 10px;">{{vm.userAppointment.applicationStatus}}</a> </div>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart">
+                                    <div class="broker-profile-chart"> </div>
+                                    <div ng-attr-title="{{vm.statusValues[0]}}" style="opacity: 0.4;text-align: center; padding: 5px;"> Profile Details </div>
+                                </div>
+                                <div class="chart">
+                                    <div class="broker-kyc-chart"> </div>
+                                    <div ng-attr-title="{{vm.statusValues[1]}}" style="opacity: 0.4;text-align: center; padding: 5px;"> KYC Details </div>
+                                </div>
+                                <div class="chart">
+                                    <div class="broker-document-chart"> </div>
+                                    <div ng-attr-title="{{vm.statusValues[2]}}" style="opacity: 0.4;text-align: center; padding: 5px;"> Documents </div>
+                                </div>
+                                <div class="chart">
+                                    <div class="broker-validation-chart"> </div>
+                                    <div ng-attr-title="{{vm.statusValues[3]}}" style="opacity: 0.4;text-align: center; padding: 5px;"> Validation Status </div>
+                                </div>
+                            </div>
                         </div>
-                        <div style="float: right; border-left: solid 1px #e7ecf1;">
-                            <img src="/assets/images/selected.png" class="selected">
-                            <a ng-href="/kyck-rest/document/bulkDownload?documentNames={{document.documentName}}&userId={{vm.userAppointment.email}}">
-                                <img src="/assets/images/download.png"/>                                
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top:15px;display: flex;" ng-if="vm.brokeragesDetails.document && vm.brokeragesDetails.document.length">
-                    <a ng-click="vm.toggleAllDocuments()" class="select-all-btn">
+                        <div layout="row" class="dashClassAfterElements">
+                            <div class="dashClassAfterElementsChild"> <span class="title">Download Documents</span>
+                                <div class="document-container">
+                                    <div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokeragesDetails.document || !vm.brokeragesDetails.document.length"> No uploaded Documents for this user. </div>
+                                    <div ng-class="{documentTile:true,selected:vm.hasDocument(document)}" ng-click="vm.toggleDocument(document)" ng-repeat="document in vm.documents" ng-if="document.documentID" class="documentTile">
+                                        <div style="float:left; padding:10px;">
+                                            <div class="header">{{document.categoryName}}</div>
+                                            <div class="description">Click to select/de-select</div>
+                                        </div>
+                                        <div style="float: right; border-left: solid 1px #e7ecf1;"> <img src="/assets/images/selected.png" class="selected">
+                                            <a ng-href="/kyck-rest/document/bulkDownload?documentNames={{document.documentName}}&userId={{vm.userAppointment.email}}"> <img src="/assets/images/download.png" /> </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-top:15px;display: flex;" ng-if="vm.brokeragesDetails.document && vm.brokeragesDetails.document.length"> <a ng-click="vm.toggleAllDocuments()" class="select-all-btn">
                         {{vm.selectedDocumentNames.length!=vm.brokeragesDetails.document.length ? 'Select All' : 'Clear All'}}
-                    </a>
-                    <a ng-href="{{vm.getDownloadLink()}}" class="download-all-btn">
+                    </a> <a ng-href="{{vm.getDownloadLink()}}" class="download-all-btn">
                         Download Selected
-                    </a>
-                </div>
-            </div>
-            <div class="dashClassAfterElementsChild">
-                <span class="title">Appointment Slots</span>
-                <div style="font-size: 12px;margin-top: 10px;" ng-if="!vm.userSlots.length">
-                    No Appointments
-                </div>
-                <div class="document-container">
-                <div class="appointmentTile" ng-repeat="slot in vm.userSlots">
-                    <div style="float:left; padding:10px;">
-                        <div class="header">{{slot.startTime | date:'dd MMM yy, HH:mm a'}}</div>
-                        <a class="pending-btn ng-binding">{{slot.status}}</a>
-                    </div>
-                    <div style="float: right; border-left: solid 1px #e7ecf1;">
-                        <span ng-show="slot.status==='PENDING'">
+                    </a> </div>
+                            </div>
+                            <div class="dashClassAfterElementsChild"> <span class="title">Appointment Slots</span>
+                                <div style="font-size: 12px;margin-top: 10px;" ng-if="!vm.userSlots.length"> No Appointments </div>
+                                <div class="document-container">
+                                    <div class="appointmentTile" ng-repeat="slot in vm.userSlots">
+                                        <div style="float:left; padding:10px;">
+                                            <div class="header">{{slot.startTime | date:'dd MMM yy, HH:mm a'}}</div> <a class="pending-btn ng-binding">{{slot.status}}</a> </div>
+                                        <div style="float: right; border-left: solid 1px #e7ecf1;"> <span ng-show="slot.status==='PENDING'">
                             <div class="actnItem" ng-click="vm.updateMeetingStatus('CONFIRM', slot)">CONFIRM</div>
                             <div class="actnItem" ng-click="vm.updateMeetingStatus('RESCHEDULE', slot)">RESCHEDULE</div>
-                        </span>
-                        <span ng-show="slot.status==='CONFIRM'">
+                        </span> <span ng-show="slot.status==='CONFIRM'">
                             <div class="actnItem" ng-click="vm.showVideoDialog(slot)" style="line-height:22px;">JOIN VIDEO<br/>CONFERENCE</div>
-                        </span>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-            </md-step-body>
-        </md-step>
-        </div>
-        <div ng-if="!isBroker">
-            <md-step md-label="Select Broker">
-                <md-step-body layout="row" layout-wrap>
-                    <div class="mainHeader">Select Broker</div>
-                    <h3 class="partnersHeader">Premium Partners</h3>
-                    <div style="display: flex; flex-flow: row wrap; justify-content: center;width: 100%;">
-                        <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'PREMIUM'}">
-                            <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected , 'deactivated': partner.status}">
-                                <img class="premiereIcon" src="/assets/images/premiere.png"/>
-                                <center><img ng-src="{{partner.img}}"/></center>
-                            </div>
-                        </div>    
-                    </div>
-                    
-                    <h3 class="partnersHeader">All Partners</h3>
-                    <div style="display: flex; width: 100%; justify-content: center; flex-wrap:wrap;">
-                    <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'REGULAR'}" style="margin: 20px;">
-                        <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected , 'deactivated': partner.status}">
-                            <center><img ng-src="{{partner.img}}"/></center>
-                        </div>
-                    </div>
-                    </div>
-                </md-step-body>
-            </md-step>
-        </div>
-        <div ng-if="isBroker">
-            <md-step md-label="Personal Details">
-                <md-step-body>
-                    <profile-form ng-class="{error:vm.personalDetailsError}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/>
-                </md-step-body>
-            </md-step>
-        </div>
-        <div ng-if="isBroker">
-            <md-step md-label="KYC">
-                <md-step-body>
-                    <kyc-form ng-class="{error:vm.kycerror}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/>
-                </md-step-body>
-            </md-step>
-        </div>
-        <div ng-if="isBroker || !isBroker">
-            <md-step md-label="Documents">
-                <md-step-body>
-                    <div class="mainHeader">Documents</div>
-                    <div class="flex-wrapper" style="height: calc(100vh - 90px); margin-bottom: -90px; margin-top: 20px;">
-                        <div ng-repeat="document in ::vm.documents">
-                            <document-pane is-broker="isBroker" style="float: left;" document="document" user-id="vm.userAppointment.email"></document-pane>
-                        </div>  
-                    </div>
-                </md-step-body>
-            </md-step>
-        </div>
-
-        <div ng-if="!isBroker">
-            <md-step md-label="Personal Details">
-                <md-step-body>
-                    <div class="mainHeader">Personal Details</div>
-                    <profile-form ng-class="{error:personalDetailsError}" is-broker="isBroker" user-email-id="vm.userAppointment.email"/>
-                </md-step-body>
-            </md-step>
-        </div>
-        <div ng-if="!isBroker">
-            <md-step md-label="KYC">
-                <md-step-body>
-                    <div class="mainHeader">KYC</div>
-                    <kyc-form ng-class="{error:vm.kycerror}"/>
-                </md-step-body>
-            </md-step>
-        </div>
-        <div ng-if="!isBroker">
-            <md-step md-label="Selection of Timeslot">
-                <md-step-body layout="column" flex style="overflow-x: hidden;">
-                    <select-slot selected-partners="selectedPartners" timeslot-selected="timeslotSelected" style="margin-right: 10px;"/>
-                </md-step-body>
-            </md-step>
-        </div>
-        <div ng-if="isBroker">
-            <md-step md-label="Validation Reports">
-                <md-step-body layout="column" flex>
-                    <div style="min-height: 800px; height: 800px;">
-                        <div class="validation-report-count">
-                            <div class="stat accepted">
-                                {{vm.validationAcceptedCount}}
-                            </div>
-                            <div class="stat rejected">
-                                {{vm.validationRejectedCount}}
-                            </div>
-                            <div class="stat total">
-                                {{vm.validationTotalCount}}
-                            </div>
-
-                        </div>
-                        <div class="validationReport" ng-repeat="report in vm.validationReports">
-                            <div>
-                                <div class="title">{{report.name}}
+                        </span> </div>
+                                    </div>
                                 </div>
-                                <div class="description">{{report.description}}
-                                </div>
-                                <table class="checklist-table" ng-if="report.checklistValue.length">
-                                    <tr ng-repeat="checklistValue in report.checklistValue">
-                                        <td>{{checklistValue.name}} :</td>
-                                        <td> {{checklistValue.value}}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div>
-                                <div ng-click="toggleReport($index)" class="ticked" ng-class='{grey: report.status != "PASS"}'></div>
-                                <div ng-click="toggleReport($index)" class="unticked" ng-class='{grey: report.status =="PASS"}'></div>
                             </div>
                         </div>
                     </md-step-body>
                 </md-step>
             </div>
-        </div>
+            <div ng-if="!isBroker">
+                <md-step md-label="Select Broker">
+                    <md-step-body layout="row" layout-wrap>
+                        <div class="mainHeader">Select Broker</div>
+                        <h3 class="partnersHeader">Premium Partners</h3>
+                        <div style="display: flex; flex-flow: row wrap; justify-content: center;width: 100%;">
+                            <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'PREMIUM'}">
+                                <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected , 'deactivated': partner.status}"> <img class="premiereIcon" src="/assets/images/premiere.png" />
+                                    <center><img ng-src="{{partner.img}}" /></center>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="partnersHeader">All Partners</h3>
+                        <div style="display: flex; width: 100%; justify-content: center; flex-wrap:wrap;">
+                            <div ng-repeat="partner in ::vm.partners | filter:{brokerageCategory:'REGULAR'}" style="margin: 20px;">
+                                <div class="partnerLogo" ng-click="vm.toggleSelected(partner)" ng-class="{'selected': partner.selected , 'deactivated': partner.status}">
+                                    <center><img ng-src="{{partner.img}}" /></center>
+                                </div>
+                            </div>
+                        </div>
+                    </md-step-body>
+                </md-step>
+            </div>
+            <div ng-if="isBroker">
+                <md-step md-label="Personal Details">
+                    <md-step-body>
+                        <profile-form ng-class="{error:vm.personalDetailsError}" is-broker="isBroker" user-email-id="vm.userAppointment.email" /> </md-step-body>
+                </md-step>
+            </div>
+            <div ng-if="isBroker">
+                <md-step md-label="KYC">
+                    <md-step-body>
+                        <kyc-form ng-class="{error:vm.kycerror}" is-broker="isBroker" user-email-id="vm.userAppointment.email" /> </md-step-body>
+                </md-step>
+            </div>
+            <div ng-if="isBroker || !isBroker">
+                <md-step md-label="Documents">
+                    <md-step-body>
+                        <div class="mainHeader">Documents</div>
+                        <div class="flex-wrapper" style="height: calc(100vh - 90px); margin-bottom: -90px; margin-top: 20px;">
+                            <div ng-repeat="document in ::vm.documents">
+                                <document-pane is-broker="isBroker" style="float: left;" document="document" user-id="vm.userAppointment.email"></document-pane>
+                            </div>
+                        </div>
+                    </md-step-body>
+                </md-step>
+            </div>
+            <div ng-if="!isBroker">
+                <md-step md-label="Personal Details">
+                    <md-step-body>
+                        <div class="mainHeader">Personal Details</div>
+                        <profile-form ng-class="{error:personalDetailsError}" is-broker="isBroker" user-email-id="vm.userAppointment.email" /> </md-step-body>
+                </md-step>
+            </div>
+            <div ng-if="!isBroker">
+                <md-step md-label="KYC">
+                    <md-step-body>
+                        <div class="mainHeader">KYC</div>
+                        <kyc-form ng-class="{error:vm.kycerror}" /> </md-step-body>
+                </md-step>
+            </div>
+            <div ng-if="!isBroker">
+                <md-step md-label="Selection of Timeslot">
+                    <md-step-body layout="column" flex style="overflow-x: hidden;">
+                        <select-slot selected-partners="selectedPartners" timeslot-selected="timeslotSelected" style="margin-right: 10px;" /> </md-step-body>
+                </md-step>
+            </div>
+            <div ng-if="isBroker">
+                <md-step md-label="Validation Reports">
+                    <md-step-body layout="column" flex>
+                        <div style="min-height: 800px; height: 800px;">
+                            <div class="validation-report-count">
+                                <div class="stat accepted"> {{vm.validationAcceptedCount}} </div>
+                                <div class="stat rejected"> {{vm.validationRejectedCount}} </div>
+                                <div class="stat total"> {{vm.validationTotalCount}} </div>
+                            </div>
+                            <div class="validationReport" ng-repeat="report in vm.validationReports">
+                                <div>
+                                    <div class="title">{{report.name}} </div>
+                                    <div class="description">{{report.description}} </div>
+                                    <table class="checklist-table" ng-if="report.checklistValue.length">
+                                        <tr ng-repeat="checklistValue in report.checklistValue">
+                                            <td>{{checklistValue.name}} :</td>
+                                            <td> {{checklistValue.value}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div>
+                                    <div ng-click="toggleReport($index)" class="ticked" ng-class='{grey: report.status != "PASS"}'></div>
+                                    <div ng-click="toggleReport($index)" class="unticked" ng-class='{grey: report.status =="PASS"}'></div>
+                                </div>
+                            </div>
+                    </md-step-body>
+                </md-step>
+                </div>
+            </div>
         </md-stepper>
-
         <footer id="bottomFooter">
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="!isBroker">
                 <md-button class="md-raised md-back" ng-click="vm.backStep()" ng-show="vm.getActiveStep()>1">Back</md-button>
-                <md-button class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
-                    <span ng-show="vm.getActiveStep()<5">Next</span>
-                    <span ng-show="vm.getActiveStep()==5">Submit</span>
-                </md-button>
+                <md-button class="md-raised md-success" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)"> <span ng-show="vm.getActiveStep()<5">Next</span> <span ng-show="vm.getActiveStep()==5">Submit</span> </md-button>
                 <!-- <md-button class="md-raised md-edit-form" ng-click="vm.editForm()">Edit Form</md-button> -->
             </div>
             <div layout="row" class="footerBtns" layout-align="start center" ng-if="isBroker">
-                <md-button class="md-raised md-success" ng-click="vm.nextRequestStep()" ng-show="!vm.allVerified || vm.getActiveStep()>1">
-                    <span ng-show="vm.getActiveStep()==1">Start</span>
-                    <span ng-show="vm.getActiveStep()>1">Accept</span>
-                </md-button>
+                <md-button class="md-raised md-success" ng-click="vm.nextRequestStep()" ng-show="!vm.allVerified || vm.getActiveStep()>1"> <span ng-show="vm.getActiveStep()==1">Start</span> <span ng-show="vm.getActiveStep()>1">Accept</span> </md-button>
                 <md-button class="md-raised md-success" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.getActiveStep()==1 && vm.allVerified">
                     <div>Approve</div>
                 </md-button>
@@ -297,20 +228,13 @@
                 </md-button>
             </div>
         </footer>
-
         <footer id="bottomFullFooter">
             <div style="display: flex" ng-if="!isBroker">
                 <md-button class="md-raised md-back footerBottomBtn" ng-click="vm.backStep()" ng-show="vm.getActiveStep()>1">{{vm.steps[vm.getActiveStep()-2]}}</md-button>
-                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)">
-                    <span ng-show="vm.getActiveStep()<5">{{vm.steps[vm.getActiveStep()]}}</span>
-                    <span ng-show="vm.getActiveStep()==5">Submit</span>
-                </md-button>
+                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.nextStep()" ng-disabled="(vm.getActiveStep()==5 && !timeslotSelected) || (vm.getActiveStep()==1 && selectedPartners.length==0)"> <span ng-show="vm.getActiveStep()<5">{{vm.steps[vm.getActiveStep()]}}</span> <span ng-show="vm.getActiveStep()==5">Submit</span> </md-button>
             </div>
             <div style="display: flex" ng-if="isBroker">
-                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.nextRequestStep()" ng-show="!vm.allVerified || vm.getActiveStep()>1">
-                    <span ng-show="vm.getActiveStep()==1">Start</span>
-                    <span ng-show="vm.getActiveStep()>1">Accept</span>
-                </md-button>
+                <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.nextRequestStep()" ng-show="!vm.allVerified || vm.getActiveStep()>1"> <span ng-show="vm.getActiveStep()==1">Start</span> <span ng-show="vm.getActiveStep()>1">Accept</span> </md-button>
                 <md-button class="md-raised md-success footerBottomBtn" ng-click="vm.submitApplication('APPROVED')" ng-show="vm.getActiveStep()==1 && vm.allVerified">
                     <div>Approve</div>
                 </md-button>
@@ -319,46 +243,32 @@
                 </md-button>
             </div>
         </footer>
-
     </div>
-
-    <div class="right-stat" ng-if="!isBroker" ng-class="{collapsed:rightSideNavCollapsed}">
-        <img class="closeRightSideBar" src="/assets/images/hide-bar-white.png" ng-click="vm.showRightDrawer()">
-        <img class="bgimage" src="/assets/images/sidebar-background.png">
+    <div class="right-stat" ng-if="!isBroker" ng-class="{collapsed:rightSideNavCollapsed}"> <img class="closeRightSideBar" src="/assets/images/hide-bar-white.png" ng-click="vm.showRightDrawer()"> <img class="bgimage" src="/assets/images/sidebar-background.png">
         <div style="position:absolute;right:15px;left:10px;z-index: 2;">
-            <div><progress-display chart-id="brokerage-progress" is-vertical="true"/></div>
-             <div class="contact-brokerage">
+            <div>
+                <progress-display chart-id="brokerage-progress" is-vertical="true" />
+            </div>
+            <div class="contact-brokerage">
                 <div style="position: relative;display: flex; flex-flow: column; margin-top: 15px;">
                     <h2 style="color:white;">Brokerage Applications</h2>
-                    <input type="text" placeholder="Search" ng-model="vm.searchBrokerageApplications" type="search" ng-change="vm.changeBrokerageApplications()" > 
-                    <img src="/assets/images/search.png" alt="Search" style="position: absolute;right:2px;top:40px;">   
+                    <input type="text" placeholder="Search" ng-model="vm.searchBrokerageApplications" type="search" ng-change="vm.changeBrokerageApplications()"> <img src="/assets/images/search.png" alt="Search" style="position: absolute;right:2px;top:40px;">
                     <div style="display: flex;flex-flow: column;color:white;">
-                        <div style="display: flex;border: none;border-radius: 3px;padding: 20px;padding-left:0px;margin-bottom: 10px;" ng-repeat="item in vm.filteredContactedBrokers">
-                            <img style="width: 70px; background:white; border-radius:3px;height:36px;margin-right: 15px; padding: 5px;" ng-src="/assets/images/partnerLogos/{{item.brokerageId}}.png" alt="">
+                        <div style="display: flex;border: none;border-radius: 3px;padding: 20px;padding-left:0px;margin-bottom: 10px;" ng-repeat="item in vm.filteredContactedBrokers"> <img style="width: 70px; background:white; border-radius:3px;height:36px;margin-right: 15px; padding: 5px;" ng-src="/assets/images/partnerLogos/{{item.brokerageId}}.png" alt="">
                             <div style="display: flex; flex-flow: column;">
-                                <div style="font-size: 14px;">{{item.brokerageId}}
-                                </div>
-                                <div  ng-if="item.status!='PENDING'" style="margin-top: 10px;font-size: 14px;line-height: 26px;background-color:#2ecc71;width: 90px;text-align: center;border-radius: 4px;">
-                                    {{item.status}}        
-                                </div>
-                                <div  ng-if="item.status=='PENDING'" class="confirm-btn" style="margin-top: 10px;font-size: 14px;line-height: 26px;background-color: #3498db;width: 90px;text-align: center;border-radius: 4px;">
-                                    {{item.status}}        
-                                </div>
-                            </div> 
-                            
+                                <div style="font-size: 14px;">{{item.brokerageId}} </div>
+                                <div ng-if="item.status!='PENDING'" style="margin-top: 10px;font-size: 14px;line-height: 26px;background-color:#2ecc71;width: 90px;text-align: center;border-radius: 4px;"> {{item.status}} </div>
+                                <div ng-if="item.status=='PENDING'" class="confirm-btn" style="margin-top: 10px;font-size: 14px;line-height: 26px;background-color: #3498db;width: 90px;text-align: center;border-radius: 4px;"> {{item.status}} </div>
+                            </div>
                         </div>
-                    </div>            
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div layout="column" class="rightSide" ng-if="isBroker" flex ng-class="{collapsed:rightSideNavCollapsed}">
-        <img class="closeRightSideBar" src="/assets/images/hide-bar.png" ng-click="vm.showRightDrawer()">
-        <img style="position: absolute;width:250px;height:100%; z-index: 0;" ng-src="{{vm.bgurl}}">
+    <div layout="column" class="rightSide" ng-if="isBroker" flex ng-class="{collapsed:rightSideNavCollapsed}"> <img class="closeRightSideBar" src="/assets/images/hide-bar.png" ng-click="vm.showRightDrawer()"> <img style="position: absolute;width:250px;height:100%; z-index: 0;" ng-src="{{vm.bgurl}}">
         <div style="z-index: 3;">
-            <mini-calendar/>            
-        </div>
+            <mini-calendar/> </div>
         <h2 style="color: white;margin: 20px; margin-bottom: 0px; z-index: 3;">Messages</h2>
         <div class="message-container" style="z-index: 3; margin-bottom: 60px;">
             <div class="message-requests {{message.class}}" ng-repeat="message in vm.usermessages|orderBy:'-date'|limitTo:3">
@@ -367,17 +277,9 @@
             </div>
         </div>
         <div style="z-index: 3; position: relative;">
-            <!-- <img src="/assets/images/clip.png" style="position: absolute; right: 55px; height: 24px; margin-top: 16px;" /> -->
-            <img ng-click="vm.sendMessage()" src="/assets/images/open-message.png" class="sendMsgButton"/>
+            <!-- <img src="/assets/images/clip.png" style="position: absolute; right: 55px; height: 24px; margin-top: 16px;" /> --><img ng-click="vm.sendMessage()" src="/assets/images/open-message.png" class="sendMsgButton" />
             <div ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)">
-                <input
-                    type="text"
-                    name="compose"
-                    placeholder="Add your message"
-                    ng-model="vm.messageReplyText"
-                    class="input"
-                    style="margin: 10px; margin-left:18px; padding: 10px; border-radius: 7px; z-index: 3; border: none; outline: none; box-shadow: none; width: 218px; position: fixed; bottom: 60px; right: 0px;">
-                </div>
+                <input type="text" name="compose" placeholder="Add your message" ng-model="vm.messageReplyText" class="input" style="margin: 10px; margin-left:18px; padding: 10px; border-radius: 7px; z-index: 3; border: none; outline: none; box-shadow: none; width: 218px; position: fixed; bottom: 60px; right: 0px;"> </div>
         </div>
     </div>
 </div>
