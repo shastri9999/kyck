@@ -207,9 +207,9 @@
                                     <div ng-click="toggleReport($index)" class="unticked" ng-class='{grey: report.status =="PASS"}'></div>
                                 </div>
                             </div>
+                        </div>
                     </md-step-body>
                 </md-step>
-                </div>
             </div>
         </md-stepper>
         <footer id="bottomFooter">
@@ -247,13 +247,12 @@
     <div class="right-stat" ng-if="!isBroker" ng-class="{collapsed:rightSideNavCollapsed}"> <img class="closeRightSideBar" src="/assets/images/hide-bar-white.png" ng-click="vm.showRightDrawer()"> <img class="bgimage" src="/assets/images/sidebar-background.png">
         <div style="position:absolute;right:15px;left:10px;z-index: 2;">
             <div>
-                <progress-display chart-id="brokerage-progress" is-vertical="true" />
-            </div>
+                <progress-display chart-id="brokerage-progress" is-vertical="true" /> </div>
             <div class="contact-brokerage">
                 <div style="position: relative;display: flex; flex-flow: column; margin-top: 15px;">
                     <h2 style="color:white;">Brokerage Applications</h2>
                     <input type="text" placeholder="Search" ng-model="vm.searchBrokerageApplications" type="search" ng-change="vm.changeBrokerageApplications()"> <img src="/assets/images/search.png" alt="Search" style="position: absolute;right:2px;top:40px;">
-                    <div style="display: flex;flex-flow: column;color:white;">
+                    <div style="display: flex;flex-flow: column;color:white; margin-bottom: 45px;">
                         <div style="display: flex;border: none;border-radius: 3px;padding: 20px;padding-left:0px;margin-bottom: 10px;" ng-repeat="item in vm.filteredContactedBrokers"> <img style="width: 70px; background:white; border-radius:3px;height:36px;margin-right: 15px; padding: 5px;" ng-src="/assets/images/partnerLogos/{{item.brokerageId}}.png" alt="">
                             <div style="display: flex; flex-flow: column;">
                                 <div style="font-size: 14px;">{{item.brokerageId}} </div>
