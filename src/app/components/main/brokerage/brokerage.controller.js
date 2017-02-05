@@ -294,7 +294,7 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
             vm.allVerified = false;
             setUserAppointments();
             // vm.selectedIndex = vm.userAppointments.findIndex(function (a) {return a.email == vm.userAppointment.email;})
-            shuffletheorder();
+            //            shuffletheorder();
         }, function (error) {
             console.log(error);
         });
@@ -425,7 +425,7 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
 
     function searchAppointment(appointment) {
         var search_str = appointment.fname + " " + appointment.lname;
-        return searchText(vm.searchUsername, search_str);
+        return searchText(vm.searchUsername, search_str.toLowerCase());
     }
 
     function changeUsers() {
