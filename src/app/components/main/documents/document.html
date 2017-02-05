@@ -10,9 +10,14 @@
 	</div>
 	<div class="document-action" ng-if="!vm.document.documentID || vm.document.replaceAction" ngf-drag-over-class="'dragover'" ngf-drop="vm.upload($file, vm.document)">
 		<span ng-if="vm.isBroker" class="upload">Document not uploaded.</span>
-		<span ng-if="!vm.isBroker" class="upload mo-hide">Drag and drop your file here or 
-			<md-button ngf-select="vm.upload($file, vm.document)" class="md-primary md-raised" style="background-color: #3598DB">	Upload
+		<span ng-if="!vm.isBroker" class="upload mo-hide">
+			Drag and drop your file here or 
+			<md-button ngf-select="vm.startUpload($file, vm.document)" class="md-primary md-raised"
+					   style="background-color: #3598DB;min-width:0;width:63px;font-size:12px;">	Upload
 			</md-button>
+			<md-button class="md-secondary md-raised" ng-if="vm.document.replaceAction" 
+					   ng-click="vm.document.replaceAction = false"
+					   style="min-width:0;width:63px;font-size:12px;">Cancel</md-button>
  		</span>
  		<span ng-if="!vm.isBroker" class="uploadIcons">
 			<div class="uploadIcon">

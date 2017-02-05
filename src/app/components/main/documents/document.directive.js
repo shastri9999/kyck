@@ -34,6 +34,28 @@ function documentComponent() {
       document.replaceAction = true;
     }
 
+    const processOCRData = (data)=>{
+      let photo = {}
+      let ocr = data.filter((field)=>{
+        if (field.name == 'Photo')
+        {
+          photo.value = field.value;
+        }
+        if (field.name == 'PhotoType')
+        {
+          photo.type = field.value;
+        }
+        return (field.name != 'Photo' && field.name !='PhotoType');
+      });
+      if (photo.value)
+      {
+        ocr.push({
+          name: 'Photo',
+          value: `data:${photo.type};base64,${photo.value}`,
+        });
+      }
+      return ocr;
+    };
 
     vm.preview = function(document){
       $rootScope.canEnableOCR = !vm.isBroker;
@@ -46,7 +68,8 @@ function documentComponent() {
           $rootScope.viewingDocument = document;
           $rootScope.viewingDocument.OCR = null;
           DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
-            $rootScope.viewingDocument.OCR = response.data;
+            
+            $rootScope.viewingDocument.OCR = processOCRData(response.data);
           });
           $http({
             method: 'GET',
@@ -79,12 +102,35 @@ function documentComponent() {
           }).then((data)=>{
             let URL = 'data:' + documentData.mimeType + ';base64,' + data.data;
             $rootScope.showDocumentPreview(URL);
-          })
+          });
         });
       }
+    };
+
+
+    vm.startUpload = function(file, document)
+    {
+      if(!file)
+        return;
+      document.documentName = file.name;
+      $rootScope.viewingDocument = document;
+      $rootScope.viewingDocument.OCR = null;
+      $rootScope.canEnableOCR = true;
+      if (file.type === "image/jpeg" || file.type === "image/png")
+      {
+
+        Upload.dataUrl(file, true).then((URL)=>{
+          $rootScope.showDocumentPreview(URL, true);
+        });
+        
+      }
+      else
+      {
+        vm.upload(file, document);
+      }
+      
     }
-
-
+    
     vm.upload = function(file, document){       
       $rootScope.mainLoading = true;
       $rootScope.mainLoadingMessage = "Document is being uploaded... Please wait."
@@ -98,6 +144,7 @@ function documentComponent() {
         $log.debug(response);
         $log.debug('Success: ' + response.config.data.file.name + 'Uploaded. Response: ' + response.data);
         $rootScope.mainLoading = false;
+        $rootScope.setUpload = false;
         $mdToast.show(
           $mdToast.simple()
           .textContent('File Uploaded Successfully!')

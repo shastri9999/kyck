@@ -17,6 +17,8 @@
         border-radius: 3px;
         font-size: 12px;
         cursor: pointer;
+        margin-right: 6px;
+        margin-bottom: 6px;
     }
     .completed-btn {
         padding: 5px 18px;
@@ -26,6 +28,9 @@
         border-radius: 3px;
         font-size: 12px;
         cursor: pointer;
+        margin-right: 6px;
+        whitespace: nowrap;
+        height: 25px;
     }
     .conference-btn {
         font-size: 11px;
@@ -35,7 +40,8 @@
         background-color: #b3bbc3;
         color: #fff;
         cursor: pointer;
-        margin-left: 6px;
+        whitespace: nowrap;
+        height: 25px;
     }
     .left {
     	display: flex;
@@ -48,6 +54,7 @@
     		display: flex;
             padding-bottom: 40px;
             margin: 40px;
+            margin-bottom: 0;
             margin-top: 20px;
             border-bottom: 2px solid rgba(231,236,241,0.3);
             flex-flow: column;
@@ -65,6 +72,7 @@
                   margin-top: 20px;
                   display: flex;
                   padding: 15px;
+                  width: 100%;
                   .date {
                     display: flex;
                     flex-flow: column;
@@ -75,6 +83,10 @@
                   .detail {
                     display: flex;
                     flex-flow: column;
+                    .status-btn-container {
+                        display: flex;
+                        flex-flow: row wrap;   
+                    }
                   }
                 }
             }
@@ -83,6 +95,7 @@
     		display: flex;
             margin: 40px;
             margin-top: 0px;
+            padding-top: 20px;
     		flex-grow: 1;
             flex-flow: column;
             .message-container {
@@ -172,7 +185,7 @@
     display: flex;
     flex-grow: 1;
     max-height: calc(100vh - 120px);
-    overflow: auto;    
+    overflow: hidden;    
     .left {
         display: flex;
         flex-flow: column;
@@ -184,6 +197,7 @@
             display: flex;
             padding-bottom: 40px;
             margin: 40px;
+            margin-bottom: 0;
             margin-top: 20px;
             border-bottom: 2px solid rgba(231,236,241,0.3);
             flex-flow: column;
@@ -266,6 +280,7 @@
         overflow: hidden;
         flex-shrink:0;
         position:relative;
+        height: 760px;
         .appointments {
             z-index: 1;
             display: flex;
@@ -274,8 +289,9 @@
             .appointments-container {
                 margin-top: 7px;
                 min-height: 150px;
-                max-height: 310px;
+                max-height: 430px;
                 overflow: auto;
+                padding-bottom: 250px;
                 .appointment {
                     display: flex;
                     background-color: #fff;

@@ -166,8 +166,10 @@
         }
 .brokerage {
     display: flex;
-    margin: 40px;
     flex-grow: 1;
+    margin-right: 0;
+    margin-left: 10px;
+    min-height: 300px;
     margin-top: 0px;
     flex-flow: column;
     .brokerage-container {
@@ -226,7 +228,7 @@
                 flex-flow: row wrap;
                 margin-top: 7px;
                 min-height: 150px;
-                max-height: 50vh;
+                max-height: calc(100vh - 500px);
                 overflow: auto;
                 .appointment {
                     display: flex;

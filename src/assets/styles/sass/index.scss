@@ -210,6 +210,17 @@ kyc-form form, profile-form form{
           border: 1px solid red;
         }
     }
+    textarea {
+      height: 150px;
+      width: 320px;
+      border-radius: 3px;
+      border: 1px solid #e7ecf1;
+      padding: 15px;
+      font-size: 14px;
+      color: #4f6379;
+      resize: none;
+      line-height: 20px;
+    }
     .radio {
       display: flex;
       width: 320px;
@@ -254,4 +265,8 @@ kyc-form form, profile-form form{
 ::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+}
+
+path.progress {
+  filter: unset;
 }

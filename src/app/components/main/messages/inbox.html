@@ -1,12 +1,15 @@
 <div class="inbox">
 	<div style="font-size: 12px;padding-top: 20px;" ng-if="!vm.messages || !vm.messages.length">Inbox is empty</div>
-	<div ng-class="{message: true, active:messageView.activeInboxMessage.messageId == message.messageId}" ng-repeat="message in vm.messages | orderBy:'-messageDate'| limitTo:vm.messageLimit:(vm.currentPage-1)*vm.messageLimit" ng-click="vm.openMessage(message)">
+	<div ng-class="{message: true, active:messageView.activeInboxMessage.messageId == message.messageId}" 
+		 ng-repeat="message in vm.messages | orderBy:'-messageId'| limitTo:vm.messageLimit:(vm.currentPage-1)*vm.messageLimit" 
+		 ng-click="vm.openMessage(message)">
+		<div class="status" ng-if="message.messageStatus=='UNREAD'"></div>
 		<img ng-if="message.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
 		<div class="avatar-circle" ng-if="!message.avatar">{{message.messageFrom|limitTo:1|capitalize}}</div>
 		<div class="detail">
 			<div>{{message.messageSubject}}</div>
 			<div style="font-size: 12px; margin-bottom: 8px;margin-top: 8px;">From: {{message.messageFromName}} ({{message.messageFrom}})</div>
-			<div style="opacity: 0.4;font-size: 14px;">{{message.messageContent}}</div>
+			<div style="opacity: 0.4;font-size: 14px;overflow: hidden;white-space: nowrap;max-width: 260px;text-overflow: ellipsis;">{{message.messageContent}}</div>
 		</div>
 		<div class="time">
 			<div style="white-space: nowrap;" am-time-ago="message.messageDate | amParse:'DD/MM/YYYY hh:mm'"></div>

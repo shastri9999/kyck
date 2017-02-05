@@ -4,10 +4,10 @@
 			<h2>Appointments</h2>
 			<div class="appointments-container">
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.brokerAppointments || !vm.brokerAppointments.length">
-					No Application Requests to Show 
+					No Appointments
 				</div>
-				<div ng-click="vm.openCalendar()" class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:10">
-					<div class="date">
+				<div class="appointment" ng-repeat="appointment in vm.brokerAppointments|orderBy:'-startTime'|limitTo:10">
+					<div ng-click="vm.openCalendar()"  class="date">
 						<div style="font-size: 24px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'Do'}}</div>
 						<div style="opacity: 0.4;padding: 4px; border-bottom: 1px dotted;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'MMM YY'}}</div>
 						<div style="font-size: 12px; opacity: 0.3;padding: 3px;">{{appointment.startTime | amParse:'DD/MM/YYYY hh:mm' | amDateFormat:'hh:mm a'}}</div>
@@ -17,17 +17,17 @@
 						<div style="font-size: 14px;margin-bottom: 3px;">{{appointment.brokerageName}}</div>
 						<div style="margin-bottom: 17px;opacity: 0.4;" class="message">{{appointment.meetingSubject}}</div>
 						<div class="status-btns" ng-switch on="appointment.status">
-							<div ng-switch-when="CONFIRM">
+							<div ng-switch-when="CONFIRMED" class="status-btn-container">
 								<a class="pending-btn">{{appointment.status}}</a>
-								<a class="conference-btn" ng-click="joinConference(appointment)">Join Conference</a>
+								<a class="conference-btn" ng-click="vm.joinRoom(appointment)">Join Conference</a>
 							</div>
-							<div ng-switch-when="PENDING">
+							<div ng-switch-when="PENDING" class="status-btn-container">
 								<a class="pending-btn">{{appointment.status}}</a>
 							</div>
-							<div ng-switch-when="completed">
+							<div ng-switch-when="completed" class="status-btn-container">
 								<a href="" class="completed-btn">Completed</a>
 							</div>
-							<div ng-switch-default>
+							<div ng-switch-default class="status-btn-container">
 								<a class="pending-btn">{{appointment.status}}</a>
 							</div>
 						</div>
@@ -39,7 +39,7 @@
 			<h2>Messages</h2>
 			<div class="message-container">
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.messages || !vm.messages.length">
-					No Messages to Show 
+					No Messages
 				</div>
 				<div class="message" ng-repeat="message in vm.messages | orderBy:'-messageDate'| limitTo:10" ng-click="vm.openMessage(message)">
 					<img ng-if="message.avatar" style="width:120px;padding-right: 20px;align-self: flex-start;" ng-src="{{message.avatar}}">
@@ -91,7 +91,7 @@
 			<h2>Brokerage Application Request</h2>
 			<div class="appointments-container">
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.userAppointments || !vm.userAppointments.length">
-					No Application Requests to Show 
+					No Application Requests
 				</div>
 				<div class="appointment" ng-click="vm.goToRequests()" ng-repeat="appointment in vm.userAppointments|orderBy:'-date'|limitTo:6">
 					<a class="overlay-link" ui-sref="main.brokerage"></a>
@@ -112,7 +112,7 @@
 			<h2>Messages</h2>
 			<div class="message-container">
 				<div style="color:#4f6379; padding-top: 40px; font-size: 12px;" ng-if="!vm.messages || !vm.messages.length">
-					No Messages to Show 
+					No Messages 
 				</div>
 
 				<div class="message" ng-repeat="message in vm.messages | orderBy:'-messageDate'|limitTo:3" ng-click="vm.openMessage(message)">
@@ -154,7 +154,7 @@
 					<div class="detail">
 						<div style="font-size: 14px;">{{appointment.userFirstName}} {{appointment.userLastName}}</div>
 						<div style="opacity: 0.4; margin-top: 3px;font-size: 13px;">{{appointment.displayTime}}</div>
-						<a class="conference-btn">Start Conference</a>
+						<a class="conference-btn" ng-if="appointment.status === 'CONFIRM'" ng-click="vm.joinRoom(appointment)">Start Conference</a>
 					</div>
 				</div>
 			</div>

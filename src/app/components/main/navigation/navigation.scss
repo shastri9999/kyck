@@ -24,12 +24,30 @@ navigation {
 				display: initial;
 			}
 		}
+		.messages-count {
+			position: absolute;
+		    right: 5px;
+		    font-size: 11px;
+		    background: orange;
+		    height: 20px;
+		    width: 20px;
+		    border-radius: 14px;
+		    text-align: center;
+		    line-height: 20px;
+		    top: 19px;
+		}
+		&.collapsed {
+			.messages-count {
+				top: 8px;
+			}
+		}
 		a {
 			padding: 20px 0px;
 		    color: white;
 		    display: flex;
 		    text-decoration: none;
 		    border-bottom: 1px solid rgba(255,255,255,0.1);
+		    position: relative;
 		    .icon-active {
 		    	padding-left: 17px;
 		    	padding-right: 17px;
@@ -37,13 +55,17 @@ navigation {
 		    }
 		    .icon {
 		    	padding-left: 17px;
-		    	padding-right: 17px;		    	
+		    	padding-right: 17px;	
+		    	height: 17px;
+		    	width: 50px;
 		    }
 		    &.active {
 		    	background: white;
 		    	color: #4f6379;
 		    	.icon-active {
 		    		display: initial;
+		    		width: 50px;
+		    		height: 17px;
 		    	}
 				.icon {
 					display: none;

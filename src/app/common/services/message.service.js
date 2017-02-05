@@ -38,6 +38,15 @@ class MessageService{
 		}
 	}
 
+	unread(){
+		return this._$http({
+			method: 'GET',
+			url: this.URL + '/unread',
+		}).then((response)=>{
+			return response.data.data;
+		});
+	}
+
 	fetchSent(){
 		if (this.sentFetched)
 		{
@@ -56,6 +65,15 @@ class MessageService{
 		}
 	}
 
+	getMail(messageId){
+		return this._$http({
+			method: 'GET',
+			url: `${this.URL}/getmail?messageId=${messageId}`,
+		}).then((response)=>{
+			return (response.data.data);
+		});
+	}
+		
 	sendMessage(message, response, forSent){
 		let data = {
 			messageContent: response,

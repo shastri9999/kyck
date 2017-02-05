@@ -1,6 +1,7 @@
 'use strict';
 
-function DashboardController (DashboardResource, AuthenticationService, MessageService, BrokerageResource, CalendarService, $rootScope, $state, moment) {
+function DashboardController (DashboardResource, AuthenticationService,
+                              MessageService, BrokerageResource, CalendarService, $rootScope, $state, $window,$mdToast, moment) {
 	'ngInject';
 	const vm=this;
 	vm.isBroker = AuthenticationService.isBroker();
@@ -37,12 +38,32 @@ function DashboardController (DashboardResource, AuthenticationService, MessageS
 				return appointment;
 			});
 		});
+		
+		vm.joinRoom = (appointment)=>{
+			 $rootScope.loadingProgress = true;
+			 BrokerageResource.getroom({},{
+                    'calendarId':appointment.calendarId,'emailId' : [], 'userId' : appointment.userEmailId
+            }, function(req){
+                    $rootScope.loadingProgress = false;
+                    $window.open(req.data, 'Join Video Conferenence', 'width=1024,height=800');
+                    $mdToast.showSimple("Invited for Video Conference.");
+                }, function(error){console.log(error);});
+		};
 	}
 	else
 	{
 		/* Get user related info */
 		$rootScope.loadingProgress=true;
-
+		vm.joinRoom = (appointment)=>{
+		 $rootScope.loadingProgress = true;
+		 BrokerageResource.getroom({},{
+                'calendarId':appointment.calendarId,'emailId' : [], 'userId' : appointment.brokerEmailId
+        }, function(req){
+                $rootScope.loadingProgress = false;
+                $window.open(req.data, 'Join Video Conferenence', 'width=1024,height=800');
+                $mdToast.showSimple("Invited for Video Conference.");
+            }, function(error){console.log(error);});
+		};
 		CalendarService.fetchMeetings().then((appointments)=>{
 			$rootScope.loadingProgress = false;
 			vm.brokerAppointments = appointments;

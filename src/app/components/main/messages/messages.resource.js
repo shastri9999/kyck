@@ -30,6 +30,11 @@ function MessageResource($resource, $rootScope) {
             url: URL + 'get',
             isArray: false
         },
+        unread: {
+            method: 'GET',
+            url: URL + 'unread',
+            isArray: false
+        },
         inbox: {
         	method: 'GET', 
         	isArray: false,

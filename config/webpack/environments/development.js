@@ -1,5 +1,4 @@
 'use strict';
-var webpack = require('webpack');
 
 module.exports = function(_path) {
   return {
@@ -7,17 +6,14 @@ module.exports = function(_path) {
     debug: true,
     devtool: 'source-map',
     output: {
-      publicPath: 'http://0.0.0.0:8080/'
+      publicPath: '/'
     },
     devServer: {
       contentBase: './dist',
-      info: true,
-      hot: true,
-      inline: true,
-      host:"0.0.0.0"
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin()
-    ]
+      info: false,
+      inline: false,
+      host:"0.0.0.0",
+      port: 3000
+    }
   };
 };
