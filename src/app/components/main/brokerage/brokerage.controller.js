@@ -499,6 +499,9 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
     }
 
     function updateMessages() {
+        $rootScope.loadingProgress = true;
+        vm.usermessages = [];
+        console.log('updating messages to', vm.userAppointment.email);
         BrokerageResource.usermessages({
             userId: vm.userAppointment.email
         }, function (response) {
@@ -560,9 +563,9 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
         MessageService.sendMessage(messageDict, vm.messageReplyText, true).then((response) => {
             if ($rootScope.messageAttachment) vm.upload(response.data.data.messageId);
             vm.messageReplyText = "";
+            updateMessages();
             $mdToast.showSimple('Message Successfully Sent!');
         });
-        updateMessages();
     }
 
     function upload(messageId) {
