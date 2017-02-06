@@ -16,7 +16,11 @@ class MessageService{
 			method: 'GET',
 			url: '/kyck-rest/users/contacted'
 		}).then((response)=>{
-			return response.data.data.map((item)=>item.email);
+			const toList = response.data.data.map((item)=>({mail:item.email, label: `${item.fname} ${item.lname} (${item.email})`}));
+			return toList.filter((to, index, self)=>{
+				const found = self.findIndex((t)=>{return t.mail==to.mail});
+				return found===index;
+			});
 		});
 	}
 	
