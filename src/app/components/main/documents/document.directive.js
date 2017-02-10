@@ -80,6 +80,7 @@ function documentComponent() {
             }]
           }).then((data)=>{
             if (data) {
+              $rootScope.previewNotReady = false;
               $rootScope.showDocumentPreview();
               DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
                 
