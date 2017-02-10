@@ -21,6 +21,13 @@ function DocumentResource($resource, $rootScope) {
             },
             url: URL + 'download/string64'
         },
+        status: {
+            method: 'GET',
+            params: {
+                documentId: '@name'
+            },
+            url: URL + 'download/status'
+        },
         brokerdownload: {
             method: 'GET',
             params: {

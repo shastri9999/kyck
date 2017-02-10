@@ -13,7 +13,7 @@
 					<img id="image" ng-if="!pdfView && !documentPreviewLoading && !OCRView" class="preview" ng-src="{{documentPreviewURL}}" alt="">
 					<div ng-if="documentPreviewLoading && !OCRView" style="display: flex;background-color: #e5eff1;align-items: center; padding: 10px;">
 						<img src="/assets/images/loading.gif" style="margin-right: 20px;height:40px; width:40px;" alt="">
-						Please wait image is loading...
+						{{showingPreview ? "Please wait image is loading..." : "Document is being uploaded. Please wait..."}}
 					</div>
 					<div ng-if="OCRView" class="ocr-view">
 						<div class="input" ng-repeat="field in viewingDocument.OCR">

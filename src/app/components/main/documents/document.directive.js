@@ -36,6 +36,10 @@ function documentComponent() {
 
     const processOCRData = (data)=>{
       let photo = {}
+      if (!data.filter)
+      {
+        return null;
+      }
       let ocr = data.filter((field)=>{
         if (field.name == 'Photo')
         {
@@ -59,7 +63,7 @@ function documentComponent() {
 
     vm.preview = function(document){
       $rootScope.canEnableOCR = !vm.isBroker;
-      $rootScope.showDocumentPreview();
+      $rootScope.showingPreview = true;
       if (!vm.isBroker)
       {
         DocumentResource.metadata({documentType: document.documentType}, function(response){
@@ -67,25 +71,42 @@ function documentComponent() {
           let document = documentData;
           $rootScope.viewingDocument = document;
           $rootScope.viewingDocument.OCR = null;
-          DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
-            
-            $rootScope.viewingDocument.OCR = processOCRData(response.data);
-          });
           $http({
             method: 'GET',
-            url: '/kyck-rest/document/download/string64',
-            params: {documentId: documentData.documentName},
+            url: '/kyck-rest/document/download/status',
+            params: {documentName: documentData.documentName},
             transformResponse: [function (data) {
               return data;
             }]
           }).then((data)=>{
-            let URL = 'data:' + documentData.mimeType + ';base64,' + data.data;
-            $rootScope.showDocumentPreview(URL);
-          })
+            if (data) {
+              $rootScope.showDocumentPreview();
+              DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){
+                
+                $rootScope.viewingDocument.OCR = processOCRData(response.data);
+              });
+              $http({
+                method: 'GET',
+                url: '/kyck-rest/document/download/string64',
+                params: {documentId: documentData.documentName},
+                transformResponse: [function (data) {
+                  return data;
+                }]
+              }).then((data)=>{
+                let URL = 'data:' + documentData.mimeType + ';base64,' + data.data;
+                $rootScope.showDocumentPreview(URL);
+              });
+            }
+            else {
+              $rootScope.previewNotReady = true;
+              $rootScope.showDocumentPreview();
+            }
+          });
         });
       }
       else
       {
+          $rootScope.showDocumentPreview();
           DocumentResource.brokermetadata({documentType: document.documentType, userId: vm.userId}, function(response){
           const documentData = response.data;
           let document = documentData;
@@ -112,6 +133,7 @@ function documentComponent() {
     {
       if(!file)
         return;
+      $rootScope.showingPreview = false;
       document.documentName = file.name;
       $rootScope.viewingDocument = document;
       $rootScope.viewingDocument.OCR = null;
