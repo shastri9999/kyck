@@ -49,6 +49,7 @@ export default angular.module('kyck', [
 	$rootScope.shouldShowDocumentPreview = false;
 	$rootScope.documentPreviewLoading = false;
 	$rootScope.documentPreviewURL = '';
+	$rootScope.showingPreview = false;
 	$rootScope.viewingDocument = {};
 	$rootScope.OCRView = false;
 	$rootScope.canEnableOCR = false;
@@ -57,6 +58,7 @@ export default angular.module('kyck', [
 	$rootScope.croppedBlob = null;
 	$rootScope.pdfView = false;
 	$rootScope.unreadMessages = 0;
+	$rootScope.previewNotReady = false;
 	
 	MessageService.unread().then(count=>$rootScope.unreadMessages=count);
 

@@ -240,6 +240,7 @@
             display: flex;
             margin: 40px;
             margin-top: 0px;
+            margin-bottom: 5px;
             flex-grow: 1;
             flex-flow: column;
             .message-container {
@@ -247,6 +248,7 @@
                 max-height: 400px;
                 overflow: auto;
                 padding-right: 20px;
+                padding-bottom: 60px;
             }
             .message {
                 display: flex;

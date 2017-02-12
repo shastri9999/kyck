@@ -72,7 +72,7 @@
 		</div>
 		<div ng-if="vm.composeMessage.messageFrom" style="position: absolute;" class="compose-hide">To</div>
 		<div style="position: absolute;" class="compose-to">To</div>
-		<select type="text" name="to" ng-model="vm.composeMessage.messageFrom" placeholder="To" ng-options="mail for mail in vm.toList"/>
+		<select type="text" name="to" ng-model="vm.composeMessage.messageFrom" placeholder="To" ng-options="mail.mail as mail.label for mail in vm.toList"/>
 		<input type="text" name="subject" ng-model="vm.composeMessage.messageSubject" placeholder="Subject">
 		<textarea ngf-drag-over-class="'dragover'" ngf-drop="vm.addAttachment($file)" name="message" placeholder="Type your message here..." ng-model="vm.composeMessage.messageContent" cols="30" rows="20"></textarea>
 		<img src="/assets/images/paper-clips.png" alt="Attach" class="compose-attach" ngf-select="vm.addAttachment($file)">				

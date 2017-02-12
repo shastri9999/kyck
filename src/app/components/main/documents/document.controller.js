@@ -11,6 +11,7 @@ function DocumentsController($rootScope, $state, DocumentResource, $http) {
 				doc.documentID = null; //Making default docId as null. Replacing it with actual value in next call
 				doc.replaceAction = false;
 			});
+			$rootScope.loadingProgress = false;
 			DocumentResource.findall(function(response){
 				if(response && response.data){
 					response.data.forEach(function(existingDoc){
@@ -22,8 +23,10 @@ function DocumentsController($rootScope, $state, DocumentResource, $http) {
 						}
 					});
 				}
+				$rootScope.loadingProgress = false;
 			})
 	}, function(error){
+			$rootScope.loadingProgress = false;
 	});
 }
 
