@@ -8,14 +8,17 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
     $rootScope.loadingProgress = false;
     const userId = AuthenticationService.getLoggedInUser().userId;
     const isBroker = AuthenticationService.isBroker();
+    var curDate = new Date();
     const month = (new Date()).getMonth();
-    fetchMeetings();
+    fetchMeetings(curDate);
     setEventClick();
-    $rootScope.$on('nextMonthCalendar', function ($event, e) {
-        console.log("Next Month");
+    $rootScope.$on('nextMonthCalendar', function ($event, args) {
+        curDate.setMonth(curDate.getMonth() + 1);
+        fetchMeetings(args);
     });
-    $rootScope.$on('previousMonthCalendar', function ($event, e) {
-        console.log("Previous Month");
+    $rootScope.$on('previousMonthCalendar', function ($event, args) {
+        curDate.setMonth(curDate.getMonth() - 1);
+        fetchMeetings(args);
     });
 
     function getStatus(status, isBroker) {
@@ -89,16 +92,16 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
         }
     }
 
-    function fetchMeetings() {
+    function fetchMeetings(args) {
         $scope.events = [];
         if (!isBroker) {
-            CalendarService.fetchMeetings().then((data) => {
+            CalendarService.fetchMeetingsMonthWise(args.getMonth() + 1, args.getFullYear()).then((data) => {
                 console.log(data);
                 $scope.events = data.map(formatSlot);
             });
         }
         else {
-            CalendarService.fetchBrokerMeetings().then((data) => {
+            CalendarService.fetchBrokerMeetingsMonthWise(args.getMonth() + 1, args.getFullYear()).then((data) => {
                 // var eles = document.getElementsByClassName('md-event-calendar-month-cell');
                 // console.log(eles);
                 // for (let n=0; n<eles.length; n++) {
@@ -175,7 +178,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                                 }
                                 CalendarService.updateAppointmentEvent(calendarDetailRequest).then((data) => {
                                     $mdToast.showSimple("Meeting has been rescheduled.");
-                                    fetchMeetings();
+                                    fetchMeetings(curDate);
                                 });
                             });
                             $scope.closeDialog = function () {
@@ -192,7 +195,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                         CalendarService.updateAppointmentStatus(calendarDetailRequest).then((data) => {
                             console.log(slot, calendarDetailRequest, data);
                             $mdToast.showSimple("Status of the meeting updated.");
-                            fetchMeetings();
+                            fetchMeetings(curDate);
                         });
                     }
                     $mdDialog.hide();

@@ -167,19 +167,19 @@
             vm.offset = vm.autoHeight === false || $attrs.autoHeight === '' || isNaN($attrs.autoHeight.replace('px', '')) ? 0 : parseInt($attrs.autoHeight.replace('px', ''));
 
             function nextMonth() {
-                $rootScope.$broadcast('nextMonthCalendar');
                 vm.date = $$mdEventCalendarUtil.getDateInNextMonth(vm.date);
                 vm.monthDisplay = $$mdEventCalendarUtil.months[vm.date.getMonth()];
                 vm.yearDisplay = vm.date.getFullYear();
                 vm.isTodayDisabled = vm.date.getMonth() === (new Date()).getMonth();
+                $rootScope.$broadcast('nextMonthCalendar', vm.date);
             }
 
             function previousMonth() {
-                $rootScope.$broadcast('previousMonthCalendar');
                 vm.date = $$mdEventCalendarUtil.getDateInPreviousMonth(vm.date);
                 vm.monthDisplay = $$mdEventCalendarUtil.months[vm.date.getMonth()];
                 vm.yearDisplay = vm.date.getFullYear();
                 vm.isTodayDisabled = vm.date.getMonth() === (new Date()).getMonth();
+                $rootScope.$broadcast('previousMonthCalendar', vm.date);
             }
 
             function setToday() {
