@@ -11,6 +11,12 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
     const month = (new Date()).getMonth();
     fetchMeetings();
     setEventClick();
+    $rootScope.$on('nextMonthCalendar', function ($event, e) {
+        console.log("Next Month");
+    });
+    $rootScope.$on('previousMonthCalendar', function ($event, e) {
+        console.log("Previous Month");
+    });
 
     function getStatus(status, isBroker) {
         var customClass = "GREEN";
