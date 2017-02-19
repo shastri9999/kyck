@@ -285,7 +285,9 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
         $rootScope.loadingProgress = true;
         $scope.timeslotSelected = false;
         //            "brokerageId": AuthenticationService.getLoggedInUser().userId
-        BrokerageResource.updateApplication({, "status": status, "userId": vm.userAppointment.email
+        BrokerageResource.updateApplication({
+            "status": status
+            , "userId": vm.userAppointment.email
         }, function (response) {
             console.log(response, status, vm.userAppointment.email);
             $rootScope.loadingProgress = false;
