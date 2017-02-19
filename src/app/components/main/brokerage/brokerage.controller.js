@@ -56,9 +56,9 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
             vm.userAppointments = response.data;
             vm.userAppointmentsFiltered = vm.userAppointments;
             $scope.firstAppointment = '<div class="appointment ng-scope" ng-click="vm.selectUser(0)">' + '<div class="avatar-circle">' + vm.userAppointmentsFiltered[0].fname[0].toUpperCase() + vm.userAppointmentsFiltered[0].lname[0].toUpperCase() + '</div>' + '<div class="detail">' + '<div style="font-size: 14px;" class="ng-binding">' + vm.userAppointmentsFiltered[0].fname + vm.userAppointmentsFiltered[0].lname + '</div>' + '<a class="pending-btn ng-binding" style="margin-top: 4px;">' + vm.userAppointmentsFiltered[0].applicationStatus + '</a>' + '</div>' + '</div>';
-            shuffletheorder();
+            //            shuffletheorder();
             vm.userAppointment = vm.userAppointments[0];
-            if (vm.userAppointments.length > 0) {
+            if (vm.userAppointments.length > 0 && vm.firstTime) {
                 selectUser(0);
             }
         });
@@ -138,6 +138,7 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
     }
 
     function init() {
+        vm.firstTime = true;
         vm.nextStep = nextStep;
         vm.backStep = backStep;
         vm.nextRequestStep = nextRequestStep;
@@ -283,14 +284,13 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
     function submitApplication(status) {
         $rootScope.loadingProgress = true;
         $scope.timeslotSelected = false;
-        BrokerageResource.updateApplication({
-            "status": status
-            , "userId": vm.userAppointment.email
+        //            "brokerageId": AuthenticationService.getLoggedInUser().userId
+        BrokerageResource.updateApplication({, "status": status, "userId": vm.userAppointment.email
         }, function (response) {
-            console.log(response);
+            console.log(response, status, vm.userAppointment.email);
             $rootScope.loadingProgress = false;
             $mdToast.showSimple("Application has been successfully " + status.toLowerCase() + ".");
-            vm.userAppointment.applicationStatus = status;
+            //            vm.userAppointment.applicationStatus = status;
             vm.allVerified = false;
             setUserAppointments();
             // vm.selectedIndex = vm.userAppointments.findIndex(function (a) {return a.email == vm.userAppointment.email;})
@@ -301,8 +301,6 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
     }
 
     function updateMeetingStatus(status, slot) {
-        console.log("cal id is", slot.calendarId);
-
         function formatStatus(status) {
             var t = status.toLowerCase();
             if (t == "CONFIRM") return "confirmed";
@@ -501,20 +499,21 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
     function updateMessages() {
         $rootScope.loadingProgress = true;
         vm.usermessages = [];
-        console.log('updating messages to', vm.userAppointment.email);
         BrokerageResource.usermessages({
             userId: vm.userAppointment.email
         }, function (response) {
             $rootScope.loadingProgress = false;
             for (let i = 0; i < response.data.length; i++) {
                 const message = response.data[i]['messageContent'];
-                const messageDate = Date.parse(response.data[i]['messageDate']);
+                //moment(a['startTime'], 'DD/MM/YYYY hh:mm').toDate()
+                const messageDate = moment(response.data[i]['messageDate'], 'DD/MM/YYYY hh:mm').format('DD/MM/YYYY');
+                // moment(response.data[i]['messageDate'], 'DD/MM/YYYY hh:mm').toDate();
                 let className = "";
                 if (response.data[i]['messageFrom'] === vm.userAppointment.email) {
-                    className = "left";
+                    className = "right";
                 }
                 else {
-                    className = "right";
+                    className = "left";
                 }
                 vm.usermessages.push({
                     'message': message
