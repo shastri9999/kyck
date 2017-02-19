@@ -53,6 +53,7 @@ class CalendarService {
         });
     }
     updateAppointmentStatus(calendarDetailRequest) {
+        console.log(calendarDetailRequest);
         this._$rootScope.loadingProgress = true;
         return this._$http({
             method: 'POST'

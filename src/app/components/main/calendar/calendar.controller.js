@@ -37,6 +37,10 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
             customClass = "GOLDEN";
             ifConfirmButton = false;
             ifJoinVideoButton = false;
+            if (isBroker) {
+                ifConfirmButton = true;
+                ifRescheduleButton = true;
+            }
         }
         else if (status == "REJECT") {
             formattedStatus = "Rejected"
@@ -188,7 +192,7 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
                     }
                     else {
                         var calendarDetailRequest = {
-                            "calendarId": slot.calendarId
+                            "calenderId": slot.calendarId
                             , "meetingStatus": status
                         };
                         console.log(slot, calendarDetailRequest);
