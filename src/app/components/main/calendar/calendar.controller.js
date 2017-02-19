@@ -131,6 +131,9 @@ function CalendarController($scope, $mdDialog, $filter, AuthenticationService, B
 
             function DialogController($scope, $mdDialog) {
                 'ngInject';
+                slot['firstName'] = isBroker ? slot.userFirstName : slot.brokerFirstName;
+                slot['lastName'] = isBroker ? slot.userLastName : slot.brokerLastName;
+                console.log(slot);
                 $scope.slot = slot;
                 $scope.isBroker = isBroker;
                 $scope.updateAppointment = updateAppointment;

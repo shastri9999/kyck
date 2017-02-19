@@ -65,7 +65,7 @@ class SelectFormController {
                                 , customClass: 'book-appointment'
                                 , customText: 'slots'
                                 , title: numToTime(i) + ' - ' + numToTime(i2)
-                                , mday: startD.getDay()
+                                , mday: startD.getDate()
                                 , mhour: startD.getHours()
                                 , mmonth: startD.getMonth()
                             });
@@ -123,8 +123,8 @@ class SelectFormController {
             vm.selectedDay = day;
             vm.selectedHour = hour;
             vm.selectedTimeSlot = $selectedEvent.start.toISOString();
-            console.log($selectedEvent, $selectedEvent.start.getDay());
-            textContent = "You are booking an appointment on " + getMonth($selectedEvent.start.getMonth()) + " " + $selectedEvent.start.getDay() + " at " + numToTime(hour) + " . Are you sure?";
+            console.log($selectedEvent, $selectedEvent.start, moment($selectedEvent), $selectedEvent.start.getDate(), $selectedEvent.start.getMonth());
+            textContent = "You are booking an appointment on " + getMonth($selectedEvent.start.getMonth()) + " " + $selectedEvent.start.getDate() + " at " + numToTime(hour) + " . Are you sure?";
             confirm = $mdDialog.confirm({
                 title: 'Book Your Appointment'
                 , textContent: textContent
