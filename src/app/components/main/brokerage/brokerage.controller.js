@@ -13,6 +13,7 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
         return obj;
     }
     vm.check = () => {
+        console.log('check', vm.getActiveStep());
         if (vm.getActiveStep() == 1 && vm.isBroker) {
             if (!document.querySelector('.chart svg')) {
                 vm.charts = [];
@@ -398,6 +399,9 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
         if (vm.getActiveStep() === 5) {
             var steppers = $mdStepper('stepper-demo');
             steppers.goto(0);
+            if (vm.isBroker) {
+                vm.check();
+            }
             vm.selectedDocumentNames = [];
             return;
         }
