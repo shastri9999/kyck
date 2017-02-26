@@ -76,10 +76,10 @@ function documentComponent() {
             url: '/kyck-rest/document/download/status',
             params: {documentName: documentData.documentName},
             transformResponse: [function (data) {
-              return data;
+              return JSON.parse(data).data;
             }]
           }).then((data)=>{
-            if (data) {
+            if (data.data) {
               $rootScope.previewNotReady = false;
               $rootScope.showDocumentPreview();
               DocumentResource.ocrdata({documentCategory: document.documentType}, function(response){

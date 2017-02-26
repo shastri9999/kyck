@@ -147,9 +147,10 @@ constructor($http, AppConstants, $rootScope, StorageService, $state, UserService
 				method: 'GET',
 				url: '/kyck-rest/user/getusrdetails/action'
 			}).then((data)=>{
+				
 			}).catch((error)=>{
 				this._$rootScope.$broadcast('logout');
-			})
+			});
 		}
 	}
 

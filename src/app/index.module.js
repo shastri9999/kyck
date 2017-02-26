@@ -60,8 +60,6 @@ export default angular.module('kyck', [
 	$rootScope.unreadMessages = 0;
 	$rootScope.previewNotReady = false;
 	
-	MessageService.unread().then(count=>$rootScope.unreadMessages=count);
-
 	window.cropper = null;
 
 	$rootScope.toggleCropper = ()=>{
@@ -274,6 +272,10 @@ export default angular.module('kyck', [
 		else
 		{
 			AuthenticationService.checkSignedIn();
+			MessageService.unread().then((count)=>{
+				$rootScope.unreadMessages = count;
+				$rootScope.loadingProgress = false;
+			});
 		}
 		
 		/* Todo: Move all this to service */
