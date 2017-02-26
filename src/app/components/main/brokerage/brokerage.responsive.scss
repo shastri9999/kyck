@@ -1,253 +1,259 @@
 #bottomFullFooter {
-	display:none;
+    display: none;
 }
+
 #userContactDetails {
-	display: none;
+    display: none;
 }
 
 .closeRightSideBar {
-	display:none;
+    display: none;
 }
+
 #userSelector {
-	margin: 0px;
-	background: #f9fbfc;
-	md-select-value {
-	    margin-top: -15px;
-	}
-	md-option {
-		height: 80px;
-		padding: 15px;
-		padding-bottom: 20px;
-		padding-top: 0px;
-	}
+    margin: 0px;
+    background: #f9fbfc;
+    md-select-value {
+        margin-top: -15px;
+    }
+    md-option {
+        height: 80px;
+        padding: 15px;
+        padding-bottom: 20px;
+        padding-top: 0px;
+    }
 }
+
 .dashClassAfterElements {
-	margin: 20px;
-	flex-wrap: wrap;
+    margin: 20px;
+    flex-wrap: wrap;
 }
+
 .dashClassAfterElementsChild {
-	/*margin-right: 30px;*/
-	flex: 0 0 49%;
-	padding: 20px;
-/*	max-width: 40%;
+    /*margin-right: 30px;*/
+    flex: 0 0 48%;
+    padding: 20px;
+    /*	max-width: 40%;
 	min-width: 280px;
-*/}
+*/
+}
+
 .mainCalBrokerage {
-	flex: 1;
+    flex: 1;
     max-height: 100%;
-    box-sizing: border-box;	
+    box-sizing: border-box;
 }
 
 .right-stat {
     .bgimage {
-		width:250px;
-		/* min-height:calc(100vh - 107px); */
-		position: fixed;
-		z-index: 1;
-	}
+        width: 250px;
+        /* min-height:calc(100vh - 107px); */
+        position: fixed;
+        z-index: 1;
+    }
 }
-.meetingDetailsContent.mobile {display:none;}
-.sendMsgButton {
-	position: fixed;
-	right: 20px;
-	height: 20px;
-	bottom: 80px;
-	z-index: 10;
-	margin-top: 18px;
-	cursor: pointer;
-	outline: none;
-}
-@media (max-width: 600px) {
-	select-slot md-event-calendar md-event-calendar-month .md-event-calendar-show-more-container.show {
-		max-width: 160px;
-	}
-	.right-stat {
-        display: block;
-        &.collapsed{
-            display:none;
-        }
 
+.meetingDetailsContent.mobile {
+    display: none;
+}
+
+.sendMsgButton {
+    position: fixed;
+    right: 20px;
+    height: 20px;
+    bottom: 80px;
+    z-index: 10;
+    margin-top: 18px;
+    cursor: pointer;
+    outline: none;
+}
+
+@media (max-width: 600px) {
+    select-slot md-event-calendar md-event-calendar-month .md-event-calendar-show-more-container.show {
+        max-width: 160px;
+    }
+    .right-stat {
+        display: block;
+        &.collapsed {
+            display: none;
+        }
         .bgimage {
-    		height:calc(100vh - 36px);
-    	}
+            height: calc(100vh - 36px);
+        }
     }
     .sendMsgButton {
         right: 20px;
     }
     .miniCalendar {
-    	margin-top: 20px;
+        margin-top: 20px;
     }
     .rightSide {
-    	display: flex;
-    	&.collapsed {
-    		display:none;
-    	}
-    	position: absolute;
-    	right: 0px;
+        display: flex;
+        &.collapsed {
+            display: none;
+        }
+        position: absolute;
+        right: 0px;
     }
-
     .closeRightSideBar {
-    	top: 10px;
-    	left: 10px;
-    	position: absolute;
-    	height: 20px;
-    	width: 20px;
-    	z-index:40;
-    	display: block;
-    	cursor: pointer;
-    	outline: none;
+        top: 10px;
+        left: 10px;
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        z-index: 40;
+        display: block;
+        cursor: pointer;
+        outline: none;
     }
-
-	#bottomFullFooter {
-		.md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled], .md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled] {
-			background-color: rgba(240,240,240,1);
-		}
-	}
-	.mainArea .partnerMenu .partnerTitle {
-		border-left: none;
-		border-right: none;
-	}
-	.meetingDetailsContent {
-		display: none;
-	}
-	.meetingDetailsContent.mobile {
-		display:flex;
-	    font-size: 14px;
-	    margin-top: 8px;
-	    opacity: 0.6;
-	    .timeclock {
-	    	max-width: 18px;
-	    	padding-top: 2px;
-	    	img {
-	    		max-width: 15px;
-	    	}
-	    }
-	}
-
-	md-event-calendar._md.md-primary md-event-calendar-month .md-event-calendar-month-row-header {
-		font-size: 14px;
-	    padding-bottom: 15px;
-	    height: 46px
-	}
-
-	md-event-calendar._md.md-primary md-event-calendar-header {
-		height: 46px;
-	}
-
-	md-event-calendar md-event-calendar-header md-event-calendar-title {
-		font-size: 16px;
-	}
-
-	.parentPartnerLogoSmall {
-		min-width: 50px !important;
-		max-width: inherit !important;
-	}
-	.mainArea .partnerMenu {
-		margin-left: 0px;
-		margin-right: 0px;
-	}
-	.mainArea md-event-calendar {
-		margin: 0px;
-	}
-	.meetingDetails {
-		display: none;
-	}
-	.mainCalBrokerage {
-	    -ms-flex: 1 1 100%;
-	    flex: 1 1 100%;
-	    max-width: 100%;
-	    max-height: 100%;
-	    box-sizing: border-box;			
-	}
-	.mainArea md-step-body {
-	    max-height: calc(100vh - 140px);
-	    padding-bottom: 0px;
-	}
-	.dashClassAfterElementsChild {
-		/*max-width: 90%;*/
-		flex: 0 0 100%;
-		flex-wrap: wrap;
-	}
-	.mainArea md-step-body.accSumStep {
-		max-height: none;
-		padding-bottom: 140px;
-	}
-	.chart-container {
-		max-width: 80vw;
-	}
-	#primaryApp {
-		display: none;
-	}
-	.contactedUsers {
-		display: none;
-	}
-	.userSel {
-	    left: 0px !important;
-	    top: 140px !important;
-	    width: 100%;
-		md-option {
-			height: 80px;
-			padding: 15px;
-			padding-bottom: 20px;
-			padding-top: 0px;
-			background: #f9fbfc !important;
-			border-bottom: solid 1px #e5e9ee;
-		}
-		md-select-menu:not(.md-overflow) md-content {
-			padding: 0px;
-		}
-	}
-	.dashClassAfterElements {
-	}
-	#userContactDetails {
-		display: block;
-		z-index: 0;
-	}
-	.md-steppers-header-region {
-		display: none;
-	}
-	#bottomFooter {
-		display: none;
-	}
-	#bottomFullFooter {
-		display: block;
-		position: fixed;
-		bottom: 0px;
-		height: 80px;
-		z-index: 0;
-		background: none;
-		left: 0px;
-	}
-	.footerBottomBtn {
-		flex-grow: 1;
-		margin: 0px;
-		padding: 0px;
-		height: 80px;
-		font-size: 16px;
-	}
-	.appointment {
-		outline: none;
-		display: flex;
-		padding: 15px;
-		margin-top: 20px; 
-		padding-top: 20px;
-		padding-bottom: 20px;
-		cursor: pointer;
-		.detail {
-			display: flex;
-			flex-flow: column;
-			margin-left: 10px;
-		}
-		.pending-btn {
-			padding: 5px 0;
-			text-transform: uppercase;
-			border: 1px solid #57c3ea;
-			color: #57c3ea;
-			border-radius: 3px;
-			font-size: 12px;
-			cursor: pointer;
-			text-align: center;
-			min-height: 25px;
-		}
-	}
+    #bottomFullFooter {
+        .md-button.md-default-theme.md-raised[disabled],
+        .md-button.md-raised[disabled],
+        .md-button.md-default-theme.md-fab[disabled],
+        .md-button.md-fab[disabled] {
+            background-color: rgba(240, 240, 240, 1);
+        }
+    }
+    .mainArea .partnerMenu .partnerTitle {
+        border-left: none;
+        border-right: none;
+    }
+    .meetingDetailsContent {
+        display: none;
+    }
+    .meetingDetailsContent.mobile {
+        display: flex;
+        font-size: 14px;
+        margin-top: 8px;
+        opacity: 0.6;
+        .timeclock {
+            max-width: 18px;
+            padding-top: 2px;
+            img {
+                max-width: 15px;
+            }
+        }
+    }
+    md-event-calendar._md.md-primary md-event-calendar-month .md-event-calendar-month-row-header {
+        font-size: 14px;
+        padding-bottom: 15px;
+        height: 46px
+    }
+    md-event-calendar._md.md-primary md-event-calendar-header {
+        height: 46px;
+    }
+    md-event-calendar md-event-calendar-header md-event-calendar-title {
+        font-size: 16px;
+    }
+    .parentPartnerLogoSmall {
+        min-width: 50px !important;
+        max-width: inherit !important;
+    }
+    .mainArea .partnerMenu {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .mainArea md-event-calendar {
+        margin: 0px;
+    }
+    .meetingDetails {
+        display: none;
+    }
+    .mainCalBrokerage {
+        -ms-flex: 1 1 100%;
+        flex: 1 1 100%;
+        max-width: 100%;
+        max-height: 100%;
+        box-sizing: border-box;
+    }
+    .mainArea md-step-body {
+        max-height: calc(100vh - 140px);
+        padding-bottom: 0px;
+    }
+    .dashClassAfterElementsChild {
+        /*max-width: 90%;*/
+        flex: 0 0 100%;
+        flex-wrap: wrap;
+    }
+    .mainArea md-step-body.accSumStep {
+        max-height: none;
+        padding-bottom: 140px;
+    }
+    .chart-container {
+        max-width: 80vw;
+    }
+    #primaryApp {
+        display: none;
+    }
+    .contactedUsers {
+        display: none;
+    }
+    .userSel {
+        left: 0px !important;
+        top: 140px !important;
+        width: 100%;
+        md-option {
+            height: 80px;
+            padding: 15px;
+            padding-bottom: 20px;
+            padding-top: 0px;
+            background: #f9fbfc !important;
+            border-bottom: solid 1px #e5e9ee;
+        }
+        md-select-menu:not(.md-overflow) md-content {
+            padding: 0px;
+        }
+    }
+    .dashClassAfterElements {}
+    #userContactDetails {
+        display: block;
+        z-index: 0;
+    }
+    .md-steppers-header-region {
+        display: none;
+    }
+    #bottomFooter {
+        display: none;
+    }
+    #bottomFullFooter {
+        display: block;
+        position: fixed;
+        bottom: 0px;
+        height: 80px;
+        z-index: 0;
+        background: none;
+        left: 0px;
+    }
+    .footerBottomBtn {
+        flex-grow: 1;
+        margin: 0px;
+        padding: 0px;
+        height: 80px;
+        font-size: 16px;
+    }
+    .appointment {
+        outline: none;
+        display: flex;
+        padding: 15px;
+        margin-top: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        cursor: pointer;
+        .detail {
+            display: flex;
+            flex-flow: column;
+            margin-left: 10px;
+        }
+        .pending-btn {
+            padding: 5px 0;
+            text-transform: uppercase;
+            border: 1px solid #57c3ea;
+            color: #57c3ea;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            min-height: 25px;
+        }
+    }
 }
