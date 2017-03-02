@@ -6,7 +6,7 @@
   "scripts": {
     "copy-images": "mkdir -p dist/assets/images && cp -R src/assets/images dist/assets",
     "dev": "npm run copy-images && cross-env NODE_ENV=development webpack-dev-server --progress",
-    "build": "cross-env NODE_ENV=production webpack -p --colors --progress --bail"
+    "build": "npm run copy-images && cross-env NODE_ENV=production webpack --colors --progress --bail"
   },
   "dependencies": {
     "ang-accordion": "^1.0.2",
@@ -72,6 +72,8 @@
     "node": ">=0.12.0"
   },
   "devDependencies": {
-    "json-loader": "^0.5.4"
+    "json-loader": "^0.5.4",
+    "ng-annotate-loader": "0.0.10",
+    "ng-annotate-webpack-plugin": "^0.2.1-pre"
   }
 }

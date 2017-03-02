@@ -9,15 +9,14 @@ import PhoneService from './services/phone.service.js';
 import CurrencyService from './services/currency.service.js';
 
 const common = angular.module('common', []);
+common.service("AuthenticationService", AuthenticationService);
+common.service("UserService", UserService);
+common.service("StorageService", StorageService);
+common.service("MessageService", MessageService);
+common.service("CalendarService", CalendarService);
+common.service("PhoneService", PhoneService);
+common.service("CurrencyService", CurrencyService);
 
-[AuthenticationService, 
-UserService, 
-StorageService,
-MessageService,
-CalendarService,
-PhoneService,
-CurrencyService]
-.forEach(service=>common.service(service.name, service));
 
 common.filter('capitalize', function() {
     return function(input, all) {

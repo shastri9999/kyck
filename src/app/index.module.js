@@ -27,7 +27,8 @@ export default angular.module('kyck', [
 	]
 	)
 .config(config)
-.run(function($rootScope, $location, AuthenticationService, DocumentResource, MessageService, $http, $timeout, $mdToast, Upload){
+.run(['$rootScope', '$location', 'AuthenticationService', 'DocumentResource', 'MessageService', '$http', '$timeout', '$mdToast', 'Upload',
+      function($rootScope, $location, AuthenticationService, DocumentResource, MessageService, $http, $timeout, $mdToast, Upload){
 	'ngInject';
 
 	/* Todo: Move all this to service */
@@ -282,4 +283,4 @@ export default angular.module('kyck', [
 		$rootScope.breadCrumb = next.breadCrumb;
 		$rootScope.messageView.reply = "";
 	});
-});
+}]);
