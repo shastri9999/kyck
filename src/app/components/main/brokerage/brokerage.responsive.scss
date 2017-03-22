@@ -68,9 +68,20 @@
     outline: none;
 }
 
+.validationTab {
+    min-height: 800px;
+    height: 800px;
+}
 @media (max-width: 600px) {
     select-slot md-event-calendar md-event-calendar-month .md-event-calendar-show-more-container.show {
         max-width: 160px;
+    }
+    .validationTab {
+        max-width: 90%;
+    }
+    .mainArea .validation-report-count .stat {
+        font-size: 36px;
+        margin-right: 30px;
     }
     .right-stat {
         display: block;
@@ -180,7 +191,8 @@
         padding-bottom: 140px;
     }
     .chart-container {
-        max-width: 80vw;
+        width: 90vw;
+        padding-left: 5vw;
     }
     #primaryApp {
         display: none;

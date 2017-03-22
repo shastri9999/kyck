@@ -3,7 +3,7 @@
     font-size: 16px;
     display: flex;
     flex-grow: 1;
-    max-height: calc(100vh - 120px);
+    /* max-height: calc(100vh - 120px); */
     overflow: auto;    
     h2 {
         font-weight: 500;
@@ -184,7 +184,7 @@
     font-size: 16px;
     display: flex;
     flex-grow: 1;
-    max-height: calc(100vh - 120px);
+    /* max-height: calc(100vh - 120px); */
     overflow: hidden;    
     .left {
         display: flex;
@@ -282,7 +282,6 @@
         overflow: hidden;
         flex-shrink:0;
         position:relative;
-        height: 760px;
         .appointments {
             z-index: 1;
             display: flex;
