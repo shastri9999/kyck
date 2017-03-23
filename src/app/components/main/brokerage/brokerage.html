@@ -265,7 +265,7 @@
             </div>
         </div>
     </div>
-    <div layout="column" class="rightSide" ng-if="isBroker" flex ng-class="{collapsed:rightSideNavCollapsed}"> <img class="closeRightSideBar" src="/assets/images/hide-bar.png" ng-click="vm.showRightDrawer()"> <img style="position: absolute;width:250px;height:100%; z-index: 0;" ng-src="{{vm.bgurl}}">
+    <div layout="column" class="rightSide" ng-if="isBroker" flex ng-class="{collapsed:rightSideNavCollapsed}"> <img class="closeRightSideBar" src="/assets/images/hide-bar.png" ng-click="vm.showRightDrawer()"> <img style="position: fixed; padding-bottom: 120px; width:250px;height:100%; z-index: 0;" ng-src="{{vm.bgurl}}">
         <div style="z-index: 3;">
             <mini-calendar/> </div>
         <h2 style="color: white;margin: 20px; margin-bottom: 0px; z-index: 3;">Messages</h2>

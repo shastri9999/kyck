@@ -3,7 +3,7 @@ import inviteDialogTemplateUrl from './dialog.html';
 const d3 = require('d3');
 const RadialProgressChart = require('radial-progress-chart');
 
-function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDialog, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, DashboardResource, UserService, CalendarService, $window, moment, MessageService, Upload) {
+function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDialog, $rootScope, BrokerageResource, AuthenticationService, DocumentResource, DashboardResource, UserService, CalendarService, $window, moment, MessageService, Upload, $timeout) {
     'ngInject';
     var vm = this;
     init();
@@ -23,6 +23,7 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
     }
 
     function updateBrokers() {
+        console.log('updating brokers');
         $rootScope.loadingProgress = true;
         BrokerageResource.contactedBrokerages((response) => {
             vm.contactedBrokers = response.data;
@@ -171,7 +172,10 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
             $scope.timeslotSelected = true;
         });
         $rootScope.$on('brokerageSubmitted', function ($event, e) {
-            updateBrokers();
+            console.log('brokerage submitted');
+            $timeout(function(){
+                $window.location.reload();
+            }, 3000);
         });
         if (!vm.isBroker) {
             updateBrokers();
@@ -378,13 +382,14 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
             });
         }
         else if (vm.getActiveStep() == 5 && !vm.isBroker) {
-            console.log('broadcasted submit brokerage event');
             $rootScope.$broadcast('submitBrokerage');
             return;
         }
         else if (vm.getActiveStep() == 5) {
             var steppers = $mdStepper('stepper-demo');
-            steppers.goto(0);
+            if (vm.isBroker) {
+                steppers.goto(0);
+            }
             vm.selectedDocumentNames = [];
             return;
         }
@@ -398,8 +403,8 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
         }
         if (vm.getActiveStep() === 5) {
             var steppers = $mdStepper('stepper-demo');
-            steppers.goto(0);
             if (vm.isBroker) {
+                steppers.goto(0);
                 vm.check();
             }
             vm.selectedDocumentNames = [];

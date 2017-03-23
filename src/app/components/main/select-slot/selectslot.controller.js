@@ -157,12 +157,10 @@ class SelectFormController {
                 console.log("NO");
             });
             $rootScope.$on('submitBrokerage', function ($event, e) {
-                console.log($rootScope.brokerageSubmitted);
                 if ($rootScope.brokerageSubmitted == true) {
                     return false;
                 }
                 $rootScope.brokerageSubmitted = true;
-                console.log('submitBrokerage');
                 for (var i = 0; i < vm.selectedPartners.length; i++) {
                     var partner = vm.selectedPartners[i];
                     if (!partner.selectedAppointments) {
