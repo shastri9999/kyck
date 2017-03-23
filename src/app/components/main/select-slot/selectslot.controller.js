@@ -213,8 +213,6 @@ class SelectFormController {
                     $scope.closeDialog = function () {
                         vm.timeslotSelected = false;
                         vm.dialogShown = false;
-                        var steppers = $mdStepper('stepper-demo');
-                        steppers.goto(0);
                         $mdDialog.hide();
                         vm.selectedDocumentNames = [];
                         // window.location.reload();
