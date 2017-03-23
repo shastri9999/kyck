@@ -52,16 +52,23 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
     });
     vm.steps = ["Select Broker", "Personal Details", "KYC", "Documents", "Selection of Timeslot"]
 
-    function setUserAppointments() {
+    function setUserAppointments(firstTime, lastEmail) {
         BrokerageResource.userAppointments((response) => {
             $rootScope.loadingProgress = false;
             vm.userAppointments = response.data;
             vm.userAppointmentsFiltered = vm.userAppointments;
             $scope.firstAppointment = '<div class="appointment ng-scope" ng-click="vm.selectUser(0)">' + '<div class="avatar-circle">' + vm.userAppointmentsFiltered[0].fname[0].toUpperCase() + vm.userAppointmentsFiltered[0].lname[0].toUpperCase() + '</div>' + '<div class="detail">' + '<div style="font-size: 14px;" class="ng-binding">' + vm.userAppointmentsFiltered[0].fname + vm.userAppointmentsFiltered[0].lname + '</div>' + '<a class="pending-btn ng-binding" style="margin-top: 4px;">' + vm.userAppointmentsFiltered[0].applicationStatus + '</a>' + '</div>' + '</div>';
-            //            shuffletheorder();
             vm.userAppointment = vm.userAppointments[0];
-            if (vm.userAppointments.length > 0 && vm.firstTime) {
+            if (vm.userAppointments.length > 0 && vm.firstTime && firstTime) {
                 selectUser(0);
+            } else {
+                // select user with email == lastEmail
+                for (i=0; i<vm.userAppointments.length; i++) {
+                    if (vm.userAppointments[i].email == lastEmail) {
+                        selectUser(i);
+                        return;
+                    }
+                }
             }
         });
     }
@@ -240,7 +247,7 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
         }
         if (vm.isBroker) {
             $rootScope.loadingProgress = true;
-            setUserAppointments();
+            setUserAppointments(true, "");
             vm.getDownloadLink = () => {
                 if (vm.userAppointment && vm.selectedDocumentNames.length) return '/kyck-rest/document/bulkDownload?' + 'userId=' + vm.userAppointment.email + '&documentNames=' + vm.selectedDocumentNames.join(',');
                 return '';
@@ -299,7 +306,7 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
             $mdToast.showSimple("Application has been successfully " + status.toLowerCase() + ".");
             //            vm.userAppointment.applicationStatus = status;
             vm.allVerified = false;
-            setUserAppointments();
+            setUserAppointments(false, vm.userAppointment.email);
             // vm.selectedIndex = vm.userAppointments.findIndex(function (a) {return a.email == vm.userAppointment.email;})
             //            shuffletheorder();
         }, function (error) {
@@ -514,11 +521,9 @@ function BrokerageController($state, $scope, $mdToast, $http, $mdStepper, $mdDia
             userId: vm.userAppointment.email
         }, function (response) {
             $rootScope.loadingProgress = false;
-            for (let i = 0; i < response.data.length; i++) {
+            for (let i = 0; i < Math.min(response.data.length,3); i++) {
                 const message = response.data[i]['messageContent'];
-                //moment(a['startTime'], 'DD/MM/YYYY hh:mm').toDate()
                 const messageDate = moment(response.data[i]['messageDate'], 'DD/MM/YYYY hh:mm').format('DD/MM/YYYY');
-                // moment(response.data[i]['messageDate'], 'DD/MM/YYYY hh:mm').toDate();
                 let className = "";
                 if (response.data[i]['messageFrom'] === vm.userAppointment.email) {
                     className = "right";
