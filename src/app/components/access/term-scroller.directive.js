@@ -8,7 +8,8 @@ function TermScroller($rootScope) {
     restrict: 'A',
     link: function(scope, element, attributes){
      $(element).on('scroll', function(event){
-       if (event.target.scrollTop > 5710)
+       const height = event.target.scrollHeight - 570;
+       if (event.target.scrollTop > height)
        {
           $rootScope.$apply(()=>{
             $rootScope.terms.agreeEnabled = true;
